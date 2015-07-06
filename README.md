@@ -22,3 +22,4 @@
 - Incredible database of installable applications
 - Uses systemd for startup for faster boots
 - Always the latest kernel for maximum compatibility
+
