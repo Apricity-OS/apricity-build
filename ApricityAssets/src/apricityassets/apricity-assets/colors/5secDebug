@@ -1,0 +1,8 @@
+#!/bin/bash
+#requires plymouth-x11 installed
+#sudo apt-get install plymouth-x11
+echo
+echo "Running 5-second debug test..."
+echo "Creates /lib/plymouth/themes/colors/debug.log for debugging"
+sudo plymouthd --debug --debug-file=/lib/plymouth/themes/colors/debug.log; sudo plymouth --show-splash ; for ((I=0; I<5; I++)); do sleep 1 ; sudo plymouth --update=test$I ; done ; sudo plymouth --quit
+exit

@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<!---->
+        <title>马克飞象 - 专为印象笔记打造的Markdown编辑器</title>
+        <link rel="canonical" href="https://stackedit.io/editor">
+        <link rel="icon" href="res-min/img/stackedit-32.ico" type="image/x-icon">
+        <link rel="icon" sizes="192x192" href="res-min/img/logo-highres.png">
+        <link rel="shortcut icon" href="res-min/img/stackedit-32.ico" type="image/x-icon">
+        <link rel="shortcut icon" sizes="192x192" href="res-min/img/logo-highres.png">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="res-min/img/logo-ipad-retina.png">
+        <meta name="description" content="专为印象笔记打造的Markdown编辑器">
+        <meta name="author" content="gock">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="msvalidate.01" content="5E47EE6F67B069C17E3CDD418351A612">
+
+        <!-- test --> 
+        
+        <script>
+            // Use ?debug to serve original JavaScript files instead of minified
+            window.baseDir = 'res';
+            if (!/(\?|&)debug($|&)/.test(location.search)) {
+                window.baseDir += '-min';
+            }
+            window.require = {
+                baseUrl: window.baseDir,
+                deps: ['main']
+            };
+        </script>
+        <!--<link href='res/themes/default.css' rel='stylesheet'>-->
+        <script src="res-min/require.js"></script>
+    </head>
+
+    <body>
+    <div id="loading">
+	<div class='loading-container'>
+		<p>马克飞象<b>专业版</b></p>
+		<p>加载中...</p>
+	</div>
+</div>
+<div id='readme' platform-related># 欢迎使用马克飞象
+
+@(示例笔记本)[马克飞象|帮助|Markdown]
+
+**马克飞象**是一款专为印象笔记（Evernote）打造的Markdown编辑器，通过精心的设计与技术实现，配合印象笔记强大的存储和同步功能，带来前所未有的书写体验。特点概述：
+ 
+- **功能丰富** ：支持高亮代码块、插入 *LaTex* 公式，工作学习好帮手
+- **得心应手** ：支持插入图片，无论是本地上传/图片URL/拖放图片/直接截图粘贴，随心所欲
+- **深度整合** ：支持选择笔记本和添加标签，支持从印象笔记跳转编辑，轻松管理
+
+> 号外号外，离线客户端来啦！[点击下载](https://chrome.google.com/webstore/detail/%E9%A9%AC%E5%85%8B%E9%A3%9E%E8%B1%A1/kidnkfckhbdkfgbicccmdggmpgogehop/)
+
+-------------------
+
+### Markdown简介
+
+> Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— [维基百科](https://zh.wikipedia.org/wiki/Markdown)
+
+正如您在阅读的这份文档，它使用简单的符号标识不同的标题，将某些文字标记为**粗体**或者*斜体*，下面列举了几个高级功能，更多语法请按`Ctrl + /`查看帮助。 
+
+#### 代码块
+``` python
+@requires_authorization
+def somefunc(param1='', param2=0):
+    '''A docstring'''
+    if param1 > param2: # interesting
+        print 'Greater'
+    return (param2 - param1 + 1) or None
+class SomeClass:
+    pass
+>>> message = '''interpreter
+... prompt'''
+```
+
+#### LaTex 公式
+$$	x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+
+#### 表格
+| Item      |    Value | Qty  |
+| :-------- | --------:| :--: |
+| Computer  | 1600 USD |  5   |
+| Phone     |   12 USD |  12  |
+| Pipe      |    1 USD | 234  |
+
+### 印象笔记相关
+
+#### 笔记本和标签
+**马克飞象**增加了`@(笔记本)[标签A|标签B]`语法, 以选择笔记本和添加标签。 **绑定账号后**， 输入`(`自动会出现笔记本列表，请从中选择。自己纯手工输入无效。
+
+#### 标题
+**马克飞象**会自动使用文档内出现的第一个标题作为笔记标题。例如本文，就是第一行的 `欢迎使用马克飞象`。
+
+#### 快捷编辑
+保存在印象笔记中的笔记，右上角会有一个红色的编辑按钮，点击后会回到**马克飞象**中打开并编辑该笔记。
+>**注意：**目前用户在印象笔记中单方面做的任何修改，马克飞象是无法自动感知和更新的。所以请务必回到马克飞象编辑。
+
+#### 数据同步
+**马克飞象**通过**将Markdown原文以隐藏内容保存在笔记中**的精妙设计，实现了对Markdown的存储和再次编辑。既解决了其他产品只是单向导出HTML的单薄，又规避了服务端存储Markdown带来的隐私安全问题。这样，服务端仅作为对印象笔记 API调用和数据转换之用。
+
+ >**隐私声明：用户所有的笔记数据，均保存在印象笔记中。马克飞象不存储用户的任何笔记数据。**
+
+#### 离线存储
+**马克飞象**使用浏览器离线存储将内容实时保存在本地，不必担心网络断掉或浏览器崩溃。为了节省空间和避免冲突，已同步至印象笔记并且不再修改的笔记将删除部分本地缓存，不过依然可以随时通过`文档管理`打开。
+
+> **注意：**虽然浏览器存储大部分时候都比较可靠，但印象笔记作为专业云存储，更值得信赖。以防万一，**请务必经常及时同步到印象笔记**。
+
+### 快捷键
+
+帮助    `Ctrl + /`
+同步文档    `Ctrl + S`
+创建文档    `Ctrl + Alt + N`
+最大化编辑器    `Ctrl + Enter`
+文档管理    `Ctrl + O`
+系统菜单    `Ctrl + M`
+
+整行移动    `Alt + 上/下箭头`
+删除整行    `Ctrl + D`
+
+加粗    `Ctrl + B`
+插入图片    `Ctrl + G`
+插入链接    `Ctrl + L`
+提升标题    `Ctrl + H`
+
+### 关于收费
+
+**马克飞象**目前已正式发布，为新用户提供 10 天的试用期，试用期过后需要[续费](maxiang.info/vip.html)才能继续使用。未购买或者未及时续费，将不能同步新的笔记。之前保存过的笔记依然可以编辑。
+
+
+### 反馈与建议
+- 微博：[@马克飞象](http://weibo.com/u/2788354117)，[@GGock](http://weibo.com/ggock "开发者个人账号")
+- 邮箱：&lt;hustgock@gmail.com&gt;
+
+---------
+感谢阅读这份帮助文档。请点击右上角，绑定印象笔记账号，开启全新的记录与分享体验吧。
+
+<div id='images_area'></div>
+<div class="layout-wrapper-l1">
+    <div class="layout-wrapper-l2" id="app_wrap">
+        <div class="navbar navbar-default" style='display:none'>
+            <div class="navbar-inner">
+                <div class="nav left-space"></div>
+                <div class="nav right-space pull-right"></div>
+                <div class="buttons-dropdown dropdown">
+                    <div class="nav">
+                        <button class="btn btn-success" data-toggle="dropdown"
+                            title="Show buttons">
+                            <i class="icon-th-large"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav left-buttons">
+                    <li class="wmd-button-group1 btn-group"></li>
+                </ul>
+                <ul class="nav left-buttons">
+                    <li class="wmd-button-group2 btn-group"></li>
+                </ul>
+                <ul class="nav left-buttons">
+                    <li class="wmd-button-group3 btn-group"></li>
+                </ul>
+                <ul class="nav left-buttons">
+                    <li class="wmd-button-group5 btn-group"></li>
+                </ul>
+                <ul class="nav left-buttons">
+                    <li class="wmd-button-group4 btn-group">
+                    <a class="btn btn-success button-open-discussion" title="Comments Ctrl/Cmd+M"><i class="icon-comment-alt"></i></a>
+                    </li>
+                </ul>
+                <ul class="nav pull-right right-buttons">
+                    <li class="offline-status hide">
+                    <div class="text-danger">
+                        <i class="icon-attention-circled"></i>offline
+                    </div>
+                    </li>
+                    <li class="extension-buttons"></li>
+                </ul>
+                <ul class="nav pull-right title-container">
+                    <li><div class="working-indicator"></div></li>
+                    <li><a class="btn btn-success file-title-navbar" href="#"
+                        title="Rename document"> </a></li>
+                    <li><div class="input-file-title-container"><input type="text"
+                        class="col-sm-4 form-control hide input-file-title"
+                        placeholder="Document title" /></div></li>
+                </ul>
+            </div>
+        </div>
+        <div class="editor-navbar sync-ace-theme">
+            <div class="editor-navbar-bg sync-ace-theme"></div>
+            <div class="navbar-inner ace_string ace_constant ace_numeric ">
+                <button class="btn open-folder-btn"  title="文档管理">
+                    <i class="icon-book"></i>
+                </button>
+                <div class="editor-navbar-buttons">
+                    <span class='toolbar-group'>
+                        <div class='wmd-buttons-group'>
+                            <ul class="nav wmd-button-group1 wmd-button-group3  wmd-button-group2 wmd-button-group4 btn-group"></ul>
+                            <ul class='nav image-button-group btn-group'></ul>
+                        </div>
+                        <div class="editor-hosted-buttons"><!--<button
+                    class="btn btn-success action-create-file" title='Markdown 语法' vine-click='SHOW_HELP'>
+                    <i class="icon-help-circled"></i>
+                </button>-->
+                            <button class="btn btn-success dropdown-toggle" title='编辑器主题' id='theme-button' data-toggle="dropdown">
+                                <i class="icon-magic"></i>
+                            </button>
+                            <ul id="theme-list" class="dropdown-menu ui" role="menu" aria-labelledby="drop6">
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/default">Default</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/active4d">Active4d</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/all_hallows_eve">All Hallows Eve</a></li>
+                                <!-- <li><a tabindex="-1" href="#" data-value="ace/theme/ambiance">Ambiance</a></li> -->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/amy">Amy</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/arstotzka">Arstotzka</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/azure">Azure</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/blackboard">Blackboard</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/bold">Bold</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/boxuk">Boxuk</a></li>
+                                <!-- <li><a tabindex="-1" href="#" data-value="ace/theme/brilliance_black">Brilliance Black</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/brilliance_dull">Brilliance Dull</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/carbonight">Carbonight</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/carbonight_contrast">Carbonight Contrast</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/chaos">Chaos</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/chocolate">Chocolate</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/chrome">Chrome</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/chrome_devtools">Chrome Devtools</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/clouds">Clouds</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/clouds_midnight">Clouds Midnight</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/cobalt">Cobalt</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/crimson_editor">Crimson Editor</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/crisp">Crisp</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/darkside">Darkside</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/darkside_contrast">Darkside Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/dawn">Dawn</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/dreamweaver">Dreamweaver</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/earthsong">Earthsong</a></li>
+                                <!-- <li><a tabindex="-1" href="#" data-value="ace/theme/earthsong_contrast">Earthsong Contrast</a></li>-->
+                                <!-- <li><a tabindex="-1" href="#" data-value="ace/theme/earthsong_light">Earthsong Light</a></li>-->
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/eclipse">Eclipse</a></li>-->
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/eiffel">Eiffel</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/espresso_libre">Espresso Libre</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/freshcut">Freshcut</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/freshcut_contrast">Freshcut Contrast</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/frontier">Frontier</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/frontier_contrast">Frontier Contrast</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/github">Github</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/gloom">Gloom</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/gloom_contrast">Gloom Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/glowfish">Glowfish</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/glowfish_contrast">Glowfish Contrast</a></li>-->
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/goldfish">Goldfish</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/goldfish_contrast">Goldfish Contrast</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/grunge">Grunge</a></li>-->
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/grunge_contrast">Grunge Contrast</a></li>-->
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/halflife">Halflife</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/halflife_contrast">Halflife Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/heroku">Heroku</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/hyrule">Hyrule</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/hyrule_contrast">Hyrule Contrast</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/iceberg">Iceberg</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/iceberg_contrast">Iceberg Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/idle">Idle</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/idle_fingers">Idle Fingers</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/idlefingers">Idlefingers</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/iplastic">Iplastic</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/juicy">Juicy</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/juicy_contrast">Juicy Contrast</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/katzenmilch">Katzenmilch</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/keen">Keen</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/keen_contrast">Keen Contrast</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/kiwi">Kiwi</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/kr_theme">Kr Theme</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/krtheme">Krtheme</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/kuroir">Kuroir</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/laravel">Laravel</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/laravel_contrast">Laravel Contrast</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/lavender">Lavender</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/lavender_contrast">Lavender Contrast</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/lazy">Lazy</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/legacy">Legacy</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/magicwb_(amiga)">Magicwb (Amiga)</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/mellow">Mellow</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/mellow_contrast">Mellow Contrast</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/merbivore">Merbivore</a></li>-->
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/merbivore_soft">Merbivore Soft</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/mintchoc">Mintchoc</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/mono_industrial">Mono Industrial</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/monoindustrial">Monoindustrial</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/monokai">Monokai</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/mud">Mud</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/mud_contrast">Mud Contrast</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/otakon">Otakon</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/pastel">Pastel</a></li>
+                                <!--
+ <li><a tabindex="-1" href="#" data-value="ace/theme/pastel_on_dark">Pastel On Dark</a></li>
+ <li><a tabindex="-1" href="#" data-value="ace/theme/pastels_on_dark">Pastels On Dark</a></li>
+ <li><a tabindex="-1" href="#" data-value="ace/theme/patriot">Patriot</a></li>
+ <li><a tabindex="-1" href="#" data-value="ace/theme/patriot_contrast">Patriot Contrast</a></li>
+ -->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/peacock">Peacock</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/peacock_contrast">Peacock Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/peacocks_in_space">Peacocks In Space</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/peel">Peel</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/piggy">Piggy</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/potpourri">Potpourri</a></li>
+ <li><a tabindex="-1" href="#" data-value="ace/theme/potpourri_contrast">Potpourri Contrast</a></li>
+ -->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/rainbow">Rainbow</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/revelation">Revelation</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/revelation_contrast">Revelation Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/shrek">Shrek</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/slate">Slate</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/slime">Slime</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/slime_contrast">Slime Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/slush_and_poppies">Slush And Poppies</a></li>
+                                <!--
+ <li><a tabindex="-1" href="#" data-value="ace/theme/snappy">Snappy</a></li>
+ <li><a tabindex="-1" href="#" data-value="ace/theme/snappy_contrast">Snappy Contrast</a></li>
+ <li><a tabindex="-1" href="#" data-value="ace/theme/snappy_light">Snappy Light</a></li>
+ <li><a tabindex="-1" href="#" data-value="ace/theme/solarflare">Solarflare</a></li>
+ -->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/solarflare_contrast">Solarflare Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/solarized_dark">Solarized Dark</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/solarized_light">Solarized Light</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/sourlick">Sourlick</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/sourlick_contrast">Sourlick Contrast</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/spacecadet">Spacecadet</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/spearmint">Spearmint</a></li>
+                                <!--
+ <li><a tabindex="-1" href="#" data-value="ace/theme/stark">Stark</a></li>
+ <li><a tabindex="-1" href="#" data-value="ace/theme/stark_contrast">Stark Contrast</a></li>
+ -->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/sunburst">Sunburst</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/super">Super</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/terminal">Terminal</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/textmate">Textmate</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/textmate_(mac_classic)">Textmate (Mac Classic)</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/tomorrow">Tomorrow</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/tomorrow_night">Tomorrow Night</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/tomorrow_night_blue">Tomorrow Night Blue</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/tomorrow_night_bright">Tomorrow Night Bright</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/tomorrow_night_eighties">Tomorrow Night Eighties</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/tonic">Tonic</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/tribal">Tribal</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/tron">Tron</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/tron_contrast">Tron Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/turnip">Turnip</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/turnip_contrast">Turnip Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/twilight">Twilight</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/userscape">Userscape</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/vibrant_ink">Vibrant Ink</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/xcode">Xcode</a></li>
+                                <!--<li><a tabindex="-1" href="#" data-value="ace/theme/xcode_default">Xcode Default</a></li>-->
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/yule">Yule</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/zacks">Zacks</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/zacks_contrast">Zacks Contrast</a></li>
+                                <li><a tabindex="-1" href="#" data-value="ace/theme/zenburnesque">Zenburnesque</a></li>
+
+                            </ul>
+                            <button class="btn btn-success full-editor-btn" title='切换全屏' vine-click='TOGGLE_RESIZE'>
+                                <i class="icon-resize-full"></i>
+                                <i class="icon-resize-small-1"></i>
+                            </button>
+                        </div>
+                    </span>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="preview-buttons-container">
+            <div class='preview-buttons'>
+                <button class="btn btn-success dropdown-toggle save-file" data-toggle="dropdown" id='indicator-file-status' vine-switch-on='FILE_STATUS_CHANGED' vine-click='SYNC_FILE'>
+                    <i class="icon-flash"  tooltip-title='本地缓存，点击同步"' switch-when='created'></i>
+                    <i class="icon-asterisk "  tooltip-title='有改动，点击同步' switch-when='modified'></i>
+                    <i class="icon-spin6 animate-spin"  tooltip-title='正在同步' switch-when='syncing'></i>
+                    <i class="icon-ok"  tooltip-title='已同步' switch-when='synced'></i>
+                </button>
+
+                <button class="btn btn-success dropdown-toggle file-status-lock disabled"   title='只读模式' >
+                    <i class="icon-lock"></i>
+                </button>
+                <button class="btn btn-success action-create-file" title='新建文档' vine-click='CREATE_FILE'>
+                    <i class="icon-doc"></i>
+                </button>
+
+                <custom vine-switch-on="IS_USER_AUTHED">
+                <button class="btn profile-btn btn-success"  title='账号' switch-when='true'>
+                    <i class="icon-user"></i>
+                </button>
+                <button class="btn profile-btn" title='账号' switch-when='false'>
+                    <i class="icon-evernote"></i>
+                </button>
+                </custom>
+            </div>
+        </div>
+
+
+        <div class="layout-wrapper-l3">
+            <pre id="wmd-input" class="form-control editor"><div class="editor-content" contenteditable=true></div><div class="editor-margin"></div></pre>
+            <pre id="ace-input" class="form-control"><div class="editor-content" contenteditable=true></div><div class="editor-margin"></div></pre>
+            <div class="preview-panel">
+                <div class="layout-resizer layout-resizer-preview"></div>
+                <div class="layout-toggler layout-toggler-navbar btn btn-info" title="Toggle navigation bar"><i class="icon-th"></i></div>
+                <div class="layout-toggler layout-toggler-preview btn btn-info" title="Toggle preview"><i class="icon-none"></i></div>
+                <div class="preview-container">
+                    <div id="preview-contents" class='note-content'>
+                        <div id="wmd-preview" class="preview-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="extension-preview-buttons">
+            <div class="btn-group drag-me" title="Drag me!">
+                <i class="icon-ellipsis-vert"></i>
+            </div>
+        </div>
+        <button class='btn btn-success' id='toggle-preview' vine-click='PREVIEW_DOCUMENT:0' >
+            <i class='icon-direction' title='返回编辑' ></i>
+        </button>
+    </div>
+    <div id="wmd-button-bar" class="hide"></div>
+
+    <div class="menu-panel">
+        <!--<button class="btn toggle-button" title="Menu">
+            <img
+                data-stackedit-src="menu-icon.png" width="24" height="24" />
+        </button>-->
+
+        <div class="panel-content ">
+            <div vine-switch-on='IS_USER_AUTHED'>
+                <custom switch-when='true'>
+                <div class='username'  vine-bind='user'><span >{{ username }}</span><a href='javascript:void(0)' vine-click='VIP_CHARGE' target='_blank'><span  title='{{#vip}}{{#is_expired}}已过期{{/is_expired}}{{^is_expired}}会员至 {{vip}}{{/is_expired}}{{/vip}}'  class='vip-status {{#vip}}{{#is_expired}}expired{{/is_expired}}{{/vip}}'><i class='icon icon-star'></i><span class='renew'>续费</span></span></a></div>
+                <div class="list-group">
+                    <a href="javascript:void(0)"  class="list-group-item" vine-click='LOG_OUT'><i class="icon-logout"></i>
+                        退出账号</a> 
+                </div>
+                </custom>
+                <custom switch-default>
+                <div class="list-group">
+                    
+                    <a href="javascript:void(0)" 
+                        class="list-group-item"  vine-click='REDIRECT_AUTH:evernote' ><i class="icon-login"></i>
+                        绑定 Evernote International 账号</a>
+                    <a href="javascript:void(0)"  vine-click='REDIRECT_AUTH:yinxiang' class="list-group-item" ><i
+                            class="icon-login"></i>
+                        绑定印象笔记账号</a>
+                    
+                </div>
+
+                </custom>
+            </div>
+            <div class="dropdown-header">当前文档</div>
+            <div class="list-group">
+                <a href="javascript:void(0)"  class="list-group-item" vine-click='CONFIRM_DELETE_FILE' ><i class="icon-trash"></i> 删除文档</a>
+                <!--<a href="javascript:void(0)"  class="list-group-item" vine-click='EXPORT_MD_FILE' ><i class="icon-download"></i> 导出 Markdown</a> -->
+                <!--<a href="javascript:void(0)"  class="list-group-item" data-toggle="modal" data-target=".modal-pdf-hint"><i class="icon-download"></i> 导出 PDF</a>-->
+                <a href="javascript:void(0)" data-toggle=collapse data-target=".collapse-export" class="list-group-item"><i class="icon-download"></i> 导出...</a>
+                <div class="sub-menu collapse-export clearfix collapse" >
+                    <ul class="nav">
+                        <li><a  href="javascript:void(0)" vine-click='EXPORT_MD_FILE'>Markdown</a></li>
+                        <li><a href="javascript:void(0)"  vine-click='EXPORT_HTML_FILE'>HTML</a></li>
+                        <li><a href="#" data-toggle="modal" data-target=".modal-pdf-hint">PDF</a></li>
+                    </ul>
+                </div>
+                <a href="javascript:void(0)"  class="list-group-item"  vine-click='PREVIEW_DOCUMENT:1' ><i class="icon-desktop"></i> 预览文档</a>
+                <a href="javascript:void(0)"  class="list-group-item"  vine-click='SHARE_DOCUMENT'  ><i class="icon-share"></i> 分享链接</a>
+            </div>
+            <div class="dropdown-header">系统</div>
+            <ul class="list-group nav">
+
+                <li><a href="#" class='list-group-item action-load-settings' data-toggle="modal" data-target=".modal-settings" ><i class="icon-cog"></i> 设置</a></li>
+
+                <!-- ref:web  -->
+
+                
+                <li><a tabindex="-1" href="https://chrome.google.com/webstore/detail/马克飞象/kidnkfckhbdkfgbicccmdggmpgogehop?hl=zh-CN" target='_blank' class='list-group-item'><i class="icon-gift"></i> 下载离线客户端</a></li>
+                
+                <!-- endref -->
+                <li><a href="#" data-toggle="modal" vine-click='OPEN_FILE:readme:_blank' class='list-group-item'><i class="icon-attention-circled"></i> 使用说明</a></li>
+                <li ><a href="#" data-toggle="modal" vine-click='SHOW_HELP' class='list-group-item'><i class="icon-help-circled"></i> 快捷帮助</a></li>
+
+                
+                <li ><a href="https://www.evernote.com/shard/s21/sh/74d9e61d-2e12-4ee9-9d67-882f5d9474a4/8e6e04ad336df52156c5bf6965d8568f" class='list-group-item' target='_blank'><i class="icon-mail-alt"></i> 常见问题</a></li>
+                <!-- ref:web  -->
+                <!--<li><a tabindex="-1" href="/basic" class='list-group-item'><i class="icon-forward"></i> 切换至免费版</a></li>-->
+                <!-- endref -->
+                
+                <!-- <li><a href="#" data-toggle="modal"  class='list-group-item' data-target=".modal-about"><i
+                class="icon-info-circled"></i> 关于</a></li> -->
+
+            </ul>
+        </div> 
+
+    </div>
+
+
+    <div class="document-panel">
+        <!--<button class="btn toggle-button" title="Select document Ctrl+[ Ctrl+]">
+            <i class="icon-folder-open"></i>
+        </button>
+        <div class="search-bar clearfix">
+            <ul class="nav">
+                <li><a href="#" class="action-create-file"><i
+                        class="icon-file"></i> New document</a></li>
+                <li><a href="#" class="action-remove-file-confirm"><i
+                        class="icon-trash"></i> Delete document</a></li>
+                <li><a href="#" data-toggle="modal" data-target=".modal-document-manager"><i
+                        class="icon-layers"></i> Manage documents</a></li>
+            </ul>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-search"></i></span><input
+                    type="text" class="form-control" placeholder="Find document" />
+            </div>
+        </div>
+        <div class="panel-content">
+            <div class="list-group document-list"></div>
+            <div class="list-group document-list-filtered hide"></div>
+        </div>
+        -->
+        <div class="search-bar clearfix">
+            <div class="input-group" id='search-and-sync'>
+                <input  placeholder="搜索文件"type="text" class="form-control" vine-model='file_search'></input>
+                <span class="input-group-addon btn sync-list" vine-click='FETCH_LATEST_NOTES' title='从 Evernote 同步笔记列表'><i class="icon-arrows-cw"></i></span>
+            </div>
+        </div>
+        <div class="panel-content">
+            <div class="list-group document-list">
+                <ul class="nav" role='menu'>
+                    <li tabindex='1'  vine-repeat='filelist | file_filter:file_search:notebook,status,title' class='{{#is_current}}active{{/is_current}}'>
+                    <a   vine-click='{{# fid}}OPEN_FILE:{{fid}}{{/ fid }}{{# fguid}}OPEN_GUID_FILE:{{fguid}}{{/ fguid }}' href='javascript:void(0)' class="list-group-item file-item {{#is_synced}}synced{{/is_synced}}" data-file="{{ fid }}">
+
+                        <span class='file-notebook'>
+                            {{# saved_notebook }}
+                            <span class='label label-success'>{{ saved_notebook }}</span>
+                            {{/ saved_notebook}}
+                            {{# default_notebook }}
+                            <span class='default-notebook'><i class='icon-leaf'></i></span>
+                            {{/ default_notebook }}
+                        </span>
+                        {{#fid}}
+                        <span class='file-action' >
+                            <i class='icon-trash'  vine-click='CONFIRM_DELETE_FILE:{{fid}}' title='删除文档(D)'></i>
+                            <i class='icon-link-ext'  vine-click='OPEN_FILE:{{fid}}:_blank' title='在新窗口中打开(O)'></i>
+
+                            {{# guid }}
+                            <i class='icon-eye'  vine-click='EVERNOTE_VIEW:{{guid}}' title='在 Evernote 中打开(V)'></i>
+                            {{/ guid }}
+                        </span>
+                        {{/fid}}
+                        <span>{{ title }}</span>
+                        <span class='file-status-label'>
+                            {{# is_created }}
+                            <i class='icon-flash'></i>
+                            {{/ is_created }}
+                            {{# is_modified }}
+                            <i class='icon-asterisk'></i>
+                            {{/ is_modified }}
+                        </span>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-group document-list-filtered hide"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-document-manager">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;</button>
+                <h2 class="modal-title">Manage documents</h2>
+            </div>
+            <div class="modal-body">
+                <div></div>
+                <ul class="nav nav-pills document-list">
+                    <li class="pull-right dropdown"><a href="#"
+                        data-toggle="dropdown"><i class="icon-check"></i> Selection <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="action-select-all"><i
+                                class="icon-check"></i> Select all</a></li>
+                        <li><a href="#" class="action-unselect-all"><i
+                                class="icon-check-empty"></i> Unselect all</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="action-move-items"><i
+                                class="icon-forward"></i> Move to folder</a></li>
+                        <li><a href="#" class="action-delete-items"><i
+                                class="icon-trash"></i> Delete</a></li>
+                    </ul></li>
+                    <li class="pull-right"><a href="#"
+                        class="action-create-folder"> <i class="icon-folder"></i>
+                        Create folder
+                    </a></li>
+                    <li class="disabled"><a><i class="icon-file"></i> <span
+                            class="document-count"></span></a></li>
+                    <li class="disabled"><a><i class="icon-folder"></i> <span
+                            class="folder-count"></span></a></li>
+                </ul>
+                <div class="list-group document-list"></div>
+                <p class="confirm-delete hide">The following documents will be
+                deleted locally:</p>
+                <p class="choose-folder hide">Please choose a destination
+                folder:</p>
+                <div class="list-group selected-document-list hide"></div>
+                <div class="list-group select-folder-list hide"></div>
+            </div>
+            <div class="modal-footer">
+                <a href="#"
+                    class="btn btn-default confirm-delete choose-folder action-cancel hide">Cancel</a>
+                <a href="#"
+                    class="btn btn-primary confirm-delete action-delete-items-confirm hide">OK</a>
+                <a href="#" class="btn btn-primary document-list"
+                    data-dismiss="modal">Close</a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="modal fade modal-non-unique">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Ooops...</h2>
+            </div>
+            <div class="modal-body">
+                <p>StackEdit has stopped because another instance was running in
+                the same browser.</p>
+                <blockquote>
+                    <p>If you want to reopen StackEdit, click on
+                    "Reload".</p>
+                </blockquote>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:window.location.reload();"
+                    class="btn btn-primary">Reload</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade modal-app-reset">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Reset application</h2>
+            </div>
+            <div class="modal-body">
+                <p>This will delete all your local documents.</p>
+                <blockquote><b>Are you sure?</b></blockquote>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-primary action-app-reset"
+                    data-dismiss="modal">OK</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade modal-import-docs-settings">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Import documents and settings</h2>
+            </div>
+            <div class="modal-body">
+                <p>This will delete all existing local documents.</p>
+                <blockquote><b>Are you sure?</b></blockquote>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-primary action-import-docs-settings-confirm"
+                    data-dismiss="modal">OK</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-generic" class="modal hide fade in">
+    <div class="modal-header">
+        <a href="#" class="close" data-dismiss="modal">&times;</a>
+        <h3></h3>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>
+
+
+<div class="modal modal-insert-link" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;</button>
+                <h3 class="modal-title">插入链接</h3>
+            </div>
+            <div class="modal-body">
+                <p>请填写链接URL以及描述（可选）：</p>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-globe"></i></span><input
+                    id="input-insert-link" type="text" class="col-lg-5 form-control"
+                    placeholder='http://example.com/ "optional title"'></input>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
+                <a href="#" class="btn btn-primary action-insert-link"
+                    data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal modal-insert-image" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;</button>
+                <h3 class="modal-title">插入图片</h3>
+            </div>
+            <div class="modal-body">
+                <p>请填写图片URL：</p>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-picture"></i></span><input
+                    id="input-insert-image" type="text" class="col-lg-5 form-control"
+                    placeholder='http://example.com/image.jpg'></input>
+                </div>
+                <div class='help-block'><b>注意：</b> <span>马克飞象支持从剪切板直接复制图片，截屏粘贴试试。</span></div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default footer-left-btn"
+                    ><input type="file" accept="image/*" id='uploader' name="files[]" multiple="" onchange="" style="position:absolute; top:0; right:0; opacity:0; filter: alpha(opacity=0); font-size:23px; direction: ltr; cursor: pointer;"><i class="icon-hdd"></i>插入本地图片...</a> <a href="#" class="btn btn-default"
+                    data-dismiss="modal">取消</a> <a href="#"
+                    class="btn btn-primary action-insert-image" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-save-error">
+    <div class="modal-dialog slim">
+        <div class="modal-content">
+
+            <div class="modal-header" style='color:#B90B0B;'>
+                <h3 class="modal-title">同步文件失败</h3>
+            </div>
+            <div class="modal-body">
+                <p><b>错误码：</b><span class='error-code'></span></p>
+                <blockquote><pre  class='error-message'></pre></blockquote>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary "
+                    data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-remove-file-confirm" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;</button>
+                <h3 class="modal-title">删除文件</h3>
+            </div>
+            <div class="modal-body">
+                <p id='remove-hint'>确定删除<code id='remove-filename'></code>？</p>
+                <blockquote>
+                    <b>注意：</b> 如果已同步到Evernote, Evernote中的内容将不会删除 
+                </blockquote>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
+                <a href="#" class="btn btn-primary action-remove-file"
+                    data-dismiss="modal" vine-click='DELETE_FILE'>删除文件</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal modal-file-conflict error"  role="dialog">
+    <div class="modal-dialog slim">
+        <div class="modal-content">
+
+            <div class="modal-header" >
+                <h3 class="modal-title">文件冲突</h3>
+            </div>
+            <div class="modal-body">
+                <p>检测到本地有尚未同步的修改，将打开本地版本。请仔细对比本地与Evernote中的内容，以决定同步或删除本地版本。操作前请做好备份。</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary "
+                    data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal modal-help" role="dialog" tabindex='-1'>
+    <div class="modal-dialog">
+        <div class="markdown-syntax" platform-related>
+            <table class='markdown-table'>
+		<tr> <td>强调</td><td><pre>*斜体*	**粗体**</pre></td><td><kbd>Ctrl</kbd><kbd>I/B</kbd></td> </tr>
+		<tr> <td>链接</td><td><pre>[描述](http://example.com)</pre></td><td><kbd>Ctrl</kbd><kbd>L</kbd></td> </tr>
+		<tr> <td>图片</td><td><pre>![描述](example.jpg)</pre></td><td><kbd>Ctrl</kbd><kbd>G</kbd></td> </tr>
+		<tr> <td>标题</td><td>
+<pre>标题1		标题2
+========	--------
+
+## 标题2		###### 标题6
+</pre>	
+		</td><td><kbd>Ctrl</kbd><kbd>H</kbd></td> </tr>
+		<tr> <td>列表</td><td>
+<pre>1. 有序列表	- 无序列表
+2. 有序列表	- 无序列表
+</pre>
+		</td><td></td> </tr>
+		<tr> <td>引用</td><td>
+<pre>&gt; 这是引用的文字
+&gt; 引用内可以嵌套标题、列表等
+</pre>		
+		</td><td><kbd>Ctrl</kbd><kbd>Q</kbd></td> </tr>
+		<tr> <td>代码</td><td>
+<pre><i>这是一句行内代码</i> `var a=1` , <i>以下是代码区块</i>：
+```ruby
+print 'Hello world'
+```
+</pre>	
+		</td><td><kbd>Ctrl</kbd><kbd>K</kbd></td> </tr>
+		<tr> <td>LaTex 公式</td><td>
+<pre><i>这是一句行内公式</i> $ y = x + 1 $ , <i>以下是整行公式</i>：
+$$ a^2 + b^2 = c^2 $$
+</pre>	
+		</td><td></td> </tr>
+		<tr> <td>表格</td><td>
+<pre>| Item      |    Value | Qty  |
+| :-------- | --------:| :--: |
+| Computer  | 1600 USD |  5   |
+</pre>
+
+		</td><td><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>T</kbd></td> </tr>
+		</table>
+
+<table class='key-table'>
+<td>文档管理</td>
+<td><kbd>Ctrl</kbd><kbd>O</kbd></td>
+</tr>
+<tr>
+<td>帮助</td>
+<td><kbd>Ctrl</kbd><kbd>/</kbd></td>
+</tr>
+<tr>
+<tr>
+<td>最大化编辑器</td>
+<td><kbd>Ctrl</kbd><kbd>Enter</kbd></td>
+</tr>
+<tr>
+<td>同步文档</td>
+<td><kbd>Ctrl</kbd><kbd>S</kbd></td>
+</tr>
+<tr>
+<tr>
+<td>创建文档</td>
+<td><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>N</kbd></td>
+</tr>
+<tr>
+<td>系统菜单</td>
+<td><kbd>Ctrl</kbd><kbd>M</kbd></td>
+</tr>
+<tr>
+<td>放大 / 缩小字体</td>
+<td><kbd>Ctrl</kbd><kbd>+/-</kbd></td>
+</tr>
+</table>
+
+        </div>
+    </div>
+</div>
+<div class="modal modal-notify slim" role="dialog" tabindex='-1'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal modal-auto-sync "  role="dialog">
+    <div class="modal-dialog slim">
+        <div class="modal-content">
+
+            <div class="modal-header" >
+                <h3 class="modal-title">提示</h3>
+            </div>
+            <div class="modal-body">
+                <p>当前笔记已经有一段时间未同步到 Evernote，是否立即同步？</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary "
+                    data-dismiss="modal" vine-click='SYNC_FILE'>确定</a>
+                <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-missing-images "  role="dialog">
+    <div class="modal-dialog slim">
+        <div class="modal-content">
+
+            <div class="modal-header" >
+                <h3 class="modal-title">同步文件失败</h3>
+            </div>
+            <div class="modal-body">
+                <p>文档中有图片插入失败，请更正后再保存。有任何问题，请先备份好相关内容，反馈至 hustgock@gmail.com。<blockquote>注：马克飞象从 Evernote 中打开笔记有一定概率载入图片失败，如果是这种情况，请不用着急，删除本地缓存，再次从 Evernote 打开即可。</blockquote></p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary "
+                    data-dismiss="modal" >确定</a>
+                <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='modal modal-wait-pay slim' role='dialog'>
+    <div class="modal-dialog slim">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <h3 class="modal-title">感谢支持！</h3>
+            </div>
+            <div class="modal-body">
+                <p>请确认刚才的支付结果：</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" vine-click="CHECK_PAY_STATUS"   class="btn btn-primary" data-dismiss="modal" target='_blank'>支付成功</a>
+                <a href="javascript:void(0)" vine-click="HINT_PAY_FAIL" class="btn btn-warning"  data-dismiss="modal" target='_blank'>不，我遇到了问题</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='modal modal-pay-success slim' role='dialog'>
+    <div class="modal-dialog slim">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <h3 class="modal-title">支付成功</h3>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <thead><td>订单号</td><td>到期时间</td></thead>
+                    <tr vine-repeat='SUCCESS_ORDERS'><td>{{ order_no }}</td><td>{{ due }}</td></tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)"   data-dismiss="modal"  class="btn btn-primary" >确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='modal modal-pay-fail slim' role='dialog'>
+    <div class="modal-dialog slim">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <h3 class="modal-title">支付不成功？</h3>
+            </div>
+            <div class="modal-body">
+                <p>如果支付遇到了问题，或者支付成功后但状态没有更新，请不要着急，可以随时联系 hustgock@gmail.com 人工处理。</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)"   data-dismiss="modal"  class="btn btn-primary" >确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='modal modal-order-not-found slim' role='dialog'>
+    <div class="modal-dialog slim">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <h3 class="modal-title">抱歉，未找到订单信息</h3>
+            </div>
+            <div class="modal-body">
+                <p>如果支付遇到了问题，或者支付成功后但状态没有更新，请不要着急，可以随时联系 hustgock@gmail.com 人工处理。</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)"   data-dismiss="modal"  class="btn btn-primary" >确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal modal-share-link" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;</button>
+                <h3 class="modal-title">分享链接</h3>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <a href='' target='_blank' id="share-link" style='word-break: break-all;'></a>
+                    <div class="help-block">公开链接可以让你轻松分享笔记给其他人。</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default footer-left-btn" vine-click='STOP_SHARE_DOCUMENT'><i class='icon-unlink'></i> 停止分享</a>
+                <a href="#" class="btn btn-primary"
+                    data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='modal modal-china-jump slim' role='dialog'>
+    <div class="modal-dialog slim">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <h3 class="modal-title">Are you from China?</h3>
+            </div>
+            <div class="modal-body">
+                <p>If yes, the app would change to Chinese language and link to faster server.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" vine-click="CHANGE_LANGUAGE:zh"   class="btn btn-primary" data-dismiss="modal" target='_blank'>Yes, I am</a>
+                <a href="javascript:void(0)"  class="btn btn-warning"  data-dismiss="modal" target='_blank'>No</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal modal-settings" aria-hidden="false" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">设置</h3>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a class="action-load-settings" href="#tabpane-settings-basic" data-toggle="tab">常规</a></li>
+                    <li><a class="action-load-settings" href="#tabpane-settings-style" data-toggle="tab">样式</a></li>
+                    <!--<li><a class="action-load-settings"
+						href="#tabpane-settings-extensions" data-toggle="tab">Extensions</a></li>-->
+					<li><a class="action-load-settings"
+						href="#tabpane-settings-utils" data-toggle="tab">Utils</a></li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <form id='settings'>
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="tabpane-settings-basic">
+                            <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">编辑器</label>
+                                <div class="col-lg-7">
+                                <select  name='editor' class="form-control"><option value="light">Lite（简约）</option><option value="ace">Ace（旧版）</option></select>
+                                <div class="help-block">通常推荐使用 Lite 编辑器。旧版的 Ace 编辑器支持 Vim 和 Emacs 键盘模式以及行号，但偶尔会有小 bug。</div>
+                                </div>
+                            </div>
+                            <div class="form-group only-ace editor-related" platform-related>
+                                    <label class="col-lg-4 control-label">键盘模式</label>
+                                    <div class="col-lg-7">
+                                        <div class="radio">
+                                            <label> <input type="radio" name="key_bindings" value="">
+                                                Normal
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label> <input type="radio" name="key_bindings" value="ace/keyboard/vim">
+                                                Vim <!--<div class='radio-hint'>（部分 Markdown 快捷键将变为 Ctrl + Alt + *）</div>-->
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label> <input type="radio" name="key_bindings" value="ace/keyboard/emacs">
+                                                Emacs<!--<div class='radio-hint'>（所有 Markdown 快捷键将变为 Ctrl + Alt + *）</div>-->
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group only-ace editor-related">
+                                    <label class="col-lg-4 control-label">显示行号</label>
+                                    <div class="col-lg-7">
+                                        <div class="checkbox">
+                                            <label> <input type="checkbox" name="line_number" >
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">默认布局</label>
+                                    <div class="col-lg-7">
+                                        <div class="checkbox">
+                                            <label> <input type="checkbox" name="layout.editor" checked="checked" disabled>
+                                                编辑器
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label> <input type="checkbox" name="layout.preview" checked="checked">
+                                                预览区
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label> <input type="checkbox" name="layout.toolbar" checked="checked">
+                                                工具栏
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Evernote 中的笔记正文</label>
+                                    <div class="col-lg-7">
+                                        <div class="checkbox">
+                                            <label> <input type="checkbox" name="publish.title" checked="checked">
+                                                带标题
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label> <input type="checkbox" name="publish.tags" checked="checked">
+                                                带标签
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label> <input type="checkbox" name="evernote_readonly" checked="checked">
+                                                只读
+                                            </label>
+
+                                            <div class="help-block">强烈推荐。由马克飞象创建的笔记，如果不慎使用 Evernote 编辑，可能会造成信息丢失。</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">自动同步</label>
+                                    <div class="col-lg-7">
+                                        <div class="checkbox">
+                                            <label> <input type="checkbox" name="auto_sync">
+                                                每10分钟自动同步至 Evernote，以保证数据安全
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabpane-settings-style">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">代码高亮</label>
+                                    <div class="col-lg-7">
+                                        <select  name='code_highlight' class="form-control"><option value="hljs-dark">Dark</option><option value="hljs-light">Light</option><option value="">无</option></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">字号比例</label>
+                                    <div class="col-lg-7">
+                                        <input type="text" id='input-settings-font-size' name='font_ratio' class="form-control col-lg-7">
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label"></label>
+                                    <div class="col-lg-7">
+                                        <div class="checkbox">
+                                            <label> <input type="checkbox" name="font_size_to_evernote" > 字号应用到 Evernote 文档
+                                            </label> 
+                                            <div class="help-block">不推荐勾选，Evernote 默认字号 14px，已达到最佳显示和阅读效果。</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">文档字体</label>
+                                    <div class="col-lg-7 form-inline">
+                                        <input type="text"  name='preview_font' class="form-control col-lg-7" placeholder='正在使用默认字体'>
+                                        <div class="help-block">示例：Arial, 微软雅黑</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">编辑器字体</label>
+                                    <div class="col-lg-7 form-inline ">
+                                        <input type="text"  name='editor_font' class="form-control col-lg-7" placeholder='正在使用默认字体'>
+                                        <div class="help-block">请使用<a href='http://zh.wikipedia.org/zh/%E7%AD%89%E5%AE%BD%E5%AD%97%E4%BD%93' target='_blank'>等宽字体</a>，否则可能导致光标错位。</div>
+                                        <div class="help-block">示例: "Courier New", 宋体</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">自定义渲染CSS</label>
+                                    <div class="col-lg-7 form-inline ">
+                                        <textarea name='custom_css' class="form-control" spellcheck='false' >/**
+设置你自己的CSS。例如：
+h1 {
+  border-bottom: 1px solid #ccc;
+  line-height:1.6;
+}
+body {
+  background:#FDFFD0
+}
+**/
+</textarea>	
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabpane-settings-extensions" style='display:none;'>
+						<div class="panel-group accordion-extensions"></div>
+						<span class="help-block pull-right"><a target="_blank"
+							href="https://github.com/benweet/stackedit/blob/master/doc/developer-guide.md#developer-guide">Create
+								your own extension...</a></span>
+					</div>
+					<div class="tab-pane" id="tabpane-settings-utils">
+						<div class="tab-pane-button-container">
+							<a href="#" class="btn btn-block btn-default action-welcome-file"
+								data-dismiss="modal"><i class="icon-help-circled"></i>
+								Hello! document</a> <a href="#"
+								class="btn btn-block btn-default action-welcome-tour"
+								data-dismiss="modal"><i
+								class="icon-help-circled"></i> Welcome tour</a>
+						</div>
+						<div class="tab-pane-button-container">
+							<a href="#"
+								class="btn btn-block btn-default action-import-docs-settings"><i
+								class="icon-cog-alt"></i> Import docs & settings</a> <a href="#"
+								class="btn btn-block btn-default action-export-docs-settings"
+								data-dismiss="modal"><i class="icon-cog-alt"></i>
+								Export docs & settings</a> <input type="file"
+								id="input-file-import-docs-settings" class="hide">
+						</div>
+						<div class="tab-pane-button-container">
+							<a href="#"
+								class="btn btn-block btn-default action-default-settings"
+								data-dismiss="modal"><i class="icon-wrench"></i>
+								Load default settings</a> <a href="#" class="btn btn-block btn-default"
+								data-dismiss="modal" data-toggle="modal"
+								data-target=".modal-app-reset"><i
+								class="icon-fire"></i> Reset application</a> <a target="_blank" href="recovery.html" class="btn btn-block btn-default"><i
+								class="icon-medkit"></i> StackEdit recovery</a>
+						</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
+                <a href="#" class="btn btn-primary action-apply-settings" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal modal-pdf-hint error"  role="dialog">
+	<div class="modal-dialog slim">
+		<div class="modal-content">
+
+			<!--<div class="modal-header" >
+				<h3 class="modal-title">文件冲突</h3>
+			</div>
+			-->
+			<div class="modal-body">
+				<p>Chrome在`打印`中提供了`另存为PDF`的功能，非常方便。具体步骤：</p>
+				<ol>
+					<li>点击本页下方的`导出PDF`按钮，将打开`打印`界面。（或者通过其他方式，比如空白处右键选择`打印`按钮）。</li>
+					<li>在弹出的界面中进行如下设置
+					<p><img src='http://maxiang.qiniudn.com/images/pdf.jpg'></p>
+					</li>
+
+					<li>点击保存即可。</li>
+				</ol>
+
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-primary "
+					vine-click='EXPORT_PDF' data-dismiss="modal"
+					>导出 PDF</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+    </body>
+    <!--
+      processed by htmlbuild (footer)
+    -->
+</html>

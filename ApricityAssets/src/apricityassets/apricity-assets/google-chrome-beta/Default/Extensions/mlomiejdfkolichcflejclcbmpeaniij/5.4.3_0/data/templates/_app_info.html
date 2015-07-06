@@ -1,0 +1,77 @@
+<div class="app-info<% if (loading) print(' loading') %>">
+	<div <% if (hidden) print(' style="display:none"') %>>
+
+	<% if (!loading) { %>
+
+			<% if (success) { %>
+
+				<img class="company-logo" src="<%- company_logo_url %>">
+
+				<h1><%- t('company_about', company_name) %></h1>
+
+				<% if (company_app.length && !(company_app.length == 1 && company_name == name)) { %>
+					<p>
+						<%- t('company_operates', company_name) %>
+						<%- _.pluck(company_app, 'ca_name').join(', ') %>
+					</p>
+				<% } %>
+
+				<% if (company_in_their_own_words.length > 0) { %>
+
+					<p>
+						<h2><%- t('company_in_their_own_words') %></h2>
+					</p>
+
+					<p>
+						<%- company_in_their_own_words %>
+					</p>
+
+				<% } else if (company_description) { %>
+
+					<p>
+						<h2><%- t('company_description') %></h2>
+					</p>
+
+					<p>
+						<%- company_description %>
+					</p>
+
+				<% } %>
+				<p>
+					<h2><%- t('company_website') %></h2>
+					<a href="<%- company_website_url %>" rel="nofollow" target="_blank"><%- company_website_url %></a>
+				</p>
+
+				<p>
+					<h2><%- t('company_affiliations') %></h2>
+					<% if (!affiliation_groups.length) { %>
+						<%- t('none') %>
+					<% } else {
+						_(affiliation_groups).chain().pluck('ag_logo_url').each(function (logo_url) {
+							%><img src="<%- logo_url %>" height=20> <%
+						})
+					} %>
+				</p>
+
+				<p>
+					<h2><%- t('company_tags') %></h2>
+					<span>
+						<%- tags.length > 0 ? tags.map(function (tag) { return tag.tag_title }).join(", ") : t('none') %>
+					</span>
+				</p>
+
+			<% } else { %>
+
+				<h1><%- t('company_profile_error') %></h1>
+				<br>
+
+			<% } %>
+
+			<h2>
+				<a target="_blank" href="https://www.ghostery.com/apps/<%- encodeURIComponent(name.replace(/\s+/g, '_').toLowerCase()) %>"><%- t('company_profile_link') %></a>
+			</h2>
+
+	<% } %>
+
+	</div>
+</div>

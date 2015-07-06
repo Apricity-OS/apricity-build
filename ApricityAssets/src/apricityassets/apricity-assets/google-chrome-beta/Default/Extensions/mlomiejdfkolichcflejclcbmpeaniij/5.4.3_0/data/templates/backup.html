@@ -1,0 +1,72 @@
+<%
+var _app_browser = require('tpl/_app_browser'),
+	_ghostrank = require('tpl/_ghostrank'),
+	_select = require('tpl/_select'),
+	_header = require('tpl/_header'),
+	_footer = require('tpl/_footer'),
+	_library_li = require('tpl/_library_li'),
+	_block_by_default_helper = require('tpl/_default_block_all');
+%>
+
+<%= _header({
+	ratelink_url: 'https://chrome.google.com/webstore/detail/mlomiejdfkolichcflejclcbmpeaniij/reviews',
+	show_tabs: false,
+	show_walkthrough_link: false,
+	show_walkthrough_progress: false,
+	show_walkthrough_skip: false,
+	survey_link: true
+}) %>
+
+<div class="options-div" id="general-options">
+	<table>
+		<tr>
+			<th>
+				<%- t('backup_export_header') %>
+			</th>
+			<td>
+        <p>
+          <%- t('backup_export') %>
+        </p>
+        <br />
+				<button id="backup-button" class="blue-button" disabled>
+					<span><%- t('backup_export_button') %></span>
+				</button>
+			</td>
+    </tr>
+		<tr>
+			<th>
+				<%- t('backup_import_header') %>
+			</th>
+			<td>
+        <p>
+          <%- t('backup_import') %>
+        </p>
+        <p>
+          <%- t('backup_import_warning') %>
+        </p>
+        <br />
+				<input type="file" id="restore-file"></input>
+        <br />
+				<button id="restore-button" class="blue-button" disabled>
+					<span><%- t('backup_import_button') %></span>
+				</button>
+        <div id="restore-error" style="display: none">
+          <%= t('backup_import_error') %>
+        </div>
+			</td>
+		</tr>
+		<tr>
+			<th style="border-bottom: none;">&nbsp;</th>
+			<td style="border-bottom: none; border-left: none; text-align: left;">
+				<a id="goto-options" href="options.html"><%- t('backup_options_link') %></a>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div id="saving-options-notice-overlay"></div>
+<div id="saving-options-notice">
+	<div><%- t("options_saving_exit_message") %></div>
+</div>
+
+<%= _block_by_default_helper() %>

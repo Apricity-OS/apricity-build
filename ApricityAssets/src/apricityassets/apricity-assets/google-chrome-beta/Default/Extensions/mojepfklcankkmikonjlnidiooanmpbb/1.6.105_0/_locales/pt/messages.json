@@ -1,0 +1,1526 @@
+{
+   "1_HOUR": {
+      "description": "Label",
+      "message": "1 hour"
+   },
+   "1_INVITATION": {
+      "description": "Label",
+      "message": "Tem 1 novo convite."
+   },
+   "ACCOUNT": {
+      "description": "Label",
+      "message": "Conta"
+   },
+   "ACCOUNTS": {
+      "description": "Label",
+      "message": "Contas"
+   },
+   "ADD_ACCOUNT": {
+      "description": "Label",
+      "message": "Adicionar Conta"
+   },
+   "ADD_ALERT": {
+      "description": "Label",
+      "message": "Adicionar um novo alerta"
+   },
+   "ADD_DESCRIPTION": {
+      "description": "",
+      "message": "Adicionar uma descrição"
+   },
+   "ADD_REMOVE_TIMEZONES": {
+      "description": "Label",
+      "message": "Adicionar/Remover fusos horários"
+   },
+   "ADD_TIMESLOT": {
+      "description": "Label",
+      "message": "Add Time Slot"
+   },
+   "AFTER": {
+      "description": "Label",
+      "message": "Após"
+   },
+   "AFTERNOON": {
+      "description": "Label",
+      "message": "Afternoon"
+   },
+   "AGE_PLURAL": {
+      "description": "Label (eg: 23 years old)",
+      "message": "%@ anos de idade"
+   },
+   "AGE_SINGULAR": {
+      "description": "Label (eg: 1 year old)",
+      "message": "%@ ano de idade"
+   },
+   "ALERTS": {
+      "description": "Label",
+      "message": "Alertas"
+   },
+   "ALERTS_VAL": {
+      "description": "Label",
+      "message": "Alertas %@"
+   },
+   "ALERT_LABEL": {
+      "description": "Label",
+      "message": "Alerta:"
+   },
+   "ALL_DAY": {
+      "description": "Label",
+      "message": "Dia todo"
+   },
+   "ALL_DAY_EVENT": {
+      "description": "Label",
+      "message": "Evento de dia todo"
+   },
+   "ALL_EVENTS": {
+      "description": "",
+      "message": "Todos os eventos"
+   },
+   "ALL_GOOD": {
+      "description": "Label",
+      "message": "All good!"
+   },
+   "API_ISSUE": {
+      "description": "Error message",
+      "message": "Algo correu mal com a nossa API. Por favor tente de novo mais tarde."
+   },
+   "ASANA_DESCRIPTION": {
+      "description": "Settings > Asana description",
+      "message": "Tarefas"
+   },
+   "AT_TIME_OF_EVENT": {
+      "description": "Label",
+      "message": "Na hora do evento"
+   },
+   "AUTOMATIC": {
+      "description": "Label",
+      "message": "Automatic"
+   },
+   "A_FEW_SECONDS": {
+      "description": "Label",
+      "message": "há uns segundos"
+   },
+   "BACK": {
+      "description": "Label",
+      "message": "Back"
+   },
+   "BACK_TO_CAL": {
+      "description": "Label",
+      "message": "Voltar à vista de calendário"
+   },
+   "BASECAMP_DESCRIPTION": {
+      "description": "Settings > Basecamp description",
+      "message": "Eventos e Tarefas"
+   },
+   "BEFORE": {
+      "description": "Label (eg: 1 minute before)",
+      "message": "%@ antes"
+   },
+   "BIRTHDAYS_X": {
+      "description": "Label (eg: Birthdays: Aurelien, Pierre and Joey)",
+      "message": "Birthdays: %@"
+   },
+   "BIRTHDAY_X": {
+      "description": "Label (eg: Birthday: Aurelien)",
+      "message": "Birthday: %@"
+   },
+   "CALENDAR": {
+      "description": "Label",
+      "message": "Calendário"
+   },
+   "CALENDARS": {
+      "description": "Label",
+      "message": "Calendários"
+   },
+   "CANCEL": {
+      "description": "Label",
+      "message": "Cancelar"
+   },
+   "CANCEL_SEARCH": {
+      "description": "Label",
+      "message": "Cancel Search"
+   },
+   "CATALOG": {
+      "description": "Label - Example: Holidays - United States Catalog",
+      "message": "%@ Catalog"
+   },
+   "CHANGE_COLOR": {
+      "description": "label",
+      "message": "Mudar cor"
+   },
+   "CHANGE_COLOR_TO": {
+      "description": "Example: Change color to: red",
+      "message": "Mudar cor para: %@"
+   },
+   "CHANGE_DURATION_TO_COLON": {
+      "description": "Example: Change duration to: One hour",
+      "message": "Change duration to: %@"
+   },
+   "CLICK_TO_CHANGE_EMAIL": {
+      "description": "Label",
+      "message": "Click to change your email address."
+   },
+   "COMMITMENT_TO_SECURITY": {
+      "description": "label",
+      "message": "O nosso compromisso com Segurança"
+   },
+   "CONFIRM": {
+      "description": "Label",
+      "message": "Confirm"
+   },
+   "CONFIRM_FOR_DATE": {
+      "description": "Example: Confirm for Wed, Sep 03 @ 6:30pm",
+      "message": "Confirm for %@"
+   },
+   "CONNECT": {
+      "description": "Label (eg: Connect your calendar)",
+      "message": "Ligar"
+   },
+   "CONNECT_ACCOUNTS_ST": {
+      "description": "error message",
+      "message": "You need to connect a calendar account to add events."
+   },
+   "CONNECT_ACCOUNTS_ST_MEET": {
+      "description": "error message",
+      "message": "You need to connect a calendar account to create new Meets."
+   },
+   "CONNECT_ACCOUNTS_TL": {
+      "description": "Label",
+      "message": "Ligar Contas"
+   },
+   "CONNECT_SOMETHING": {
+      "description": "Label (eg: Connect Facebook)",
+      "message": "Conectar %@"
+   },
+   "CONNECT_TO": {
+      "description": "Label (eg: Connect to Google)",
+      "message": "Connect to %@"
+   },
+   "CONNECT_WITH": {
+      "description": "Label (eg: Connect with Google)",
+      "message": "Conectar com %@"
+   },
+   "CONNECT_WITH_EMAIL": {
+      "description": "Label",
+      "message": "Login com Email"
+   },
+   "COPIED_EXCL_MARK": {
+      "description": "Label",
+      "message": "Copied!"
+   },
+   "COPY_AND_SHARE_URL": {
+      "description": "Label",
+      "message": "Copy and share this URL."
+   },
+   "COPY_TO_CLIPBOARD": {
+      "description": "Label",
+      "message": "Copy to clipboard"
+   },
+   "CREATE_EVENT": {
+      "description": "Label",
+      "message": "Create Event"
+   },
+   "CREATE_MEET": {
+      "description": "Label",
+      "message": "Create a new Meet"
+   },
+   "CURRENT_CALENDAR_COLON": {
+      "description": "Example: Current Calendar: Google",
+      "message": "Current Calendar: %@"
+   },
+   "CURRENT_LOC": {
+      "description": "Label",
+      "message": "Localização actual"
+   },
+   "CURRENT_TIMEZONE": {
+      "description": "Example: Current Time Zone: CET",
+      "message": "Fuso Horário Actual: %@"
+   },
+   "CUSTOM": {
+      "description": "Label",
+      "message": "Personalizado"
+   },
+   "CUSTOM_LOCATION": {
+      "description": "Label",
+      "message": "Localização personalizada"
+   },
+   "CUSTOM_TITLE": {
+      "description": "Label",
+      "message": "Custom Title"
+   },
+   "DAILY": {
+      "description": "Label",
+      "message": "Diariamente"
+   },
+   "DATE_COLON": {
+      "description": "Example: Date: 10/01/03",
+      "message": "Date: %@"
+   },
+   "DATE_FORMAT": {
+      "description": "Label",
+      "message": "Formato da data"
+   },
+   "DAY": {
+      "description": "Label",
+      "message": "dia"
+   },
+   "DAYS": {
+      "description": "Label",
+      "message": "dias"
+   },
+   "DAYS_BEFORE": {
+      "description": "Label",
+      "message": "%@ dias antes"
+   },
+   "DAY_BEFORE": {
+      "description": "Label",
+      "message": "%@ dia antes"
+   },
+   "DAY_OF_THE_MONTH": {
+      "description": "Label",
+      "message": "Dia do mês"
+   },
+   "DAY_OF_THE_WEEK": {
+      "description": "Label",
+      "message": "Dia da semana"
+   },
+   "DECIDE_LATER": {
+      "description": "Label",
+      "message": "Decide Later"
+   },
+   "DECLINE_1": {
+      "description": "Verb - Decline The Event",
+      "message": "Não vou"
+   },
+   "DECLINE_2": {
+      "description": "Verb - Declined The Event",
+      "message": "Não vai"
+   },
+   "DEFAULT_ALERT": {
+      "description": "Label",
+      "message": "Aviso predefinido"
+   },
+   "DEFAULT_CALENDAR": {
+      "description": "Label",
+      "message": "Default calendar"
+   },
+   "DEFAULT_EVENT_LENGTH": {
+      "description": "Label",
+      "message": "Default event duration"
+   },
+   "DELETE": {
+      "description": "Label",
+      "message": "Apagar"
+   },
+   "DELETE_ACCOUNT": {
+      "description": "Label",
+      "message": "Eliminar Conta"
+   },
+   "DELETE_ACCOUNT_SENTENCE": {
+      "description": "Sentence",
+      "message": "Tem a certeza que pretende eliminar a sua conta? Sem problemas! Se sentir falta do Suprisse, pode sempre voltar mais tarde. Os dados de calendário não serão apagados e não vamos ficar chateados. :)"
+   },
+   "DELETE_AND_NOTIFY": {
+      "description": "",
+      "message": "Apagar e notificar convidados"
+   },
+   "DELETE_ATTENDEE": {
+      "description": "Label",
+      "message": "Remover Convidado"
+   },
+   "DELETE_EVENT": {
+      "description": "",
+      "message": "Apagar evento?"
+   },
+   "DELETE_EVENT_MSG": {
+      "description": "",
+      "message": "Deseja apagar '%@'?"
+   },
+   "DELETE_EVET_MSG_ATTENDEES": {
+      "description": "",
+      "message": "Deseja notificar os seus convidados de que vai cancelar '%@'?"
+   },
+   "DELETE_MEET": {
+      "description": "",
+      "message": "Apagar encontro?"
+   },
+   "DELETE_MY_ACCOUNT": {
+      "description": "Label",
+      "message": "Eliminar a minha conta"
+   },
+   "DELETE_RECURRING": {
+      "description": "",
+      "message": "Apagar evento recorrente"
+   },
+   "DELETE_RECURRING_MSG": {
+      "description": "",
+      "message": "Este é um evento recorrente. Que ocorrências devem ser apagadas?"
+   },
+   "DELETE_REMINDER": {
+      "description": "Label",
+      "message": "Remover Alerta"
+   },
+   "DELETE_TIMEZONE": {
+      "description": "Label",
+      "message": "Remover Fuso Horário"
+   },
+   "DELETE_WITHOUT_NOTIFY": {
+      "description": "",
+      "message": "Apagar sem notificar"
+   },
+   "DEL_EVENT": {
+      "description": "Label",
+      "message": "Apagar evento"
+   },
+   "DESCRIPTION": {
+      "description": "Label",
+      "message": "Descrição"
+   },
+   "DISCONNECT": {
+      "description": "Label  (eg: Disconnect your calendar)",
+      "message": "Desligar"
+   },
+   "DISCONNECT_CONCT": {
+      "description": "Label",
+      "message": "Desligar conexão"
+   },
+   "DISCONNECT_CONCT_MSG": {
+      "description": "Sentence",
+      "message": "Isto irá desligar a sua conexão do Sunrise. Pode voltar a conectar mais tarde."
+   },
+   "DISCONNECT_CONCT_MSG_X": {
+      "description": "Sentence (eg: Disconnect Facebook",
+      "message": "Isto irá desligar a sua conexão %@ do Sunrise. Pode voltar a conectar %@ mais tarde."
+   },
+   "DISCONNECT_CONCT_X": {
+      "description": "Label (eg: Disconnect Facebook)",
+      "message": "Desligar %@"
+   },
+   "DONE": {
+      "description": "Label",
+      "message": "Feito"
+   },
+   "DONT_DELETE": {
+      "description": "",
+      "message": "Não apagar"
+   },
+   "DONT_SEND": {
+      "description": "",
+      "message": "Não enviar"
+   },
+   "DOWNLOAD_SUNRISE_FOR": {
+      "description": "Download Sunrise for Android",
+      "message": "Download Sunrise for %@"
+   },
+   "DURATION_COLON": {
+      "description": "Example: Duration: One hour",
+      "message": "Duration: %@"
+   },
+   "EDIT": {
+      "description": "Label",
+      "message": "Editar"
+   },
+   "EDIT_INTERESTING_CALENDARS": {
+      "description": "Label",
+      "message": "Edit Interesting Calendars"
+   },
+   "EDIT_TRANSPARENT_BUSY": {
+      "description": "Label",
+      "message": "Ocupado"
+   },
+   "EDIT_TRANSPARENT_FREE": {
+      "description": "Label",
+      "message": "Grátis"
+   },
+   "ENDS": {
+      "description": "Label",
+      "message": "Acaba:"
+   },
+   "ENTER_EMAIL_CONFIRM": {
+      "description": "Label",
+      "message": "Enter your email address to confirm"
+   },
+   "ERROR_TRY_AGAIN": {
+      "description": "Error message",
+      "message": "Erro. Por favor tente de novo."
+   },
+   "EVENING": {
+      "description": "Label",
+      "message": "Evening"
+   },
+   "EVENTBRITE_DESCRIPTION": {
+      "description": "Settings > Google Tasks description",
+      "message": "Bilhetes"
+   },
+   "EVENT_ADDED_TO_CALENDAR": {
+      "description": "Label",
+      "message": "The event will be added to your calendar."
+   },
+   "EVENT_NOT_BEEN_SAVED": {
+      "description": "Sentence",
+      "message": "O seu evento não foi guardado."
+   },
+   "EVERNOTE_DESCRIPTION": {
+      "description": "Settings > Evernote description",
+      "message": "Adicionar os seus lembretes do Evernote"
+   },
+   "EVERY_2_WEEK": {
+      "description": "Label",
+      "message": "A cada 2 semanas"
+   },
+   "EVERY_DAY": {
+      "description": "Label",
+      "message": "Todos os dias"
+   },
+   "EVERY_HOUR": {
+      "description": "Label",
+      "message": "Todas as horas"
+   },
+   "EVERY_MINUTE": {
+      "description": "Label",
+      "message": "Todos os minutos"
+   },
+   "EVERY_MONTH": {
+      "description": "Label",
+      "message": "Todos os meses"
+   },
+   "EVERY_WEEK": {
+      "description": "Label",
+      "message": "Todas as semanas"
+   },
+   "EVERY_X_HOURS": {
+      "description": "Label",
+      "message": "A cada %@ horas"
+   },
+   "EVERY_X_MINUTES": {
+      "description": "Label",
+      "message": "A cada %@ minutos"
+   },
+   "EVERY_YEAR": {
+      "description": "Label",
+      "message": "Todos os anos"
+   },
+   "FACEBOOK_DESCRIPTION": {
+      "description": "Settings > Facebook description",
+      "message": "Eventos e Aniversários"
+   },
+   "FAVORITES": {
+      "description": "Label",
+      "message": "Favorites"
+   },
+   "FEATURE_CONNECTION_ERROR": {
+      "description": "Label",
+      "message": "You must be connected to internet to use this feature"
+   },
+   "FOLLOWING_EVENTS": {
+      "description": "",
+      "message": "Eventos seguintes"
+   },
+   "FORGOT_APPLEID": {
+      "description": "label",
+      "message": "Esqueceu o Apple ID ou Password?"
+   },
+   "FOURSQUARE_DESCRIPTION": {
+      "description": "Settings > Foursquare description",
+      "message": "Checkins"
+   },
+   "FREQUENTS": {
+      "description": "Label",
+      "message": "Frequents"
+   },
+   "GITHUB_DESCRIPTION": {
+      "description": "Settings > Github description",
+      "message": "Objectivos"
+   },
+   "GOING_1": {
+      "description": "Verb - Going To The Event",
+      "message": "Vou"
+   },
+   "GOING_2": {
+      "description": "Verb - Accepted The Event",
+      "message": "Vai"
+   },
+   "GOOGLE_DESCRIPTION": {
+      "description": "Settings > Google description",
+      "message": "Calendários"
+   },
+   "GOOGLE_PUSH_BANNER_1": {
+      "description": "",
+      "message": "Acabamos de acrescentar suporte para actualizações em tempo real para o Google Calendar. "
+   },
+   "GOOGLE_PUSH_BANNER_2": {
+      "description": "",
+      "message": "Edite um evento a partir das nossas aplicações móveis e veja-o a ser alterado, em tempo real, no Sunrise no seu desktop!"
+   },
+   "GTASK_DESCRIPTION": {
+      "description": "Settings > Google Tasks description",
+      "message": "Tarefas"
+   },
+   "HELP": {
+      "description": "Label",
+      "message": "Ajuda"
+   },
+   "HIDE_INVITATION": {
+      "description": "Label",
+      "message": "Ignore this invitation"
+   },
+   "HIDE_SIDEBAR": {
+      "description": "Label",
+      "message": "Esconder Barra Lateral"
+   },
+   "HIGH_CONTRAST_COLORS": {
+      "description": "Label",
+      "message": "High Contrast Colors"
+   },
+   "HOLIDAYS_SPORTS_MORE": {
+      "description": "Label",
+      "message": "Holidays, TV, sports, and more"
+   },
+   "HOURS_BEFORE": {
+      "description": "Label",
+      "message": "%@ horas antes"
+   },
+   "HOUR_BEFORE": {
+      "description": "Label",
+      "message": "%@ hora antes"
+   },
+   "ICLOUD_DESCRIPTION": {
+      "description": "Settings > iCloud description",
+      "message": "Calendários"
+   },
+   "ICLOUD_MAC_CONNECT_TITLE": {
+      "description": "Title/Sentence",
+      "message": "Como ligar uma conta iCloud?"
+   },
+   "ICLOUD_MAC_MSG": {
+      "description": "Sentence",
+      "message": "De momento, Suprisse não suporta a ligação directa aos calendários do iCloud a partir da aplicação para Mac."
+   },
+   "ICLOUD_MAC_MSG_2": {
+      "description": "Sentence",
+      "message": "Mas pode descarregar uma das nossas aplicações para iOS e ligar os seus calendários do iCloud a partir dela. Assim, os seus calendários do iCloud também vão aparecer na aplicação para Mac."
+   },
+   "INTERESTING_CALENDARS": {
+      "description": "Label",
+      "message": "Calendários Interessantes"
+   },
+   "INTERVAL": {
+      "description": "Label (eg Interval: 2 years)",
+      "message": "Intervalo:"
+   },
+   "INVITATIONS": {
+      "description": "Label",
+      "message": "Convites"
+   },
+   "INVITATION_CHANGE_DATE": {
+      "description": "Example: Lunch is now on Tue, Aug 5 at 12am",
+      "message": "%@{1} is now on %@{2} at %@{3}"
+   },
+   "INVITATION_CHANGE_DATE_PLACE": {
+      "description": "Example: Lunch is now on Tue, Aug 5 at 12am, Petite Abeille, 30 W 17th",
+      "message": "%@{1} is now on %@{2} at %@{3}, %@{4}"
+   },
+   "INVITATION_CHANGE_DAY": {
+      "description": "Example: Lunch is now on Tue, Aug 5",
+      "message": "%@{1} is now on %@{2}"
+   },
+   "INVITATION_CHANGE_DAY_PLACE": {
+      "description": "Example: Lunch is now on Tue, Aug 5 at Petite Abeille, 30 W 17th",
+      "message": "%@{1} is now on %@{2} at %@{3}"
+   },
+   "INVITATION_CHANGE_TIME": {
+      "description": "Example: Lunch is now at 12am",
+      "message": "%@{1} is now at %@{2}"
+   },
+   "INVITATION_CHANGE_TIME_PLACE": {
+      "description": "Example: Lunch is now at 12am, Petite Abeille, 30 W 17th",
+      "message": "%@{1} is now at %@{2}, %@{3}"
+   },
+   "INVITATION_DATE": {
+      "description": "Example: Invitation: Lunch – Wed, Sep 03 @ 6:30pm",
+      "message": "Convite: %@{1} – %@{2} @ %@{3}"
+   },
+   "INVITATION_DATE_ORGANIZER": {
+      "description": "Example: Invitation: Lunch – Wed, Sep 03 @ 6:30pm by Mike",
+      "message": "Convite: %@{1} – %@{2} @ %@{3} por %@{4}"
+   },
+   "INVITATION_DAY": {
+      "description": "Example: Invitation: Lunch – Wed, Sep 03",
+      "message": "Invitation: %@{1} – %@{2}"
+   },
+   "INVITATION_DAY_ORGANIZER": {
+      "description": "Example: Invitation: Lunch – Wed, Sep 03 by Mike",
+      "message": "Invitation: %@{1} – %@{2} by %@{3}"
+   },
+   "INVITED_BY_SOMEONE": {
+      "description": "Label (eg: Invited by Jeremy)",
+      "message": "Convidado por %@"
+   },
+   "INVITED_YOU": {
+      "description": "Label: (eg: Pierre has invited you.)",
+      "message": "convidou-te."
+   },
+   "IS_CANCELLED": {
+      "description": "Example: Meeting is cancelled",
+      "message": "%@ is cancelled"
+   },
+   "JOBS": {
+      "description": "Label",
+      "message": "Empregos"
+   },
+   "JOIN_VIDEO_CALL": {
+      "description": "Label",
+      "message": "Participar na videochamada"
+   },
+   "KEYBOARD_SHORTCUTS": {
+      "description": "Title",
+      "message": "Atalhos de teclado"
+   },
+   "LAST_UPDATED": {
+      "description": "Label",
+      "message": "Última actualização:"
+   },
+   "LEAVE_EDIT_MODE": {
+      "description": "Label",
+      "message": "Sair do modo de edição"
+   },
+   "LINNKEDIN_DESCRIPTION": {
+      "description": "Settings > Linkedin description",
+      "message": "Fornece mais informação acerca dos seus convidados"
+   },
+   "LOADING": {
+      "description": "Label",
+      "message": "A carregar..."
+   },
+   "LOCATION": {
+      "description": "Label",
+      "message": "Localização"
+   },
+   "LOCATION_COLON": {
+      "description": "Label",
+      "message": "Localização:"
+   },
+   "LOGOUT": {
+      "description": "Label",
+      "message": "Sair"
+   },
+   "LOGOUT_CONFIRM_MSG": {
+      "description": "Question",
+      "message": "Tem a certeza que pretende sair?"
+   },
+   "MAYBE_1": {
+      "description": "Verb - Maybe Going To The Event",
+      "message": "Talvez"
+   },
+   "MAYBE_2": {
+      "description": "Verb - Tentatively Accepted The Event",
+      "message": "Talvez"
+   },
+   "MEETUP_DESCRIPTION": {
+      "description": "Settings > Meetup description",
+      "message": "Tarefas"
+   },
+   "MEET_AUTOMATIC_TITLE_DESCRIPTION": {
+      "description": "Example: e.g.: Victor / (attendee name)",
+      "message": "e.g.: %@ / (attendee name)"
+   },
+   "MEET_CONFIRMATION": {
+      "description": "Pierre Valade confirmed for 10am on Friday, July 4th (CET). All good!",
+      "message": "%@{1} confirmed for %@{2} on %@{3} (%@{4}). %@{5}"
+   },
+   "MEET_CONFIRMED_FOR": {
+      "description": "Example: This Meet is confirmed for Wed, Sep 03 @ 6:30pm",
+      "message": "This Meet is confirmed for %@"
+   },
+   "MEET_SHARE_URL": {
+      "description": "Example: Share https://sunrise.am/m/foo with the person you want to meet with",
+      "message": "Share %@ with the person you want to meet with"
+   },
+   "MEET_URL_COPIED_CLIPBOARD": {
+      "description": "Label",
+      "message": "Meet URL copied to clipboard"
+   },
+   "MIGRATION_ISSUE": {
+      "description": "Error message",
+      "message": "Algo correu mal, por favor volte a tentar mais tarde. Caso o problema persista, por favor contacte o suporte."
+   },
+   "MINUTES_BEFORE": {
+      "description": "Label",
+      "message": "%@ minutos antes"
+   },
+   "MINUTE_BEFORE": {
+      "description": "Label",
+      "message": "%@ minuto antes"
+   },
+   "MISSING_USERNAME_PASS": {
+      "description": "Error message",
+      "message": "Nome de Utilizador ou Password em falta."
+   },
+   "MONTH": {
+      "description": "Label",
+      "message": "mês"
+   },
+   "MONTHLY": {
+      "description": "Label",
+      "message": "Mensalmente"
+   },
+   "MONTHS": {
+      "description": "Label",
+      "message": "meses"
+   },
+   "MONTH_VIEW": {
+      "description": "Label",
+      "message": "Vista mensal"
+   },
+   "MORE_OPTIONS": {
+      "description": "",
+      "message": "Mais opções"
+   },
+   "MORNING": {
+      "description": "Label",
+      "message": "Morning"
+   },
+   "MUST_BE_CONNECTED_TO_INTERNET": {
+      "description": "Error message",
+      "message": "Precisa de estar ligado à Internet para conectar."
+   },
+   "NETWORK_CONNECTION_ERROR": {
+      "description": "Error message",
+      "message": "Erro de ligação à rede. Por favor tente mais tarde."
+   },
+   "NEVER": {
+      "description": "Label (Never updated)",
+      "message": "Nunca"
+   },
+   "NEW_EVENT": {
+      "description": "Label",
+      "message": "New event"
+   },
+   "NEXT_MONTH": {
+      "description": "Label",
+      "message": "Next Month"
+   },
+   "NEXT_PERIOD": {
+      "description": "Label",
+      "message": "Next period"
+   },
+   "NEXT_WEEK": {
+      "description": "Label",
+      "message": "Next Week"
+   },
+   "NIGHT": {
+      "description": "Label",
+      "message": "Night"
+   },
+   "NONE": {
+      "description": "Label (eg: Alerts: None)",
+      "message": "Nenhum"
+   },
+   "NOTIFICATIONS": {
+      "description": "Label",
+      "message": "Notificações"
+   },
+   "NOTIFICATION_CALENDARS": {
+      "description": "Label",
+      "message": "Notificações de Calendários"
+   },
+   "NOTIFICATION_CALENDARS_ERROR": {
+      "description": "",
+      "message": "Para utilizar as notificações do Sunrise, autorize-as no seu navegador"
+   },
+   "NOTIFICATION_CALENDARS_SUBTITLE": {
+      "description": "",
+      "message": "Ligar ou desligar notificações de eventos para calendários específicos"
+   },
+   "NOT_AVAILABLE_YET": {
+      "description": "Label",
+      "message": "Ainda não disponível"
+   },
+   "NOT_SETTLED_PLACE": {
+      "description": "Label",
+      "message": "Not settled on a place to meet yet"
+   },
+   "NOW": {
+      "description": "Label",
+      "message": "Agora"
+   },
+   "NO_CALENDARS": {
+      "description": "Label",
+      "message": "No Calendars"
+   },
+   "NO_INVITATIONS": {
+      "description": "Label",
+      "message": "You have no new invitations"
+   },
+   "NO_REPEAT": {
+      "description": "Label",
+      "message": "Sem repetição"
+   },
+   "NO_RESULTS": {
+      "description": "Label",
+      "message": "Sem Resultados"
+   },
+   "NO_SUPPORT_1": {
+      "description": "Error message",
+      "message": "Não foi possível carregar uma base de dados suportada (IndexedDB, WebSQL ou LocalStorage)."
+   },
+   "NO_SUPPORT_2": {
+      "description": "Error message",
+      "message": "Está a utilizar o modo de navegação privada? As funcionalidades de base de dados não são suportadas no modo de navegação privada."
+   },
+   "NO_SUPPORT_3": {
+      "description": "Error message",
+      "message": "Pedimos desculpa pela inconveniência."
+   },
+   "OCCURRENCES": {
+      "description": "Label",
+      "message": "Ocorrências"
+   },
+   "OFFICE365_DESCRIPTION": {
+      "description": "Settings > Office 365 description",
+      "message": "Calendars"
+   },
+   "ON": {
+      "description": "Label (eg: On 1/1/2014)",
+      "message": "Em"
+   },
+   "ONLY_THIS_EVENT": {
+      "description": "",
+      "message": "Apenas este evento"
+   },
+   "ON_DAYS": {
+      "description": "Label (eg On days: Monday, Tuesday)",
+      "message": "Nos dias:"
+   },
+   "OOPS": {
+      "description": "Title. Exaample: 'Oops, something went wrong!'",
+      "message": "Oops"
+   },
+   "PART_RECURRING_EVENT": {
+      "description": "",
+      "message": "Isto faz parte de um evento recorrente"
+   },
+   "PENDING": {
+      "description": "Label",
+      "message": "Em Progresso"
+   },
+   "PEOPLE": {
+      "description": "Label",
+      "message": "Pessoas"
+   },
+   "PEOPLE_INVITED": {
+      "description": "Label",
+      "message": "%@ Pessoas convidadas"
+   },
+   "PICK_TIME": {
+      "description": "Label",
+      "message": "Pick a time that works for you"
+   },
+   "PLACE": {
+      "description": "Label",
+      "message": "Place"
+   },
+   "PLACEHOLDER_DESCRIPTION": {
+      "description": "",
+      "message": "Introduza uma descrição"
+   },
+   "PLACEHOLDER_TITLE": {
+      "description": "Placeholder",
+      "message": "Título do evento"
+   },
+   "PLEASE_WAIT": {
+      "description": "Label",
+      "message": "Aguarde, por favor"
+   },
+   "PREFERENCES": {
+      "description": "Label",
+      "message": "Preferências"
+   },
+   "PREVIOUS_MONTH": {
+      "description": "Label",
+      "message": "Previous Month"
+   },
+   "PREVIOUS_PERIOD": {
+      "description": "Label",
+      "message": "Previous period"
+   },
+   "PREVIOUS_WEEK": {
+      "description": "Label",
+      "message": "Previous Week"
+   },
+   "PRIVACY_POLICY": {
+      "description": "Label",
+      "message": "Política de Privacidade"
+   },
+   "PRODUCTEEV_DESCRIPTION": {
+      "description": "Settings > Prodcuteev description",
+      "message": "Tarefas"
+   },
+   "REAL_TIME_AVAILABILITIES_FOR": {
+      "description": "Example: Real time availabilities for John Doe",
+      "message": "Real time availabilities for %@"
+   },
+   "RECEIVE_INVIT_SHORTLY": {
+      "description": "Label",
+      "message": "You will receive an email shortly, including a calendar invite."
+   },
+   "RECONNECT": {
+      "description": "Label  (eg: Reconnect your calendar)",
+      "message": "Reconectar"
+   },
+   "RECONNECT_YOUR_X_ACCOUNT": {
+      "description": "Label (eg: Reconnect your Google account)",
+      "message": "Reconnect your %@ account"
+   },
+   "REFRESH": {
+      "description": "Label",
+      "message": "Actualizar"
+   },
+   "REFRESH_CALENDARS": {
+      "description": "Label",
+      "message": "Actualizar calendários"
+   },
+   "RELATIVE_TIME_D": {
+      "description": "Label",
+      "message": "1 dia"
+   },
+   "RELATIVE_TIME_DD": {
+      "description": "Label",
+      "message": "%d dias"
+   },
+   "RELATIVE_TIME_FUTURE": {
+      "description": "Label",
+      "message": "em %@"
+   },
+   "RELATIVE_TIME_FUTURE_DD_LONG": {
+      "description": "in 2 days",
+      "message": "em %@ dias"
+   },
+   "RELATIVE_TIME_FUTURE_DD_SHORT": {
+      "description": "in 2d",
+      "message": "em %@d"
+   },
+   "RELATIVE_TIME_FUTURE_D_LONG": {
+      "description": "in 1 day",
+      "message": "em %@ dia"
+   },
+   "RELATIVE_TIME_FUTURE_HH_LONG": {
+      "description": "in 2 hours",
+      "message": "em %@ horas"
+   },
+   "RELATIVE_TIME_FUTURE_HH_SHORT": {
+      "description": "in 2h",
+      "message": "em %@h"
+   },
+   "RELATIVE_TIME_FUTURE_H_LONG": {
+      "description": "in 1 hour",
+      "message": "em %@ hora"
+   },
+   "RELATIVE_TIME_FUTURE_MM_LONG": {
+      "description": "in 2 mins",
+      "message": "em %@ mins"
+   },
+   "RELATIVE_TIME_FUTURE_MM_SHORT": {
+      "description": "in 2m",
+      "message": "em %@m"
+   },
+   "RELATIVE_TIME_FUTURE_M_LONG": {
+      "description": "in 1 min",
+      "message": "em %@ min"
+   },
+   "RELATIVE_TIME_FUTURE_SS_LONG": {
+      "description": "in 2 secs",
+      "message": "em %@ segs"
+   },
+   "RELATIVE_TIME_FUTURE_SS_SHORT": {
+      "description": "in 2s",
+      "message": "em %@s"
+   },
+   "RELATIVE_TIME_FUTURE_S_LONG": {
+      "description": "in 1 sec",
+      "message": "em %@ seg"
+   },
+   "RELATIVE_TIME_H": {
+      "description": "Label",
+      "message": "1 hora"
+   },
+   "RELATIVE_TIME_HH": {
+      "description": "Label",
+      "message": "%d horas"
+   },
+   "RELATIVE_TIME_M": {
+      "description": "Label",
+      "message": "1 minuto"
+   },
+   "RELATIVE_TIME_MM": {
+      "description": "Label",
+      "message": "%d minutos"
+   },
+   "RELATIVE_TIME_MM_MONTH": {
+      "description": "Label",
+      "message": "%d meses"
+   },
+   "RELATIVE_TIME_M_MONTH": {
+      "description": "Label",
+      "message": "1 mês"
+   },
+   "RELATIVE_TIME_PAST": {
+      "description": "Label",
+      "message": "%@ atrás"
+   },
+   "RELATIVE_TIME_PAST_DD_LONG": {
+      "description": "2 days ago",
+      "message": "Há %@ dias"
+   },
+   "RELATIVE_TIME_PAST_DD_SHORT": {
+      "description": "2d ago",
+      "message": "Há %@d"
+   },
+   "RELATIVE_TIME_PAST_D_LONG": {
+      "description": "1 day ago",
+      "message": "Há %@ dia"
+   },
+   "RELATIVE_TIME_PAST_HH_LONG": {
+      "description": "2 hours ago",
+      "message": "Há %@ horas"
+   },
+   "RELATIVE_TIME_PAST_HH_SHORT": {
+      "description": "2h ago",
+      "message": "Há %@h"
+   },
+   "RELATIVE_TIME_PAST_H_LONG": {
+      "description": "1 hour ago",
+      "message": "Há %@ hora"
+   },
+   "RELATIVE_TIME_PAST_MM_LONG": {
+      "description": "2 mins ago",
+      "message": "Há %@ mins"
+   },
+   "RELATIVE_TIME_PAST_MM_SHORT": {
+      "description": "2m ago",
+      "message": "Há %@m"
+   },
+   "RELATIVE_TIME_PAST_M_LONG": {
+      "description": "1 min ago",
+      "message": "Há %@ min"
+   },
+   "RELATIVE_TIME_PAST_SS_LONG": {
+      "description": "2 secs ago",
+      "message": "Há %@ segs"
+   },
+   "RELATIVE_TIME_PAST_SS_SHORT": {
+      "description": "2s ago",
+      "message": "Há %@s"
+   },
+   "RELATIVE_TIME_PAST_S_LONG": {
+      "description": "1 sec ago",
+      "message": "Há %@ seg"
+   },
+   "RELATIVE_TIME_S": {
+      "description": "Label",
+      "message": "segundo"
+   },
+   "RELATIVE_TIME_SS": {
+      "description": "Label",
+      "message": "%d segundos"
+   },
+   "RELATIVE_TIME_Y": {
+      "description": "Label",
+      "message": "1 ano"
+   },
+   "RELATIVE_TIME_YY": {
+      "description": "Label",
+      "message": "%d anos"
+   },
+   "REMOVE_YOUR_X_ACCOUNT": {
+      "description": "Label (eg: Remove your Google account)",
+      "message": "Remove your %@ account"
+   },
+   "REPEAT": {
+      "description": "Label",
+      "message": "Repetir"
+   },
+   "REPEATS": {
+      "description": "Label",
+      "message": "Repetições:"
+   },
+   "REPEAT_BY": {
+      "description": "Label",
+      "message": "Repetir em:"
+   },
+   "RESOLVED": {
+      "description": "Label",
+      "message": "Confirmado"
+   },
+   "RETURN_TO_CALENDAR": {
+      "description": "Label",
+      "message": "Return to your Calendar"
+   },
+   "SAVE": {
+      "description": "Label",
+      "message": "Guardar"
+   },
+   "SEARCH": {
+      "description": "Label",
+      "message": "Pesquisa"
+   },
+   "SEARCH_CITY": {
+      "description": "Label",
+      "message": "Procurar por cidade"
+   },
+   "SEARCH_EVENT": {
+      "description": "Label",
+      "message": "Search for an event"
+   },
+   "SELECT_TIME_CONFIRM": {
+      "description": "Label",
+      "message": "Select a time to confirm"
+   },
+   "SEND": {
+      "description": "Title",
+      "message": "Enviar"
+   },
+   "SEND_NOTIF_TO_GUESTS": {
+      "description": "Sentence",
+      "message": "Pretende enviar uma notificação aos convidados?"
+   },
+   "SEND_UPDATE": {
+      "description": "Title",
+      "message": "Enviar Actualização?"
+   },
+   "SETTINGS": {
+      "description": "Label",
+      "message": "Definições"
+   },
+   "SET_CUSTOM_LOCATION": {
+      "description": "Label",
+      "message": "Set a custom location"
+   },
+   "SET_CUSTOM_TITLE": {
+      "description": "Label",
+      "message": "Set a custom title"
+   },
+   "SET_DATE": {
+      "description": "Label",
+      "message": "Set a date"
+   },
+   "SET_TIME": {
+      "description": "Label",
+      "message": "Set a time"
+   },
+   "SHARE_ON_X": {
+      "description": "Label (eg: Share on Google)",
+      "message": "Share on %@"
+   },
+   "SHORT_DAY": {
+      "description": "shorthand for day",
+      "message": "d"
+   },
+   "SHORT_HOUR": {
+      "description": "shorthand for hour",
+      "message": "h"
+   },
+   "SHORT_MINUTE": {
+      "description": "shorthand for minute",
+      "message": "m"
+   },
+   "SHORT_MONTH": {
+      "description": "shorthand for month",
+      "message": "m"
+   },
+   "SHORT_MS": {
+      "description": "shorthand for millisecond",
+      "message": "ms"
+   },
+   "SHORT_SEC": {
+      "description": "shorthand for second",
+      "message": "s"
+   },
+   "SHORT_YEAR": {
+      "description": "shorthand for year",
+      "message": "a"
+   },
+   "SHOW_INVITATION": {
+      "description": "Label",
+      "message": "Mostrar convite"
+   },
+   "SHOW_MORE": {
+      "description": "Label (eg: +2 more)",
+      "message": "+%@"
+   },
+   "SHOW_SIDEBAR": {
+      "description": "Label",
+      "message": "Mostrar Barra Lateral"
+   },
+   "SIGN_IN": {
+      "description": "Label",
+      "message": "Entrar"
+   },
+   "SONGKICK_DESCRIPTION": {
+      "description": "Settings > Songkick description",
+      "message": "Seguir as suas bandas favoritas"
+   },
+   "STARTS_ON": {
+      "description": "Label",
+      "message": "Começa em:"
+   },
+   "STAY_EDIT": {
+      "description": "Label",
+      "message": "Continuar no modo de edição"
+   },
+   "STORE_DESCRIPTION": {
+      "description": "Settings > Store description",
+      "message": "Subscrições"
+   },
+   "SUMMARY": {
+      "description": "Label",
+      "message": "Sumário:"
+   },
+   "SUNRISE_DESCRIPTION": {
+      "description": "Label: Do not translate! ;-)",
+      "message": "Sunrise"
+   },
+   "SUNRISE_FOR": {
+      "description": "Label (eg: Sunrise for Android)",
+      "message": "Sunrise para"
+   },
+   "SUPPORT_AND_FEEDBACK": {
+      "description": "Label",
+      "message": "Suporte e Comentários"
+   },
+   "SWITCH_TO_MONTH": {
+      "description": "Label",
+      "message": "Mudar para vista Mensal"
+   },
+   "SWITCH_TO_WEEK": {
+      "description": "Label",
+      "message": "Mudar para vista Semanal"
+   },
+   "SWITCH_TO_X": {
+      "description": "Label: (eg: Switch to: 'CET - Europe/Paris')",
+      "message": "Switch to: %@"
+   },
+   "TAP_TO_ADD_ADDRESS": {
+      "description": "",
+      "message": "Tap to add an address"
+   },
+   "TERMS_OF_SERVICES": {
+      "description": "Label",
+      "message": "Termos de Serviço"
+   },
+   "TIMES_SUGGESTED_UNAVAILABLE": {
+      "description": "All the times suggested by John Doe are now unavailable.",
+      "message": "All the times suggested by %@ are now unavailable."
+   },
+   "TIMEZONE": {
+      "description": "Label",
+      "message": "Fuso horário"
+   },
+   "TIME_COLON": {
+      "description": "Example: Time: 13:00",
+      "message": "Time: %@"
+   },
+   "TIME_FORMAT": {
+      "description": "Label",
+      "message": "Formato da hora"
+   },
+   "TIME_NOT_AVAILABLE": {
+      "description": "Label",
+      "message": "This time is not available anymore."
+   },
+   "TITLE_AUTO": {
+      "description": "Label",
+      "message": "Title (Auto)"
+   },
+   "TITLE_COLON": {
+      "description": "Example: Title: Skype with Ari",
+      "message": "Title: %@"
+   },
+   "TITLE_WANT_TO_LEAVE": {
+      "description": "Question",
+      "message": "Tem a certeza que quer sair?"
+   },
+   "TODAY": {
+      "description": "Label",
+      "message": "Hoje"
+   },
+   "TODOIST_DESCRIPTION": {
+      "description": "Settings > Todoist description",
+      "message": "Tarefas"
+   },
+   "TOGGLE_SIDEBAR": {
+      "description": "Label",
+      "message": "Ligar a barra lateral"
+   },
+   "TOMORROW": {
+      "description": "Label",
+      "message": "Tomorrow"
+   },
+   "TRELLO_DESCRIPTION": {
+      "description": "Settings > Trello description",
+      "message": "Tarefas"
+   },
+   "TRIPIT_DESCRIPTION": {
+      "description": "Settings > Tripit description",
+      "message": "Itinerários de viagem"
+   },
+   "TRY_SUNRISE_NOW": {
+      "description": "Label",
+      "message": "Try Sunrise Now"
+   },
+   "TRY_SUNRISE_NOW_SENTENCE": {
+      "description": "Label",
+      "message": "Try Sunrise now (it's free) to see all your events and RSVP even faster next time!"
+   },
+   "TURN_OFF": {
+      "description": "Label - Turn off",
+      "message": "Off"
+   },
+   "TURN_ON": {
+      "description": "Label - Like on",
+      "message": "On"
+   },
+   "TWITTER_DESCRIPTION": {
+      "description": "Settings > Twitter description",
+      "message": "Tweet mais recente de alguém com quem se vai encontrar"
+   },
+   "TYPE_A_PLACE": {
+      "description": "placeholder",
+      "message": "Introduza um endereço ou localização"
+   },
+   "TYPE_NAME_ADDRESS": {
+      "description": "Label",
+      "message": "Introduza um nome ou endereço de email"
+   },
+   "TYPE_TITLE": {
+      "description": "Label",
+      "message": "Type a title"
+   },
+   "TYPE_YOUR_EMAIL": {
+      "description": "Label",
+      "message": "O seu email"
+   },
+   "TYPE_YOUR_NAME_OPTIONAL": {
+      "description": "Label",
+      "message": "Your name (Optional)"
+   },
+   "UNSUBSCRIBE": {
+      "description": "Label",
+      "message": "Unsubscribe"
+   },
+   "UNTILTED": {
+      "description": "Label",
+      "message": "Sem nome"
+   },
+   "UPDATED": {
+      "description": "Example: Updated 2min ago",
+      "message": "Updated %@"
+   },
+   "UPDATE_REC_EVT": {
+      "description": "",
+      "message": "Actualizar evento recorrente"
+   },
+   "UPDATE_REC_EVT_MSG": {
+      "description": "",
+      "message": "Este é um evento recorrente. Que ocorrências devem ser actualizadas?"
+   },
+   "UPGRADING": {
+      "description": "Label",
+      "message": "Upgrading"
+   },
+   "VERSION": {
+      "description": "Label",
+      "message": "Versão"
+   },
+   "VIEW_ALL_ATTENDEES": {
+      "description": "Label",
+      "message": "Ver todos os convidados (%@)"
+   },
+   "VIEW_EVENT": {
+      "description": "Label",
+      "message": "Ver Evento"
+   },
+   "VIEW_ON": {
+      "description": "Label (eg: View on Facebook)",
+      "message": "Ver em %@"
+   },
+   "VIEW_TIMELINE": {
+      "description": "Label",
+      "message": "Ver cronologia"
+   },
+   "WEEK": {
+      "description": "Label",
+      "message": "semana"
+   },
+   "WEEKLY": {
+      "description": "Label",
+      "message": "Semanalmente"
+   },
+   "WEEKS": {
+      "description": "Label",
+      "message": "semanas"
+   },
+   "WEEK_START_ON": {
+      "description": "Label",
+      "message": "Início da semana"
+   },
+   "WEEK_VIEW": {
+      "description": "Label",
+      "message": "Vista semanal"
+   },
+   "WERE_INVITED": {
+      "description": "sentence",
+      "message": "Foi convidado"
+   },
+   "WUNDERLIST_DESCRIPTION": {
+      "description": "Settings > Wunderlist description",
+      "message": "Tasks"
+   },
+   "X_HAS_BEEN_NOTIFIED": {
+      "description": "John Doe has also been notified.",
+      "message": "%@ has also been notified."
+   },
+   "X_HOURS": {
+      "description": "Example: 2 hours",
+      "message": "%@ hours"
+   },
+   "X_INVITATIONS": {
+      "description": "Label",
+      "message": "Tem %@ convites."
+   },
+   "X_MINUTES": {
+      "description": "Example: 15 minutes",
+      "message": "%@ minutes"
+   },
+   "X_TO_X": {
+      "description": "Example: January 9, 3:00 to 3:30pm",
+      "message": "%@{1} to %@{2}"
+   },
+   "YEAR": {
+      "description": "Label",
+      "message": "ano"
+   },
+   "YEARLY": {
+      "description": "Label",
+      "message": "Anualmente"
+   },
+   "YEARS": {
+      "description": "Label",
+      "message": "anos"
+   },
+   "YESTERDAY": {
+      "description": "Label",
+      "message": "Yesterday"
+   },
+   "YOUR_HOME_ADDRESS": {
+      "description": "Label",
+      "message": "Your home address"
+   },
+   "YOUR_WORK_ADDRESS": {
+      "description": "Label",
+      "message": "Your work address"
+   },
+   "YOU_SET": {
+      "description": "Label",
+      "message": "You're all set."
+   }
+}

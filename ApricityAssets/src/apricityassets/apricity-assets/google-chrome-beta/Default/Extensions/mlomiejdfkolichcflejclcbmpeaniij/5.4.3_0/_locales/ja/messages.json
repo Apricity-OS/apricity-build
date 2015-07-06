@@ -1,0 +1,1688 @@
+{
+   "DBTAG_10_description": {
+      "message": "これらのアプリは一般的に、サイトオペレーターのビジターとのチャットを可能にするために使われています"
+   },
+   "DBTAG_10_title": {
+      "message": "ウェブサイト・チャット"
+   },
+   "DBTAG_1_description": {
+      "message": "これらのアプリは一般的に、何らかのコメント機能をウェブサイトに提供するために使われています"
+   },
+   "DBTAG_1_title": {
+      "message": "コメントシステム"
+   },
+   "DBTAG_36_description": {
+      "message": "これらのアプリがオフサイト検索の提供に関与していますので、検索機能に不具合があった場合には、これら入力事項をチェックしてください"
+   },
+   "DBTAG_36_title": {
+      "message": "検索"
+   },
+   "DBTAG_38_description": {
+      "message": "メールキャンペーンの効果に関する情報を収集するアプリ"
+   },
+   "DBTAG_38_title": {
+      "message": "メール分析"
+   },
+   "DBTAG_39_description": {
+      "message": "簡単に認識できるあらゆるソーシャル共有ウィジェット"
+   },
+   "DBTAG_39_title": {
+      "message": "ソーシャル"
+   },
+   "DBTAG_3_description": {
+      "message": "これらのトラッカーは通常、当事者ウェブサイトによって独自ホストのソリューションとして運営されています"
+   },
+   "DBTAG_3_title": {
+      "message": "ローカル分析"
+   },
+   "DBTAG_40_description": {
+      "message": "これらのアプリは、様々なサイトで現れるG+のようなツールバーを提供しています"
+   },
+   "DBTAG_40_title": {
+      "message": "ツールバー"
+   },
+   "DBTAG_41_description": {
+      "message": "これらのアプリはトラッキングを通したセグメンテーションデータの抽出に関与しています"
+   },
+   "DBTAG_41_title": {
+      "message": "セグメントデータ"
+   },
+   "DBTAG_44_description": {
+      "message": "ウェブサイトのA/B テスト基盤を提供するトラッキングアプリ"
+   },
+   "DBTAG_44_title": {
+      "message": "A/B テスト"
+   },
+   "DBTAG_45_description": {
+      "message": "これらのアプリは閲覧されたサイトを最適化する様々な方法を提供しています"
+   },
+   "DBTAG_45_title": {
+      "message": "サイトの最適化"
+   },
+   "DBTAG_46_description": {
+      "message": "これらのアプリによって生成された広告はアフィリエイトマーケティングとして知られています"
+   },
+   "DBTAG_46_title": {
+      "message": "アフィリエイトマーケティング"
+   },
+   "DBTAG_47_description": {
+      "message": "虚偽のハイパーリンクを通してテキスト内の煩わしい広告を提供している広告会社のタグ"
+   },
+   "DBTAG_47_title": {
+      "message": "テキスト内広告"
+   },
+   "DBTAG_48_description": {
+      "message": "これらのアプリはウェブサイト運営者へリサーチや分析を提供しています"
+   },
+   "DBTAG_48_title": {
+      "message": "分析"
+   },
+   "DBTAG_49_description": {
+      "message": "これらはエバークッキーのような技術を介してユニークID を再び割り当てる（リスポーニングと呼ばれる）手法を取ることで知られています"
+   },
+   "DBTAG_49_title": {
+      "message": "クッキーの再生成（リスポーニング）"
+   },
+   "DBTAG_50_description": {
+      "message": "これらのアプリは、特定のブラウザセッションからそのブラウザを使用している実際のユーザーまでの識別に積極的に取り組みます"
+   },
+   "DBTAG_50_title": {
+      "message": "ビジターの非匿名化"
+   },
+   "DBTAG_51_description": {
+      "message": "聴いていたラジオ番組が突然止まってしまいましたか？このページで音楽プレーヤーが起動するはずでしたか？これらの会社がそのような問題の原因となっている可能性があります"
+   },
+   "DBTAG_51_title": {
+      "message": "オーディオ/ミュージックプレーヤー"
+   },
+   "DBTAG_54_description": {
+      "message": "これらのアプリはアクセス調査を通してあなたの行動を追跡したり、行動特性を導き出そうとします"
+   },
+   "DBTAG_54_title": {
+      "message": "行動様式トラッキング"
+   },
+   "DBTAG_55_description": {
+      "message": "これらのアプリはあなたの承諾なしにクリップボードのコンテンツを盗用します"
+   },
+   "DBTAG_55_title": {
+      "message": "クリップボード・スニッフィング"
+   },
+   "DBTAG_56_description": {
+      "message": "これらのアプリはお客様のクリップボードのコンテンツを盗用したり変更したりします"
+   },
+   "DBTAG_56_title": {
+      "message": "クリップボードの不正使用"
+   },
+   "DBTAG_57_description": {
+      "message": "このカテゴリーのアプリは複数のデバイスにわたってユーザを識別することができます"
+   },
+   "DBTAG_57_title": {
+      "message": "デバイスのフィンガープリント"
+   },
+   "DBTAG_58_description": {
+      "message": "フォントシステムはウェブサイト上でのフォントのレンダリングに影響を与えるトラッカーをグループ化します"
+   },
+   "DBTAG_58_title": {
+      "message": "フォントシステム"
+   },
+   "DBTAG_59_description": {
+      "message": "これらは、閲覧履歴を「スニッフィング（盗用）」することで知られています。つまり、過去にあなたが閲覧したサイトをチェックすることを意味します。"
+   },
+   "DBTAG_59_title": {
+      "message": "履歴スニッフィング"
+   },
+   "DBTAG_5_description": {
+      "message": "これらの企業は、オペレーターのフィードバック収集やその返信を手助けするウィジェットやその他のツールを提供しています"
+   },
+   "DBTAG_5_title": {
+      "message": "フィードバック"
+   },
+   "DBTAG_60_description": {
+      "message": "特定のコンテンツ間でまたはユーザーがコンテンツにアクセスする前に広告を表示することで、ユーザーに強制的に広告を閲覧させる非常に目障りな広告技術。これらのアプリがこの技術を有効化しています"
+   },
+   "DBTAG_60_title": {
+      "message": "インタースティシャル"
+   },
+   "DBTAG_61_description": {
+      "message": "これらアプリが関与している、特に説明を要しない見てすぐ分かる広告"
+   },
+   "DBTAG_61_title": {
+      "message": "ポップアンダー"
+   },
+   "DBTAG_62_description": {
+      "message": "これらのアプリは新規事業を生み出すために様々な広告キャンペーンや広告プログラムを使用しています"
+   },
+   "DBTAG_62_title": {
+      "message": "リード･マネジメント"
+   },
+   "DBTAG_63_description": {
+      "message": "ライブウェブまたはサイトトラフィック、地図、その他の視覚的なものを提供するアプリ"
+   },
+   "DBTAG_63_title": {
+      "message": "ライブトラフィック・ウィジェット"
+   },
+   "DBTAG_64_description": {
+      "message": "これらのアプリはオープンソースです"
+   },
+   "DBTAG_64_title": {
+      "message": "オープンソース"
+   },
+   "DBTAG_65_description": {
+      "message": "コンテンツを閲覧する前にコンテンツオーバーレイを閉じなければならない、もうひとつの目障りな広告技術。この技術を実行するアプリはこちらにまとめました"
+   },
+   "DBTAG_65_title": {
+      "message": "オーバーレイ"
+   },
+   "DBTAG_66_description": {
+      "message": "これらアプリが関与している、特に説明を要しない見てすぐ分かる広告"
+   },
+   "DBTAG_66_title": {
+      "message": "ポップアップ"
+   },
+   "DBTAG_6_description": {
+      "message": "これらの企業は、サイト訪問者への簡単な質問や世論調査の結果収集に利用されるウィジェットを提供しています"
+   },
+   "DBTAG_6_title": {
+      "message": "世論調査"
+   },
+   "DBTAG_7_description": {
+      "message": "ここではポルノサイトに最も頻繁に掲載される広告主をまとめました"
+   },
+   "DBTAG_7_title": {
+      "message": "ポルノ広告"
+   },
+   "DBTAG_8_description": {
+      "message": "これは第三者のタグ管理を提供する一連のアプリです "
+   },
+   "DBTAG_8_title": {
+      "message": "タグマネージャー"
+   },
+   "DBTAG_9_description": {
+      "message": "このグループには、ビデオコンテンツの提供に通常必要となるアプリケーションや広告主、およびトラッカーが含まれます。ビデオプレーヤーが見当たらない、あるいはビデオが作動しない場合には、このタグから始めることをお勧めします"
+   },
+   "DBTAG_9_title": {
+      "message": "ビデオプレーヤー"
+   },
+   "alert_bubble": {
+      "description": "Ghostery's alert bubble is the purple, semi-translucent notification panel that pops up as you browse to show detected trackers on the page.",
+      "message": "アラート バブル"
+   },
+   "alert_bubble_gear_tooltip": {
+      "description": "Tooltip that appears when hovering over the alert bubble's gear.",
+      "message": "クリックしてアラートバブルを設定"
+   },
+   "alert_bubble_tooltip": {
+      "description": "Tooltip that appears when hovering over the alert bubble.",
+      "message": "クリックしてアラートバブルを閉じる"
+   },
+   "all": {
+      "description": "Default setting in the 'filter by type' dropdown for the tracker browser. Doesn't filter anything out. Should read as 'Show all'.",
+      "message": "すべて"
+   },
+   "backup_export": {
+      "description": "Instructions for exporting Ghostery settings.",
+      "message": "バックアップまたは他のコンピューターへの転送には、このボタンをクリックして Ghostery の環境設定のコピーを保存してください。"
+   },
+   "backup_export_button": {
+      "description": "Button for exporting Ghostery settings.",
+      "message": "バックアップファイルを保存"
+   },
+   "backup_export_header": {
+      "description": "Section header for Export section of the Import/Export page.",
+      "message": "エクスポート"
+   },
+   "backup_import": {
+      "description": "Instructions for importing Ghostery settings.",
+      "message": "以前に作成されたバックアップファイルから使用したいファイルを選択し、「インポート」ボタンをクリックしてください。"
+   },
+   "backup_import_button": {
+      "description": "Button for importing Ghostery settings.",
+      "message": "インポート"
+   },
+   "backup_import_error": {
+      "description": "Error message shown when importing a bad file.",
+      "message": "$SPAN_START$バックアップファイルが無効です。$SPAN_END$$A_START$サポート$A_END$へご連絡ください。",
+      "placeholders": {
+         "a_end": {
+            "content": "\u003C/a>"
+         },
+         "a_start": {
+            "content": "\u003Ca href=\"https://getsatisfaction.com/ghostery\">"
+         },
+         "span_end": {
+            "content": "\u003C/span>"
+         },
+         "span_start": {
+            "content": "\u003Cspan class=\"red\">"
+         }
+      }
+   },
+   "backup_import_header": {
+      "description": "Section header for Import section of the Import/Export page.",
+      "message": "インポート"
+   },
+   "backup_import_warning": {
+      "description": "Warning before importing Ghostery settings.",
+      "message": "警告：現在の Ghostery の設定に上書きされます。"
+   },
+   "backup_options_link": {
+      "description": "Link back to the main options page.",
+      "message": "オプションページに戻る"
+   },
+   "backup_page_title": {
+      "description": "Title of Ghostery's Import/Export settings page.",
+      "message": "Ghostery の設定をインポート/エクスポート"
+   },
+   "block_by_default_helper_accept": {
+      "description": "Accept link text, closes the popup when clicked.",
+      "message": "了解！"
+   },
+   "block_by_default_helper_cancel": {
+      "description": "Cancel link text, undoes the action when clicked.",
+      "message": "いいえ、結構です！"
+   },
+   "block_by_default_helper_text": {
+      "description": "Notification message shown when the user selects all trackers in the tracker browser on either the options page or the walkthrough, and does not yet have blocking by default enabled.",
+      "message": "新しいトラッカーもブロックされます"
+   },
+   "blocked": {
+      "description": "Select this to show only blocked (checked) trackers in the tracker browser. Should read as 'Show blocked'.",
+      "message": "ブロック済み"
+   },
+   "blocking_filter_name": {
+      "description": "Description of current search filter",
+      "message": "「$NAME$」と一致したトラッカー$NUMBER$件を表示中  ",
+      "placeholders": {
+         "name": {
+            "content": "\u003Cstrong>$2\u003C/strong>",
+            "example": "google"
+         },
+         "number": {
+            "content": "\u003Cstrong>$1\u003C/strong>"
+         }
+      }
+   },
+   "blocking_filter_name_tags": {
+      "description": "Description of current search filter",
+      "message": "「$NAME$」と一致したタグ付きトラッカー$NUMBER$件を表示中：$TAGS$",
+      "placeholders": {
+         "name": {
+            "content": "\u003Cstrong>$2\u003C/strong>",
+            "example": "google"
+         },
+         "number": {
+            "content": "\u003Cstrong>$1\u003C/strong>"
+         },
+         "tags": {
+            "content": "\u003Cstrong>$3\u003C/strong>",
+            "example": "Behavior Tracking, Popups, Social"
+         }
+      }
+   },
+   "blocking_filter_tags": {
+      "description": "Description of current search filter",
+      "message": "タグ付きトラッカー$NUMBER$件を表示中：$TAGS$",
+      "placeholders": {
+         "number": {
+            "content": "\u003Cstrong>$1\u003C/strong>"
+         },
+         "tags": {
+            "content": "\u003Cstrong>$2\u003C/strong>",
+            "example": "Behavior Tracking, Popups, Social"
+         }
+      }
+   },
+   "blocking_summary": {
+      "description": "Some of the trackers are selected (X out of Y total).",
+      "message": "全$NUMBER_TOTAL$件中$NUMBER_SELECTED$件のトラッカーをブロック中。",
+      "placeholders": {
+         "number_selected": {
+            "content": "\u003Cstrong>$1",
+            "example": 1247
+         },
+         "number_total": {
+            "content": "$2\u003C/strong>",
+            "example": 1267
+         }
+      }
+   },
+   "blocking_summary_all": {
+      "description": "All trackers are selected.",
+      "message": "$B_START$全ての$B_END$トラッカーをブロック中。",
+      "placeholders": {
+         "b_end": {
+            "content": "\u003C/strong>"
+         },
+         "b_start": {
+            "content": "\u003Cstrong>"
+         }
+      }
+   },
+   "blocking_summary_all_small": {
+      "description": "All trackers are selected.",
+      "message": "$B_START$全てを$B_END$ブロック中",
+      "placeholders": {
+         "b_end": {
+            "content": "\u003C/strong>"
+         },
+         "b_start": {
+            "content": "\u003Cstrong>"
+         }
+      }
+   },
+   "blocking_summary_none": {
+      "description": "No trackers are selected.",
+      "message": "ブロック中のトラッカーは$B_START$ありません$B_END$。",
+      "placeholders": {
+         "b_end": {
+            "content": "\u003C/strong>"
+         },
+         "b_start": {
+            "content": "\u003Cstrong>"
+         }
+      }
+   },
+   "blocking_summary_none_small": {
+      "description": "No trackers are selected.",
+      "message": "ブロック$B_START$なし$B_END$",
+      "placeholders": {
+         "b_end": {
+            "content": "\u003C/strong>"
+         },
+         "b_start": {
+            "content": "\u003Cstrong>"
+         }
+      }
+   },
+   "blocking_summary_small": {
+      "description": "Some of the trackers are selected (X out of Y total).",
+      "message": "全$NUMBER_TOTAL$件中$NUMBER_SELECTED$件をブロック中",
+      "placeholders": {
+         "number_selected": {
+            "content": "\u003Cstrong>$1",
+            "example": 130
+         },
+         "number_total": {
+            "content": "$2\u003C/strong>",
+            "example": 132
+         }
+      }
+   },
+   "browser_button_tooltip": {
+      "description": "Ghostery's browser button tooltip.",
+      "message": "Ghostery 検出結果を表示"
+   },
+   "button_cancel": {
+      "description": "Part of a confirmation dialog. Clicking this cancels the action.",
+      "message": "キャンセル"
+   },
+   "button_ok": {
+      "description": "Part of a confirmation dialog. Clicking this cancels the action.",
+      "message": "OK"
+   },
+   "category_ad": {
+      "description": "Ghostery organizes trackers by category. This is one of several tracker categories.",
+      "message": "広告"
+   },
+   "category_ad_desc": {
+      "description": "User-facing description for the Advertising tracker category.",
+      "message": "広告表示が目的のトラッカーは「広告」カテゴリに分類されます。"
+   },
+   "category_analytics": {
+      "description": "Ghostery organizes trackers by category. This is one of several tracker categories.",
+      "message": "分析"
+   },
+   "category_analytics_desc": {
+      "description": "User-facing description for the Analytics tracker category.",
+      "message": "ウェブサイト運営者向けの調査や分析を提供するトラッカーは、「分析」カテゴリに分類されます。"
+   },
+   "category_privacy": {
+      "description": "Ghostery organizes trackers by category. This is one of several tracker categories.",
+      "message": "プライバシー"
+   },
+   "category_privacy_desc": {
+      "description": "User-facing description for the Privacy tracker category.",
+      "message": "プライバシー通知、またその他のプライバシー関連要素は、「プライバシー」のカテゴリに分類されます。"
+   },
+   "category_tracker": {
+      "description": "Ghostery organizes trackers by category. This is one of several tracker categories.",
+      "message": "ビーコン"
+   },
+   "category_tracker_desc": {
+      "description": "User-facing description for the Beacons tracker category.",
+      "message": "トラッキング以外の目的を持たないトラッカー（ビーコン、変換ピクセル、オーディエンスセグメンテーションピクセルなど）は、「ビーコン」のカテゴリに分類されます。"
+   },
+   "category_widget": {
+      "description": "Ghostery organizes trackers by category. This is one of several tracker categories.",
+      "message": "ウィジェット"
+   },
+   "category_widget_desc": {
+      "description": "User-facing description for the Widgets tracker category.",
+      "message": "ページ機能（ソーシャルネットワークボタン、コメントのフォームなど）を提供するトラッカーは「ウィジェット」のカテゴリに分類されます。"
+   },
+   "click2play_allow_always_tooltip": {
+      "description": "Tooltip that appears over the 'allow always' click2play button.",
+      "message": "許可してリロードします。"
+   },
+   "click2play_allow_once_button_tooltip": {
+      "description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
+      "message": "Ghostery は $APP_NAME$ をブロックしました。今回のみ読み込みを許可するには、こちらをクリックしてください。",
+      "placeholders": {
+         "app_name": {
+            "content": "$1",
+            "example": "Twitter Button"
+         }
+      }
+   },
+   "click2play_allow_once_tooltip": {
+      "description": "Tooltip that appears over the 'allow once' click2play button.",
+      "message": "一度許可してリロードします。"
+   },
+   "click2play_blocked": {
+      "message": "Ghostery は $APP_NAME$ をブロックしました。",
+      "placeholders": {
+         "app_name": {
+            "content": "$1",
+            "example": "SoundCloud"
+         }
+      }
+   },
+   "click2play_comment_form": {
+      "message": "Ghostery は $NAME$ 提供のコメントをブロックしました。",
+      "placeholders": {
+         "name": {
+            "content": "$1",
+            "example": "Disqus"
+         }
+      }
+   },
+   "click2play_review_form": {
+      "message": "Ghostery は $NAME$ 提供の表示をブロックしました。",
+      "placeholders": {
+         "name": {
+            "content": "$1",
+            "example": "Disqus"
+         }
+      }
+   },
+   "click2play_survey_form": {
+      "message": "Ghostery は $NAME$ 提供のアンケートをブロックしました。",
+      "placeholders": {
+         "name": {
+            "content": "$1",
+            "example": "Disqus"
+         }
+      }
+   },
+   "click2play_video_form": {
+      "message": "Ghostery は $NAME$ ビデオプレーヤーをブロックしました。",
+      "placeholders": {
+         "name": {
+            "content": "$1",
+            "example": "Disqus"
+         }
+      }
+   },
+   "company_about": {
+      "description": "Header for company profiles.",
+      "message": "$COMPANY$ の概要：",
+      "placeholders": {
+         "company": {
+            "content": "$1",
+            "example": "Google"
+         }
+      }
+   },
+   "company_affiliations": {
+      "message": "業界関係団体："
+   },
+   "company_description": {
+      "message": "企業詳細"
+   },
+   "company_in_their_own_words": {
+      "description": "Label for a description of the company that is provided by the company itself",
+      "message": "自社紹介"
+   },
+   "company_operates": {
+      "description": "Followed by a list of products this company offers.",
+      "message": "$COMPANY$ の事業内容：",
+      "placeholders": {
+         "company": {
+            "content": "$1",
+            "example": "Google"
+         }
+      }
+   },
+   "company_profile_error": {
+      "message": "ghostery.com からデータを読み込めません"
+   },
+   "company_profile_link": {
+      "message": "プロフィール全体の閲覧を続行"
+   },
+   "company_tags": {
+      "description": "Tags here refers to categories we use to group companies based on their business (ie Video Player, Popups, Polls)",
+      "message": "タグ："
+   },
+   "company_website": {
+      "message": "ウェブサイト："
+   },
+   "copied_to_clipboard": {
+      "description": "Confirmation bubble shown after clicking a copy-text-to-clipboard button.",
+      "message": "クリップボードへコピーしました！"
+   },
+   "copyright": {
+      "description": "Copyright message, shown in page footers.",
+      "message": "$C$ $YEAR$ $GHOSTERY$は$COMPANY_ADDRESS$に属します",
+      "placeholders": {
+         "c": {
+            "content": "&copy;"
+         },
+         "company_address": {
+            "content": "$1",
+            "example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
+         },
+         "ghostery": {
+            "content": "\u003Ca href='https://www.ghostery.com' target='_blank'>Ghostery\u003C/a>"
+         },
+         "year": {
+            "content": "2014"
+         }
+      }
+   },
+   "corner1": {
+      "description": "One of four corners of the screen (to place the alert bubble in).",
+      "message": "右上"
+   },
+   "corner2": {
+      "description": "One of four corners of the screen (to place the alert bubble in).",
+      "message": "左上"
+   },
+   "corner3": {
+      "description": "One of four corners of the screen (to place the alert bubble in).",
+      "message": "右下"
+   },
+   "corner4": {
+      "description": "One of four corners of the screen (to place the alert bubble in).",
+      "message": "左下"
+   },
+   "credits_description": {
+      "description": "This text is above a list of other programming projects (code libraries) that are used by Ghostery.",
+      "message": "Ghostery が使用するライブラリは以下の通りです："
+   },
+   "credits_show_license_link": {
+      "description": "This link shows the end-user license agreement used by a particular code library used by Ghostery.",
+      "message": "ライセンスを表示"
+   },
+   "dismiss": {
+      "description": "Text for a button or link to close a notification.",
+      "message": "却下"
+   },
+   "ghostery_logo": {
+      "description": "Alt. text for the Ghostery logo graphic in the header on options and walkthrough pages.",
+      "message": "Ghostery ロゴ"
+   },
+   "help_credits_header": {
+      "description": "Section header that gives credit to other people's work that is used by Ghostery.",
+      "message": "謝辞"
+   },
+   "help_help_header": {
+      "description": "Section header for the help section on the help page.",
+      "message": "ヘルプ"
+   },
+   "help_text1": {
+      "message": "お困りの際は、$FORUM_LINK_START$こちら$LINK_TAG_END$のサポートフォーラムまたは$FAQ_LINK_START$Ghostery FAQ$LINK_TAG_END$をご覧ください。",
+      "placeholders": {
+         "faq_link_start": {
+            "content": "\u003Ca href='https://www.ghostery.com/faq' target='_blank'>"
+         },
+         "forum_link_start": {
+            "content": "\u003Ca href='https://www.ghostery.com/feedback' target='_blank'>"
+         },
+         "link_tag_end": {
+            "content": "\u003C/a>"
+         }
+      }
+   },
+   "help_text2": {
+      "message": "メールにてお問い合わせ頂くこともできます： $EMAIL$",
+      "placeholders": {
+         "email": {
+            "content": "\u003Ca href='mailto:info@ghostery.com' target='_blank'>info@ghostery.com\u003C/a>"
+         }
+      }
+   },
+   "help_version_text": {
+      "message": "$VERSION$バージョン用$BROWSER$版 Ghostery",
+      "placeholders": {
+         "browser": {
+            "content": "$1",
+            "example": "Firefox"
+         },
+         "version": {
+            "content": "$2",
+            "example": "5.1.0"
+         }
+      }
+   },
+   "homepage_link": {
+      "description": "Link to Ghostery's homepage (ghostery.com).",
+      "message": "ホームページ"
+   },
+   "library_never_updated": {
+      "description": "Text shown in the case when no tracker library updates have yet happened.",
+      "message": "是非、自動更新されますようお勧めします。"
+   },
+   "library_update_already_updated": {
+      "description": "Tracker library did not need to be updated from remote servers since its already the latest copy",
+      "message": "すでに更新済みです。"
+   },
+   "library_update_failed": {
+      "description": "Tracker library update action failed.",
+      "message": "更新に失敗しました。後ほど再度お試しください。"
+   },
+   "library_update_in_progress": {
+      "description": "Indicates an update is in progress (might have a spinner graphic next to it).",
+      "message": "更新中..."
+   },
+   "library_update_now_link": {
+      "message": "今すぐ更新"
+   },
+   "library_update_successful": {
+      "description": "Tracker library update action completed successfully.",
+      "message": "成功！"
+   },
+   "library_updated_on": {
+      "description": "Text shown when a tracker library update has happened at least once.",
+      "message": "トラッカーライブラリの最新更新日は$DATE$です。",
+      "placeholders": {
+         "date": {
+            "content": "$1",
+            "example": "Wed Oct 12 2011"
+         }
+      }
+   },
+   "license_link": {
+      "description": "Link to Ghostery's end-user license agreement.",
+      "message": "ライセンス"
+   },
+   "new_since_last_update": {
+      "description": "Select this to filter the tracker browser to show only the trackers added to the library since last update. Should read as 'Show new since last update'.",
+      "message": "最終更新以降の新情報"
+   },
+   "no_results": {
+      "description": "This is shown when the user performed a search or applied some other filter so that all items got filtered out.",
+      "message": "見つかりませんでした。"
+   },
+   "none": {
+      "description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
+      "message": "なし"
+   },
+   "note": {
+      "description": "Similar in function to a \"WARNING:\" prefix. Used for stuff like \"NOTE: Blocking trackers can break pages.",
+      "message": "注記："
+   },
+   "notification_reminder1": {
+      "description": "First line of the walkthrough reminder/notification. Sentence continued on next line.",
+      "message": "Ghostery 設定チュートリアルをチェックして"
+   },
+   "notification_reminder2": {
+      "description": "Second line of the walkthrough reminder/notification. Continues the sentence from previous line.",
+      "message": "Ghostery の主機能の詳細を見てみましょう。"
+   },
+   "notification_reminder_link": {
+      "description": "Link to the walkthrough/configuration wizard, part of the walkthrough reminder/notification.",
+      "message": "Ghostery をセットアップ"
+   },
+   "notification_update": {
+      "message": "Ghostery のトラッカーライブラリが更新されました。"
+   },
+   "notification_update_link": {
+      "description": "Link to show recently added trackers.",
+      "message": "最新情報についてはこちらをクリック"
+   },
+   "notification_upgrade": {
+      "description": "Link to the release notes section of the Ghostery blog. Shown after Ghostery has gotten upgraded.",
+      "message": "Ghostery の最新リリース。詳細はこちら。"
+   },
+   "number_of_trackers": {
+      "description": "Trackers, plural.",
+      "message": "$NUMBER$件のトラッカー：",
+      "placeholders": {
+         "number": {
+            "content": "$1",
+            "example": "300"
+         }
+      }
+   },
+   "options_about_tab": {
+      "description": "One of three page tabs on the options page; click to show about page.",
+      "message": "概要"
+   },
+   "options_advanced_tab": {
+      "description": "One of three page tabs on the options page; click to show advanced settings.",
+      "message": "詳細設定"
+   },
+   "options_alert_bubble_position": {
+      "description": "Alert bubble settings. $CORNER$ is a dropdown form control.",
+      "message": "$CORNER$コーナーに表示",
+      "placeholders": {
+         "corner": {
+            "content": "$1",
+            "example": "top right"
+         }
+      }
+   },
+   "options_alert_bubble_show": {
+      "description": "Alert bubble settings. $ALERT_BUBBLE$ is defined in the 'alert_bubble' message.",
+      "message": "$ALERT_BUBBLE$ を表示",
+      "placeholders": {
+         "alert_bubble": {
+            "content": "$1",
+            "example": "alert bubble"
+         }
+      }
+   },
+   "options_alert_bubble_timeout": {
+      "description": "Alert bubble settings. $DURATION$ is a dropdown form control.",
+      "message": "$DURATION$秒後に閉じる",
+      "placeholders": {
+         "duration": {
+            "content": "$1",
+            "example": "15"
+         }
+      }
+   },
+   "options_autoupdate": {
+      "description": "Checkbox label for tracker library auto-updates.",
+      "message": "トラッカーライブラリの自動更新を有効にする"
+   },
+   "options_autoupdate_header": {
+      "description": "Section header for the tracker library updates settings section of the options page.",
+      "message": "自動更新"
+   },
+   "options_backup": {
+      "description": "Link to import/export settings page.",
+      "message": "こちらをクリックして Ghostery の設定をインポート/エクスポート"
+   },
+   "options_backup_header": {
+      "description": "Section header for Import/Export settings section of the options page.",
+      "message": "インポート/エクスポート"
+   },
+   "options_badge": {
+      "message": "$SPAN_START$Ghostery のボタンの上にバッジ$SPAN_END$を表示（ブラウザのツールバー上）$LABEL_END$",
+      "placeholders": {
+         "label_end": {
+            "content": "\u003C/label>"
+         },
+         "span_end": {
+            "content": "\u003C/span>"
+         },
+         "span_start": {
+            "content": "\u003Cspan id=\"badge-help\" class=\"help\">"
+         }
+      }
+   },
+   "options_block_by_default": {
+      "description": "Checkbox label for the \"block new elements by default\" preference.",
+      "message": "デフォルトでは新しい要素をブロック"
+   },
+   "options_blocking1": {
+      "message": "Ghosteryはトラッカーをカテゴリー別に分類します。カテゴリー行をクリックすると、そのカテゴリー内のトラッカーを閲覧できます。ブロックするにはチェックボックスに印をつけてください。トラッカーの名前をクリックすると詳細を御覧になれます。"
+   },
+   "options_blocking2": {
+      "message": "ブロッキングが予期せぬ形でウェブページを妨害することがあります。ビデオ、ログイン、コメント記入欄などで不具合が発生した場合には、下の$B_START$ホワイトリスト登録サイト$B_END$リストに追加することにより、そのページでは何もブロックしないようGhostery にご指示ください。",
+      "placeholders": {
+         "b_end": {
+            "content": "\u003C/strong>"
+         },
+         "b_start": {
+            "content": "\u003Cstrong>"
+         }
+      }
+   },
+   "options_blocking3": {
+      "message": "トラッカーをブロックすると、そのトラッカーは第三者プロバイダと通信できなくなります。"
+   },
+   "options_blocking_header": {
+      "description": "Section header for blocking options on the options page.",
+      "message": "ブロック オプション"
+   },
+   "options_cancel_button": {
+      "description": "Clicking this button closes the options page without saving.",
+      "message": "キャンセル"
+   },
+   "options_click2play1": {
+      "description": "Checkbox label for the 'enable/disable click-to-play' preference.",
+      "message": "ブロックされた特定のコンテンツを [click-to-play] オーバーレイで置き換えます。"
+   },
+   "options_click2play2": {
+      "description": "Checkbox label for the 'enable/disable click-to-play' preference.",
+      "message": "ビデオプレーヤーやコメントフォームなど、潜在的に有用なウィジェットをブロックする場合に便利です"
+   },
+   "options_click2play_buttons1": {
+      "description": "Checkbox label for the 'enable/disable click-to-play for social buttons' preference.",
+      "message": "また、「ソーシャル」ボタンを置き換えます"
+   },
+   "options_click2play_buttons2": {
+      "description": "Checkbox label for the 'enable/disable click-to-play for social buttons' preference.",
+      "message": "（Google+ のボタン、Twitter のバッジ、Facebook のいいね！、Pinterest、等々）"
+   },
+   "options_click2play_header": {
+      "description": "Section header for the Click-to-Play settings section of the options page.",
+      "message": "Click-to-Play"
+   },
+   "options_display_header": {
+      "description": "Section header for alert bubble and other presentation options on the options page.",
+      "message": "表示オプション"
+   },
+   "options_general_tab": {
+      "description": "One of three page tabs on the options page; click to show general/basic settings. Selected/active by default.",
+      "message": "一般"
+   },
+   "options_ghostrank": {
+      "description": "Ghostrank checkbox label.",
+      "message": "Ghostrank を有効にする"
+   },
+   "options_header": {
+      "description": "Header that appears at the top of the options page",
+      "message": "オプション"
+   },
+   "options_ignore_first_party": {
+      "description": "Checkbox label for the \"ignore first party\" preference.",
+      "message": "当事者のトラッカーは無視する"
+   },
+   "options_ignore_first_party_help": {
+      "description": "Help text that explains what ignoring first party preference does",
+      "message": "（例：doubleclick.com 上では DoubleClick のトラッカーは無視する）"
+   },
+   "options_in_the_findings_panel": {
+      "description": "Text that comes right after options_script_sources. Here is how they read together: \"Expand tracker... (in the findings panel)\"",
+      "message": "（$TAG_START$検出パネル$TAG_END$ 内）",
+      "placeholders": {
+         "tag_end": {
+            "content": "\u003C/span>"
+         },
+         "tag_start": {
+            "content": "\u003Cspan id=\"browser-panel-help\" class=\"help\">"
+         }
+      }
+   },
+   "options_language": {
+      "message": "$LANGUAGE$で Ghostery を表示",
+      "placeholders": {
+         "language": {
+            "content": "$1",
+            "example": "English"
+         }
+      }
+   },
+   "options_language_header": {
+      "description": "Section header for the localization settings section of the options page.",
+      "message": "言語"
+   },
+   "options_language_language": {
+      "description": "Replace with the name of this language, in this language. Has to make sense grammatically as part of 'Show Ghostery in $LANGUAGE$' (the options_language message)",
+      "message": "日本語"
+   },
+   "options_notify_of_library_updates": {
+      "description": "Checkbox label for the library update notifications toggle preference.",
+      "message": "新しい要素の通知を希望"
+   },
+   "options_page_title": {
+      "description": "Title of Ghostery's options page.",
+      "message": "Ghostery のオプション"
+   },
+   "options_save_button": {
+      "description": "Clicking this button saves your updates to Ghostery's options.",
+      "message": "保存"
+   },
+   "options_saving_exit_message": {
+      "description": "Message that appears for an instant when saving settings on the options page.",
+      "message": "保存オプション"
+   },
+   "options_script_sources": {
+      "description": "Checkbox label for expanding by default tracker source URL sections in the findings panel. These URLs link to pages that show the tracker's source code.",
+      "message": "デフォルトではトラッカーソース URL の一覧を表示"
+   },
+   "options_sharing1": {
+      "description": "A description of Ghostrank (on the options page and the walkthrough/wizard). 'Ghostrank', like 'Ghostery', should not get translated. Paragraph one of five.",
+      "message": "Ghostrank$TM$を有効にすると、Ghostery はあなたが遭遇したトラッカーやそれらが設置されたサイトについての匿名データを収集します。このデータは、トラッキング要素やそれらが見つかったウェブページに関するデータであって、$B_START$あなたやあなたの閲覧傾向に関するものではありません$B_END$。",
+      "placeholders": {
+         "b_end": {
+            "content": "\u003C/strong>"
+         },
+         "b_start": {
+            "content": "\u003Cstrong>"
+         },
+         "tm": {
+            "content": "$1",
+            "example": "™"
+         }
+      }
+   },
+   "options_sharing2": {
+      "description": "Paragraph two of five.",
+      "message": "オンラインマーケティング会社は、自社のテクノロジーやライバル企業のテクノロジーの実社会における有用性をより良く把握する必要があります。Ghostrank データは、企業が消費者へのマーケティングをより透過的に行い、ウェブプロパティをより効率的に管理し、プライバシー規格に順守できるよう、レポートとして企業に売却されます。"
+   },
+   "options_sharing3": {
+      "description": "Paragraph three of five.",
+      "message": "$B_START$企業と共有される Ghostrank データに、Ghostery ユーザーに関するデータが含まれることは一切ありません。$B_END$Ghostrank が収集するデータに関する詳細については、$DATA_LINK$こちらをクリック$LINK_TAG_END$してください。",
+      "placeholders": {
+         "b_end": {
+            "content": "\u003C/strong>"
+         },
+         "b_start": {
+            "content": "\u003Cstrong>"
+         },
+         "data_link": {
+            "content": "\u003Ca href=\"https://www.ghostery.com/faq#q16\" target=\"_blank\">"
+         },
+         "link_tag_end": {
+            "content": "\u003C/a>"
+         }
+      }
+   },
+   "options_sharing4": {
+      "description": "Paragraph four of five.",
+      "message": "また、弊社は$RESEARCH_LINK$独自の調査結果を発表$LINK_TAG_END$し、プライバシー調査者[$PRIVACY_LINK1$１$LINK_TAG_END$][$PRIVACY_LINK2$２$LINK_TAG_END$]や分析者、ジャーナリストにデータを提供する場合があります。更に、$BBB_LINK$Better Business Bureau（商事改善協会）$LINK_TAG_END$のような団体が、$ADCHOICES_LINK$DAA AdChoices$LINK_TAG_END$プログラムなどのプライバシー規格の実施に Ghostrank のデータを使うこともあります。",
+      "placeholders": {
+         "adchoices_link": {
+            "content": "$1",
+            "example": "\u003Ca href=\"http://www.aboutads.info/\" target=\"_blank\">"
+         },
+         "bbb_link": {
+            "content": "$2",
+            "example": "\u003Ca href=\"https://purplebox.ghostery.com/post/1016021311\" target=\"_blank\">"
+         },
+         "link_tag_end": {
+            "content": "\u003C/a>"
+         },
+         "privacy_link1": {
+            "content": "$3",
+            "example": "\u003Ca href=\"https://purplebox.ghostery.com/post/1016023393\" target=\"_blank\">"
+         },
+         "privacy_link2": {
+            "content": "$4",
+            "example": "\u003Ca href=\"https://wiki.digitalmethods.net/Dmi/DmiWinterSchool2012TrackingTheTrackers\" target=\"_blank\">"
+         },
+         "research_link": {
+            "content": "$5",
+            "example": "\u003Ca href=\"https://purplebox.ghostery.com/post/1016023378\" target='_blank'>"
+         }
+      }
+   },
+   "options_sharing5": {
+      "description": "Paragraph five of five.",
+      "message": "GhostRank のオプトインを選択されることをお勧めします。ただしデータ共有を有効にされない場合は、情報は収集されません。Ghostery のサービスがどのようにビジネスをサポートしているかについての詳細は、$MOST_FAQ_LINK$「よくある質問」$LINK_TAG_END$をご覧ください。",
+      "placeholders": {
+         "link_tag_end": {
+            "content": "\u003C/a>"
+         },
+         "most_faq_link": {
+            "content": "$1",
+            "example": "\u003Ca href=\"https://purplebox.ghostery.com/post/1016023438\" target=\"_blank\">"
+         }
+      }
+   },
+   "options_sharing_header": {
+      "description": "Section header for Ghostrank (opt-in tracker data sharing) section of the options page.",
+      "message": "共有オプション"
+   },
+   "options_sharing_notice": {
+      "message": "Ghostery 本社へ匿名の統計データを返信することで、$EM_START$Ghostery を支援してください$EM_END$。",
+      "placeholders": {
+         "em_end": {
+            "content": "\u003C/em>"
+         },
+         "em_start": {
+            "content": "\u003Cem>"
+         }
+      }
+   },
+   "options_sites_tab": {
+      "description": "In-page tab (within the options page) that lets you manage pages exempt from Ghostery's blocking.",
+      "message": "ホワイトリストサイト"
+   },
+   "options_trackers_tab": {
+      "description": "In-page tab (within the options page) that lets you browse Ghostery's trackers.",
+      "message": "トラッカー"
+   },
+   "options_unsaved_changes_warning": {
+      "description": "Warning text shown when the user attempts to close the options page after having made unsaved configuration changes. The word \"Save\" in the message (part of \"click the Save button\") must match the translation of options_save_button.",
+      "message": "設定の変更が行われたようです。変更を保存したい場合は、このままこのページに留まり、このページの一番下にある「保存」ボタンをクリックしてください。"
+   },
+   "panel_button_pause_blocking": {
+      "description": "Button located at the bottom of the findings panel that pauses blocking.",
+      "message": "ブロックを一時停止"
+   },
+   "panel_button_pause_blocking_tooltip": {
+      "description": "Tooltip over the findings panel pause blocking button.",
+      "message": "全てのブロックを一時的に停止するにはこちらをクリック。"
+   },
+   "panel_button_resume_blocking": {
+      "description": "Button located at the bottom of the findings panel that resumes blocking.",
+      "message": "ブロックを再開"
+   },
+   "panel_button_undo_whitelist_site": {
+      "description": "Button located at the bottom of the findings panel that unwhitelists a site.",
+      "message": "ホワイトリストを元に戻す"
+   },
+   "panel_button_whitelist_site": {
+      "description": "Button located at the bottom of the findings panel that whitelists a site.",
+      "message": "ホワイトリスト登録"
+   },
+   "panel_button_whitelist_site_tooltip": {
+      "description": "Tooltip over the findings panel whitelist site button.",
+      "message": "閲覧中のサイトにおいて全てのトラッカーを許可するにはこちらをクリック。"
+   },
+   "panel_needs_reload": {
+      "description": "Message that appears at the bottom of the findings panel when a settings has been changed and the page needs to be reloaded to reflect these changes.",
+      "message": "変更を確認するにはページを$SPAN_START$リロード$SPAN_END$してください。",
+      "placeholders": {
+         "span_end": {
+            "content": "\u003C/span>"
+         },
+         "span_start": {
+            "content": "\u003Cspan class='reload'>"
+         }
+      }
+   },
+   "panel_no_trackers_found": {
+      "description": "Text displayed in the findings panel's apps-div when no trackers were found.",
+      "message": "トラッカーは検出されませんでした"
+   },
+   "panel_not_scanned": {
+      "description": "Text displayed in the findings panel's apps-div when the page has not been scanned.",
+      "message": "このページはスキャンされませんでした。$BREAK$Ghostery は、「http」と「https」のページ、そして Ghostery がインストールされた後に読み込まれたページのみをスキャンします。",
+      "placeholders": {
+         "break": {
+            "content": "\u003Cbr>"
+         }
+      }
+   },
+   "panel_settings_about": {
+      "description": "About button from the findings panel settings bar.",
+      "message": "概要"
+   },
+   "panel_settings_options": {
+      "description": "Options button from the findings panel settings bar.",
+      "message": "オプション"
+   },
+   "panel_settings_share": {
+      "description": "Share button from the findings panel settings bar.",
+      "message": "共有"
+   },
+   "panel_settings_support": {
+      "description": "Support button from the findings panel settings bar.",
+      "message": "サポート"
+   },
+   "panel_title_not_scanned": {
+      "description": "Text at the top of the findings panel that is displayed when a page has not been scanned by Ghostery.",
+      "message": "スキャンされていないページ"
+   },
+   "panel_title_paused": {
+      "description": "Text at the top of the findings panel that is displayed when 'pause blocking' is enabled.",
+      "message": "ブロックは$SPAN_START$一時停止中$SPAN_END$です",
+      "placeholders": {
+         "span_end": {
+            "content": "$2"
+         },
+         "span_start": {
+            "content": "$1"
+         }
+      }
+   },
+   "panel_title_plural": {
+      "description": "Text at the top of the findings panel that reads the amount of trackers found on the page (if zero or more than one trackers were found).",
+      "message": "$NUMBER$件のトラッカーを検出",
+      "placeholders": {
+         "number": {
+            "content": "$1",
+            "example": 7
+         }
+      }
+   },
+   "panel_title_singular": {
+      "description": "Text at the top of the findings panel that reads the amount of trackers found on the page (if only one tracker was found).",
+      "message": "1件のトラッカーを検出"
+   },
+   "panel_title_whitelisted": {
+      "description": "Text at the top of the findings panel that is displayed when a page has been whitelisted.",
+      "message": "サイトは$SPAN_START$ホワイトリストに登録済み$SPAN_END$",
+      "placeholders": {
+         "span_end": {
+            "content": "$2"
+         },
+         "span_start": {
+            "content": "$1"
+         }
+      }
+   },
+   "panel_tooltip_help": {
+      "description": "Tooltip for the findings panel help button (\"?\").",
+      "message": "ヘルプ"
+   },
+   "panel_tooltip_settings": {
+      "description": "Tooltip for the findings panel settings \"cog\".",
+      "message": "設定"
+   },
+   "panel_tracker_compatibility_warning": {
+      "description": "Message that appears when a tracker is known to break a specific website if blocked.",
+      "message": "このトラッカーをブロックすると$SITE$の一部が破損する場合があります",
+      "placeholders": {
+         "site": {
+            "content": "$1",
+            "example": "store.apple.com"
+         }
+      }
+   },
+   "panel_tracker_found_sources_title": {
+      "description": "Title that appears when expanding a findings panel tracker, above the list of found sources.",
+      "message": "検出されたトラッカーソースのURL："
+   },
+   "panel_tracker_global_block_message_blocked": {
+      "description": "Message that appears after setting the global block to 'blocked' for a tracker in the findings panel.",
+      "message": "トラッカーをブロックしました"
+   },
+   "panel_tracker_global_block_message_unblocked": {
+      "description": "Message that appears after setting the global block to 'unblocked' for a tracker in the findings panel.",
+      "message": "トラッカーを許可しました"
+   },
+   "panel_tracker_global_block_tooltip": {
+      "description": "Tooltip that appears over the findings panel's tracker global blocking control.",
+      "message": "$APP_NAME$のブロックを切り替えるにはこちらをクリック。",
+      "placeholders": {
+         "app_name": {
+            "content": "$1",
+            "example": "Google Analytics"
+         }
+      }
+   },
+   "panel_tracker_more_info": {
+      "description": "Link that appears under each findings panel tracker when expanding the tracker's found sources. It links to the ghostery.com info page for that app.",
+      "message": "$APP_NAME$についての詳細はこちらクリックしてください",
+      "placeholders": {
+         "app_name": {
+            "content": "$1",
+            "example": "Google Analytics"
+         }
+      }
+   },
+   "panel_tracker_site_specific_unblock_message": {
+      "description": "Message that appears after setting the site specific unblock to 'on' for a tracker in the findings panel.",
+      "message": "$HOST$上では$BREAK$常に許可",
+      "placeholders": {
+         "break": {
+            "content": "\u003Cbr>"
+         },
+         "host": {
+            "content": "$1",
+            "example": "www.google.com"
+         }
+      }
+   },
+   "panel_tracker_site_specific_unblock_tooltip_off": {
+      "description": "Tooltip that appears over the findings panel tracker site-specific unblock control.",
+      "message": "$HOST$で$APP_NAME$を常に許可するにはこちらをクリック。",
+      "placeholders": {
+         "app_name": {
+            "content": "$1",
+            "example": "Google Analytics"
+         },
+         "host": {
+            "content": "$2",
+            "example": "www.google.com"
+         }
+      }
+   },
+   "panel_tracker_site_specific_unblock_tooltip_on": {
+      "description": "Tooltip that appears over the findings panel tracker site-specific unblock control.",
+      "message": "$HOST$での$APP_NAME$の許可を中止するにはこちらをクリック。",
+      "placeholders": {
+         "app_name": {
+            "content": "$1",
+            "example": "Google Analytics"
+         },
+         "host": {
+            "content": "$2",
+            "example": "www.google.com"
+         }
+      }
+   },
+   "panel_tutorial_close": {
+      "description": "Text that appears on the top right corner of the findings panel tutorial as a link to close the tutorial.",
+      "message": "チュートリアルを閉じる"
+   },
+   "panel_tutorial_screen_blocking_controls_content": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "トラッカーのブロックまたは許可を行うには、各トラッカーの右側にある2つのボタンをお使いください。"
+   },
+   "panel_tutorial_screen_blocking_controls_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "トラッカーの管理"
+   },
+   "panel_tutorial_screen_final_content1": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "$BUTTON$ボタンをクリックすることで、いつでもこのチュートリアルをご覧頂けます。",
+      "placeholders": {
+         "button": {
+            "content": "\u003Cspan class=\"help-button\">\u003C/span>"
+         }
+      }
+   },
+   "panel_tutorial_screen_final_content2": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "Ghosteryの検出パネルの入門ビデオを見るには$A_START$こちら$a_end$をクリックしてください。",
+      "placeholders": {
+         "a_end": {
+            "content": "\u003C/a>"
+         },
+         "a_start": {
+            "content": "\u003Ca id=\"tutorial-youtube\" target=\"_blank\" href=\"https://www.ghostery.com/help/panel/intro\">"
+         }
+      }
+   },
+   "panel_tutorial_screen_final_content3": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "ご質問 またはご意見がございますか？弊社の$A_START_1$サポートフォーラム$A_END$へアクセスするか、$A_START_2$support@ghostery.com$A_END$までメールでお問い合わせください。",
+      "placeholders": {
+         "a_end": {
+            "content": "\u003C/a>"
+         },
+         "a_start_1": {
+            "content": "\u003Ca id=\"tutorial-support\" target=\"_blank\" href=\"https://www.ghostery.com/feedback\">"
+         },
+         "a_start_2": {
+            "content": "\u003Ca id=\"tutorial-email\" target=\"_blank\" href=\"mailto:support@ghostery.com\">"
+         }
+      }
+   },
+   "panel_tutorial_screen_final_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "Ghostery のご利用をお楽しみください！"
+   },
+   "panel_tutorial_screen_findings_panel_content": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "検出パネルは、閲覧ページ上のトラッカーを確認し管理する場所です。"
+   },
+   "panel_tutorial_screen_findings_panel_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "検出パネル"
+   },
+   "panel_tutorial_screen_global_block_content": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "ブロックの切り替えトグルが赤色で右側に位置している場合、$SPAN_START$Ghostery はそのトラッカーをブロックします。$SPAN_END$",
+      "placeholders": {
+         "span_end": {
+            "content": "\u003C/span>"
+         },
+         "span_start": {
+            "content": "\u003Cspan class=\"red\">"
+         }
+      }
+   },
+   "panel_tutorial_screen_global_block_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "トラッカーのブロック"
+   },
+   "panel_tutorial_screen_global_unblock_content": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "ブロックの切り替えトグルが青色で左側に位置している場合、$SPAN_START$Ghostery はそのトラッカーを許可します。$SPAN_END$デフォルトでは全トラッカーに対してこの設定になっています。",
+      "placeholders": {
+         "span_end": {
+            "content": "\u003C/span>"
+         },
+         "span_start": {
+            "content": "\u003Cspan class=\"blue\">"
+         }
+      }
+   },
+   "panel_tutorial_screen_global_unblock_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "トラッカーの許可"
+   },
+   "panel_tutorial_screen_more_options_content": {
+      "description": "This is the next-to-last screen of the in-findings panel tutorial. The first button ($SPAN_1$) doesn't have text, it's the gear button in the upper right. $SPAN_2$ is the grey Options button that comes up after clicking on the gear button. Its text lives in panel_settings_options.",
+      "message": "Ghostery のオプションページへアクセスするには、この$SPAN_1$ボタンをクリックしてから、こちらの$SPAN_2$ボタンをクリックしてください。",
+      "placeholders": {
+         "span_1": {
+            "content": "\u003Cspan class=\"settings-button\">\u003C/span>"
+         },
+         "span_2": {
+            "content": "\u003Cspan class=\"settings-buttons\">$1\u003C/span>"
+         }
+      }
+   },
+   "panel_tutorial_screen_more_options_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "オプションページへのアクセス"
+   },
+   "panel_tutorial_screen_pause_blocking_content": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation. The text for $BUTTON_TEXT$ lives in panel_button_pause_blocking.",
+      "message": "$SPAN_START_B$$BUTTON_TEXT$$SPAN_END$ボタンが押されると、$SPAN_START_A$Ghostery は全てのブロックを一時的に停止します$SPAN_END$。ブロックを再開するにはもう一度ボタンを押してください。",
+      "placeholders": {
+         "button_text": {
+            "content": "$1"
+         },
+         "span_end": {
+            "content": "\u003C/span>"
+         },
+         "span_start_a": {
+            "content": "\u003Cspan class=\"yellow\">"
+         },
+         "span_start_b": {
+            "content": "\u003Cspan class=\"tutorial-footer-button\">"
+         }
+      }
+   },
+   "panel_tutorial_screen_pause_blocking_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "ブロックの一時停止"
+   },
+   "panel_tutorial_screen_site_specific_content": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "チェックマークボタンが有効（緑色）になっている場合、$SPAN_START$Ghostery は閲覧中のサイトにおいて常にトラッカーを許可します$SPAN_END$。",
+      "placeholders": {
+         "span_end": {
+            "content": "\u003C/span>"
+         },
+         "span_start": {
+            "content": "\u003Cspan class=\"green\">"
+         }
+      }
+   },
+   "panel_tutorial_screen_site_specific_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "例外の設定"
+   },
+   "panel_tutorial_screen_welcome_content": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "チュートリアルを続行するには右側の矢印をクリックしてください。"
+   },
+   "panel_tutorial_screen_welcome_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "検出パネルのチュートリアルへようこそ！"
+   },
+   "panel_tutorial_screen_whitelist_content": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation. The text for $BUTTON_TEXT$ lives in panel_button_whitelist_site.",
+      "message": "$SPAN_START_B$$BUTTON_TEXT$$SPAN_END$ボタンが押されると、$SPAN_START_A$Ghostery は閲覧中のサイトにおいて全てのトラッカーを許可します$SPAN_END$ホワイトリストから閲覧中のサイトを削除するには、もう一度ボタンを押してください。",
+      "placeholders": {
+         "button_text": {
+            "content": "$1"
+         },
+         "span_end": {
+            "content": "\u003C/span>"
+         },
+         "span_start_a": {
+            "content": "\u003Cspan class=\"green\">"
+         },
+         "span_start_b": {
+            "content": "\u003Cspan class=\"tutorial-footer-button\">"
+         }
+      }
+   },
+   "panel_tutorial_screen_whitelist_title": {
+      "description": "Findings Panel tutorial content. Use the screen's title to find the correct translation.",
+      "message": "サイトのホワイトリスト登録"
+   },
+   "privacy_policy_link": {
+      "description": "Link to Ghostery's privacy statement.",
+      "message": "プライバシーステートメント"
+   },
+   "rate_ghostery_link1": {
+      "description": "Part one of \"Like Ghostery? Rate It!\"",
+      "message": "Ghosteryを気に入って頂けましたか？"
+   },
+   "rate_ghostery_link2": {
+      "description": "Part two of \"Like Ghostery? Rate It!\"",
+      "message": "評価してください！"
+   },
+   "see_more": {
+      "description": "This is a link shown after/next to truncated paragraphs. Clicking it will reveal the entire paragraph. You can see an example of the options page in the Sharing Options section.",
+      "message": "もっと見る。"
+   },
+   "short_description": {
+      "description": "A short description of this extension (Ghostery).",
+      "message": "プライバシーの保護： Ghostery を使って、誰があなたのウェブ閲覧をトラッキングしているかを確認しましょう。"
+   },
+   "site_whitelist_description": {
+      "message": "Ghostery では、トラッカーをブロックしないサイトのリストを指定できます。"
+   },
+   "site_whitelist_help": {
+      "message": "サイトの URL を入力して、「追加」をクリック（または「Enter」を押す）："
+   },
+   "survey_link": {
+      "message": "$LINK_START$アンケートにお答えください！$LINK_END$",
+      "placeholders": {
+         "link_end": {
+            "content": "\u003C/a>"
+         },
+         "link_start": {
+            "content": "\u003Ca target=\"_blank\" href=\"$1\">"
+         }
+      }
+   },
+   "survey_link_also": {
+      "message": "また、$LINK_START$アンケートにお答えください！$LINK_END$",
+      "placeholders": {
+         "link_end": {
+            "content": "\u003C/a>"
+         },
+         "link_start": {
+            "content": "\u003Ca target=\"_blank\" href=\"$1\">"
+         }
+      }
+   },
+   "tags_less": {
+      "description": "Clicking this makes the tag list smaller",
+      "message": "タグをより少なく表示..."
+   },
+   "tags_more": {
+      "description": "Clicking this expands the list to show all tags",
+      "message": "もっとタグを表示..."
+   },
+   "thanks_for_using_ghostery": {
+      "message": "Ghostery をご利用いただきありがとうございます！"
+   },
+   "toggle_collapse_all": {
+      "description": "Click this to collapse all items, hiding collapsible per-item content.",
+      "message": "すべてを折りたたむ："
+   },
+   "toggle_expand_all": {
+      "description": "Click this to expand all items, revealing all content.",
+      "message": "すべてを展開："
+   },
+   "toggle_select_all": {
+      "description": "Click this to select all items.",
+      "message": "すべてを選択"
+   },
+   "toggle_select_none": {
+      "description": "Click this to deselect all items.",
+      "message": "選択しない"
+   },
+   "tracker_browser_filters_reset": {
+      "description": "Link to reset the tracker browser's display filters.",
+      "message": "検索をリセット"
+   },
+   "tracker_browser_name_filter": {
+      "description": "Text input filter for the tracker browser. Lets you filter by/search for tracker names. Part of 'Search for tracker name'.",
+      "message": "$SEARCH_FIELD$ を検索",
+      "placeholders": {
+         "search_field": {
+            "content": "$1",
+            "example": "tracker name"
+         }
+      }
+   },
+   "tracker_browser_name_filter_placeholder": {
+      "description": "Placeholder text for the tracker browser search input. Should read as 'Search for tracker name'.",
+      "message": "トラッカー名"
+   },
+   "tracker_browser_type_filter": {
+      "description": "Dropdown filter for the tracker browser. Lets you show only blocked (checked), or only unblocked (unchecked) trackers.",
+      "message": "$TYPE$ を表示",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "blocked"
+         }
+      }
+   },
+   "unblocked": {
+      "description": "Select this to show only unblocked (unchecked) trackers in the tracker browser. Should read as 'Show unblocked'.",
+      "message": "ブロック解除済み"
+   },
+   "walkthrough_autoupdate1": {
+      "message": "Ghostery は、ビーコン、広告、分析サービス、ページのウィジェット、その他のサードパーティのページ要素に関して、トラッカーライブラリを定期的に更新します。"
+   },
+   "walkthrough_blocking1": {
+      "message": "Ghostery は、検出したページ要素のブラウザ上での実行を防止することができます。"
+   },
+   "walkthrough_blocking2": {
+      "message": "トラッカーをブロックすれば、ブラウザ上でトラッカーの実行を防止し、あなたの行動データがどのようにトラッキングされるかを制御することができます。なお、ソーシャルネットワークのフィードウィジェットや、ブラウザベースのゲーム等、トラッカーの中には有益なものもあります。ブロックすることにより、アクセスしたサイト上で予期せぬ影響を与える場合もありますのでご注意ください。"
+   },
+   "walkthrough_blocking3": {
+      "message": "問題が発生した場合は$LINK_START$お知らせください$LINK_END$。",
+      "placeholders": {
+         "link_end": {
+            "content": "\u003C/a>"
+         },
+         "link_start": {
+            "content": "\u003Ca href='https://www.ghostery.com/feedback' target='_blank'>"
+         }
+      }
+   },
+   "walkthrough_blocking4": {
+      "message": "ブロックされたトラッカーには、アラートバブルおよび検出パネル内で取り消し線が入ります。"
+   },
+   "walkthrough_blocking_header": {
+      "message": "ブロック"
+   },
+   "walkthrough_finished1": {
+      "message": "設定が完了しました。Ghostery をご利用いただけます。"
+   },
+   "walkthrough_finished2": {
+      "message": "Ghostery やウェブ上でのユーザープライバシーに関する最新情報は、当社の$BLOG_LINK$ブログ$LINK_END$ 、または$TWITTER_LINK$ツイッター$LINK_END$や $FACEBOOK_LINK$Facebookページ$LINK_END$でご確認ください。",
+      "placeholders": {
+         "blog_link": {
+            "content": "\u003Ca href='https://purplebox.ghostery.com' target='_blank'>"
+         },
+         "facebook_link": {
+            "content": "\u003Ca href='http://www.facebook.com/ghostery' target='_blank'>"
+         },
+         "link_end": {
+            "content": "\u003C/a>"
+         },
+         "twitter_link": {
+            "content": "\u003Ca href='http://twitter.com/ghostery' target='_blank'>"
+         }
+      }
+   },
+   "walkthrough_finished3": {
+      "message": "サポートが必要な場合は、メール（$EMAIL$）でお問い合わせ頂くか、$LINK_START$当社フォーラム$LINK_END$をご利用ください。",
+      "placeholders": {
+         "email": {
+            "content": "\u003Ca href='mailto:support@ghostery.com' target='_blank'>support@ghostery.com\u003C/a>"
+         },
+         "link_end": {
+            "content": "\u003C/a>"
+         },
+         "link_start": {
+            "content": "\u003Ca href='https://www.ghostery.com/feedback' target='_blank'>"
+         }
+      }
+   },
+   "walkthrough_ghostrank_checkbox": {
+      "message": "Ghostrank を有効にするにはこちらをクリック"
+   },
+   "walkthrough_intro1": {
+      "message": "Ghostery は、アクセスしたウェブページ上でサードパーティのページ要素（または「トラッカー」）を検索します。トラッカーには、ソーシャルネットワークのウィジェット、広告、トラッキングと分析に使用される非表示のピクセルなどがあります。Ghostery は、トラッカーの存在と、それらトラッカーを実行している企業名を通知します。これら企業の詳細情報を確認して、必要に応じて当該企業が実行するトラッカーをブロックできます。"
+   },
+   "walkthrough_intro2": {
+      "message": "このチュートリアルでは、Ghostery の主要オプションを紹介し、簡単にセットアップできる機会をご提供します。これら設定内容は、Ghostery オプション設定ページからいつでも変更することができます。（また、追加オプションの閲覧も可能。）オプション設定中に何かご質問等ございましたら、$EMAIL$ までメールにてお問い合わせください。",
+      "placeholders": {
+         "email": {
+            "content": "\u003Ca href='mailto:support@ghostery.com' target='_blank'>support@ghostery.com\u003C/a>"
+         }
+      }
+   },
+   "walkthrough_intro_header": {
+      "message": "はじめに"
+   },
+   "walkthrough_link": {
+      "description": "Link to walkthrough/configuration wizard, shown on top of the options page.",
+      "message": "Ghostery の主要オプションのチュートリアルは、$LINK_START$ Ghostery 設定ウィザード$LINK_END$ からどうぞ。",
+      "placeholders": {
+         "link_end": {
+            "content": "\u003C/a>"
+         },
+         "link_start": {
+            "content": "\u003Ca href=\"walkthrough.html\" id=\"walkthrough-link\">"
+         }
+      }
+   },
+   "walkthrough_notification1": {
+      "message": "閲覧しているページでトラッカーがGhostery によって検出されると、画面右上に紫色のボックスが現れ、それらトラッカーを稼動させた企業名が表示されます。Ghostery をバックグラウンドで実行する場合は、下のチェックボックスからチェックを外してください。"
+   },
+   "walkthrough_notification2": {
+      "message": "紫色のボックスは Ghostery オプション設定ページでカスタマイズできます。"
+   },
+   "walkthrough_notification_checkbox": {
+      "message": "アラートバブルを有効にするにはこちらをクリック"
+   },
+   "walkthrough_notification_header": {
+      "message": "通知"
+   },
+   "walkthrough_page_title": {
+      "description": "Title of Ghostery's walkthrough/configuration wizard pages.",
+      "message": "Ghostery 設定チュートリアル"
+   },
+   "walkthrough_skip_button": {
+      "message": "ウィザードをスキップ"
+   },
+   "walkthrough_skip_confirmation": {
+      "message": "設定ウィザードをスキップします。$LINEBREAK$Ghostery オプション設定ページからいつでも開始できます。",
+      "placeholders": {
+         "linebreak": {
+            "content": "\u003Cbr>"
+         }
+      }
+   },
+   "welcome_to_ghostery": {
+      "message": "$VERSION$バージョン用$BROWSER$版 Ghostery へようこそ！",
+      "placeholders": {
+         "browser": {
+            "content": "$1",
+            "example": "Firefox"
+         },
+         "version": {
+            "content": "$2",
+            "example": "5.1.0"
+         }
+      }
+   },
+   "whitelist_add_button": {
+      "description": "Options page site whitelisting button. Clicking this adds the URL typed into the text input to the whitelist.",
+      "message": "追加"
+   },
+   "whitelist_error_duplicate_url": {
+      "description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
+      "message": "このサイトはすでにホワイトリストに登録済みです。"
+   },
+   "whitelist_error_invalid_url": {
+      "description": "Options page site whitelisting error message shown when whitelisting what appears to be an invalid URL.",
+      "message": "有効なURLを入力して下さい。"
+   },
+   "whitelist_remove_all_button": {
+      "description": "Options page site whitelisting button. Clicking this removes all URLs from the whitelist.",
+      "message": "すべて削除"
+   },
+   "whitelist_remove_button": {
+      "description": "Options page site whitelisting button. Clicking this removes the selected URL(s) from the whitelist.",
+      "message": "削除"
+   },
+   "whitelisted_sites_header": {
+      "description": "Options page site whitelisting text shown above the list of whitelisted sites.",
+      "message": "以下のサイトではブロックを実行しない："
+   }
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--
+  - This file is part of Adblock Plus <https://adblockplus.org/>,
+  - Copyright (C) 2006-2015 Eyeo GmbH
+  -
+  - Adblock Plus is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU General Public License version 3 as
+  - published by the Free Software Foundation.
+  -
+  - Adblock Plus is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License
+  - along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<html>
+  <head>
+    <title class="i18n_firstRun_title"></title>
+    <meta charset="utf-8">
+    <link type="text/css" href="skin/firstRun.css" rel="stylesheet"/>
+    <script type="text/javascript" src="ext/common.js"></script>
+    <script type="text/javascript" src="ext/content.js"></script>
+    <script type="text/javascript" src="i18n.js"></script>
+    <script type="text/javascript" src="firstRun.js"></script>
+  </head>
+  <body>
+
+
+    <header>
+        <img id="logo">
+        <h1 id="title-main" class="i18n_firstRun_title"></h1>
+    </header>
+
+    <section id="legacySafariWarning" class="i18n_firstRun_legacySafariWarning warning" hidden="true"></section>
+    <section id="filterlistsReinitializedWarning" class="i18n_firstRun_filterlistsReinitializedWarning warning" hidden="true"></section>
+    <section id="dataCorruptionWarning" class="i18n_firstRun_dataCorruptionWarning warning" hidden="true"></section>
+
+    <div id="content">
+      <section id="acceptable-ads">
+        <h2 class="i18n_firstRun_acceptableAdsHeadline"></h2>
+        <p id="acceptableAdsExplanation" class="i18n_firstRun_acceptableAdsExplanation"></p>
+      </section>
+
+
+      <section id="share">
+        <h2 id="share-headline" class="i18n_firstRun_share_headline"></h2>
+
+        <div id="donate-block">
+          <a id="donate" class="i18n_firstRun_donate" target="_blank"></a>
+          <span id="donate-label" class="i18n_firstRun_donate_label"></span>
+        </div>
+
+        <div id="share-block">
+          <div id="share-general" class="share-buttons">
+            <a id="share-facebook" href="https://www.facebook.com/adblockplus" target="_blank" data-script="https://facebook.com/plugins/like.php?">
+            </a>
+            <a id="share-twitter" href="https://twitter.com/adblockplus" target="_blank" data-script="https://platform.twitter.com/widgets/">
+            </a>
+            <a id="share-gplus" href="https://www.google.com/+AdblockPlus" target="_blank" data-script="https://apis.google.com/se/0/_/+1/fastbutton?">
+            </a>
+          </div>
+
+          <!-- Chinese social networks -->
+          <div id="share-chinese" class="share-buttons">
+            <a id="share-renren" href="http://www.renren.com/601651969" target="_blank">
+            </a>
+            <a id="share-weibo" href="http://e.weibo.com/adblockplus/" target="_blank">
+            </a>
+          </div>
+          <span class="i18n_firstRun_share"></span>
+        </div>
+      </section>
+
+
+      <section id="can-do-more">
+        <h2 class="i18n_firstRun_features"></h2>
+
+        <div id="can-do-more-content">
+          <ul id="features">
+            <li id="feature-malware" class="feature">
+              <div class="feature-image feature-malware-image"></div>
+              <div class="feature-description">
+                <div class="feature-description-textblock">
+                  <h3 class="i18n_firstRun_feature_malware feature-title"></h3>
+                  <span class="i18n_firstRun_feature_malware_description"></span>
+                </div>
+                <div id="toggle-malware" class="toggle">
+                  <div class="i18n_firstRun_toggle_on toggle-on"></div>
+                  <div class="toggle-blob"></div>
+                  <div class="i18n_firstRun_toggle_off toggle-off"></div>
+                </div>
+              </div>
+
+            </li>
+            <li id="feature-social" class="feature">
+              <div class="feature-image feature-social-image"></div>
+              <div class="feature-description">
+                <div class="feature-description-textblock">
+                  <h3 class="i18n_firstRun_feature_social feature-title"></h3>
+                  <span class="i18n_firstRun_feature_social_description"></span>
+                </div>
+                <div id="toggle-social" class="toggle">
+                  <div class="i18n_firstRun_toggle_on toggle-on"></div>
+                  <div class="toggle-blob"></div>
+                  <div class="i18n_firstRun_toggle_off toggle-off"></div>
+                </div>
+              </div>
+            </li>
+
+            <li id="feature-tracking" class="feature">
+              <div class="feature-image feature-tracking-image"></div>
+              <div class="feature-description">
+                  <div class="feature-description-textblock">
+                    <h3 class="i18n_firstRun_feature_tracking feature-title"></h3>
+                    <span class="i18n_firstRun_feature_tracking_description"></span>
+                  </div>
+                  <div id="toggle-tracking" class="toggle">
+                    <div class="i18n_firstRun_toggle_on toggle-on"></div>
+                    <div class="toggle-blob"></div>
+                    <div class="i18n_firstRun_toggle_off toggle-off"></div>
+                  </div>
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <a id="contributors" class="i18n_firstRun_contributor_credits"></a>
+    </footer>
+
+
+    <div id="glass-pane">
+      <iframe id="share-popup" scrolling="no"></iframe>
+    </div>
+  </body>
+</html>

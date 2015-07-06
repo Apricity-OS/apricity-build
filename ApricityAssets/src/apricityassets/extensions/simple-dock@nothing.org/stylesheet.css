@@ -1,0 +1,9 @@
+.sd_notification {
+	border-radius: 10px 10px 10px 10px;
+}
+.sd_notification_top {
+	border-radius: 0px 0px 10px 10px;
+}
+.sd_notification_bottom {
+	border-radius: 10px 10px 0px 0px;
+}

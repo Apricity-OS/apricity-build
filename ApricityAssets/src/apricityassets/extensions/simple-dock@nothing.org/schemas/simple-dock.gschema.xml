@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schemalist gettext-domain="simple-dock">
+<schema path="/org/gnome/shell/extensions/simple-dock/" id="org.gnome.shell.extensions.simple-dock">
+    <key type="b" name="change-message-tray">
+        <default>true</default>
+        <summary>Adapt message bar and notifications</summary>
+        <description>Adds a message bar button and moves notifications to the top bar</description>
+    </key>
+    <key type="b" name="show-apps-button">
+        <default>true</default>
+        <summary>Show applications button</summary>
+        <description>Show applications button</description>
+    </key>
+    <key type="i" name="show-method">
+        <default>0</default>
+        <summary>Show method</summary>
+        <description>Shows or hides dock</description>
+    </key>
+    <key type="i" name="max-icon-size">
+        <default>48</default>
+        <summary>Maximum icon size</summary>
+        <description>Maximum icon size</description>
+    </key>
+    <key type="d" name="background-opacity">
+      <default>0.0</default>
+      <summary>Background opacity</summary>
+      <description>Sets the background opacity.</description>
+    </key>
+</schema>
+</schemalist>

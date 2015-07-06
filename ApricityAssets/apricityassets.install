@@ -1,0 +1,39 @@
+post_install(){
+rm /usr/share/gnome-background-properties/adwaita.xml
+cp -rf /usr/share/backgrounds/apricity /usr/share/backgrounds/gnome
+rm -r /usr/share/backgrounds/apricity
+rm /usr/share/gnome-background-properties/gnome-backgrounds.xml
+chmod -R 755 /usr/share/backgrounds/gnome
+}
+
+post_remove(){
+rm -r "/usr/share/themes/Arctic Apricity"
+rm -r "/usr/share/icons/Apricity Icons"
+rm -r /usr/share/backgrounds/apricity
+rm -r /etc/skel/.liquidprompt
+rm -r /usr/share/plymouth/themes/apricity
+rm /etc/skel/.config/autostart/firstrun.sh
+rm /etc/skel/.config/autostart/firstrun.desktop
+rm /usr/share/gnome-background-properties/apricity-backgrounds.xml
+rm -r /etc/apricity-assets
+}
+
+pre_upgrade(){
+rm -r "/usr/share/themes/Arctic Apricity"
+rm -r "/usr/share/icons/Apricity Icons"
+rm -r /usr/share/backgrounds/apricity
+rm -r /etc/skel/.liquidprompt
+rm -r /usr/share/plymouth/themes/apricity
+rm /etc/skel/.config/autostart/firstrun.sh
+rm /etc/skel/.config/autostart/firstrun.desktop
+rm /usr/share/gnome-background-properties/apricity-backgrounds.xml
+rm -r /etc/apricity-assets
+}
+
+post_upgrade(){
+rm /usr/share/gnome-background-properties/adwaita.xml
+cp -rf /usr/share/backgrounds/apricity /usr/share/backgrounds/gnome
+rm -r /usr/share/backgrounds/apricity
+rm /usr/share/gnome-background-properties/gnome-backgrounds.xml
+chmod -R 755 /usr/share/backgrounds/gnome
+}

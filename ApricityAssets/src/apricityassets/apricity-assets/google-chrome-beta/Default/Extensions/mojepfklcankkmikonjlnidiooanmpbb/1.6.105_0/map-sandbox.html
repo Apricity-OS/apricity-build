@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+
+      var config = {
+        apiUrl: 'https://www.google.com/jsapi',
+        apiKey: 'AIzaSyCyRioht3bUzfpuOuLzk-1-xr9YIKuYGKY',
+        delay: 5000
+      };
+
+      var helpers = {};
+
+      helpers.loadScript = function(src, cb, args) {
+        var s, r, t;
+        r = false;
+        s = document.createElement('script');
+        s.type = 'text/javascript';
+
+        s.async = true;
+        s.src = src;
+        if (typeof(cb) === 'function') {
+          s.onload = s.onreadystatechange = function() {
+            if (!r && (!this.readyState || this.readyState === 'complete')) {
+              r = true;
+              cb.apply(args);
+            }
+          };
+          s.onerror = function() {
+            if (!r) {
+              cb.apply(args);
+            }
+          };
+        }
+        t = document.getElementsByTagName('script')[0];
+        t.parentNode.insertBefore(s, t);
+      };
+
+      var app = {
+        autocomplete: null,
+        details: null,
+        isApiLoaded: false
+      };
+
+      app.init = function() {
+        app.initListener();
+        app.initApi();
+      };
+
+      app.initApi = function() {
+        helpers.loadScript(config.apiUrl, function() {
+          if (typeof google === 'object' && typeof google.load === 'function') {
+            // The api is correctly loaded
+            app.isApiLoaded = true;
+
+            google.load('maps', '3', {
+              'other_params': 'key=' + config.apiKey + '&libraries=places&sensor=true',
+              'callback': function() {
+                app.autocomplete = new google.maps.places.AutocompleteService();
+                app.details = new google.maps.places.PlacesService(document.createElement('div'));
+              }
+            });
+          }
+          else {
+            // Try to load the api in `config.delay`
+            setTimeout(app.initApi, config.delay)
+          }
+        });
+      };
+
+      app.initListener = function() {
+        window.addEventListener('message', function(event) {
+          var method = event.data.method;
+          var query = event.data.query;
+          var timestamp = event.data.timestamp;
+          var position = event.data.position;
+          var options = event.data.options;
+
+          var onDone = function(data) {
+            data = data || {};
+
+            event.source.postMessage(JSON.stringify({
+              "result": data,
+              "timestamp": timestamp
+            }), event.origin);
+          };
+
+          if (app.isApiLoaded) {
+            app[method](query, position, options, onDone);
+          }
+          else {
+            onDone();
+          }
+        });
+      };
+
+      app.searchPlace = function (query, position, options, cb) {
+        options = options || {};
+        options.input = query;
+
+        if (position && !options.nolocation) {
+          options.location = {
+            lat: function() {
+              return position.latitude;
+            },
+            lng: function() {
+              return position.longitude;
+            }
+          };
+
+          options.radius = 10000;
+        }
+
+        if (options.nolocation) {
+          options.bounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(-90, 180),
+            new google.maps.LatLng(90, 180)
+          );
+
+          options.nolocation = undefined;
+        }
+
+        if (!app.autocomplete) {
+          return cb([]);
+        }
+
+        app.autocomplete.getPlacePredictions(options, function(predictions, status){
+          if (status !== google.maps.places.PlacesServiceStatus.OK) {
+              return cb([]);
+          } else {
+            return cb(predictions);
+          }
+        });
+      };
+
+      app.getDetails = function(query, position, options, cb){
+        app.details.getDetails({reference:query}, function(details, status){
+          if (status !== google.maps.places.PlacesServiceStatus.OK) {
+            return cb({});
+          } else {
+            details.geometry.location.lat = details.geometry.location.lat();
+            details.geometry.location.lng = details.geometry.location.lng();
+
+            // Clean up data due to postMessage restrictions
+            delete details.photos;
+
+            return cb(details);
+          }
+        });
+      };
+
+      document.addEventListener("DOMContentLoaded", function() {
+        app.init();
+      });
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,50 @@
+#header {
+    padding: 15px;
+}
+#image-holder {
+    float: left;
+    background-color: white;
+    border-radius: 34px;
+    padding: 2px;
+}
+#image {
+    display: block;
+    height: 64px;
+    width: 64px;
+    border-radius: 32px;
+}
+#text-holder {
+    margin-left: 90px;
+}
+#title {
+    font-size: 19px;
+    line-height: 36px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#desc {
+    opacity: 0.5;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#message {
+    background-color: #ecf0f0;
+    padding: 15px;
+    white-space: pre-wrap;
+    height: 120px;
+    overflow: scroll;
+}
+#reply {
+    display: block;
+    height: 100px;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    resize: none;
+    outline: none;
+}
+#sms-counter {
+    padding: 15px;
+}

@@ -1,0 +1,36 @@
+{
+   "app": {
+      "background": {
+         "scripts": [ "main.js" ]
+      }
+   },
+   "author": "gock",
+   "default_locale": "en",
+   "description": "__MSG_description__",
+   "icons": {
+      "128": "assets/icon128.png",
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl03MeKiRB088Yi6ZMr/oFBMwVJkv+jYZDDVNhlq/e1DHQ5dswtKzmOwmCbaiDVO6F9XkRKzA7KwBzMFnSmq3O3JpSB6OkASwGzche6Ti3mjpHsbhTM02WJxwJoAMPzMZMG2CZaucF87GPr4a/heowVybnsQLwFMnuh4s2vJHOKzqkRW36Z7e8mzOIKgbgroqZk7cMoF9mfnNMuHMBtJOAvFARV5aY95APUn49ZmTcHrlJRWRjaIgEULc1ufhk2aHOBKm11NYMy4/UABlD7fqrN94qsbTzMW6+bqEN5kI7bwZtOprDHLSCMlK63gC/z3tZqnjSa07MOe+Ys86zv4m0QIDAQAB",
+   "manifest_version": 2,
+   "name": "__MSG_extName__",
+   "offline_enabled": true,
+   "permissions": [ "webview", "storage", "fullscreen", "overrideEscFullscreen", "https://www.google-analytics.com/", "*://maxiang.info/*", "*://www.evernote.com/*", "*://app.yinxiang.com/*", "*://app.maxiang.info/*", "*://marxi.co/*", "*://app.marxi.co/*", "*://test.maxiang.info/*", "*://test.maxiang.io/*", "*://0.0.0.0/*", "*://115.29.201.173/*", {
+      "fileSystem": [ "write", "retainEntries", "directory" ]
+   } ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "url_handlers": {
+      "guid_note": {
+         "matches": [ "*://maxiang.info/note/*", "*://app.maxiang.info/note/*", "*://marxi.co/note/*", "*://app.marxi.co/note/*" ],
+         "title": "Guid"
+      }
+   },
+   "version": "1.3.17",
+   "webview": {
+      "partitions": [ {
+         "accessible_resources": [ "sandboxing.html", "*.js", "*.css", "*.woff", "*.otf" ],
+         "name": "good_trusted"
+      } ]
+   }
+}

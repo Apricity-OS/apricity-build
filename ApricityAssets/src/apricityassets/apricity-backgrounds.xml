@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+<wallpapers>
+    <wallpaper deleted="false">
+		<name>Toronto</name>
+		<filename>/usr/share/backgrounds/gnome/flow.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Infinity</name>
+		<filename>/usr/share/backgrounds/gnome/infinity.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Youth</name>
+		<filename>/usr/share/backgrounds/gnome/youth.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Venice</name>
+		<filename>/usr/share/backgrounds/gnome/venice.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Bliss</name>
+		<filename>/usr/share/backgrounds/gnome/bliss.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+    <wallpaper deleted="false">
+		<name>Agriculture</name>
+		<filename>/usr/share/backgrounds/gnome/agriculture.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Aurora</name>
+		<filename>/usr/share/backgrounds/gnome/aurora.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Autumn</name>
+		<filename>/usr/share/backgrounds/gnome/autumn.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Bear Rock</name>
+		<filename>/usr/share/backgrounds/gnome/bear-rock.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Blue Flowers</name>
+		<filename>/usr/share/backgrounds/gnome/blue.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Chicago</name>
+		<filename>/usr/share/backgrounds/gnome/chicago.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Groundcover</name>
+		<filename>/usr/share/backgrounds/gnome/dotty-flowers.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Field</name>
+		<filename>/usr/share/backgrounds/gnome/field.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Sunrise on a Field</name>
+		<filename>/usr/share/backgrounds/gnome/field-sunrise.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Aspen</name>
+		<filename>/usr/share/backgrounds/gnome/aspen.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Lake</name>
+		<filename>/usr/share/backgrounds/gnome/gradient.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Signpost of the Shadows</name>
+		<filename>/usr/share/backgrounds/gnome/horizon.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Horse</name>
+		<filename>/usr/share/backgrounds/gnome/horse.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Green Sky</name>
+		<filename>/usr/share/backgrounds/gnome/green-sky.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Rocky Sunset</name>
+		<filename>/usr/share/backgrounds/gnome/poly.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Shell</name>
+		<filename>/usr/share/backgrounds/gnome/shell.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Snow</name>
+		<filename>/usr/share/backgrounds/gnome/snow.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Storm</name>
+		<filename>/usr/share/backgrounds/gnome/storm.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Sunset</name>
+		<filename>/usr/share/backgrounds/gnome/sunset.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Toronto</name>
+		<filename>/usr/share/backgrounds/gnome/toronto.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Yellow Flower</name>
+		<filename>/usr/share/backgrounds/gnome/yellow.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Autumn-Road</name>
+		<filename>/usr/share/backgrounds/gnome/autumn-road.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Beach</name>
+		<filename>/usr/share/backgrounds/gnome/beach.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Beach-Gradient</name>
+		<filename>/usr/share/backgrounds/gnome/beach-gradient.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Bioluminescence</name>
+		<filename>/usr/share/backgrounds/gnome/bioluminescence.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Blue-Rocks</name>
+		<filename>/usr/share/backgrounds/gnome/blue-rocks.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Canyon</name>
+		<filename>/usr/share/backgrounds/gnome/canyon.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Floating-Cloud</name>
+		<filename>/usr/share/backgrounds/gnome/default.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Eleven</name>
+		<filename>/usr/share/backgrounds/gnome/eleven.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Goose</name>
+		<filename>/usr/share/backgrounds/gnome/goose.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Gorge</name>
+		<filename>/usr/share/backgrounds/gnome/gorge.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Horseshoe-Canyon</name>
+		<filename>/usr/share/backgrounds/gnome/horseshoe-canyon.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Hummingbird</name>
+		<filename>/usr/share/backgrounds/gnome/hummingbird.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>In-Motion</name>
+		<filename>/usr/share/backgrounds/gnome/in-motion.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Lightning</name>
+		<filename>/usr/share/backgrounds/gnome/lightning.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Lights</name>
+		<filename>/usr/share/backgrounds/gnome/lights.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Lonely-Rocks</name>
+		<filename>/usr/share/backgrounds/gnome/lonely-rocks.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Morning-Rocks</name>
+		<filename>/usr/share/backgrounds/gnome/morning-rocks.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Moving-Rocks</name>
+		<filename>/usr/share/backgrounds/gnome/moving-rocks.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Paradise</name>
+		<filename>/usr/share/backgrounds/gnome/paradise.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Qambo</name>
+		<filename>/usr/share/backgrounds/gnome/qambo.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Red-Leaves</name>
+		<filename>/usr/share/backgrounds/gnome/red-leaves.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Red-Sunset</name>
+		<filename>/usr/share/backgrounds/gnome/red-sunset.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Reunion</name>
+		<filename>/usr/share/backgrounds/gnome/reunion.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Ridge</name>
+		<filename>/usr/share/backgrounds/gnome/ridge.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Rockaway-Sunset</name>
+		<filename>/usr/share/backgrounds/gnome/rockaway-sunset.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Rocks</name>
+		<filename>/usr/share/backgrounds/gnome/rocks.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Rocky-Shore</name>
+		<filename>/usr/share/backgrounds/gnome/rocky-shore.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Rough</name>
+		<filename>/usr/share/backgrounds/gnome/rogh.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Rustle</name>
+		<filename>/usr/share/backgrounds/gnome/rustle.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Snow-White</name>
+		<filename>/usr/share/backgrounds/gnome/snow-white.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Stone-Pier</name>
+		<filename>/usr/share/backgrounds/gnome/stone-pier.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Storm-Beach</name>
+		<filename>/usr/share/backgrounds/gnome/storm-beach.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Stream</name>
+		<filename>/usr/share/backgrounds/gnome/stream.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Stripes</name>
+		<filename>/usr/share/backgrounds/gnome/stripes.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Stump</name>
+		<filename>/usr/share/backgrounds/gnome/stump.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Tangled</name>
+		<filename>/usr/share/backgrounds/gnome/tangled.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Trees</name>
+		<filename>/usr/share/backgrounds/gnome/trees.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Unity</name>
+		<filename>/usr/share/backgrounds/gnome/unity.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Weathered</name>
+		<filename>/usr/share/backgrounds/gnome/weathered.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>White</name>
+		<filename>/usr/share/backgrounds/gnome/white.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+</wallpapers>

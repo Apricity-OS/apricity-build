@@ -1,0 +1,24 @@
+{
+   "app": {
+      "background": {
+         "scripts": [ "chrome.js" ]
+      }
+   },
+   "default_locale": "en",
+   "icons": {
+      "128": "images/chrome-icons/icon128.png",
+      "16": "images/chrome-icons/icon16.png",
+      "48": "images/chrome-icons/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqca/IMgO6rvgAZgjVnYnjNsz3a9PPB+7DiZDDDOlEp+7DZkroF/va0paBSy0/c6TwJw81jy+ptFmg8ugpjdZv1ZbEJpEeqv4vmQNfcRu6L+7QV3qOdmqrKA5b7wbTaL4xUEImN8T5I8w07tWToM7z5/yiVQN+DR4W7OzLLIs49sBOW0uX4PUlH7UWojFL+4jzpnNPElb2pnrIFZP11ov63IAMqwdW5aRM14rsz/M1ZapdsZ8TX9LZro+WNSsRXG9pZGenNXNwZwFcqikTOiEV/qpmO/2mbwl+Nk/OqSnjwK6NJ07wC0J1Ncs76CSDHirtIycU72TZQnw838BKu1TZQIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "31",
+   "name": "Sunrise Calendar",
+   "offline_enabled": true,
+   "permissions": [ "identity", "storage", "geolocation", "webview", "notifications", "unlimitedStorage", "clipboardWrite", "https://*.google.com/", "https://api.sunrise.am/", "https://setup.icloud.com/", "https://iconic.sunrise.am/", "https://metrics.sunrise.am/", "https://*.getsentry.com/", "https://postal.sunrise.am/", "http://meet.sunrise.am/" ],
+   "sandbox": {
+      "pages": [ "map-sandbox.html", "map-view.html" ]
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.6.105"
+}

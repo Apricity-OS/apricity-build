@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "Choose the number of the theme you want to use, then [ENTER]"
+echo
+sudo update-alternatives --config default.plymouth
+sudo update-initramfs -u
+echo
+read -p "Do you want to test the theme? (Y/N) "
+if [ "$REPLY" != "n" -a "$REPLY" != "N" ] ; then 
+ echo
+ echo "Running 10-second test..."
+ sudo plymouthd ; sudo plymouth --show-splash ; for ((I=0; I<10; I++)); do sleep 1 ; sudo plymouth --update=test$I ; done ; sudo plymouth --quit
+fi
+exit

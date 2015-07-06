@@ -1,0 +1,23 @@
+{
+   "app_description": {
+      "message": "Google Wallet per a continguts digitals"
+   },
+   "app_name": {
+      "message": "Google Wallet"
+   },
+   "craw_app_unavailable": {
+      "message": "Ara mateix aquesta aplicació no està disponible."
+   },
+   "craw_connect_to_network": {
+      "message": "Connecteu-vos a una xarxa."
+   },
+   "iap_unavailable": {
+      "message": "In-Apps Payments no està disponible actualment."
+   },
+   "jwt_retrieve_failed": {
+      "message": "No s'ha pogut completar la transacció. Torneu-ho a provar més tard."
+   },
+   "please_sign_in": {
+      "message": "Inicieu la sessió a Chrome."
+   }
+}

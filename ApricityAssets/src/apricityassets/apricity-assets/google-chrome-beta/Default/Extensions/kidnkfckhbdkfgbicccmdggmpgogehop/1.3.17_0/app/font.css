@@ -1,0 +1,33 @@
+@font-face {font-family: MathJax_Main; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf') format('opentype')}
+@font-face {font-family: MathJax_Main; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf') format('opentype'); font-weight: bold}
+@font-face {font-family: MathJax_Main; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf') format('opentype'); font-style: italic}
+@font-face {font-family: MathJax_Math; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf') format('opentype'); font-style: italic}
+@font-face {font-family: MathJax_Caligraphic; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf') format('opentype')}
+@font-face {font-family: MathJax_Size1; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf') format('opentype')}
+@font-face {font-family: MathJax_Size2; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf') format('opentype')}
+@font-face {font-family: MathJax_Size3; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf') format('opentype')}
+@font-face {font-family: MathJax_Size4; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf') format('opentype')}
+
+
+@font-face {font-family: MathJax_Typewriter; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Typewriter-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Typewriter-Regular.otf') format('opentype')}
+
+
+@font-face {font-family: MathJax_SansSerif; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Regular.otf') format('opentype')}
+@font-face {font-family: MathJax_SansSerif; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Bold.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Bold.otf') format('opentype'); font-weight: bold}
+@font-face {font-family: MathJax_SansSerif; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Italic.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Italic.otf') format('opentype'); font-style: italic}
+
+
+@font-face {font-family: MathJax_Fraktur; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Regular.otf') format('opentype')}
+@font-face {font-family: MathJax_Fraktur; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Bold.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Bold.otf') format('opentype'); font-weight: bold}
+
+@font-face {font-family: MathJax_Caligraphic; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Bold.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Bold.otf') format('opentype'); font-weight: bold}
+
+
+@font-face {font-family: MathJax_AMS; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_AMS-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_AMS-Regular.otf') format('opentype')}
+
+
+@font-face {font-family: MathJax_Script; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Script-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Script-Regular.otf') format('opentype')}
+
+@font-face {font-family: MathJax_Math; src: url('.././lib/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Math-Regular.woff') format('woff'), url('.././lib/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Math-Regular.otf') format('opentype')}
+
+

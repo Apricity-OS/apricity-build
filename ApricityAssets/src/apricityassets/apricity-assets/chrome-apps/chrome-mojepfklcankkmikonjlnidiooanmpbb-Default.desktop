@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Sunrise Calendar
+Exec=/opt/google/chrome-beta/google-chrome-beta --user-data-dir=/home/alex/.config/google-chrome-beta --profile-directory=Default --app-id=mojepfklcankkmikonjlnidiooanmpbb
+Icon=chrome-mojepfklcankkmikonjlnidiooanmpbb-Default
+StartupWMClass=crx_mojepfklcankkmikonjlnidiooanmpbb

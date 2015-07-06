@@ -1,0 +1,23 @@
+{
+   "app_description": {
+      "message": "Google Wallet para sa digital goods"
+   },
+   "app_name": {
+      "message": "Google Wallet"
+   },
+   "craw_app_unavailable": {
+      "message": "Kasalukuyang hindi available ang app."
+   },
+   "craw_connect_to_network": {
+      "message": "Mangyaring kumonekta sa isang network."
+   },
+   "iap_unavailable": {
+      "message": "Kasalukuyang hindi available ang Mga Pagbabayad na In-App."
+   },
+   "jwt_retrieve_failed": {
+      "message": "Hindi makumpleto ang transaksyon. Pakisubukang muli sa ibang pagkakataon."
+   },
+   "please_sign_in": {
+      "message": "Mangyaring mag-sign in sa Chrome."
+   }
+}

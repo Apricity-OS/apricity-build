@@ -1,0 +1,23 @@
+{
+   "app_description": {
+      "message": "Google новчаник за дигиталну робу"
+   },
+   "app_name": {
+      "message": "Google новчаник"
+   },
+   "craw_app_unavailable": {
+      "message": "Апликација је тренутно недоступна."
+   },
+   "craw_connect_to_network": {
+      "message": "Повежите са мрежом."
+   },
+   "iap_unavailable": {
+      "message": "Плаћања у апликацији су тренутно недоступна."
+   },
+   "jwt_retrieve_failed": {
+      "message": "Није могуће довршити трансакцију. Покушајте поново касније."
+   },
+   "please_sign_in": {
+      "message": "Пријавите се у Chrome."
+   }
+}

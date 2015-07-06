@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extensions-mediaplayer">
+  <enum id='org.gnome.shell.extensions.mediaplayer.positions'>
+    <value value='0' nick='center'/>
+    <value value='1' nick='right'/>
+    <value value='2' nick='volume-menu'/>
+  </enum>
+  <enum id='org.gnome.shell.extensions.mediaplayer.status-type'>
+    <value value='0' nick='icon'/>
+    <value value='1' nick='cover'/>
+    <value value='2' nick='icon-fullcolor'/>
+  </enum>
+  <schema path="/org/gnome/shell/extensions/mediaplayer/" id="org.gnome.shell.extensions.mediaplayer">
+    <key name="indicator-position" enum="org.gnome.shell.extensions.mediaplayer.positions">
+        <default>'volume-menu'</default>
+        <summary>Where to display the indicator (center, right, volume menu)</summary>
+    </key>
+    <key type="b" name="volume">
+        <default>false</default>
+        <summary>Show the media player volume slider</summary>
+        <description>Whether to show the volume control of the mediaplayers.</description>
+    </key>
+    <key type="b" name="position">
+        <default>true</default>
+        <summary>Show the media player position slider</summary>
+        <description>Whether to show the position slider of the mediaplayers.</description>
+    </key>
+    <key type="b" name="playlists">
+        <default>false</default>
+        <summary>Show media player playlists</summary>
+        <description>Whether to show the playlists of the mediaplayers.</description>
+    </key>
+    <key type="i" name="coversize">
+        <default>80</default>
+        <summary>Album cover size</summary>
+        <description>The size of the cover displayed in the menu. Default is 80px width.</description>
+    </key>
+    <key type="b" name="rundefault">
+        <default>false</default>
+        <summary>Allow to start the default media player</summary>
+        <description>Starts the default mediaplayer by clicking on the media player status icon.</description>
+    </key>
+    <key type="b" name="rating">
+    	<default>false</default>
+    	<summary>Display song rating</summary>
+	    <description>Display the currently playing song's rating on a 0 to 5 scale</description>
+    </key>
+    <key name="status-type" enum="org.gnome.shell.extensions.mediaplayer.status-type">
+    	<default>'icon'</default>
+    	<summary>Indicator appearance</summary>
+    </key>
+    <key type="s" name="status-text">
+    	<default>''</default>
+    	<summary>The indicator status text</summary>
+    </key>
+    <key type="i" name="status-size">
+        <default>300</default>
+        <summary>Status text size</summary>
+        <description>The the maximum width before the title gets an ellipsis. Default is 300px.</description>
+    </key>
+    <key type="b" name="volumemenu">
+        <default>true</default>
+        <summary>Show the media player in the volume menu</summary>
+        <description>Whether to show the mediaplayer controls in the volume menu.</description>
+    </key>
+  </schema>
+</schemalist>

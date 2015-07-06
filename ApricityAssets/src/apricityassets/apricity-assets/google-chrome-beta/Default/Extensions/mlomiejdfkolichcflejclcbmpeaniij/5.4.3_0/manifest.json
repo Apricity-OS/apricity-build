@@ -1,0 +1,41 @@
+{
+   "background": {
+      "scripts": [ "lib/build/background.js" ]
+   },
+   "browser_action": {
+      "default_icon": {
+         "19": "data/images/icon19_off.png",
+         "38": "data/images/icon38_off.png"
+      },
+      "default_popup": "panel.html",
+      "default_title": "__MSG_browser_button_tooltip__"
+   },
+   "content_scripts": [ {
+      "all_frames": false,
+      "js": [ "data/includes/ghostery-min.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": false,
+      "css": [ "lib/vendor/bootstrap/bootstrap.css", "data/css/ghostery_dot_com.css" ],
+      "js": [ "lib/vendor/jquery-1.7.2.js", "lib/vendor/bootstrap/bootstrap.js", "data/includes/ghostery_dot_com.js" ],
+      "matches": [ "http://*.ghostery.com/*", "https://*.ghostery.com/*", "http://localhost:4567/*" ],
+      "run_at": "document_end"
+   } ],
+   "default_locale": "en",
+   "description": "__MSG_short_description__",
+   "icons": {
+      "128": "data/images/icon128.png",
+      "16": "data/images/icon16.png",
+      "48": "data/images/icon48.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDWKbhv4tbugT5f8XlKtXmjzhsWjGX+ILAnBL9AOzUA2nYu9Y2P8PAxbOHSRKeLE9zHYD2MzsGgBE4LlLKGV7p5FhrtURBMJrkN5RooOH/RkAPbAvyfJ+sku5qgg2Ijrf10cxXqED39WsTaa4ZWnnkOXl9Y7XMGbuolzBz2m+SfSwIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "23",
+   "name": "Ghostery",
+   "options_page": "options.html",
+   "permissions": [ "http://*/*", "https://*/*", "tabs", "webNavigation", "webRequest", "webRequestBlocking" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "5.4.3",
+   "web_accessible_resources": [ "data/images/click2play/allow_once.png", "data/images/click2play/allow_unblock.png", "data/images/click2play/ghostery_facebook.png", "data/images/click2play/ghostery_linkedin.png", "data/images/click2play/ghostery_pinterest.png", "data/images/click2play/ghostery_plus.png", "data/images/click2play/ghostery_stumble.png", "data/images/click2play/ghostery_tumblr.png", "data/images/click2play/ghostery_twitter.png", "data/images/click2play/ghostery_vkontakte.png", "data/images/click2play/ghosty_blocked.png", "data/images/gear.svg" ]
+}

@@ -1,0 +1,104 @@
+<%
+var _header = require('tpl/_header'),
+	_app_browser = require('tpl/_app_browser'),
+	_ghostrank = require('tpl/_ghostrank'),
+	_select = require('tpl/_select'),
+	_footer = require('tpl/_footer'),
+	_block_by_default_helper = require('tpl/_default_block_all');
+%>
+
+<%= _header({
+	show_tabs: false,
+	show_walkthrough_link: false,
+	show_walkthrough_progress: true,
+	show_walkthrough_skip: true
+}) %>
+
+<a href="#" id="arrow-prev" class="arrow" tabindex="1" role="navigation" aria-label="previous section" style="display:none"></a>
+<a href="#" id="arrow-next" class="arrow" tabindex="1" role="navigation" aria-label="next section"></a>
+
+<div id="slider">
+
+	<div style="display:block" class="options-div">
+		<p style="font-weight: bold;">
+			<%= t('welcome_to_ghostery', 'Chrome', '<span id="version-text"></span>') %>
+		</p>
+		<p>
+			<%- t('walkthrough_intro1') %>
+		</p>
+		<p>
+			<%= t('walkthrough_intro2') %>
+		</p>
+	</div>
+
+	<div style="display:none" class="options-div">
+		<%= _ghostrank() %>
+		<p>
+			<label>
+				<input type="checkbox" id="ghostrank"<% if (conf.ghostrank) print(' checked') %>>
+				<%- t('walkthrough_ghostrank_checkbox') %>
+			</label>
+		</p>
+	</div>
+
+	<div style="display:none" class="options-div">
+		<p>
+			<img src="data/images/help/alert_bubble.png" class="example">
+			<%- t('walkthrough_notification1') %>
+		</p>
+
+		<p>
+			<%- t('walkthrough_notification2') %>
+		</p>
+
+		<p>
+			<label>
+				<input type="checkbox" id="show-alert"<% if (conf.show_alert) print(' checked') %>>
+				<%- t('walkthrough_notification_checkbox') %>
+			</label>
+		</p>
+
+		<div style="clear:both"></div>
+	</div>
+
+	<div style="display:none" class="options-div">
+		<p>
+			<%- t('walkthrough_blocking1') %>
+		</p>
+		<p>
+			<%- t('walkthrough_blocking2') %>
+		</p>
+		<p>
+			<%= t('walkthrough_blocking3') %>
+		</p>
+		<p style="margin-bottom: 20px;">
+			<%- t('walkthrough_blocking4') %>
+		</p>
+
+		<div id="app-browser">
+			<%= _app_browser({ _select: _select }) %>
+		</div>
+
+		<input type="checkbox" id="block-by-default" style="display:none"<% if (conf.block_by_default) print(' checked') %>>
+
+	</div>
+
+	<div style="display:none" class="options-div">
+		<p>
+			<%= t('walkthrough_finished2') %>
+		</p>
+		<p>
+			<%= t('walkthrough_finished3') %>
+		</p>
+		<p>
+			<%- t('thanks_for_using_ghostery') %>
+		</p>
+	</div>
+
+</div>
+
+<div class="options-div">
+	<%= _footer() %>
+</div>
+
+<%= _block_by_default_helper() %>
