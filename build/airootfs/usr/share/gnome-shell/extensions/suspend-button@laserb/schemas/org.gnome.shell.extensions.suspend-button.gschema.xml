@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extensions-suspend-button">
+  <schema path="/org/gnome/shell/extensions/suspend-button/" id="org.gnome.shell.extensions.suspend-button">
+    <key type="b" name="show-two-buttons">
+        <default>true</default>
+        <summary>Show two distinct buttons instead of alt-switch-button.</summary>
+        <description></description>
+    </key>
+    <key type="b" name="suspend-default">
+        <default>true</default>
+        <summary>Set suspend as default</summary>
+        <description>Change alt-switch-buttons behaviour to default to suspend.
+        Press alt to shutdown.
+        This setting has no effect if two buttons are shown.</description>
+    </key>
+  </schema>
+</schemalist>

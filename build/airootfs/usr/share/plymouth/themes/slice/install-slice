@@ -1,0 +1,56 @@
+#!/bin/bash
+
+#execute only from within the folder extracted from the slice.tar.gz file!
+
+#Note: No guarantee that this theme will be seen correctly at all screen resolutions available
+
+if [ "$PWD" != "/lib/plymouth/themes/slice" ] ; then
+	sudo mkdir /lib/plymouth/themes/slice
+	clear
+	sudo rsync -aq --exclude=install-slice * /lib/plymouth/themes/slice/
+	clear
+fi
+if [ ! -f "/etc/initramfs-tools/conf.d/splash" ]; then
+	sudo cp splash /etc/initramfs-tools/conf.d/splash
+	clear
+	echo
+	echo 'Asserted FRAMEBUFFER=y...'
+	echo
+	echo
+fi
+PACKAGE=$(dpkg-query -W --showformat='${Status}\n' plymouth-x11 | grep "install ok installed")
+if [ "" == "$PACKAGE" ]; then
+	echo 'Installing plymouth-x11 to provide for splash testing without restarting the computer.'
+	echo
+	echo
+	sudo apt-get install plymouth-x11
+	clear
+	echo
+	echo 'Installed plymouth-x11 to provide for splash testing without restarting the computer.'
+	echo
+	echo
+fi
+sudo update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/slice/slice.plymouth 100
+sudo update-alternatives --config default.plymouth  #here, choose the number of the theme you want to use then hit enter
+sudo update-initramfs -u
+echo
+echo
+echo Running 10-second test...
+sudo plymouthd ; sudo plymouth --show-splash ; for ((I=0; I<10; I++)); do sleep 1 ; sudo plymouth --update=test$I ; done ; sudo plymouth --quit
+clear
+echo
+echo If or when you want to restore the original Plymouth theme, 
+echo    execute the script: ./update-plymouth 
+echo 
+echo If you want to test the theme without re-starting the machine,
+echo    execute the script: ./test-plymouth
+echo
+echo If you want to test the theme after any modifications,
+echo    execute the script: ./update-slice
+echo
+echo Scripts may be executed from the folder where slice.tar.gz was extracted,
+echo    OR from /lib/plymouth/themes/slice.
+echo
+echo
+read -p "Press ENTER to exit."
+exit

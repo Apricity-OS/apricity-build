@@ -1,0 +1,23 @@
+{
+   "app_description": {
+      "message": "Google Wallet для цифрових товарів"
+   },
+   "app_name": {
+      "message": "Google Wallet"
+   },
+   "craw_app_unavailable": {
+      "message": "Програма тимчасово недоступна."
+   },
+   "craw_connect_to_network": {
+      "message": "Під’єднайтеся до мережі."
+   },
+   "iap_unavailable": {
+      "message": "Платежі через програму зараз не доступні."
+   },
+   "jwt_retrieve_failed": {
+      "message": "Не вдалося завершити трансакцію. Повторіть спробу пізніше."
+   },
+   "please_sign_in": {
+      "message": "Увійдіть у Chrome."
+   }
+}

@@ -1,0 +1,20 @@
+{
+   "backend": {
+      "message": "https://app.maxiang.info"
+   },
+   "backend_yinxiang": {
+      "message": "http://115.29.201.173/app"
+   },
+   "description": {
+      "message": "强大的Markdown离线编辑器，专为印象笔记打造"
+   },
+   "extName": {
+      "message": "马克飞象"
+   },
+   "index": {
+      "message": "index_zh.html"
+   },
+   "lang": {
+      "message": "zh"
+   }
+}

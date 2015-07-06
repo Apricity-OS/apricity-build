@@ -1,0 +1,376 @@
+#  GNOME Shell Extension TaskBar
+#  Copyright (C) 2015 zpydr
+#  Copyright (C) 2015 tuhaihe (Chinese translation)
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+#  zpydr@openmailbox.org
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-08 01:29+0200\n"
+"PO-Revision-Date: 2014-10-08 01:30+0100\n"
+"Last-Translator: tuhaihe\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: prefs.js:119
+#, fuzzy
+msgid "Overview"
+msgstr "预览"
+
+#: prefs.js:122 prefs.js:155 prefs.js:306 prefs.js:315
+msgid "Tasks"
+msgstr "任务"
+
+#: prefs.js:128 prefs.js:156
+msgid "Desktop Button"
+msgstr "桌面按钮"
+
+#: prefs.js:134 prefs.js:157 prefs.js:229
+msgid "Workspace Button"
+msgstr "工作区按钮"
+
+#: prefs.js:140 prefs.js:158
+msgid "Appview Button"
+msgstr "应用程序视图按钮"
+
+#: prefs.js:146 prefs.js:159
+msgid "Favorites"
+msgstr "收藏"
+
+#: prefs.js:153
+#, fuzzy
+msgid "Align "
+msgstr "分配位置"
+
+#: prefs.js:182 prefs.js:213 prefs.js:509
+msgid "Bottom Panel"
+msgstr ""
+
+#: prefs.js:208
+msgid "Panels"
+msgstr ""
+
+#: prefs.js:211 prefs.js:507
+msgid "Top Panel"
+msgstr ""
+
+#: prefs.js:216
+msgid "Icon Size"
+msgstr "图标大小"
+
+#: prefs.js:229
+#, fuzzy
+msgid "Font Size"
+msgstr "图标大小"
+
+#: prefs.js:242
+msgid "Align TaskBar"
+msgstr ""
+
+#: prefs.js:257
+msgid "Anchor Point"
+msgstr ""
+
+#: prefs.js:265
+msgid "Background Color"
+msgstr ""
+
+#: prefs.js:309
+msgid "Tasks on All Workspaces"
+msgstr ""
+
+#: prefs.js:315
+msgid "Tasks Container Width"
+msgstr ""
+
+#: prefs.js:323
+msgid "Close Tasks"
+msgstr "关闭任务"
+
+#: prefs.js:326 prefs.js:450
+msgid "OFF"
+msgstr "关闭"
+
+#: prefs.js:327
+msgid "Middle Click"
+msgstr "中键点击"
+
+#: prefs.js:328
+msgid "Right Click"
+msgstr "右键点击"
+
+#: prefs.js:333
+#, fuzzy
+msgid "Scroll Tasks"
+msgstr "关闭任务"
+
+#: prefs.js:339
+msgid "Active Task Frame"
+msgstr ""
+
+#: prefs.js:345
+msgid ""
+"Active Task\n"
+"Background Color"
+msgstr ""
+
+#: prefs.js:360
+msgid "Activate Tasks on Hover"
+msgstr ""
+
+#: prefs.js:366
+#, fuzzy
+msgid "Hover Delay"
+msgstr "预览延迟"
+
+#: prefs.js:366 prefs.js:844
+msgid "(ms)"
+msgstr "(毫秒)"
+
+#: prefs.js:396
+msgid "Buttons"
+msgstr ""
+
+#: prefs.js:399
+msgid ""
+"Desktop Button Right Click\n"
+"opens Preferences (this)"
+msgstr ""
+"桌面按钮右键点击\n"
+"打开首选项"
+
+#: prefs.js:405
+msgid "Desktop Button Icon"
+msgstr "桌面按钮图标"
+
+#: prefs.js:414
+msgid "Workspace Button Index"
+msgstr "工作区按钮计数"
+
+#: prefs.js:417 prefs.js:452
+msgid "Index"
+msgstr "当前位置"
+
+#: prefs.js:418
+msgid "Index/Total"
+msgstr "当前位置/总数"
+
+#: prefs.js:423
+msgid "Scroll Workspaces"
+msgstr ""
+
+#: prefs.js:429
+msgid ""
+"Appview Button\n"
+"L/R Click Toggle"
+msgstr ""
+"应用程序视图按钮\n"
+"左/右视图切换"
+
+#: prefs.js:432
+msgid ""
+"L Appview\n"
+"R Overview"
+msgstr ""
+"左：应用程序视图\n"
+"右：活动窗口概览"
+
+#: prefs.js:433
+msgid ""
+"L Overview\n"
+"R Appview"
+msgstr ""
+"左：活动窗口概览\n"
+"右：应用程序视图"
+
+#: prefs.js:438
+#, fuzzy
+msgid "Appview Button Icon"
+msgstr "应用程序视图按钮"
+
+#: prefs.js:447
+msgid "Bottom Panel Tray Button"
+msgstr ""
+
+#: prefs.js:451
+#, fuzzy
+msgid "Icon"
+msgstr "图标大小"
+
+#: prefs.js:457
+msgid "When Tray is Empty"
+msgstr ""
+
+#: prefs.js:460
+msgid "Show Icon"
+msgstr ""
+
+#: prefs.js:461
+msgid "Show 0"
+msgstr ""
+
+#: prefs.js:462
+msgid "Hide"
+msgstr ""
+
+#: prefs.js:467
+#, fuzzy
+msgid "Tray Button Icon"
+msgstr "桌面按钮图标"
+
+#: prefs.js:476
+msgid "Activate Tray on Hover"
+msgstr ""
+
+#: prefs.js:504
+msgid "Separators"
+msgstr ""
+
+#: prefs.js:512 prefs.js:551 prefs.js:590 prefs.js:629 prefs.js:668
+#: prefs.js:707 prefs.js:749 prefs.js:750 prefs.js:751 prefs.js:752
+#: prefs.js:753 prefs.js:754
+msgid "Separator"
+msgstr ""
+
+#: prefs.js:512
+msgid "Left"
+msgstr ""
+
+#: prefs.js:707
+#, fuzzy
+msgid "Right"
+msgstr "右键点击"
+
+#: prefs.js:747
+msgid "Resize "
+msgstr ""
+
+#: prefs.js:815
+msgid "Preview"
+msgstr "预览"
+
+#: prefs.js:818
+msgid "Tasks Label"
+msgstr "任务标签"
+
+#: prefs.js:824
+msgid "Tasks Thumbnail"
+msgstr "任务缩略图"
+
+#: prefs.js:830
+msgid "Favorites Label"
+msgstr "收藏标签"
+
+#: prefs.js:836
+msgid "Thumbnail Size"
+msgstr "缩略图大小"
+
+#: prefs.js:844
+msgid "Preview Delay"
+msgstr "预览延迟"
+
+#: prefs.js:874
+msgid "Misc"
+msgstr ""
+
+#: prefs.js:877
+msgid "Hide Activities"
+msgstr "隐藏活动视图按钮"
+
+#: prefs.js:883
+msgid "Disable Hot Corner"
+msgstr "禁用热区"
+
+#: prefs.js:889
+msgid "Hide Default App Menu"
+msgstr "隐藏默认的应用程序菜单"
+
+#: prefs.js:895
+msgid ""
+"Possible conflict\n"
+"with other extensions"
+msgstr ""
+"可能与其他扩展\n"
+"造成冲突"
+
+#: prefs.js:933
+msgid "Version"
+msgstr "版本"
+
+#: prefs.js:941
+msgid "Send Bug Report"
+msgstr ""
+
+#: prefs.js:951
+msgid "Donate for TaskBar"
+msgstr ""
+
+#: prefs.js:956
+msgid "Become a Friend of GNOME"
+msgstr ""
+
+#: prefs.js:961
+#, fuzzy
+msgid "RESET ALL !"
+msgstr "全部重置"
+
+#: prefs.js:964
+msgid "Free Software Foundation"
+msgstr ""
+
+#: prefs.js:1201
+#, fuzzy
+msgid "TaskBar Preferences - Desktop Button Icon"
+msgstr "桌面按钮图标"
+
+#: prefs.js:1214 prefs.js:1315 prefs.js:1405
+msgid "Images"
+msgstr ""
+
+#: prefs.js:1302
+msgid "TaskBar Preferences - Appview Button Icon"
+msgstr ""
+
+#: prefs.js:1392
+msgid "TaskBar Preferences - Tray Button Icon"
+msgstr ""
+
+#~ msgid "Components"
+#~ msgstr "组件"
+
+#~ msgid "Adjustments"
+#~ msgstr "调整"
+
+#~ msgid "Default"
+#~ msgstr "默认"
+
+#~ msgid "GNOME"
+#~ msgstr "GNOME"
+
+#~ msgid "Dark"
+#~ msgstr "黑色"
+
+#~ msgid "Appearance"
+#~ msgstr "外观"
+
+#~ msgid "From Left to Right"
+#~ msgstr "从左到右"

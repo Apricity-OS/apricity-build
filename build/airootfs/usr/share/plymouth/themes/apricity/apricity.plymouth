@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Apricity
+Description=A theme that features a blank background with a logo.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/apricity
+ScriptFile=/usr/share/plymouth/themes/apricity/apricity.script

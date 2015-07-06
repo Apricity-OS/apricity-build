@@ -1,0 +1,31 @@
+Colors: A Plymouth startup and shutdown animated splash (version 1)
+For additional commentary and insights, go to www3.telus.net/someubuntufreebies/
+
+Here I confine myself to actions that are executed in a terminal. If your file manager presents
+a 'Run in Terminal' option when double-clicking an executable text file, then you can use that approach.
+
+1. Download and extract the Colors Plymouth theme. This will create an 'colors-splash' subfolder.
+2. In a terminal, navigate into the colors-splash folder and execute:
+      ./install-colors [ENTER]
+3. At the prompt, enter the number for the colors theme.
+
+The plymouth-x11 package will be installed to provide for testing the theme without re-booting. After that,
+a 10-second test preview of your new startup and shutdown theme will be displayed.
+
+If you attempt any modifications, and those modifications inadvertently result in a black startup screen, 
+the fastest way to recover is to re-extract the download, and then re-install it.
+
+If you have not made any changes to the files in the colors-splash folder, you can repeat the test with:
+  ./test-plymouth [ENTER]
+ 
+In the case where the duration of the startup animation is very, very short, improvement MIGHT be obtained
+by executing in the colors-splash folder:
+  ./assert-framebuffer
+
+If you are ultimately displeased with the theme or it just will not perform well on your hardware, you can
+restore the original Plymouth splash as follows.
+Navigate in a terminal to the colors-splash folder and execute:
+  ./update-plymouth [ENTER]
+When requested, enter the number of the ubuntu-logo theme or any other theme that you were using previously.
+
+

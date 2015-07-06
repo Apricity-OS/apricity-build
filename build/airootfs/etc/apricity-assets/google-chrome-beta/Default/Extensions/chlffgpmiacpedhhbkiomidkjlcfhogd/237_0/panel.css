@@ -1,0 +1,447 @@
+* {
+    outline: none;
+}
+html {
+    background-color: white;
+    height: 100%
+}
+body {
+    width: 640px;
+    height: 451px;
+}
+body.popout {
+    height: 100%;
+    width: 100%;
+}
+#container {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+#header {
+    padding: 10px 10px 0 10px;
+}
+#logo {
+    background-size: 190px 36px;
+    width: 190px;
+    height: 36px;
+}
+#bullet {
+    width: 30px;
+    margin-left: 3px;
+    margin-right: 10px;
+    margin-top: 2px;
+}
+#bullet-link {
+    float: left;
+    cursor: pointer;
+    display: inline-block;
+}
+.track {
+    display: inline-block;
+    margin: 0 10px;
+    width: 175px;
+    text-align: center;
+    vertical-align: top;
+    font-size: 15px;
+}
+#popout-holder {
+    float: right;
+    padding: 6px 8px 8px 8px;
+    height: 41px;
+}
+#popout-holder:hover {
+    cursor: pointer;
+    background-color: #38a06d;
+}
+#settings-gear {
+    float: right;
+    padding: 8px 10px 8px 10px;
+    transition: background-color .3s ease;
+}
+#settings-gear:hover {
+    cursor: pointer;
+    background-color: #38a06d;
+}
+#settings-menu {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 150px;
+    z-index: 400;
+    color:#34495e;
+    background-color: #ecf0f0;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .25);
+}
+.settings-option {
+    cursor: pointer;
+    line-height: 36px;
+    padding: 0px 10px;
+    font-size: 13px;
+}
+.settings-option:hover {
+    background-color: #ced1d5;
+}
+#menu-sink {
+    position:absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    z-index: 300;
+}
+#notifications-tab {
+    max-width: 190px;
+}
+.tab {
+    max-width: 100px;
+}
+#content {
+    position: absolute;
+    top: 51px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+}
+.tab-content {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+}
+.popout .tab-content {
+    height: 100%;
+}
+#targets-bar {
+    float: left;
+    position: relative;
+    z-index: 50;
+    width: 240px;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-right: 1px solid #d0d0d0;
+    box-shadow: 2px 0px 3px rgba(0, 0, 0, .1);
+}
+.section-header {
+    padding: 10px 4px 10px 10px;
+}
+.section-label {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 20px;
+}
+.section-control {
+    float: right;
+    width: 20px;
+    font-size: 22px;
+}
+.section-control:hover {
+    cursor: pointer;
+    color: #4ab367;
+}
+.target-row {
+    position: relative;
+    overflow: hidden;
+    padding: 10px;
+}
+.target-row:hover, .target-row.selected {
+    cursor: pointer;
+    background-color: #ecf0f0;
+}
+.target-row-content {
+    margin-left: 36px;
+    padding: 0 15px 0 10px;
+}
+.target-row-content-line {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.target-row-content-line.secondary {
+    color: #95a5a6;
+}
+.target-row-content-line.new-message {
+    font-weight: bold;
+}
+.target-row-image {
+    display: block;
+    float: left;
+    height: 36px;
+    width: 36px;
+    border-radius: 18px;
+}
+.target-row .pop-out-target {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 27px;
+    padding-right: 5px;
+    display: none;
+}
+.target-row:hover .pop-out-target {
+    display: block;
+}
+.target-row .pop-out-target:hover {
+    cursor: pointer;
+    color: #4ab367;
+}
+.target-row .pushfont-popout {
+    text-align: center;
+    font-size: 24px;
+    line-height: 56px;
+    margin-top: 2px;
+    vertical-align: middle;
+}
+#chat-bar {
+    position: absolute;
+    left: 240px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+#chat-bar-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 62px;
+}
+#chat-bar-top.with-picker {
+    bottom: 111px;
+}
+#chat-bar-top.with-link {
+    bottom: 142px;
+}
+#chat-bar-top.with-picker.with-link {
+    bottom: 191px;
+}
+#chat-bar-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #d0d0d0;
+    overflow: hidden;
+}
+#device-picker-holder {
+    position: relative;
+    display: none;
+}
+#device-picker {
+    margin-top: -50px;
+    margin-left: 10px;
+    max-height: 108px;
+}
+#device-picker.with-link {
+    max-height: 176px;
+}
+.picker-label {
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 48px;
+    border-bottom: 1px solid #ecf0f0;
+    padding: 0 5px 0 15px;
+}
+#chat-input-holder {
+    margin-left: 50px;
+}
+#input {
+    padding: 15px 0 10px 0;
+    border: 0;
+}
+#chat-add-link {
+    float: left;
+    font-size: 38px;
+    padding: 15px 10px 10px 10px;
+    color: #aaa;
+}
+#chat-add-link:hover {
+    color: #4ab367;
+    cursor: pointer;
+}
+#chat-add-link.with-link {
+    color: #4ab367;
+}
+#chat-add-link-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 54px;
+    left: 214px;
+    font-size: 12px;
+    z-index: 100;
+    background-color: #5c6868;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 30px;
+}
+#chat-link-holder {
+    display:none;
+    position: relative;
+    overflow: hidden;
+    padding: 0 14px 0 0;
+    margin: 10px 10px 0 10px;
+    border: 1px solid #d0d0d0;
+}
+#chat-link-holder-poker {
+    position: absolute;
+    bottom: 56px;
+    left: 20px;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-right: 1px solid #d0d0d0;
+    border-bottom: 1px solid #d0d0d0;
+    -moz-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+}
+#chat-add-link .pushfont-link {
+    font-size: 16px;
+    padding-right: 4px;
+}
+#chat-add-link span {
+    color: #aaa;
+    display: inline-block;
+    line-height: 16px;
+}
+#chat-title {
+    font-weight: bold;
+}
+#chat-link-holder input {
+    border: 0;
+    padding: 10px 10px 0 0;
+}
+#chat-link-favicon-holder {
+    float: left;
+}
+#chat-link-favicon {
+    display: block;
+    height: 68px;
+    width: 68px;
+    padding: 10px;
+}
+#chat-link-details {
+    margin-left: 68px;
+}
+#chat-link-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px;
+}
+#chat-link-close:hover {
+    cursor: pointer;
+    background-color: #ecf0f0;
+}
+#chat-send-holder {
+    float: right;
+    display: table;
+    width: 52px;
+    height: 60px;
+    font-size: 36px;
+    text-align: center;
+    color: #5c6868;
+}
+#chat-send-holder.with-link {
+    height: 141px;
+}
+#chat-send-holder:hover {
+    cursor: pointer;
+    color: #4ab367;
+}
+#chat-send-holder i {
+    display: table-cell;
+    vertical-align: middle;
+}
+#sms-device-picker {
+    margin-left: 100px;
+}
+#sms-device-picker-label {
+    width: 100px;
+    text-align: right;
+    padding-right: 20px;
+}
+#sms-recipient-picker {
+    margin-left: 100px;
+}
+#sms-recipient-picker-label {
+    width: 100px;
+    text-align: right;
+    padding-right: 20px;
+}
+#sms-send-holder {
+    float: right;
+    position: relative;
+    width: 52px;
+    height: 210px;
+    font-size: 36px;
+    text-align: center;
+    color: #5c6868;
+}
+#sms-send-holder:hover {
+    cursor: pointer;
+    color: #4ab367;
+}
+#sms-send-holder i {
+    line-height: 70px;
+}
+#sms-message-holder {
+    margin-right: 60px;
+    background-color: red;
+}
+#sms-message {
+    height: 210px;
+    border: 0;
+}
+#sms-input-holder {
+    border-bottom: 1px solid #ecf0f0;
+}
+#sms-warning {
+    font-size: 12px;
+    font-weight: bold;
+}
+#notifications-tab-content {
+    background-color: #ecf0f0;
+}
+#notifications-holder {
+    height: 100%;
+    overflow-y: scroll;
+}
+.fake-notification {
+    max-width: 390px;
+    margin: 15px auto;
+    box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.3);
+}
+#notifications-empty {
+    width: 100%;
+    height: 83%;
+    background-image: url(bg_sam.png);
+    background-size: 248px 186px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.mac #notifications-empty.desktop-app {
+    background-image: url(bg_apple.png);
+    background-size: 140px;
+}
+.windows #notifications-empty.desktop-app {
+    background-image: url(bg_windows.png);
+    background-size: 140px 140px;
+}
+#notifications-empty-text {
+    position: absolute;
+    bottom: 90px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #95a5a6;
+}

@@ -1,0 +1,78 @@
+/*
+  GNOME Shell Extension TaskBar
+  Copyright (C) 2015 zpydr
+
+  Version 43
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  
+  zpydr@openmailbox.org
+*/
+
+#bottomPanel {
+
+}
+
+.tkb-box
+{
+
+}
+
+.tkb-desktop-box
+{
+
+}
+
+.tkb-task-button
+{
+    padding-left: 3px;
+    padding-right: 3px;
+    border: 1px;
+}
+
+.tkb-task-button:active-task-frame
+{
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-image: url("images/active-task-background.svg");
+}
+
+.tkb-task-button:active-task-no-frame
+{
+    border-radius: 5px;
+}
+
+.tkb-preview
+{
+    background-color: rgba(0,0,0,0.9);
+    padding: 5px;
+    border-radius: 8px;
+    -y-offset: 6px;
+}
+
+.tkb-preview-name
+{
+    color: white;
+    font-weight: bold;
+    font-size: 9pt;
+    text-align: center;
+}
+
+.tkb-preview-title
+{
+    color: white;
+    font-weight: bold;
+    font-size: 9pt;
+    text-align: center;
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+    </style>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  </head>
+  <body>
+
+    <div id="map-canvas"></div>
+
+    <script type="text/javascript">
+
+      var mapApp = {
+        options: {},
+
+        initGoogle: function(){
+          mapApp.setOptions();
+          mapApp.showMap();
+          mapApp.addMaker();
+        },
+
+        setOptions: function(){
+          mapApp.options.zoom = parseInt(mapApp.getURLParameter('zoom'), 10) || 14;
+          mapApp.options.lat = mapApp.getURLParameter('lat');
+          mapApp.options.lng = mapApp.getURLParameter('lng');
+          mapApp.options.latlng = new google.maps.LatLng(mapApp.options.lat, mapApp.options.lng);
+        },
+
+        showMap: function(){
+          var mapOptions = {
+            center: mapApp.options.latlng,
+            zoom: mapApp.options.zoom,
+            disableDefaultUI: true,
+            keyboardShortcuts: false,
+            backgroundColor: '#fff'
+          };
+
+          mapApp.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+        },
+
+        addMaker: function(){
+          var image = new google.maps.MarkerImage('images/static/map-marker.png', null, null, null, new google.maps.Size(46,37));
+
+          var marker = new google.maps.Marker({
+              position: mapApp.options.latlng,
+              icon:image,
+              map: mapApp.map
+          });
+        },
+
+        getURLParameter: function(name) {
+          return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+        }
+      };
+      document.addEventListener("DOMContentLoaded", function() {
+        google.load('maps', '3', {
+          'other_params': 'key=AIzaSyCyRioht3bUzfpuOuLzk-1-xr9YIKuYGKY&libraries=places&sensor=true',
+          'callback' : mapApp.initGoogle
+        });
+      });
+
+    </script>
+
+  </body>
+</html>

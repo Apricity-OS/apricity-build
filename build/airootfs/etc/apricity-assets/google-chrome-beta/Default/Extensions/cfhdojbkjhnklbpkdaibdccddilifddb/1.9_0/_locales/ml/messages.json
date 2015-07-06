@@ -1,0 +1,24 @@
+{
+   "add": {
+      "message": "ചേര്‍ക്കുക"
+   },
+   "add_domain_button": {
+      "message": "ഡൊമൈൻ  ഉള്പെടുത്തുക"
+   },
+   "add_filter_button": {
+      "message": "ഫിൽറ്റർ ഉള്പെടുത്തുക"
+   },
+   "add_filters_msg": {
+      "message": "ഫിൽറ്റർ / ഫിൽറ്ററുകൾ ഉള്പെടുത്തുക?"
+   },
+   "add_your_own_filters": {
+      "message": "സ്വന്തം ഫിൽറ്റർ ഉള്പെടുത്തുക"
+   },
+   "description_chrome": {
+      "description": "Note: this cannot be longer than 132 characters",
+      "message": "Used by over 50 million people, a free ad blocker for Chrome that blocks ALL annoying ads, malware and tracking."
+   },
+   "name": {
+      "message": "Adblock Plus"
+   }
+}

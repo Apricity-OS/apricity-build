@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pushbullet</title>
+        <link rel="stylesheet" type="text/css" href="base.css">
+        <link rel="stylesheet" type="text/css" href="picker.css">
+        <link rel="stylesheet" type="text/css" href="chat-ui.css">
+        <link rel="stylesheet" type="text/css" href="chat.css">
+        <script src="utils.js"></script>
+        <script src="text.js"></script>
+        <script src="page.js"></script>
+        <script src="picker.js"></script>
+        <script src="moment.js"></script>
+        <script src="chat-core.js"></script>
+        <script src="chat-ui.js"></script>
+        <script src="chat.js"></script>
+    </head>
+    <body id="container">
+        <div id="bottom">
+            <textarea id="input"></textarea>
+        </div>
+        <div id="middle">
+            <div id="chat-holder">
+                <div id="chat-table">
+                    <div id="chat"></div>
+                </div>
+            </div>
+        </div>
+        <div id="top">
+            <div id="picker-holder">
+                <input id="chat-target" class="picker-input" type="text">
+                <div id="chat-picker" class="picker"></div>
+                <div id="chat-overlay" class="picker-overlay"></div>
+            </div>
+        </div>
+        <div id="chat-drop-zone">
+            <img id="chat-drop-zone-image" src="upload.png">
+        </div>
+    </body>
+</html>

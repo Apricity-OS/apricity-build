@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Type=Application
+Name=Installer
+Exec=sudo -E cnchi -dv -p /usr/share/cnchi/data/packages.xml
+Icon=intel-installer
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Installer

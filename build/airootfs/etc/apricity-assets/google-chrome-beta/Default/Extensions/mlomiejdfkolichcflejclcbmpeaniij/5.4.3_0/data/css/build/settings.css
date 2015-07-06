@@ -1,0 +1,5 @@
+/* glue: 0.3 hash: 975e856db1 */
+.settings-button{background-image:url('../../images/build/settings.png');background-repeat:no-repeat}
+.settings-button:hover{background-position:-20px -20px;width:85px;height:40px;}
+.settings-button:active{background-position:-20px -100px;width:85px;height:36px;}
+.settings-button{background-position:-20px -176px;width:85px;height:40px;}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pushbullet</title>
+        <link rel="stylesheet" type="text/css" href="base.css">
+        <link rel="stylesheet" type="text/css" href="picker.css">
+        <link rel="stylesheet" type="text/css" href="fake-notifications.css">
+        <link rel="stylesheet" type="text/css" href="chat-ui.css">
+        <link rel="stylesheet" type="text/css" href="panel.css">
+        <script src="utils.js"></script>
+        <script src="text.js"></script>
+        <script src="picker.js"></script>
+        <script src="fake-notifications.js"></script>
+        <script src="moment.js"></script>
+        <script src="chat-core.js"></script>
+        <script src="chat-ui.js"></script>
+        <script src="page.js"></script>
+        <script src="people-tab.js"></script>
+        <script src="sms-tab.js"></script>
+        <script src="notifications-tab.js"></script>
+        <script src="panel.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <div class="not-signed-in" style="padding-bottom:10px;">
+                    <a id="logo-link">
+                        <div id="logo"></div>
+                    </a>
+                    <div style="float:right;">
+                        <a id="sign-in" style="color:white;font-weight:bold;cursor:pointer;text-transform:uppercase;line-height:40px;padding-right:10px;"></a>
+                    </div>
+                </div>
+                <div id="tabs" class="signed-in">
+                    <a id="bullet-link">
+                        <img id="bullet" src="bullet@2x.png">
+                    </a>
+                    <div id="people-tab" class="tab selected"></div>
+                    <div id="devices-tab" class="tab"></div>
+                    <div id="sms-tab" class="tab" style="display:none;"></div>
+                    <div id="notifications-tab" class="tab"></div>
+                    <div id="popout-holder" class="not-safari">
+                        <img src="control_popout.png" width="24">
+                    </div>
+                    <div id="settings-gear">
+                        <img src="control_settings.png" height="20" width="20">
+                    </div>
+                </div>
+            </div>
+            <div id="content">
+                <div class="not-signed-in" style="padding:20px;">
+                    <div style="margin-bottom:30px;">
+                        <div class="track">
+                            <img src="track_links.png" height="140">
+                            <p>
+                                Instantly share links between any of your devices. Never email yourself a link again just to get it somewhere else.
+                            </p>
+                        </div>
+                        <div class="track">
+                            <img src="track_chat.png" height="140">
+                            <p>
+                                Pushbullet works on all of your devices, making sharing and chatting with friends more convenient than ever.
+                            </p>
+                        </div>
+                        <div class="track">
+                            <img src="track_files.png" height="140">
+                            <p>
+                                Moving pictures and files between your devices has never been easier. Just drag and drop onto Pushbullet.
+                            </p>
+                        </div>
+                    </div>
+                    <div style="text-align:center;margin:20px 0;">
+                        <button id="sign-up"></button>
+                    </div>
+                    <p class="firefox" style="margin-top:30px;">
+                        <span id='cant-sign-in' style="color:#7f8c8c;"></span> <a id="third-party-cookies" href="#"></a>
+                    </p>
+                </div>
+                <div class="signed-in" style="height:100%;">
+                    <div id="people-tab-content" class="tab-content" style="display:none;">
+                        <div id="targets-bar"></div>
+                        <div id="chat-bar">
+                            <div id="chat-bar-bottom">
+                                <div id="device-picker-holder">
+                                    <div id="device-picker-label" class="picker-label"></div>
+                                    <div style="overflow:hidden;position:relative;">
+                                        <input id="device" type="text" tabindex="4">
+                                        <div id="device-overlay" class="picker-overlay"></div>
+                                    </div>
+                                    <div id="device-picker" class="picker"></div>
+                                </div>
+                                <div style="clear:both;"></div>
+                                <div style="overflow:hidden;">
+                                    <div id="chat-send-holder">
+                                        <i class="pushfont-send"></i>
+                                    </div>
+                                    <div style="margin-right:52px;">
+                                        <div id="chat-link-holder">
+                                            <div id="chat-link-favicon-holder">
+                                                <img id="chat-link-favicon">
+                                            </div>
+                                            <div id="chat-link-details">
+                                                <input id="chat-title" type="text">
+                                                <input id="chat-link" type="text">
+                                                <img id="chat-link-close" src="action_cancel.png" width="24">
+                                            </div>
+                                        </div>
+                                        <div id="chat-link-holder-poker"></div>
+                                        <div>
+                                            <div id="chat-add-link">
+                                                <i class="pushfont-linkpip"></i>
+                                            </div>
+                                            <div id="chat-input-holder">
+                                                <textarea id="input" tabindex="1"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="chat-bar-top">
+                                <div id="chat-holder">
+                                    <div id="chat-table">
+                                        <div id="chat"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="chat-drop-zone">
+                                <img id="chat-drop-zone-image" src="upload.png">
+                            </div>
+                        </div>
+                        <div id="chat-add-link-tooltip"></div>
+                    </div>
+                    <div id="sms-tab-content" class="tab-content" style="display:none;">
+                        <div id="sms-device-picker-label" class="picker-label"></div>
+                        <div style="overflow:hidden;position:relative;">
+                            <input id="sms-device" type="text" tabindex="3">
+                            <div id="sms-device-overlay" class="picker-overlay"></div>
+                        </div>
+                        <div id="sms-device-picker" class="picker"></div>
+                        <div id="sms-recipient-picker-label" class="picker-label"></div>
+                        <div style="overflow:hidden;position:relative;">
+                            <input id="sms-recipient" type="text" tabindex="4">
+                            <div id="sms-recipient-overlay" class="picker-overlay"></div>
+                        </div>
+                        <div id="sms-recipient-picker" class="picker"></div>
+                        <div id="sms-input-holder">
+                            <div id="sms-send-holder">
+                                <i class="pushfont-send"></i>
+                            </div>
+                            <div id="sms-message-holder">
+                                <textarea id="sms-message" tabindex="2"></textarea>
+                            </div>
+                        </div>
+                        <div style="margin:15px;">
+                            <span id="sms-length">0/140</span> <a id="sms-warning-link" href="#"><span id="sms-warning" style="display:none;"></span></a>
+                        </div>
+                        <div style="margin:15px;">
+                            <div id="sms-disclaimer" style="font-size:12px;color:#95a5a6"></div>
+                        </div>
+                    </div>
+                    <div id="notifications-tab-content" class="tab-content" style="display:none;">
+                        <div id="notifications-holder"></div>
+                        <div id="notifications-empty">
+                            <div id="notifications-empty-text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="menu-sink" style="display:none;"></div>
+            <div id="settings-menu" style="display:none;">
+                <div id="snooze" class="settings-option not-firefox">
+                </div>
+                <div id="options" class="settings-option not-safari">
+                </div>
+                <div id="sign-out" class="settings-option">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

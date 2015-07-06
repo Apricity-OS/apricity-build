@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+<script src="jquery.min.js"></script>
+<script src="/lib/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel="stylesheet" href="/css/app.css?">
+ </head>
+ <body>
+<div id="preview" class="shadowbox note-content" style="font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;"><h1 class="note-title">Welcome to Marxico</h1>
+<p class="note-tags "><i class="icon-bookmark"></i><code>Marxico</code> <code>Manual</code> <code>Markdown</code> </p>
+<p>s<br><strong>Marxisco</strong> is a delssicate dMarkdown editor for Evernote. With reliable storage and sync powered by Evernote, <strong>Marxico</strong> offers greate writing experi<del>en</del>ce. </p>
+<ul>
+<li><strong>Versatile</strong> - supporting code highlight &amp; <em>LaTex</em>, inserting images by all means.</li>
+<li><strong>Exquisite</strong> -  neat but powerf<del>ul editor, featuring offline docs, shortcuts, live</del> preview</li>
+<li><strong>Sophisticated</strong> - deeply integrated with Evernote, supporting notebook &amp; tags, two-way bind editing.   </li>
+</ul>
+</div>
+
+<script>
+MathJax.Hub.Config({
+	  tex2jax: {
+		  inlineMath: [["$#","#$"]],
+		  displayMath: [ ['$$$$','$$$$']],
+	  },
+	  "HTML-CSS": {
+		  showMathMenu : false
+	  }
+});
+window.addEventListener('message', function(event){
+	process_math(event.data, function(html){
+		event.source.postMessage({ type: 'render_math', content: html, hash : event.data.hash }, event.origin);
+	});
+
+});
+function process_math(data, callback){
+	if (!window.MathJax) callback();
+	var tag = data.tag, inline = data.inline, content = data.content;
+	var fill = $("<" + tag + " class='mathjax' " + inline + ">$#" + content  +  "#$</" + tag + ">")[0]
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub, fill]);
+	MathJax.Hub.Queue(function(){
+		var second = $(fill).children()[1];
+		if (!second || $(second).text().length ==0 || $(second).is('.MathJax_Error')) return;
+		$(fill).find('script').remove();
+		$(fill).find('[id]').map(function(i, span){
+			$(span).removeAttr('id').removeAttr('class').removeAttr('role').removeAttr('aria-readonly');
+		})
+		$(fill).find('nobr').replaceWith(function(){
+			return $("<" + tag + " style='white-space: nowrap;'></" + tag + ">").append($(this).html().replace(/font-family: (.*?);/g, function(whole, part){ return  'font-family:' + part + ", serif;"} ));
+		})
+		callback(fill.outerHTML)
+		//MathCache.set(hash, fill.innerHTML);
+		//$(item).replaceWith(fill)
+	})
+}
+</script>
+dsdsdaf
+
+dsfasdf
+sadfasdf
+asdfas
+</body>
+</html>

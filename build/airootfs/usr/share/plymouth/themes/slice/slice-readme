@@ -1,0 +1,73 @@
+Slice: A Plymouth startup and shutdown animated splash theme (version 1.0).
+ 
+The theme performs smoothly as described on an i7 3630 cpu and Intel HD 4000 hardware.
+
+For additional splash themes, go to www3.telus.net/someubuntufreebies/
+
+
+Installation:
+
+Here I confine myself to actions that are executed in a terminal. If your file manager presents
+a 'Run in Terminal' option when double-clicking an executable text file, then you can use that approach.
+
+1. Download and extract the Slice Plymouth theme. This will create a 'slice' subfolder.
+2. In a terminal, navigate into the slice folder and execute:
+      ./install-slice [ENTER]
+
+   Framebuffer=y is asserted, and the plymouth-x11 package is installed. The plymouth-x11 package provides
+   for testing the theme without re-booting.
+
+3. At the prompt, enter the number for the slice theme.
+
+   A 10-second test preview of your new startup and shutdown theme will be displayed.
+
+   You can repeat the 10 second test with:
+      ./test-plymouth [ENTER]
+   NOTE: The animation rate during this test tends to be faster than in an actual shutdown or restart.
+
+
+Post-installation:
+
+Edit slice.script
+
+You can:
+1. adjust the slice animation rate at line 37.
+2. adjust the size of the animation at line 38.
+3. choose cycled colors or a fixed color at line 39.  A solid color comes from 'glow.png'. Modify it to suit.
+4. set the color cycle rate at line 40. 
+5. enable or disable the progress bar at line 42, and tweak it at line 43.
+
+In addition, you may add your own compositions to the theme. Using Gimp, edit the file, 'user_overlay.png', 
+which is completely transparent to begin with. Add text in the color, size, and font of your choice. 
+You are not limited to text, nor do you have to use text. You can totally personalize this overlay. The 
+image will be stretched to suit your display resolution. Set the user_overlay_style of your choice at line 48.
+
+Most people who opt for this feature would probably use it to display hardware specifications of the computer. 
+But displaying textures, short quotations, aphorisms, poems, and mottos would be other possible uses for it. 
+
+
+You can leave the editor open while you are making and testing your modifications. 
+Just save the file, and in the terminal, execute:
+  ./update-slice [ENTER]
+You can repeat the 'modify, save, update-slice' sequence as often as you like. When finished close the editor.
+NOTE: The animation rate during these tests tends to be faster than in an actual shutdown or restart, and the
+test's appearance at 4x3 aspect does not accurately reflect an actual shutdown and restart.
+
+If you attempt any modifications, and those modifications inadvertently result in a black startup screen, 
+the fastest way to recover is to re-extract the download, and then re-install it.
+
+
+If you have not made any changes to the files in the slice folder, you can repeat the 10 second test with:
+  ./test-plymouth [ENTER]
+  
+  
+If the shutdown graphic does not suit you, substitute or modify 'shutdown.png'.
+
+
+If you are ultimately displeased with the theme or it just will not perform well on your hardware, you can
+restore the original Plymouth splash as follows.
+Navigate in a terminal to the slice folder and execute:
+  ./update-plymouth [ENTER]
+When requested, enter the number of the ubuntu-logo theme or any other theme that you were using previously.
+
+

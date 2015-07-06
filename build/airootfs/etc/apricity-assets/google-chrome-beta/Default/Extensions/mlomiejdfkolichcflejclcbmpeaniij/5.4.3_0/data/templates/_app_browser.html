@@ -1,0 +1,68 @@
+<%
+var _select = require('tpl/_select');
+%>
+
+<div id="trackers-app-browser" class="app-browser">
+	<div class="app-browser-header">
+		<div class="app-browser-header-left">
+			<span id="block-status"></span>
+			<br>
+			<br>
+			<span style="font-size: .75em;">
+				<%= t("options_blocking3") %>
+			</span>
+		</div>
+		<div class="app-browser-header-divider"></div>
+		<div class="app-browser-header-right">
+			<p>
+				<%= t('tracker_browser_type_filter', _select({
+					id: 'trackers-app-list-filter-type',
+					options: [
+						{ name: t("all"), value: 'all' },
+						{ name: t("blocked"), value: 'blocked' },
+						{ name: t("unblocked"), value: 'unblocked' },
+						{ name: t("new_since_last_update"), value: 'new' }
+					]
+				})) %>
+			</p>
+			<p>
+					<%= t('tracker_browser_name_filter', 
+							'<input type="text" class="app-list-filter-name" id="trackers-app-list-filter-name" placeholder="'
+							+ t("tracker_browser_name_filter_placeholder") + '">'
+							+ '<span id="app-list-reset-search"></span>') %>
+			</p>
+			<!-- <p>
+				<a href="#" id="app-list-reset-search"><%- t("tracker_browser_filters_reset") %></a>
+			</p> -->
+		</div>
+		<div style="clear:both"></div>
+	</div>
+
+	<div id="tag-list" class="small">
+	</div>
+
+	<div id="filter-desc">
+		<div>
+			<a href="#" id="filter-clear"><%- t('tracker_browser_filters_reset') %></a>
+			<span id="filter-desc-text"></span>
+		</div>
+	</div>
+
+	<div class="app-toggles-divs">
+		<a href="#" id="select-all"><%- t("toggle_select_all") %></a>
+		<span class="vr"></span>
+		<a href="#" id="select-none"><%- t("toggle_select_none") %></a>
+		<span class="vr"></span>
+		<a href="#" id="expand-all"><%- t("toggle_expand_all") %></a>
+		<span class="vr"></span>
+		<a href="#" id="collapse-all"><%- t("toggle_collapse_all") %></a>
+	</div>
+
+	<div id="trackers">
+	</div>
+
+	<div id="no-results">
+		<%- t('no_results') %>
+	</div>
+
+</div>

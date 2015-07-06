@@ -1,0 +1,81 @@
+.controls {
+    spacing: 5px;
+}
+
+.indicator-icon {
+    padding-right: 0px;
+}
+
+.status-icon {
+    icon-size: 10px;
+    padding-bottom: 0.4em;
+}
+
+.track-box {
+    padding-left: 2em;
+}
+
+.track-cover {
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 2px;
+}
+
+.track-infos:ltr {
+    padding-left: 1em;
+    width: 15em;
+}
+
+.track-infos:rtl {
+    padding-left: 1em;
+    width: 15em;
+}
+
+.track-title {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.track-artist {
+    padding-top: 0.2em;
+    font-size: 0.9em;
+}
+
+.track-album {
+    padding-top: 0.2em;
+    font-size: 0.9em;
+}
+
+.track-rating {
+    padding-top: 0.15em;
+    font-size: 0.9em;
+}
+
+.menu-icon {
+    icon-size: 1.14em;
+    padding-right: .4em;
+}
+
+.slider-item StLabel {
+    font-size: 0.9em;
+    width: 9em;
+}
+
+.title-button {
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 4px;
+}
+
+.title-button:hover,
+.popup-menu-item:active .title-button {
+    padding: 5px;
+    border: none;
+}
+
+.popup-menu-item:active .title-button {
+    color: white;
+}
+
+.control-button:disabled {
+    color: #999;
+}

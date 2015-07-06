@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Type=Application
+Name=firstrun
+Exec=/etc/skel/.config/autostart/firstrun.sh
+Icon=system-run
+X-GNOME-Autostart-enabled=true
+Name[en_US]=firstrun

@@ -1,0 +1,13 @@
+<div class="app-arrow">&nbsp;</div>
+<div class="app-checkbox">
+	<input class="<%- name %>" type="checkbox" <% if (selected) print(' checked') %>>
+</div>
+<div class="app-name">
+	<a href="https://www.ghostery.com/apps/<%- encodeURIComponent(name.replace(/\s+/g, '_').toLowerCase()) %>"><%- name%></a>
+</div>
+<div class="app-tags">
+	<% tags.each(function (tag) { %>
+		<% if (tag === undefined) return %>
+		<a href="#" data-id="<%- tag.get('id')%>"><%- tag.get('name') %></a><span class="separator"> | </span>
+	<% }) %>
+</div>

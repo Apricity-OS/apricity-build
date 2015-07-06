@@ -1,0 +1,55 @@
+<!doctype html>
+<html data-ng-app="App" data-ng-controller="SRMainCtrl" data-ng-csp="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Sunrise Calendar</title>
+
+    <base href="/">
+
+    <meta content="Sunrise is a free, fast and beautifully designed application to make your life easier." name="description">
+    <meta property="og:title" content="Sunrise, your new Calendar.">
+    <meta property="og:image" content="https://calendar.sunrise.am/images/static/og-logo-sunrise.png">
+    <meta property="og:description" content="Sunrise is a free, fast and beautifully designed application to make your life easier.">
+    <meta name="apple-itunes-app" content="app-id=599114150">
+
+    <meta name="twitter:card" content="app">
+    <meta name="twitter:app:id:iphone" content="599114150">
+
+    <link rel="shortcut icon" href="/images/favicons/favicon.png">
+    <link rel="apple-touch-icon" sizes="196x196" href="/images/cf432f61.apple-touch-icon.png">
+
+    <link rel="stylesheet" href="/styles/e761be15.main.css">
+
+    <!--[if IE 9]>
+    <link rel="stylesheet" href="/styles/a0ce8487.ie9.css"/>
+    <![endif]-->
+
+    <!--[if IE 9]>
+    <script src="/scripts/xdomain.js" slave="https://meet.sunrise.am/public/proxy.html"></script>
+    <![endif]-->
+
+    <script src="/scripts/d41d8cd9.chrome-modules.js"></script>
+
+    <script src="/scripts/41c72c67.modules.js"></script>
+
+    <!-- Localization -->
+    
+    <script id="chrome-app-locale" data-env="chrome" src="/_locales/angular-locale_es-ea.js"></script>
+
+    <!-- Internationalization -->
+    
+
+    
+
+    <script src="/scripts/8bc451ec.scripts.js"></script>
+  </head>
+  <body class="{{currentCtrl}}" data-ng-class="{&apos;is-offline&apos;: !onlineStatus.onLine, &apos;is-disabled&apos;: $root.loadingMessage.msg, &apos;macApp&apos;: isMacApp}">
+    <div class="app" data-ng-view=""></div>
+    <sr-message-loading></sr-message-loading>
+    <sr-message></sr-message>
+
+    <div id="fb-root"></div>
+  </body>
+</html>

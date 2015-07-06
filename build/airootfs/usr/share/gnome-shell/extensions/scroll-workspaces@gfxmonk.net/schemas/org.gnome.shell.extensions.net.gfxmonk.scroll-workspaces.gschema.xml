@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+	<schema id="org.gnome.shell.extensions.net.gfxmonk.scroll-workspaces" path="/org/gnome/shell/extensions/net/gfxmonk/scroll-workspaces/">
+		<key type="i" name="scroll-delay">
+			<range min="0" max="500" />
+			<default>0</default>
+			<summary>Scroll delay</summary>
+			<description>Minimum time (in ms) between two scroll events</description>
+		</key>
+		<key type="b" name="ignore-last-workspace">
+			<default>false</default>
+			<summary>Ignore the last workspace</summary>
+			<description>Prevent scrolling into the last workspace</description>
+		</key>
+	</schema>
+</schemalist>

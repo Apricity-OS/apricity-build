@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Slice
+Description=A theme that features a circle sliced down to a triangle.
+ModuleName=script
+
+[script]
+ImageDir=/lib/plymouth/themes/slice
+ScriptFile=/lib/plymouth/themes/slice/slice.script
