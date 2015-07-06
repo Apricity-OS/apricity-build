@@ -79,7 +79,7 @@ gnome_settings()
 	chown -R root /etc/sudoers.d
 	echo 'sudoed'
 	EDITOR=nano
-	/etc/apricity-assets/Elegant_Dark/install.sh
+	#/etc/apricity-assets/Elegant_Dark/install.sh
 	sed -i.bak 's/Arch Linux/Apricity OS/g' /usr/lib/os-release
 	sed -i.bak 's/arch/apricity/g' /usr/lib/os-release
 	sed -i.bak 's/www.archlinux.org/www.apricityos.com/g' /usr/lib/os-release
@@ -208,7 +208,7 @@ nox_settings()
 	chown -R root /etc/sudoers.d
 	echo 'sudoed'
 	EDITOR=nano
-	/etc/apricity-assets/Elegant_Dark/install.sh
+	#/etc/apricity-assets/Elegant_Dark/install.sh
 	sed -i.bak 's/Arch Linux/Apricity OS/g' /usr/lib/os-release
 	sed -i.bak 's/arch/apricity/g' /usr/lib/os-release
 	sed -i.bak 's/www.archlinux.org/www.apricityos.com/g' /usr/lib/os-release
@@ -367,7 +367,7 @@ postinstall()
 	chown -R root /etc/sudoers.d
 	echo 'sudoed'
 	EDITOR=nano
-	/etc/apricity-assets/Elegant_Dark/install.sh
+	#/etc/apricity-assets/Elegant_Dark/install.sh
 	sed -i.bak 's/Arch Linux/Apricity OS/g' /usr/lib/os-release
 	sed -i.bak 's/arch/apricity/g' /usr/lib/os-release
 	sed -i.bak 's/www.archlinux.org/www.apricityos.com/g' /usr/lib/os-release
