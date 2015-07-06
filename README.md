@@ -11,8 +11,6 @@
 
 ![ICE-SSB](https://github.com/apagajewski/Apricity_OS/blob/master/Apricity%20Screengrabs/Screenshot%20from%202015-07-05%2018-37-52.png?raw=true)
 - Online applications sit right in the dock with all other applications because of ICE, a tool for site-specific browsing
-
-![Liquidprompt](https://camo.githubusercontent.com/945fb4cf2370746492805f5b8fbc0c3c462e486f/68747470733a2f2f7261772e6769746875622e636f6d2f6e6f6a68616e2f6c697175696470726f6d70742f6d61737465722f64656d6f2e706e67)
 - Informative liquidprompt terminal
 - Great applications including the libreoffice suite, totem video player, gnome-photos, gnome-music, btsync, gnome-calendar, grsync, playlonlinux, and steam
 - Many Windows programs run on Apricity through of WINE and Playonlinux
