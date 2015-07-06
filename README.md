@@ -14,11 +14,7 @@
 - Online applications sit right in the dock with all other applications because of ICE, a tool for site-specific browsing
 - Informative liquidprompt terminal
 - Great applications including the libreoffice suite, totem video player, gnome-photos, gnome-music, btsync, gnome-calendar, grsync, playlonlinux, and steam
-<<<<<<< HEAD
 - Many Windows programs run on Apricity through the use of WINE and Playonlinux
-=======
-- Many Windows programs run on Apricity through of WINE and Playonlinux
->>>>>>> 18c66ae41cc51b4d91b78d715155e50dcf00d655
 
 ![Wallpapers](https://github.com/apagajewski/Apricity_OS/blob/master/Apricity%20Screengrabs/Screenshot%20from%202015-07-05%2018-59-02.png?raw=true)
 - Beautiful, clean wallpapers
