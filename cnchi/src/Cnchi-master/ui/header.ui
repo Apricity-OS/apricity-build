@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.14"/>
+  <object class="GtkHeaderBar" id="header">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkImage" id="logo">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="pack_type">start</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="nav_box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="halign">fill</property>
+        <property name="valign">center</property>
+        <property name="hexpand">False</property>
+        <child>
+          <object class="GtkButtonBox" id="button_box">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">start</property>
+            <child>
+              <object class="GtkButton" id="backwards_button">
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="sensitive">True</property>
+                <property name="can_focus">True</property>
+                <property name="no_show_all">True</property>
+                <style>
+                    <class name="image-button"/>
+                </style>
+                <signal name="clicked" handler="on_backwards_button_clicked" swapped="no"/>
+                <child>
+                  <object class="GtkImage" id="back_icon">
+                    <property name="icon-name">go-previous-symbolic</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon-size">1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack_type">start</property>
+                <property name="position">0</property>
+                <property name="non_homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="forward_button">
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="sensitive">True</property>
+                <property name="can_focus">True</property>
+                <property name="no_show_all">True</property>
+                  <style>
+                    <class name="image-button"/>
+                  </style>
+                  <signal name="clicked" handler="on_forward_button_clicked" swapped="no"/>
+                  <child>
+                    <object class="GtkImage" id="forward_icon">
+                      <property name="icon-name">go-next-symbolic</property>
+                      <property name="visible">True</property>
+                      <property name="can_focus">False</property>
+                      <property name="icon-size">1</property>
+                    </object>
+                  </child>
+              </object>
+              <packing>
+                <property name="pack_type">start</property>
+                <property name="position">1</property>
+                <property name="non_homogeneous">True</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="pack_type">end</property>
+      </packing>
+    </child>
+  </object>
+</interface>

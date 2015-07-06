@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Antergos Slides</title>
+    <link rel="stylesheet" type="text/css" href="/usr/share/cnchi/data/css/slides-style.css"/>
+    <link rel="stylesheet" type="text/css" href="/usr/share/cnchi/data/css/lightSlider.css"/>
+    <script src="/usr/share/cnchi/data/js/jquery.min.js"></script>
+    <script src="/usr/share/cnchi/data/js/jquery.lightSlider.min.js"></script>
+</head>
+<body>
+    <div class="slider1">
+    <ul id="slider">
+        <li><img class='slide' src="/usr/share/cnchi/data/images/slides/1.png" alt=""/></li>
+        <li><img class='slide' src="/usr/share/cnchi/data/images/slides/2.png" alt=""/></li>
+        <li><img class='slide' src="/usr/share/cnchi/data/images/slides/3.png" alt=""/></li>
+    </ul>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#slider").lightSlider({
+                item: 1,
+                speed: 2600, //ms'
+                adaptiveHeight: true,
+                thumbMargin: 0,
+                gallery: false,
+                galleryMargin: 0,
+                auto: true,
+                loop: true,
+                pause: 9000,
+                mode: 'fade',
+                keyPress: false,
+                controls: false,
+                pager: false
+            });
+        });
+    </script>
+</body>
+</html>

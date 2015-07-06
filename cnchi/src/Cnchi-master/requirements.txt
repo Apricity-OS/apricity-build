@@ -1,0 +1,7 @@
+pyalpm>=0.7
+pygobject>=3.16.0
+pydbus
+pycairo
+pyparted>=3.10.1
+mako
+requests

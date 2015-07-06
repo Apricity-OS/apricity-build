@@ -1,0 +1,10 @@
+location:/usr/share/applications/chromium.desktop
+location:/usr/share/applications/pacmanxg.desktop
+separator
+location:/usr/share/applications/galculator.desktop
+location:/usr/share/applications/pluma.desktop
+location:/usr/share/applications/mate-terminal.desktop
+location:/usr/share/applications/mate-system-monitor.desktop
+separator
+location:/usr/share/applications/mate-mplayer.desktop
+location:/usr/share/applications/pragha.desktop

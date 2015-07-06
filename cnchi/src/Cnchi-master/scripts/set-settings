@@ -1,0 +1,21 @@
+#!/bin/bash -v
+
+DESKTOP=$1
+
+if [[ ${DESKTOP} == 'gnome' ]]; then
+
+fi
+
+if [[ ${DESKTOP} == 'cinnamon' ]]; then
+
+fi
+
+if [[ ${DESKTOP} == 'xfce' ]]; then
+
+fi
+
+if [[ ${DESKTOP} == 'mate' ]]; then
+
+
+fi
+

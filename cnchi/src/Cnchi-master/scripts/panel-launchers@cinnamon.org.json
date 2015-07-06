@@ -1,0 +1,18 @@
+{
+    "launcherList": {
+        "type": "generic", 
+        "default": [
+            "chromium.desktop",
+            "gnome-terminal.desktop", 
+            "nemo.desktop"
+        ], 
+        "value": []
+    }, 
+    "allow-dragging": {
+        "type": "checkbox", 
+        "default": true, 
+        "description": "Allow dragging of launchers", 
+        "value": true
+    }, 
+    "__md5__": "92eec52d8b53c791b5b00caae84f8848"
+}

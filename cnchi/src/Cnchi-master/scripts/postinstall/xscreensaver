@@ -1,0 +1,10 @@
+newLoginCommand: light-locker-command -l
+timeout: 0:10:00
+fade: True
+unfade: False
+fadeSeconds: 0:00:03
+fadeTicks: 20
+dpmsEnabled: True
+dpmsStandby: 0:10:10
+dpmsSuspend: 0:30:00
+dpmsOff: 4:00:00

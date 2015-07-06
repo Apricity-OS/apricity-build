@@ -1,0 +1,1887 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# 
+# Translators:
+# exoos <mince.lesovski@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Antergos\n"
+"POT-Creation-Date: 2014-03-29 10:36+PET\n"
+"PO-Revision-Date: 2014-03-29 15:37+0000\n"
+"Last-Translator: faidoc <faidoc@gmail.com>\n"
+"Language-Team: Macedonian (http://www.transifex.com/projects/p/antergos/language/mk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+"Language: mk\n"
+"Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
+
+#: cnchi.py:134
+msgid ""
+"This installer must be run with administrative privileges, and cannot "
+"continue without them."
+msgstr "Оваа инсталацијска програма мора да се изврши со административни привилегии, и не може да продолжи без нив."
+
+#: cnchi.py:143
+msgid ""
+"You cannot run two instances of this installer.\n"
+"\n"
+"If you are sure that the installer is not already running\n"
+"you can manually delete the file %s\n"
+"and run this installer again."
+msgstr "Не може да работат два инсталацијски програми.\nАко сте сигурни дека инстацијската програма не работи\nможе рачно да ја избришете датотеката %s\nи да ја стартувате инсталацијската програма повторно. "
+
+#: cnchi.py:151
+msgid "Cnchi installer version %s"
+msgstr "%s верзија на Cnchi инсталацијска програма"
+
+#: cnchi.py:197
+msgid "Antergos Installer"
+msgstr "Antergos инсталацијска програма"
+
+#: cnchi.py:233
+msgid "Using Aria2 to download packages - EXPERIMENTAL"
+msgstr "Користење Aria2 за превземање пакети - ЕКСПЕРИМЕНТАЛНО "
+
+#: cnchi.py:251
+msgid "Using '%s' file as package list"
+msgstr ""
+
+#: cnchi.py:278
+msgid "Cnchi - Antergos Installer"
+msgstr "Cnchi - Antergos инсталацијска програма"
+
+#: cnchi.py:331 src/welcome.py:120
+msgid "Quiting installer..."
+msgstr "Прекинување на инсталацијската програма..."
+
+#: cnchi.py:453
+msgid "Use aria2 to download Antergos packages (EXPERIMENTAL)"
+msgstr "Користи aria2 за превземање на Antergos пакетите (ЕКСПЕРИМЕНТАЛНО)"
+
+#: cnchi.py:454
+msgid ""
+"Use pre-downloaded xz packages (Cnchi will download them anyway if a new "
+"version is found)"
+msgstr "Користи пред превземени xz пакети (Cnchi секако ќе ги превземе ако пронајде нова верзија)"
+
+#: cnchi.py:455
+msgid ""
+"As --cache but before installing Cnchi copies all xz packages to destination"
+msgstr "As --привремена меморија но пред инсталацијата Cnchi ги копра сите xz пакети во одредиштето"
+
+#: cnchi.py:456
+msgid "Sets Cnchi log level to 'debug'"
+msgstr "Го подесува нивото на запис на Cnchi во 'debug'"
+
+#: cnchi.py:457
+msgid "Update Cnchi to the latest version (-uu will force the update)"
+msgstr "Ажурирај го Cnchi во последната верзија (-uu ќе изврши присилно ажурирање) "
+
+#: cnchi.py:458
+msgid ""
+"Install the packages referenced by a local xml instead of the default ones"
+msgstr "Инсталирај ги пакетите зададени од локален xml наместо стандардните"
+
+#: cnchi.py:459
+msgid "Do not perform any changes (useful for developers)"
+msgstr "Не извршувај никакви промени (корисно за програмери)"
+
+#: cnchi.py:460
+msgid "Show logging messages to stdout"
+msgstr "Прикажи пораки од записи во stdout"
+
+#: cnchi.py:461
+msgid "Disables the tryit option (useful if Cnchi is not run from a liveCD)"
+msgstr "Оневозможи ја испробај опцијата (корисно ако Cnchi не работи од инсталациско liveCD)"
+
+#: cnchi.py:462
+msgid "Show options in development (DO NOT USE THIS!)"
+msgstr "Прикажи опции во развој (НЕ ГО КОРИСТИ ОВА!)"
+
+#: cnchi.py:498 cnchi.py:502
+msgid "Please install %s before running this installer"
+msgstr ""
+
+#: cnchi.py:529
+msgid "Program updated! Restarting..."
+msgstr ""
+
+#: src/bootinfo.py:53 src/bootinfo.py:65 src/bootinfo.py:71 src/bootinfo.py:85
+#: src/installation/alongside.py:215
+msgid "unknown"
+msgstr "непознато"
+
+#: src/canonical/misc.py:929
+msgid "Can't set locale %s"
+msgstr "Не може да се подеси локал %s"
+
+#: src/canonical/validation.py:132
+msgid "password is too short"
+msgstr "Лозинката е прекратка"
+
+#: src/canonical/validation.py:135
+msgid "weak password"
+msgstr "слаба лозинка"
+
+#: src/canonical/validation.py:138
+msgid "fair password"
+msgstr "задоволителна лозинка"
+
+#: src/canonical/validation.py:141
+msgid "good password"
+msgstr "добра лозинка"
+
+#: src/canonical/validation.py:144
+msgid "strong password"
+msgstr "јака лозинка"
+
+#: src/canonical/validation.py:159
+msgid "Passwords do not match"
+msgstr "лозинките не се совпаѓаат"
+
+#: src/check.py:74
+msgid "System Check"
+msgstr "Проверка на системот"
+
+#: src/check.py:81
+msgid "has at least %dGB available storage space."
+msgstr "Има најмалку %dGB расположив простор за складирање."
+
+#: src/check.py:86
+msgid ""
+"This highly depends on which desktop environment you choose, so you might "
+"need more space."
+msgstr "Ова во голема мерка зависи од која работна околина која ќе ја одбереш, па можеби ќе ти треба повеќе простор."
+
+#: src/check.py:91
+msgid "is plugged in to a power source"
+msgstr "е поврзан со напојување "
+
+#: src/check.py:95
+msgid "is connected to the Internet"
+msgstr "е поврзан на интернет"
+
+#: src/check.py:99
+msgid "For best results, please ensure that this computer:"
+msgstr "За најдобри резултати, ве молиме осигурајте се дека овој компјутер:"
+
+#: src/check.py:169
+msgid "We have Internet connection."
+msgstr "Поврзано на интернет."
+
+#: src/check.py:170
+msgid "We're connected to a power source."
+msgstr "Поврзано со напојување."
+
+#: src/check.py:171
+msgid "We have enough disk space."
+msgstr "Имаме доволно простор на дискот."
+
+#: src/desktop.py:79
+msgid "Choose Your Desktop"
+msgstr "Одбери ја твојата работна околина"
+
+#: src/desktop.py:132
+msgid "Cnchi will install Antergos with the '%s' desktop"
+msgstr "Cnch ќе го инсталира Antergos со '%s' работна површина "
+
+#: src/desktop_environments.py:65
+msgid ""
+"Gnome 3 is an easy and elegant way to use your computer. It features the "
+"Activities Overview which is an easy way to access all your basic tasks. "
+"GNOME 3 is the default desktop in Antergos."
+msgstr "Gnome 3 е лесен и елегантен начин за користење на твојот компјутер. Содржи преглед на активности што претставува лесен начин на пристап кон сите твои основни задачи. Gnome 3 е стандардна работна околина во Antergos.  "
+
+#: src/desktop_environments.py:70
+msgid ""
+"Cinnamon is a fork of GNOME 3 developed by (and for) Linux Mint. It provides"
+" users a more traditional desktop interface along with the newest "
+"compositing techniques of GNOME 3. Cinnamon is for users of all experience "
+"levels. "
+msgstr "Cinnamon е базирана и создадена од GNOME 3 а развиена од (и за) Linux Mint. На корисникот му обезбеува по традиционално опкружување на работната околина заедно со најновите композитни технологии од GNOME 3. Cinnamon е за корисници без разлика на нивното ниво на искуство.  "
+
+#: src/desktop_environments.py:75
+msgid ""
+"Xfce is a lightweight desktop environment. It aims to be fast and low on "
+"system resources, while remaining visually appealing and user friendly. It "
+"is a great option for use on older computers or those with low hardware "
+"specifications. "
+msgstr "Xfce е лесна работна околина. Се стреми да биде брза и со мало искористување на системските ресурси, останувајќи визуелно привлечна и пријателски настроена кон корисникот. Претставува одлична опција за постари и компјутери со слаби хардверски карактеристики. "
+
+#: src/desktop_environments.py:80
+msgid ""
+"LXDE is an extremely fast-performing and energy-saving desktop environment. "
+"It uses less CPU and RAM than other environments. LXDE is especially "
+"designed for cloud computers with low hardware specifications such as "
+"netbooks, mobile devices, and older computers."
+msgstr "LXDE е многу брза и енергетски ефикасна работна околина. Помалку ги оптоварува процесорот и РАМ меморијата  од другите околини. LXDE е посебно дизајнирана за клауд компјутери со слаби хардверски карактеристики како што се мобилните уреди, ноутбук и постарите компјутери."
+
+#: src/desktop_environments.py:85
+msgid ""
+"Openbox is a highly configurable, next generation window manager with "
+"extensive standards support. It's default theme is well known for its "
+"minimalistic appearance and flexibility. Your desktop becomes cleaner, "
+"faster."
+msgstr "Openbox е многу прилагодлив менаџер на прозори од новата генерација со голема подршка. Неговата основна тема е добро позната по нејзиниот минималистичкиот изглед и флексибилност. Твојата работна површина ќе биде почиста и побрза."
+
+#: src/desktop_environments.py:90
+msgid ""
+"Enlightenment is not just a window manager for Linux/X11 and others, but "
+"also a whole suite of libraries to help you create beautiful user interfaces"
+" with much less work"
+msgstr "Enlightenment не е само менаџер на прозорци за Linux/X11 и други, исто така е комплетен пакет кој ќе ви помогне да креирате прекрасни кориснички интерфејси со помалку работа"
+
+#: src/desktop_environments.py:94
+msgid ""
+"If you are looking for a familiar working environment, KDE's Plasma Desktop "
+"offers all the tools required for a modern desktop computing experience so "
+"you can be productive right from the start."
+msgstr "Ако бараш позната работна околина, KDE Plasma Desktop ги нуди сите алатки потребни за компјутерско чувство на модерна работна површина па ќе можеш да бидеш продуктивен од самиот почеток."
+
+#: src/desktop_environments.py:98
+msgid ""
+"Razor-qt is an advanced, easy-to-use, and fast desktop environment based on "
+"Qt technologies. It has been tailored for users who value simplicity, speed,"
+" and an intuitive interface."
+msgstr "Razor-qt е напредна, лесна за употреба и брза работна околина базирана на Qt технологијата. Скроена е за корисници кои ја ценат едноставноста, брзината и интуитивниот интерфејс."
+
+#: src/desktop_environments.py:103
+msgid ""
+"This option will install Antergos as command-line only system, without any "
+"type of graphical interface. After the installation you can customize "
+"Antergos by installing packages with the command-line package manager."
+msgstr "Оваа опција ќе го инсталира Antergos само како текстуален оперативен систем, без никаков графички интерфејс. После инсталацијата може да го прилагодите Antergos со инсталирање пакети преку текстуалниот менаџер на пакети. "
+
+#: src/desktop_environments.py:107
+msgid ""
+"MATE is a fork of GNOME 2. It provides an intuitive and attractive desktop "
+"environment using traditional metaphors for Linux and other Unix-like "
+"operating systems."
+msgstr "MATE е креирана од GNOME 2. Овозможува интуитивна и атрактивна работна околина користејќи ги традиционалните елементи на Linux и Unix оперативни системи."
+
+#: src/download.py:37
+msgid "pm2ml not found. Aria2 download won't work."
+msgstr ""
+
+#: src/download.py:80
+msgid "Can't connect with aria2, downloading will be performed by alpm."
+msgstr "Не може да се поврзе со aria2, превземањето ќе се изврши со alpm."
+
+#: src/download.py:90
+msgid "Error creating metalink for package %s"
+msgstr "Грешка при креирање металинк за пакетот %s"
+
+#: src/download.py:96
+msgid "Error adding metalink for package %s"
+msgstr "Грешка при додавање металинк за пакетот %s"
+
+#: src/download.py:105
+msgid "Downloading package '%s' and its dependencies..."
+msgstr "Превземање на пакетот '%s' и неговите подзависности..."
+
+#: src/download.py:136 src/pacman/pac.py:334
+msgid "Downloading %s..."
+msgstr "Превземање %s..."
+
+#: src/download.py:168
+msgid "Can't connect to Aria2. Error Output: %s"
+msgstr "Не може да се поврзе со Aria2. Грешка во излезни вредности: %s"
+
+#: src/download.py:246
+msgid "Unable to create download queue for package %s"
+msgstr "Не може да се креира превземање за пакетот %s"
+
+#: src/download.py:250
+msgid "Can't find these packages: "
+msgstr "Не можат да се најдат овие пакети:"
+
+#: src/download.py:256
+msgid "Warning! Can't resolve these dependencies: "
+msgstr "Предупредување! Не може да се решат овие зависности:"
+
+#: src/features.py:110
+msgid "Feature Selection"
+msgstr "Идна селекција"
+
+#: src/features.py:114
+msgid "Arch User Repository (AUR) Support"
+msgstr "Подршка за Arch корисничка архива (AUR)"
+
+#: src/features.py:117
+msgid "The AUR is a community-driven repository for Arch users."
+msgstr "AUR е кориснички одржувана архива за Arch корисниците."
+
+#: src/features.py:121
+msgid ""
+"Use yaourt to install AUR packages.\n"
+"The AUR was created to organize and share new packages\n"
+"from the community and to help expedite popular packages'\n"
+"inclusion into the [community] repository."
+msgstr "Користи yaourt за инсталација на AUR пакети.\nAUR е создаден за организирање и споделување на нови пакети\nод заедницата-корисниците и за да помогне за забрзување на популарните пакети\nвклучени во архивата [на заедницата]."
+
+#: src/features.py:130
+msgid "Bluetooth Support"
+msgstr "Поддршка за Bluetooth"
+
+#: src/features.py:133
+msgid "Enables your system to make wireless connections via Bluetooth."
+msgstr "Овозможува твојот систем да воспоставува безжични врски преку Bluetooth. "
+
+#: src/features.py:137
+msgid ""
+"Bluetooth is a standard for the short-range wireless\n"
+"interconnection of cellular phones, computers, and\n"
+"other electronic devices. In Linux, the canonical\n"
+"implementation of the Bluetooth protocol stack is BlueZ"
+msgstr "Bluetooth е стандард за безжично поврзување на мало\nрастојание помеѓу мобилни телефони, компјутери и \nдруги електронски уреди. Во Линукс е имплементиран\nBluetooth протоколот BlueZ"
+
+#: src/features.py:146
+msgid "Extra Truetype Fonts"
+msgstr "Дополнителни Truetype фонтови"
+
+#: src/features.py:149
+msgid "Installation of extra TrueType fonts"
+msgstr "Инсталација на дополнителни Truetype фонтови"
+
+#: src/features.py:153
+msgid ""
+"TrueType is an outline font standard developed by\n"
+"Apple and Microsoft in the late 1980s as a competitor\n"
+"to Adobe's Type 1 fonts used in PostScript. It has\n"
+"become the most common format for fonts on both the\n"
+"Mac OS and Microsoft Windows operating systems."
+msgstr "TrueType е стандард за фонтови развиен од\nApple и Microsoft во доцните 1980ти како конкуренција\nна Type 1 фонтовите на Adobe користени во PostScript.\nСтана најкористен формат за фонтови како за Mac OS\nтака и за Microsoft Windows оперативните системи."
+
+#: src/features.py:163
+msgid "Gnome Extra"
+msgstr "Gnome додатоци"
+
+#: src/features.py:166
+msgid "Installation of extra Gnome applications"
+msgstr "Инсталација на дополнителни Gnome апликации"
+
+#: src/features.py:170
+msgid ""
+"Contains various optional tools such as a media\n"
+"player, a calculator, an editor and other non-critical\n"
+"applications that go well with the GNOME desktop.\n"
+msgstr "Содржи различни дополнителни алатки како медиа\nплеер, дигитрон, уредувач како и други не толку важни\nапликации кои добро функционираат со GNOME работната околина.\n"
+
+#: src/features.py:178
+msgid "Printing Support"
+msgstr "Подршка за печатење"
+
+#: src/features.py:181
+msgid "Installation of printer drivers and management tools."
+msgstr "Инсталирање на драјвери за принтер и управувачки алатки."
+
+#: src/features.py:185
+msgid ""
+"CUPS is the standards-based, open source printing\n"
+"system developed by Apple Inc. for OS\\302\\256 X and other\n"
+"UNIX\\302\\256-like operating systems."
+msgstr "CUPS е базиран на стандардот, систем за печатење со отворен\nкод развиен од Apple Inc. за OS\\302\\256 X и други\nUNIX\\302\\256 оперативни системи."
+
+#: src/features.py:193
+msgid "LibreOffice"
+msgstr "LibreOffice пакет"
+
+#: src/features.py:196
+msgid "Open source office suite. Supports editing MS Office files."
+msgstr "Канцелариски пакет со отворен код. Подржува уредување на MS Office документи."
+
+#: src/features.py:200
+msgid ""
+"LibreOffice is the free power-packed Open Source\n"
+"personal productivity suite for Windows, Macintosh\n"
+"and Linux, that gives you six feature-rich applications\n"
+"for all your document production and data processing\n"
+"needs: Writer, Calc, Impress, Draw, Math and Base."
+msgstr "LibreOffice е бесплатен моќен софтвер со отворен код \nза лична продуктивност за  Windows, Macintosh и Linux,\nкој има шест апликации богати со многу функции за\nсите твои потреби за изработки на документи и обработка \nна податоци: Writer, Calc, Impress, Draw, Math и Base."
+
+#: src/features.py:210
+msgid "Visual Effects"
+msgstr "Визуелни ефекти"
+
+#: src/features.py:213
+msgid "Enable transparency, shadows, and other desktop effects."
+msgstr "Овозможување на транспарентност, сенки и други ефекти на работната површина."
+
+#: src/features.py:217
+msgid ""
+"Compton is a lightweight, standalone composite manager,\n"
+"suitable for use with window managers that do not natively\n"
+"provide compositing functionality. Compton itself is a fork\n"
+"of xcompmgr-dana, which in turn is a fork of xcompmgr.\n"
+"See the compton github page for further information."
+msgstr "Compton е лесен, самостоен композитен менаџер,\nпогоден за употреба со менаџери на прозори кои немаат\nсопствена композитна функционалност. Compton е развиен од\nxcompmgr-dana, кој пак потекнува од xcompmgr. Види\nја страната compton github за понатамошни информации."
+
+#: src/features.py:227
+msgid "Uncomplicated Firewall"
+msgstr "Едноставен Firewall"
+
+#: src/features.py:230
+msgid "Control the incoming and outgoing network traffic."
+msgstr "Контрола на дојдовниот и појдовниот мрежен сообраќај."
+
+#: src/features.py:234
+msgid ""
+"Ufw stands for Uncomplicated Firewall, and is a program for\n"
+"managing a netfilter firewall. It provides a command line\n"
+"interface and aims to be uncomplicated and easy to use."
+msgstr "Ufw е кратенка од Uncomplicated Firewall, и е програма за\nуправување со netfilter firewal. Доаѓа со текстуален приказ\nи се стреми да биде едноставна и лесна за употреба."
+
+#: src/features.py:242
+msgid "Proprietary Software"
+msgstr "Комерцијален софтвер"
+
+#: src/features.py:245
+msgid "Software to play Flash videos, MP3 audio, and other media."
+msgstr "Софтвер за репродукција на Flash видеа, MP3 аудио и други медиуми.  "
+
+#: src/features.py:273
+msgid "Detected bluetooth device. Enabling by default..."
+msgstr ""
+
+#: src/features.py:288
+msgid "Selected '%s' feature to install"
+msgstr ""
+
+#: src/features.py:306
+msgid "Arch User Repository - Disclaimer"
+msgstr "Arch корисничка архива - Општи услови"
+
+#: src/features.py:307
+msgid ""
+"The Arch User Repository is a collection of user-submitted PKGBUILDs\n"
+"that supplement software available from the official repositories.\n"
+"\n"
+"The AUR is community driven and NOT supported by Arch or Antergos.\n"
+msgstr "Arch корисничката архива е колекција од кориснички додадени PKGBUILD\nкои го дополнуваат софтверот достапен во официјалните архиви.\nAUR ја одржуваат корисниците и НЕ е подржана од Arch или Antergos.\n"
+
+#: src/features.py:312
+msgid "Uncomplicated Firewall will be installed with these rules:"
+msgstr "Едноставниот Firewall ќе биде инсталиран со овие правила: "
+
+#: src/features.py:314
+msgid ""
+"ufw default deny\n"
+"ufw allow from %s\n"
+"ufw allow Transmission\n"
+"ufw allow SSH"
+msgstr "ufw стандардно не дозволувај\nufw дозволи од %s\nufw дозволи Transmission\nufw дозволи SSH"
+
+#: src/hardware/hardware.py:65 src/installation/process.py:843
+msgid "Error running command: %s"
+msgstr "Грешка при извршување на командата: %s"
+
+#: src/installation/advanced.py:210 src/installation/advanced.py:505
+#: src/installation/advanced.py:519
+msgid "free space"
+msgstr "слободен простор"
+
+#: src/installation/advanced.py:259
+msgid "It's not recommended to install grub in a partition"
+msgstr "Не е препорачливо да се инсталира grub во партиција"
+
+#: src/installation/advanced.py:287 src/installation/alongside.py:169
+msgid "Device"
+msgstr "Уред"
+
+#: src/installation/advanced.py:290
+msgid "Type"
+msgstr "Тип"
+
+#: src/installation/advanced.py:293
+msgid "Mount point"
+msgstr "Монт точка"
+
+#: src/installation/advanced.py:296
+msgid "Label"
+msgstr "Ознака"
+
+#: src/installation/advanced.py:302 src/installation/advanced.py:1635
+msgid "Format"
+msgstr "Формат"
+
+#: src/installation/advanced.py:305
+msgid "Size"
+msgstr "Големина"
+
+#: src/installation/advanced.py:308
+msgid "Used"
+msgstr "Искористено"
+
+#: src/installation/advanced.py:311
+msgid "Flags"
+msgstr "Белешки"
+
+#: src/installation/advanced.py:317
+msgid "SSD"
+msgstr "SSD"
+
+#: src/installation/advanced.py:486
+msgid "none"
+msgstr "Никое"
+
+#: src/installation/advanced.py:624
+msgid "Can't edit a partition with LVM filesystem type"
+msgstr "Не може да се уредува партиција со LVM систем со датотеки "
+
+#: src/installation/advanced.py:672
+msgid "Cannot use the same mount point twice."
+msgstr "Не може да се употреби истата монт точка два пати."
+
+#: src/installation/advanced.py:674
+msgid "Root partition must be formatted."
+msgstr "Системската-Root партицијата мора да се форматира."
+
+#: src/installation/advanced.py:750
+msgid "You will delete the partition %s from disk %s"
+msgstr ""
+
+#: src/installation/advanced.py:767
+msgid "Unmounting %s..."
+msgstr ""
+
+#: src/installation/advanced.py:927
+msgid "Cannot use the same mount point twice..."
+msgstr "Не може да се употреби истата монт точка два пати..."
+
+#: src/installation/advanced.py:948
+msgid "Creating a primary partition"
+msgstr "Креирање примарна партиција"
+
+#: src/installation/advanced.py:959
+msgid "Creating an extended partition"
+msgstr "Креирање проширена партиција"
+
+#: src/installation/advanced.py:965
+msgid "Creating a logical partition"
+msgstr "Креирање логичка партиција"
+
+#: src/installation/advanced.py:1099
+msgid "Advanced Installation Mode"
+msgstr "Напреден режим за инсталација"
+
+#: src/installation/advanced.py:1105
+msgid "Use the device below for boot loader installation:"
+msgstr "Искористи го уредот подолу за инсталација на подигачот на системот:"
+
+#: src/installation/advanced.py:1110
+msgid "Mount Checklist:"
+msgstr "Монт чеклиста:"
+
+#: src/installation/advanced.py:1116
+msgid "Root ( / )"
+msgstr "Root ( / )"
+
+#: src/installation/advanced.py:1120
+msgid "Boot ( /boot )"
+msgstr "Boot ( /boot )"
+
+#: src/installation/advanced.py:1124
+msgid "EFI ( /boot )"
+msgstr "EFI ( /boot )"
+
+#: src/installation/advanced.py:1128
+msgid "Swap"
+msgstr "Swap"
+
+#: src/installation/advanced.py:1136
+msgid "New Partition Table"
+msgstr "Нова табела на партција"
+
+#: src/installation/advanced.py:1144
+msgid "Change..."
+msgstr "Промени..."
+
+#: src/installation/advanced.py:1149
+msgid "Size:"
+msgstr "Големина:"
+
+#: src/installation/advanced.py:1153
+msgid "Type:"
+msgstr "Тип:"
+
+#: src/installation/advanced.py:1157
+msgid "Primary"
+msgstr "Примарна"
+
+#: src/installation/advanced.py:1161
+msgid "Logical"
+msgstr "Логичка"
+
+#: src/installation/advanced.py:1165
+msgid "Extended"
+msgstr "Проширена"
+
+#: src/installation/advanced.py:1169
+msgid "Beginning of this space"
+msgstr "Почеток на овој простор"
+
+#: src/installation/advanced.py:1173
+msgid "End of this space"
+msgstr "Крај на овој простор"
+
+#: src/installation/advanced.py:1177 src/installation/advanced.py:1194
+msgid "Use As:"
+msgstr "Уптреби како:"
+
+#: src/installation/advanced.py:1181 src/installation/advanced.py:1198
+msgid "Mount Point:"
+msgstr "Монт точка:"
+
+#: src/installation/advanced.py:1185 src/installation/advanced.py:1202
+msgid "Label (optional):"
+msgstr "Ознака(опционално):"
+
+#: src/installation/advanced.py:1189
+msgid "Encryption Options..."
+msgstr "Опции за шифрирање..."
+
+#: src/installation/advanced.py:1206
+msgid "Format:"
+msgstr "Формат:"
+
+#: src/installation/advanced.py:1211
+msgid "Partition Table Type:"
+msgstr "Вид на партицијската табела:"
+
+#: src/installation/advanced.py:1216
+msgid "Create Partition Table"
+msgstr "Направи партицијска табела:"
+
+#: src/installation/advanced.py:1219 src/installation/alongside.py:147
+#: src/installation/automatic.py:95
+msgid "Install Now!"
+msgstr "Инсталирај!"
+
+#: src/installation/advanced.py:1305
+msgid "Creating a new %s partition table for disk %s"
+msgstr "Креирање нова %s партицијска табела за дискот %s"
+
+#: src/installation/advanced.py:1315
+msgid ""
+"GRUB requires a BIOS Boot Partition (2 MiB, no filesystem, EF02 type code in gdisk or bios_grub flag in GNU Parted) in BIOS systems to embed its core.img file due to lack of post-MBR embed gap in GPT disks.\n"
+"\n"
+"For a BIOS-GPT configuration, create a 1007 KiB partition at the beginning of the disk with no filesystem. That will allow for the next partition on the disk to be correctly aligned at 1024 KiB. If needed, the partition can also be located somewhere else on the disk, but it should be within the first 2 TiB region. Set the partition type to ef02.\n"
+"\n"
+"The GPT partition also creates a protective MBR partition to stop unsupported tools from modifying it. You may need to set a bootable flag on this protective MBR partition if yoursystem doesnt boot successfully after installation.\n"
+"\n"
+"Cnchi will create the BIOS Boot Partition for you."
+msgstr "GRUB бара BIOS партиција за подигање(2 MiB, без систем на датотеки, EF02 код во gdisk или bios_grub ознака во GNU Parted) во BIOS системите за да ја вгради core.img датотеката поради недостаток на пост-MBR вграден простор во GPT disks.\n\nЗа BIOS-GPT конфигурацијата, направете партиција од 1007 KiB без систем на датотеки на почетокот на дискот. Ова ќе и дозволи на следната партиција на дискот да биде точно подесена на 1024 KiB. Ако е потребно, партицијата може да биде лоцирана и на друго место на дискот, но треба да биде запишана во областа на првите 2 TiB. Подесете ја партицијата како вид ef02.\n\nGPT партицијата исто така креира заштитна MBR партиција за да спречи не подржани алатки да ја променуваат. Можеби ќе треба да и доделите ознака за подигање-бут на оваа заштитна MBR партиција ако вашиот систем не се подигне успешно после инсталацијата.\n\nCnchi ќе направи BIOS партиција за подигање за вас."
+
+#: src/installation/advanced.py:1540
+msgid ""
+"%s is mounted as swap.\n"
+"To continue it has to be unmounted.\n"
+"Click Yes to unmount, or No to return\n"
+msgstr "%s е монтирана како свап.\nЗа да продолжиш мора да биде демонтирана.\nПритисни  Yes за демонтирање, или No за да се вратиш\n"
+
+#: src/installation/advanced.py:1544
+msgid ""
+"%s is mounted in '%s'.\n"
+"To continue it has to be unmounted.\n"
+"Click Yes to unmount, or No to return\n"
+msgstr "%s е монтирана во '%s'.\nЗа да продолжиш мора да биде демонтирана.\nПритисни Да за демонтирање, или Не за да се вратиш\n"
+
+#: src/installation/advanced.py:1551 src/installation/advanced.py:1565
+msgid "%s unmounted"
+msgstr ""
+
+#: src/installation/advanced.py:1562
+msgid "Swap partition %s unmounted"
+msgstr ""
+
+#: src/installation/advanced.py:1567
+msgid "%s shows as mounted (busy) but it has no mount point"
+msgstr "%s прикажан како монтиран (зафатен) но нема монт точка"
+
+#: src/installation/advanced.py:1628
+msgid "Partition %s will be deleted"
+msgstr "Партицијата %s ќе биде избришана"
+
+#: src/installation/advanced.py:1635
+msgid "Mount"
+msgstr "Монтирај"
+
+#: src/installation/advanced.py:1635
+msgid "New"
+msgstr "Нова"
+
+#: src/installation/advanced.py:1635
+msgid "Partition"
+msgstr "Партиција"
+
+#: src/installation/advanced.py:1635
+msgid "Relabel"
+msgstr "Означи повторно"
+
+#: src/installation/advanced.py:1656
+msgid "We will make changes to partitions on these disks:"
+msgstr "Ќе направиме промени на партициите на овие дискови:"
+
+#: src/installation/advanced.py:1713
+msgid "Finished saving changes in %s"
+msgstr "Завршено со зачувување на промените во %s"
+
+#: src/installation/advanced.py:1737
+msgid "Creating new %s filesystem in %s labeled %s"
+msgstr "Креирање нов %s систем со датотеки во %s означен %s"
+
+#: src/installation/advanced.py:1739
+msgid "Creating new %s filesystem in %s"
+msgstr "Креирање нов %s систем со датотеки во %s"
+
+#: src/installation/advanced.py:1774
+msgid "Couldn't format partition '%s' with label '%s' as '%s'"
+msgstr "Не може да се форматира партицијата '%s' со ознака '%s' како '%s' "
+
+#: src/installation/advanced.py:1812
+msgid "Cnchi will not install any boot loader"
+msgstr "Cnchi нема да инсталира било кој подигач на системот"
+
+#: src/installation/advanced.py:1821
+msgid "Antergos will install the bootloader of type %s in %s"
+msgstr "Antergos ќе инсталира подигач на системот од типот %s во %s"
+
+#: src/installation/advanced.py:1835 src/installation/automatic.py:241
+msgid "Testing mode. Cnchi will not change anything!"
+msgstr "Тест режим. Cnchi нема да промени ништо!"
+
+#: src/installation/alongside.py:109
+msgid "Can't load %s css"
+msgstr "Не може да се вчита %s css"
+
+#: src/installation/alongside.py:136
+msgid "Select the OS you would like Antergos installed next to."
+msgstr "Одбери оперативен систем покрај кој сакаш да биде инсталиран Antergos."
+
+#: src/installation/alongside.py:141
+msgid "Antergos Alongside Installation"
+msgstr "Antergos инсталација покрај постоечки оперативен систем  "
+
+#: src/installation/alongside.py:172
+msgid "Detected OS"
+msgstr "Пронајден е оперативен систем"
+
+#: src/installation/alongside.py:175
+msgid "Filesystem"
+msgstr "Систем со датотеки"
+
+#: src/installation/alongside.py:219
+msgid "Unable to create list of partitions for alongside installation."
+msgstr "Не може да се креира листа на партиции за инсталација покрај постоечки ОС."
+
+#: src/installation/alongside.py:259
+msgid "Can't shrink the partition (maybe it's nearly full)"
+msgstr "Партицијата не може да се смали(можеби е полна)"
+
+#: src/installation/ask.py:101
+msgid "Installation Type"
+msgstr "Вид на инсталација"
+
+#: src/installation/ask.py:117
+msgid "Erase disk and install Antergos"
+msgstr "Избриши го дискот и инсталирај го Antergos"
+
+#: src/installation/ask.py:120
+msgid "Warning: This will erase ALL data on your disk."
+msgstr "Предупредување: Ова ќе ги избрише СИТЕ податоци на дискот."
+
+#: src/installation/ask.py:126
+msgid "Encrypt this installation for increased security."
+msgstr "Шифрирај ја инсталацијата за зголемена безбедност."
+
+#: src/installation/ask.py:130
+msgid "You will be asked to create an encryption password in the next step."
+msgstr "Ќе бидеш прашан да направиш шифрирана лозинка во наредниот чекор."
+
+#: src/installation/ask.py:139
+msgid ""
+"This will setup LVM and allow you to easily manage partitions and create "
+"snapshots."
+msgstr "Ова ќе го подеси LVM и ќе ти овозможи лесно да управуваш со партициите и да направиш слики од екранот."
+
+#: src/installation/ask.py:144
+msgid "Set your Home in a different partition/volume"
+msgstr "Постави го твојот почетен директориум во друга партиција/диск"
+
+#: src/installation/ask.py:148
+msgid ""
+"This will setup you /home directory in a different partition or volume."
+msgstr "Ова ќе го подеси твојот /почетен директориум во друга партиција или диск."
+
+#: src/installation/ask.py:156 src/installation/ask.py:158
+msgid "Install Antergos alongside %s"
+msgstr "Инсталирај го Antergos покрај %s"
+
+#: src/installation/ask.py:165
+msgid "Choose exactly where Antergos should be installed. (advanced)"
+msgstr "Одбери точно каде ќе биде инсталиран Antergos. (напредно)"
+
+#: src/installation/ask.py:168
+msgid "Edit partition table and choose mount points."
+msgstr "Уреди ги партицијските табели и одбери монт точки."
+
+#: src/installation/ask.py:194
+msgid "Antergos installation will be encrypted using LUKS"
+msgstr "Antergos инсталацијата ќе биде шифрирана со LUKS"
+
+#: src/installation/ask.py:197
+msgid "Antergos will be installed using LVM volumes"
+msgstr "Antergos ќе биде инсталиран со LVM-Логичко управување со дискови"
+
+#: src/installation/ask.py:199
+msgid "Antergos will be installed using a separate /home volume."
+msgstr "Antergos ќе биде инсталиран користејќи посебен /почетен диск."
+
+#: src/installation/ask.py:201
+msgid "Antergos will be installed using a separate /home partition."
+msgstr "Antergos ќе биде инсталиран користејќи посебена /почетна партиција."
+
+#: src/installation/auto_partition.py:73 src/installation/auto_partition.py:82
+msgid "Unmounting %s"
+msgstr "Демонтирање %s"
+
+#: src/installation/auto_partition.py:77 src/installation/auto_partition.py:86
+msgid "Unmounting %s failed. Trying lazy arg."
+msgstr "Демонтирањето на %s е неуспешно. Се обидувам со lazy arg."
+
+#: src/installation/auto_partition.py:106
+msgid "Can't delete existent LVM volumes (see below)"
+msgstr "Не може да се избришат постоечките LVM дискови (види подолу)"
+
+#: src/installation/auto_partition.py:116
+msgid "Can't close LUKS devices : %s"
+msgstr "Не може да се затворат LUKS уредите : %s"
+
+#: src/installation/auto_partition.py:168
+msgid "Unknown filesystem type %s"
+msgstr "Непознат вид на систем со датотеки %s"
+
+#: src/installation/auto_partition.py:178
+msgid "Can't create file system %s"
+msgstr "Не може да се направи систем со датотеки %s"
+
+#: src/installation/auto_partition.py:207
+msgid "Device details: %s UUID=%s LABEL=%s"
+msgstr ""
+
+#: src/installation/auto_partition.py:273
+msgid "%s will be mount as %s"
+msgstr ""
+
+#: src/installation/auto_partition.py:306
+msgid "Device %s will have a %s filesystem"
+msgstr ""
+
+#: src/installation/auto_partition.py:315
+msgid "Cnchi will setup LUKS on device %s"
+msgstr "Cnchi ќе го подеси LUKS на дискот %s"
+
+#: src/installation/auto_partition.py:369
+msgid "The device %s has a size of %dMB"
+msgstr ""
+
+#: src/installation/auto_partition.py:373
+msgid ""
+"Setup cannot detect size of your device, please use advanced installation "
+"method for partitioning and mounting devices."
+msgstr "Подесувањето не може да ја одреди големината на твојот уред, Ве молиме користете го методот на напредна инсталација за партиционирање и монтирање уреди."
+
+#: src/installation/auto_partition.py:406
+msgid "Total disc size: %dMB"
+msgstr ""
+
+#: src/installation/auto_partition.py:408
+msgid "GPT-BIOS partition size: %dMB"
+msgstr ""
+
+#: src/installation/auto_partition.py:409
+msgid "UEFI partition size: %dMB"
+msgstr ""
+
+#: src/installation/auto_partition.py:410
+msgid "Boot partition size: %dMB"
+msgstr ""
+
+#: src/installation/auto_partition.py:413
+msgid "LVM physical volume size: %dMB"
+msgstr ""
+
+#: src/installation/auto_partition.py:415
+msgid "Swap partition size: %dMB"
+msgstr ""
+
+#: src/installation/auto_partition.py:416
+msgid "Root partition size: %dMB"
+msgstr ""
+
+#: src/installation/auto_partition.py:419
+msgid "Home partition size: %dMB"
+msgstr ""
+
+#: src/installation/auto_partition.py:522
+msgid "Cnchi will setup LVM on device %s"
+msgstr ""
+
+#: src/installation/automatic.py:71
+msgid "Select drive:"
+msgstr "Одбери диск:"
+
+#: src/installation/automatic.py:75
+msgid "WARNING! This will overwrite everything currently on your drive!"
+msgstr "ПРЕДУПРЕДУВАЊЕ! Ова повторно ќе запише се што се наоѓа на дискот!"
+
+#: src/installation/automatic.py:80
+msgid ""
+"Select the drive we should use to install Antergos and then click below to "
+"start the process."
+msgstr "Одбери го дискот кој ќе се користи за инсталација на Antergos и кликни подолу за да започне процесот."
+
+#: src/installation/automatic.py:85
+msgid "Encryption Password:"
+msgstr "Шифрирана лозинка:"
+
+#: src/installation/automatic.py:89 src/user_info.py:112
+msgid "Confirm your password:"
+msgstr "Потврди ја лозинката:"
+
+#: src/installation/automatic.py:93 src/user_info.py:141
+msgid "show password"
+msgstr "прикажи лозинка"
+
+#: src/installation/automatic.py:99
+msgid "Automatic Installation Mode"
+msgstr "Автоматски режим на инсталација"
+
+#: src/installation/automatic.py:163
+msgid "A LUKS password has been set"
+msgstr "LUKS лозинката е подесена"
+
+#: src/installation/automatic.py:165
+msgid "Automatic install on %s"
+msgstr "Автоматски инсталирај на %s"
+
+#: src/installation/automatic.py:198
+msgid ""
+"Do you really want to proceed and delete all your content on your hard drive?\n"
+"\n"
+"%s"
+msgstr "Дали навистина сакате да продолжите и да ја избришете целата содржина на вашиот хард диск?\n\n%s"
+
+#: src/installation/automatic.py:211
+msgid "Cnchi will install Antergos on %s"
+msgstr "Cnchi ќе го инсталира Antergos на %s"
+
+#: src/installation/automatic.py:222
+msgid "Antergos will install the %s bootloader on %s"
+msgstr "Antergos ќе го инсталира %s подигачот на системот на %s"
+
+#: src/installation/process.py:91
+msgid "Installing using the '%s' method. Please wait..."
+msgstr "Инсталирање со користење на '%s' методот. Ве молиме почекајте..."
+
+#: src/installation/process.py:165
+msgid "Can't create %s directory, Cnchi can't continue"
+msgstr "Не може да се креира %s директориумот, Cnchi не може да продолжи"
+
+#: src/installation/process.py:185
+msgid "Creating partitions and their filesystems in %s"
+msgstr "Креирање партиции и нивните системи со датотеки во %s"
+
+#: src/installation/process.py:206
+msgid "Error creating partitions and their filesystems"
+msgstr "Грешка при креирање париции и нивни системи со датотеки"
+
+#: src/installation/process.py:208 src/installation/process.py:288
+#: src/installation/process.py:356 src/installation/process.py:816
+msgid "Command %s has failed."
+msgstr "Командата %s не успеа."
+
+#: src/installation/process.py:210 src/installation/process.py:264
+#: src/installation/process.py:290 src/installation/process.py:313
+#: src/installation/process.py:358 src/installation/process.py:818
+msgid "Output : %s"
+msgstr "Излез : %s"
+
+#: src/installation/process.py:250 src/installation/process.py:281
+msgid "Mounting partition %s into %s directory"
+msgstr "Монтирање на партицијата %s во %s директориумот"
+
+#: src/installation/process.py:256
+msgid "Mounting partition %s into %s/boot directory"
+msgstr "Монтирање на партицијата %s во %s/директориумот за подигање на системот"
+
+#: src/installation/process.py:260
+msgid "Couldn't mount root and boot partitions"
+msgstr "Не можат да бидат монтирани root и boot партициите  "
+
+#: src/installation/process.py:262 src/installation/process.py:311
+msgid "Command %s has failed"
+msgstr "Командата %s не успеа"
+
+#: src/installation/process.py:286
+msgid "Can't mount %s in %s"
+msgstr "Не може да се монтира %s во %s"
+
+#: src/installation/process.py:301
+msgid "%s deleted"
+msgstr "%s избришано"
+
+#: src/installation/process.py:309
+msgid "Can't create necessary directories on destination system"
+msgstr "Не може да се креираат неопходните директориуми во зададениот систем"
+
+#: src/installation/process.py:329
+msgid "Selecting packages..."
+msgstr "Одбирање пакети..."
+
+#: src/installation/process.py:331
+msgid "Packages selected"
+msgstr "Пакетите се одбрани"
+
+#: src/installation/process.py:334
+msgid "Downloading packages using aria2..."
+msgstr "Превземање пакети со користење на aria2... "
+
+#: src/installation/process.py:336
+msgid "Packages downloaded."
+msgstr "Пакетите се превземени."
+
+#: src/installation/process.py:346 src/installation/process.py:729
+msgid "Installing packages..."
+msgstr "Инсталирање пакети..."
+
+#: src/installation/process.py:348
+msgid "Packages installed."
+msgstr "Пакетите се инсталирани."
+
+#: src/installation/process.py:350
+msgid "Configuring system..."
+msgstr "Подесување на системот..."
+
+#: src/installation/process.py:352
+msgid "System configured."
+msgstr "Системот е подесен."
+
+#: src/installation/process.py:387
+msgid "Installation finished"
+msgstr "Инсталацијата е завршена"
+
+#: src/installation/process.py:398
+msgid "Can't copy Cnchi log to %s"
+msgstr "Не може да се ископира Cnchi записникот во %s"
+
+#: src/installation/process.py:415
+msgid "Creating a temporary pacman.conf for %s architecture"
+msgstr "Креирање привремена pacman.conf за %s архитектура"
+
+#: src/installation/process.py:495
+msgid "Getting package list..."
+msgstr "Добивање на листа со пакети..."
+
+#: src/installation/process.py:504
+msgid "Can't retrieve remote package list, using a local file instead."
+msgstr "Не може да се добие далечински управувана листа на пакети, наместо тоа ќе се користи локална датотека."
+
+#: src/installation/process.py:512
+msgid "Adding all desktops common packages"
+msgstr "Додавање на сите вообичаени пакети за работната површина "
+
+#: src/installation/process.py:527
+msgid "Adding '%s' desktop packages"
+msgstr "Додавање на '%s' пакети за работната површина"
+
+#: src/installation/process.py:554
+msgid "Selected kde language pack: %s"
+msgstr "Одбран kde јазичен пакет: %s"
+
+#: src/installation/process.py:579
+msgid "Hardware module added these packages : %s"
+msgstr "Хардверскиот модул ги додаде овие пакети : %s"
+
+#: src/installation/process.py:584 src/installation/process.py:1677
+msgid "Can't import hardware module."
+msgstr "Хардверскиот модул не може да се внесе."
+
+#: src/installation/process.py:586 src/installation/process.py:1679
+msgid "Unknown error in hardware module. Output: %s"
+msgstr "Непозната грешка во хардверскиот модул. Излез: %s"
+
+#: src/installation/process.py:597
+msgid "Adding filesystem packages"
+msgstr "Додавање на пакетите за системи со датотеки"
+
+#: src/installation/process.py:618
+msgid "Check for user desired features and add them to our installation"
+msgstr "Провери за кориснички посакувани карактеристики и додади ги на инсталацијата"
+
+#: src/installation/process.py:620
+msgid "All features needed packages have been added"
+msgstr "Сите потребни пакети се додадени"
+
+#: src/installation/process.py:625
+msgid "Selecting chinese fonts."
+msgstr "Селектирање кинески фонтови."
+
+#: src/installation/process.py:631
+msgid "Adding bootloader packages if needed"
+msgstr "Додавање на пакети за подигачот на системот ако е потребно"
+
+#: src/installation/process.py:658
+msgid "Adding packages for '%s' feature."
+msgstr ""
+
+#: src/installation/process.py:665
+msgid "Selecting package %s for feature %s"
+msgstr ""
+
+#: src/installation/process.py:675
+msgid "Add libreoffice language package"
+msgstr "Додади го пакетот за јазик на libreoffice"
+
+#: src/installation/process.py:726
+msgid "Downloading packages..."
+msgstr ""
+
+#: src/installation/process.py:738
+msgid ""
+"Can't download all necessary packages. Cnchi will continue and try again "
+"this download later."
+msgstr ""
+
+#: src/installation/process.py:741
+msgid "Can't install necessary packages. Cnchi can't continue."
+msgstr ""
+
+#: src/installation/process.py:763
+msgid "Special dirs already mounted."
+msgstr "Посебните директориуми веќе се монтирани."
+
+#: src/installation/process.py:798
+msgid "Special dirs are not mounted. Skipping."
+msgstr "Специјалните директориуми не се монтирани. Прескокнување."
+
+#: src/installation/process.py:815 src/installation/process.py:821
+msgid "Unable to umount %s"
+msgstr "Не може да се демонтира %s"
+
+#: src/installation/process.py:846
+msgid "Timeout running command: %s"
+msgstr ""
+
+#: src/installation/process.py:879
+msgid "Can't copy network configuration files"
+msgstr "Не може да ги копира датотеките за конфигурација на мрежата"
+
+#: src/installation/process.py:908 src/installation/process.py:973
+msgid "Added to fstab : UUID=%s %s %s %s 0 %s"
+msgstr "Додадено на fstab : UUID=%s %s %s %s 0 %s"
+
+#: src/installation/process.py:922
+msgid "Added to crypttab : %s"
+msgstr "Додадено на crypttab : %s"
+
+#: src/installation/process.py:926
+msgid "Added to fstab : /dev/mapper/cryptAntergosHome %s %s %s 0 %s"
+msgstr "Додадено на fstab : /dev/mapper/cryptAntergosHome %s %s %s 0 %s"
+
+#: src/installation/process.py:978
+msgid "Added to fstab : %s"
+msgstr ""
+
+#: src/installation/process.py:987
+msgid "fstab written."
+msgstr "fstab е запишан."
+
+#: src/installation/process.py:1075
+msgid "/etc/default/grub configuration completed successfully."
+msgstr ""
+
+#: src/installation/process.py:1090
+msgid "Could not copy %s to grub.d"
+msgstr "Не може да го ископира %s во grub.d"
+
+#: src/installation/process.py:1097
+msgid "Installing GRUB(2) BIOS boot loader in %s"
+msgstr "Инсталирање на GRUB(2) BIOS подигач на системот во %s"
+
+#: src/installation/process.py:1119 src/installation/process.py:1203
+msgid ""
+"grub-mkconfig appears to be hung. Killing grub-mount and os-prober so we can"
+" continue."
+msgstr ""
+
+#: src/installation/process.py:1127
+msgid "GRUB(2) BIOS has been successfully installed."
+msgstr "GRUB(2) BIOS е успешно инсталиран."
+
+#: src/installation/process.py:1130
+msgid "ERROR installing GRUB(2) BIOS."
+msgstr "Грешка при инсталација на GRUB(2) BIOS."
+
+#: src/installation/process.py:1144
+msgid "Installing GRUB(2) UEFI %s boot loader"
+msgstr "Инсталирање на GRUB(2) UEFI %s подигач на системот"
+
+#: src/installation/process.py:1170
+msgid "No OEM loader found in %s. Copying Grub(2) into dir."
+msgstr "Не е пронајден OEM вчитувач во %s. Копирање на Grub(2) во директориумот."
+
+#: src/installation/process.py:1175
+msgid "Copying Grub(2) into OEM dir failed. File Not Found."
+msgstr "Копирањето на Grub(2) во OEM директориумот е неуспешно. Датотеката не е пронајдена."
+
+#: src/installation/process.py:1177
+msgid "Copying Grub(2) into OEM dir failed. File Exists."
+msgstr "Копирањето на Grub(2) во OEM директориумот е неуспешно. Датотеката постои."
+
+#: src/installation/process.py:1179
+msgid "Copying Grub(2) into OEM dir failed. Unknown Error."
+msgstr "Копирањето на Grub(2) во OEM директориумот е неуспешно. Непозната грешка."
+
+#: src/installation/process.py:1188
+msgid "UEFI Shell drop-in not found at %s"
+msgstr "UEFI Shell drop-in не е пронајден во %s"
+
+#: src/installation/process.py:1192
+msgid "UEFI Shell drop-in could not be copied."
+msgstr "UEFI Shell drop-in не може да се копира."
+
+#: src/installation/process.py:1196
+msgid "Generating grub.cfg"
+msgstr "Генерирање grub.cfg"
+
+#: src/installation/process.py:1216
+msgid "GRUB(2) UEFI install may not have completed successfully."
+msgstr "GRUB(2) UEFI инсталацијата можеби не е завршена успешно."
+
+#: src/installation/process.py:1219
+msgid "GRUB(2) UEFI install completed successfully"
+msgstr "GRUB(2) UEFI инсталацијата е завршена успешно"
+
+#: src/installation/process.py:1223
+msgid "Copying GRUB(2) Theme Files"
+msgstr "Копирање на GRUB(2) датотеки за теми"
+
+#: src/installation/process.py:1229
+msgid "Grub2 theme files not found"
+msgstr "Grub2 датотеките за теми не се пронајдени"
+
+#: src/installation/process.py:1231
+msgid "Grub2 theme files already exist."
+msgstr "Grub2 датотеките за теми веќе постојат."
+
+#: src/installation/process.py:1235
+msgid "Installing Grub2 locales."
+msgstr "Инсталирање Grub2 локали."
+
+#: src/installation/process.py:1246
+msgid "Can't install GRUB(2) locale."
+msgstr "Не може да се инсталира GRUB(2) локал."
+
+#: src/installation/process.py:1280
+msgid "Can't freeze/unfreeze xfs system"
+msgstr "Не може да го замрзне/одмрзне xfs системот"
+
+#: src/installation/process.py:1286
+msgid "Enabled %s service."
+msgstr "Овозможен %s сервисот."
+
+#: src/installation/process.py:1293
+msgid "Error creating password hash for user %s"
+msgstr "Грешка при креирање лозинка за корисникот %s"
+
+#: src/installation/process.py:1299
+msgid "Error changing password for user %s"
+msgstr "Грешка при промена на лозинка за корисникот %s"
+
+#: src/installation/process.py:1311
+msgid "Setting hooks and modules in mkinitcpio.conf"
+msgstr "Подесување на куки и модули во mkinitcpio.conf"
+
+#: src/installation/process.py:1405
+msgid "Copying xz files from cache..."
+msgstr "Копирање на xz датотеките од привремената меморија..."
+
+#: src/installation/process.py:1432
+msgid "Configuring bluetooth..."
+msgstr "Подесување на блутут..."
+
+#: src/installation/process.py:1438
+msgid "Configuring CUPS..."
+msgstr "Подесување на CUPS..."
+
+#: src/installation/process.py:1450
+msgid "Configuring firewall..."
+msgstr "Подесување на firewall..."
+
+#: src/installation/process.py:1462
+msgid "Couldn't configure the firewall: %s"
+msgstr "Не може да го подеси firewall: %s"
+
+#: src/installation/process.py:1472
+msgid "%s: Configuring display manager."
+msgstr "%s: Подесување на менаџерот за екран."
+
+#: src/installation/process.py:1498
+msgid "Completed %s display manager configuration."
+msgstr "Комплетирано подесувањето на %s менаџер за екран."
+
+#: src/installation/process.py:1500
+msgid "Error while trying to configure '%s' display manager"
+msgstr "Грешка при подесување на '%s' менаџерот за екран"
+
+#: src/installation/process.py:1584
+msgid "Configuring your new system"
+msgstr "Подесување на твојот нов систем"
+
+#: src/installation/process.py:1587
+msgid "fstab file generated."
+msgstr "fstab датотека е генерирана."
+
+#: src/installation/process.py:1604
+msgid "Cnchi will configure netctl using the %s profile"
+msgstr "Cnchi ќе го подеси netctl користејќи го %s профилот"
+
+#: src/installation/process.py:1611
+msgid "Can't copy network configuration profiles"
+msgstr "Не може да ги копира профилите за подесување на мрежата"
+
+#: src/installation/process.py:1618
+msgid "Network configuration copied."
+msgstr "Мрежната конфигурација е копирана."
+
+#: src/installation/process.py:1624
+msgid "Mirror list copied."
+msgstr "Мирор листата е копирана."
+
+#: src/installation/process.py:1626
+msgid "Can't copy mirrorlist file"
+msgstr "Не може да се копира датотеката на мирор листата"
+
+#: src/installation/process.py:1633
+msgid "Generated /etc/pacman.conf"
+msgstr "Генериран е /etc/pacman.conf"
+
+#: src/installation/process.py:1651
+msgid "Timezone set."
+msgstr "Временската зона е подесена."
+
+#: src/installation/process.py:1668
+msgid "Sudo configuration for user %s done."
+msgstr "Sudo конфигурацијата за корисникот %s е готова. "
+
+#: src/installation/process.py:1674
+msgid "Running post-install scripts from hardware module..."
+msgstr ""
+
+#: src/installation/process.py:1696
+msgid "User %s added."
+msgstr "Корисникот %s е додаден."
+
+#: src/installation/process.py:1709
+msgid "Hostname set to %s."
+msgstr "Hostname е %s."
+
+#: src/installation/process.py:1713
+msgid "Set the same password to root."
+msgstr "Подеси ја истата лозинка за root. "
+
+#: src/installation/process.py:1719
+msgid "Generating locales..."
+msgstr "Генерирање локали..."
+
+#: src/installation/process.py:1735
+msgid "Adjusting hardware clock..."
+msgstr "Подесување на хардверскиот часовник..."
+
+#: src/installation/process.py:1740
+msgid "Set /etc/X11/xorg.conf.d/00-keyboard.conf for the xkblayout"
+msgstr "Подеси го /etc/X11/xorg.conf.d/00-keyboard.conf за xkb изгледот"
+
+#: src/installation/process.py:1752
+msgid "00-keyboard.conf written."
+msgstr "00-keyboard.conf е запишана."
+
+#: src/installation/process.py:1758
+msgid "Configuring System Startup..."
+msgstr "Подесување на подигање на системот..."
+
+#: src/installation/process.py:1761
+msgid "Call Cnchi post-install script"
+msgstr "Повикај ја Cnch пост-инсталацијска скрипта"
+
+#: src/installation/process.py:1767
+msgid "Post install script completed successfully."
+msgstr ""
+
+#: src/installation/process.py:1783
+msgid "Encrypting user home dir..."
+msgstr "Шифрирање на корисничкиот почетен директориум..."
+
+#: src/installation/process.py:1785
+msgid "User home dir encrypted"
+msgstr "Корисничкиот почетен директориум е шифриран"
+
+#: src/installation/process.py:1789
+msgid "Installing bootloader..."
+msgstr "Инсталирање на подигач на системот..."
+
+#: src/installation/process.py:1793
+msgid "Copying install log to /var/log."
+msgstr ""
+
+#: src/keymap.py:71
+msgid "Select Your Keyboard Layout"
+msgstr "Одбери го распоредот на тастатурата"
+
+#: src/keymap.py:74
+msgid "Keyboard Layouts"
+msgstr "Распореди на тастатурата "
+
+#: src/keymap.py:77
+msgid "Keyboard Variants"
+msgstr "Варијанти на тастатурата"
+
+#: src/keymap.py:81
+msgid "Layouts"
+msgstr "Изглед"
+
+#: src/keymap.py:87
+msgid "Variants"
+msgstr "Варијанти"
+
+#: src/keymap.py:108
+msgid "keyboard_layout is %s"
+msgstr "Распоредот на тастатурата е %s"
+
+#: src/language.py:88
+msgid "Notice: The Cnchi Installer is beta software."
+msgstr "Забелешка: Cnchi инсталацијската програма е бета софтвер."
+
+#: src/language.py:89
+msgid ""
+"Cnchi is pre-release beta software that is under active development.\n"
+"It does not yet properly handle RAID, btrfs subvolumes, or other advanced\n"
+"setups. Please proceed with caution as data loss is possible!\n"
+"\n"
+"If you find any bugs, please report them at <a href='http://bugs.antergos.com'>http://bugs.antergos.com</a>"
+msgstr "Cnchi е софтвер во бета пред издание кој активно се развива.\nСеуште не се справува добро со RAID, btrfs субдискови и други напредни\nподесувања. Ве молиме продолжете внимателно бидејќи е можно губење на податоци!\n\nАко пронајдете било какви грешки ве молиме пријавете ги на <a href='http://bugs.antergos.com'>http://bugs.antergos.com</a>"
+
+#: src/language.py:97 src/welcome.py:102
+msgid "Welcome to Antergos!"
+msgstr "Добредојдовте во Antergos!"
+
+#: src/language.py:131
+msgid "Can't find translation file for the %s language"
+msgstr "Не е пронајден превод за  %s јазик"
+
+#: src/location.py:67
+msgid ""
+"The location you select will be used to help determine the system locale.\n"
+"This should normally be the country in which you reside.\n"
+"Here is a shortlist of locations based on the language you selected."
+msgstr "Локацијата која ја одбра ќе се искористи за да се одреди системскиот локал.\nОва вообичаено треба да биде земјата во која живееш.\nЕве кратка листа на локации базирана на јазикот кој го одбра. "
+
+#: src/location.py:72
+msgid "Country, territory or area:"
+msgstr "Држава, територија или област:"
+
+#: src/location.py:76
+msgid "Select your location"
+msgstr "Одбери ја твојата локација"
+
+#: src/location.py:198
+msgid "locale changed to : %s"
+msgstr "локал е променет во : %s"
+
+#: src/location.py:200
+msgid "Can't change to locale '%s'"
+msgstr "Не може да се промени во локал '%s'"
+
+#: src/pacman/pac.py:35
+msgid "pyalpm not found! This installer won't work."
+msgstr ""
+
+#: src/pacman/pac.py:120
+msgid "Cnchi will install a list of packages like pacman -S"
+msgstr ""
+
+#: src/pacman/pac.py:127
+msgid "No targets found"
+msgstr ""
+
+#: src/pacman/pac.py:140
+msgid "Adding %s to transaction"
+msgstr ""
+
+#: src/pacman/pac.py:144
+msgid "Finalize transaction..."
+msgstr ""
+
+#: src/pacman/pac.py:177
+msgid "Can't find a package or group called '%s'"
+msgstr "Не може да се најде пакетот или групата со име '%s'"
+
+#: src/pacman/pac.py:255
+msgid "Checking dependencies..."
+msgstr "Проверка на меѓузависности..."
+
+#: src/pacman/pac.py:257
+msgid "Checking file conflicts..."
+msgstr "Проверка на конфликти на датотеки..."
+
+#: src/pacman/pac.py:259
+msgid "Resolving dependencies..."
+msgstr "Решавање на меѓузависности..."
+
+#: src/pacman/pac.py:261
+msgid "Checking inter conflicts..."
+msgstr "Проверка на внатрешни конфликти..."
+
+#: src/pacman/pac.py:266
+msgid "Removing..."
+msgstr "Отстранување..."
+
+#: src/pacman/pac.py:268
+msgid "Upgrading..."
+msgstr "Надградба..."
+
+#: src/pacman/pac.py:270
+msgid "Checking integrity..."
+msgstr "Проверка на целокупност..."
+
+#: src/pacman/pac.py:272
+msgid "Loading packages files..."
+msgstr "Вчитување на пакети со датотеки..."
+
+#: src/pacman/pac.py:274
+msgid "Configuring..."
+msgstr "Подесување..."
+
+#: src/pacman/pac.py:276
+msgid "Downloading a file"
+msgstr "Превземање на датотека..."
+
+#: src/pacman/pac.py:303
+msgid "Installing %s (%d/%d)"
+msgstr "Инсталирање %s (%d/%d)"
+
+#: src/pacman/pac.py:306
+msgid "Checking and loading packages..."
+msgstr "Проверка и вчитување на пакети..."
+
+#: src/pacman/pac.py:329
+msgid "Updating %s database"
+msgstr "Ажурирање на %s базата со податоци"
+
+#: src/parted3/fs_module.py:150
+msgid "Can't verify if %s is a Solid State Drive or not"
+msgstr "Не може да се потврди дали %s е Solid State диск или не"
+
+#: src/parted3/fs_module.py:175
+msgid "Sorry but filesystem %s can't be shrinked"
+msgstr "Извини но системот со датотеки %s не може да се смали"
+
+#: src/parted3/lvm.py:73
+msgid "Can't remove logical volume %s"
+msgstr "Не може да се отстрани логичкиот диск %s"
+
+#: src/parted3/lvm.py:91
+msgid "Can't remove volume group %s"
+msgstr "Не може да се отстрани групата дискови  %s"
+
+#: src/parted3/lvm.py:103
+msgid "Can't remove physical volume %s"
+msgstr "Не може да се отстрани физичкиот диск %s"
+
+#: src/parted3/partition_module.py:35
+msgid "Can't import parted module! This installer won't work."
+msgstr ""
+
+#: src/parted3/partition_module.py:106
+msgid "Unrecognised disk label in device %s."
+msgstr "Непозната ознака на дискот во уредот %s."
+
+#: src/parted3/partition_module.py:111
+msgid ""
+"Exception: %s.\n"
+"For more information take a look at /tmp/cnchi.log"
+msgstr "Исклучок: %s.\nЗа повеќе информации погледнете во /tmp/cnchi.log"
+
+#: src/parted3/partition_module.py:178
+msgid "Can't delete partition %s"
+msgstr "Не може да се избрише партициајта %s"
+
+#: src/parted3/partition_module.py:229
+msgid "Partition is too large!"
+msgstr "Партицијата е преголема!"
+
+#: src/parted3/partition_module.py:288
+msgid "Can't detect used space from %s"
+msgstr "Не може да се пронајде искористен простор од %s"
+
+#: src/parted3/used_space.py:39
+msgid "Can't detect used space of NTFS partition %s"
+msgstr "Не може да се пронајде искористен простор во NTFS партицијата %s"
+
+#: src/parted3/used_space.py:65
+msgid "Can't detect used space of EXTFS partition %s"
+msgstr "Не може да се пронајде искористен простор во EXTFS партицијата %s"
+
+#: src/parted3/used_space.py:94
+msgid "Can't detect used space of FAT partition %s"
+msgstr "Не може да се пронајде искористен простор во FAT партицијата %s"
+
+#: src/parted3/used_space.py:125
+msgid "Can't detect used space of JFS partition %s"
+msgstr "Не може да се пронајде искористен простор во JFS партицијата %s"
+
+#: src/parted3/used_space.py:149
+msgid "Can't detect used space of REISERFS partition %s"
+msgstr "Не може да се пронајде искористен простор во REISERFS партицијата %s"
+
+#: src/parted3/used_space.py:176
+msgid "Can't detect used space of BTRFS partition %s"
+msgstr "Не може да се пронајде искористен простор во BTRFS партицијата %s"
+
+#: src/parted3/used_space.py:213
+msgid "Can't detect used space of XFS partition %s"
+msgstr "Не може да се пронајде искористен простор во XFS партицијата %s"
+
+#: src/rank_mirrors.py:48
+msgid "Can't find reflector script"
+msgstr "Не може да се пронајде рефлекторска скрипта"
+
+#: src/rank_mirrors.py:55
+msgid "Couldn't execute auto mirror selection"
+msgstr "Не може да се изврши автоселекција на мирор"
+
+#: src/show_message.py:52
+msgid "Antergos Installer - Error"
+msgstr "Antergos Инсталацијска програма - Грешка"
+
+#: src/show_message.py:64
+msgid "Antergos Installer - Warning"
+msgstr "Antergos Инсталацијска програма - Предупредување"
+
+#: src/show_message.py:76
+msgid "Antergos Installer - Information"
+msgstr "Antergos Инсталацијска програма - Информација"
+
+#: src/show_message.py:87
+msgid "Antergos Installer - Confirmation"
+msgstr "Antergos Инсталацијска програма - Потврда"
+
+#: src/slides.py:91
+msgid "Please wait..."
+msgstr "Ве молиме почекајте..."
+
+#: src/slides.py:93
+msgid "Installing Antergos..."
+msgstr "Инсталирање на Antergos..."
+
+#: src/slides.py:185
+msgid ""
+"IMPORTANT: There may have been a problem with the Grub(2) bootloader\n"
+"installation which could prevent your system from booting properly. Before\n"
+"rebooting, you may want to verify whether or not GRUB(2) is installed and\n"
+"configured. The Arch Linux Wiki contains troubleshooting information:\n"
+"\thttps://wiki.archlinux.org/index.php/GRUB\n"
+"\n"
+"Would you like to view the wiki page now?"
+msgstr "ВАЖНО: Можеби има проблем со инсталацијата на Grub(2) подигачот на систем\nкој спречува вашиот систем да се подигне правилно. Пред повторното вклучување,\nможеби ќе сакате да потврдите дали Grub(2) е инсталиран и конфигуриран или не.\nArch Linux Wiki страната содржи информации за овој проблем:\nhttps://wiki.archlinux.org/index.php/GRUB\n\nДали сакаш да ја прегледаш wiki страната сега?"
+
+#: src/slides.py:197
+msgid ""
+"Installation Complete!\n"
+"Do you want to restart your system now?"
+msgstr "Инсталацијата е завршена!\nДали сакаш да го рестартираш системот сега?"
+
+#: src/slides.py:225
+msgid "Do you want to retry the installation using the same configuration?"
+msgstr "Дали сакате да ја повторите инсталацијата користејки ги истите подесувања?"
+
+#: src/slides.py:228
+msgid "Restarting installation process..."
+msgstr ""
+
+#: src/timezone.py:108
+msgid "Zone:"
+msgstr "Зона:"
+
+#: src/timezone.py:112
+msgid "Region:"
+msgstr "Регион:"
+
+#: src/timezone.py:116
+msgid "Use Network Time Protocol for clock synchronization:"
+msgstr "Користи го Мрежниот протокол за време за синхронизација на часовникот:"
+
+#: src/timezone.py:120
+msgid "Select Your Timezone"
+msgstr "Одбери ја твојата временска зона"
+
+#: src/timezone.py:134
+msgid "location changed to : %s"
+msgstr "локацијата е промененета во : %s"
+
+#: src/timezone.py:221
+msgid "Can't autodetect timezone coordinates"
+msgstr "Координати за временска зона не може да се автолоцираат"
+
+#: src/timezone.py:276
+msgid "Stoping timezone threads..."
+msgstr "Стопирање на временските зони..."
+
+#: src/timezone.py:330
+msgid "Can't get network status. Will try again later."
+msgstr "Не може да се добие статус за мрежата. Ќе се обидам повторно подоцна."
+
+#: src/timezone.py:334
+msgid "We have connection. Let's get our timezone"
+msgstr "Врската е воспоставена. Да ја пронајдеме нашата временска зона"
+
+#: src/timezone.py:345
+msgid "Timezone detected."
+msgstr "Временската зона е пронајдена."
+
+#: src/timezone.py:347
+msgid "Can't detect user timezone."
+msgstr "Временската зона на корисникот не може да се пронајде."
+
+#: src/timezone.py:376
+msgid "In timezone, can't get network status"
+msgstr "Не може да се добие мрежен статус во временската зона"
+
+#: src/timezone.py:400
+msgid "Can't get the country code used to create a pacman mirrorlist"
+msgstr "Не може да се добие кодот на државата кој се користи за креирање pacman мирор листа"
+
+#: src/timezone.py:421
+msgid "Downloaded a specific mirrorlist for pacman based on %s country code"
+msgstr "Превземена е специфична мирор листа за pacman базирана на %s код на држава"
+
+#: src/timezone.py:423
+msgid "Couldn't generate mirrorlist for pacman based on country code"
+msgstr "Не може да се генерира мирор листа за pacman базирана на кодот на државата"
+
+#: src/updater.py:67
+msgid "Cnchi Internet version: %s"
+msgstr ""
+
+#: src/updater.py:96
+msgid "New version found. Updating installer..."
+msgstr ""
+
+#: src/updater.py:154
+msgid "Replacing version %s with version %s..."
+msgstr ""
+
+#: src/user_info.py:84
+msgid "Your name:"
+msgstr "Твоето име:"
+
+#: src/user_info.py:88
+msgid "Your name"
+msgstr "Твоето име"
+
+#: src/user_info.py:92
+msgid "Your computer's name:"
+msgstr "Името на твојот компјутер:"
+
+#: src/user_info.py:96
+msgid "Pick a username:"
+msgstr "Одбери корисничко име:"
+
+#: src/user_info.py:100
+msgid "Username"
+msgstr "Корисничко име"
+
+#: src/user_info.py:104
+msgid "Choose a password:"
+msgstr "Одбери лозинка:"
+
+#: src/user_info.py:108
+msgid "Password"
+msgstr "Лозинка"
+
+#: src/user_info.py:116
+msgid "Confirm password"
+msgstr "Потврди ја лозинката"
+
+#: src/user_info.py:120
+msgid "Identifies your system to other computers and devices."
+msgstr "Го идентификува твојот систем со други компјутери и уреди."
+
+#: src/user_info.py:124
+msgid "You must enter a name"
+msgstr "Мора да внесеш име"
+
+#: src/user_info.py:128
+msgid "You must enter a username"
+msgstr "Мора да внесеш корисничко име"
+
+#: src/user_info.py:132
+msgid "You must enter a password"
+msgstr "Мора да внесеш лозинка"
+
+#: src/user_info.py:136
+msgid "Log in automatically"
+msgstr "Пријави се автоматски"
+
+#: src/user_info.py:137
+msgid "Require my password to log in"
+msgstr "побарај ја мојата лозинка за пријавување"
+
+#: src/user_info.py:138
+msgid "Encrypt my home folder"
+msgstr "Шифрирај ја почетната папка"
+
+#: src/user_info.py:144
+msgid "Create Your User Account"
+msgstr "Креирај ја твојата корисничка сметка"
+
+#: src/user_info.py:204
+msgid "Are you sure you want to encrypt your home directory?"
+msgstr ""
+
+#: src/user_info.py:271
+msgid "Invalid characters entered"
+msgstr "Внесен е погрешен знак"
+
+#: src/user_info.py:275
+msgid "Username can't contain dots"
+msgstr "Корисничкото име не може да содржи точки"
+
+#: src/user_info.py:279
+msgid "Too many characters"
+msgstr "Премногу знаци"
+
+#: src/welcome.py:87
+msgid ""
+"You can try Antergos without making any changes to your system by selecting 'Try It'.\n"
+"When you are ready to install Antergos simply choose which installer you prefer."
+msgstr "Можеш да го испробаш Antergos без да направиш никакви промени на твојот систем со селектирање на 'Испробај'.\nКога ќе бидеш спремен да го инсталираш Antergos едноставно одбеи која инсталацијска програма повеќе ти се допаѓа."
+
+#: src/welcome.py:92
+msgid "Try It"
+msgstr "Испробај"
+
+#: src/welcome.py:95
+msgid "CLI Installer"
+msgstr "Текстуална инсталацијска програма"
+
+#: src/welcome.py:98
+msgid "Graphical Installer"
+msgstr "Графичка инсталацијска програма"
+
+#: src/welcome.py:135
+msgid "Can't load the CLI installer"
+msgstr "Текстуалната инсталацијската програма не може да се вчита"

@@ -1,0 +1,77 @@
+{
+  "overlay-key": {
+    "type": "keybinding",
+    "description": "Keyboard shortcut to open and close the menu",
+    "default": "Super_L::Super_R",
+    "value": "Super_L::Super_R"
+  },
+  "menu-icon-custom": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use a custom icon",
+    "tooltip": "Unchecking this allows the theme to set the icon",
+    "value": true
+  },
+  "menu-icon": {
+    "type": "iconfilechooser",
+    "default": "/usr/share/cinnamon/theme/menu.svg",
+    "description": "Icon",
+    "tooltip": "Select an icon to show in the panel.",
+    "dependency": "menu-icon-custom",
+    "indent": "true",
+    "value": "/usr/share/antergos/antergos-menu.png"
+  },
+  "menu-label": {
+    "type": "entry",
+    "default": "Menu",
+    "description": "Text",
+    "tooltip": "Enter custom text to show in the panel.",
+    "value": "Menu"
+  },
+  "show-places": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show bookmarks and places",
+    "tooltip": "Choose whether or not to show bookmarks and places in the menu.",
+    "value": true
+  },
+  "enable-autoscroll": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Enable autoscrolling in application list",
+    "tooltip": "Choose whether or not to enable smooth autoscrolling in the application list.",
+    "value": true
+  },
+  "search-filesystem": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable filesystem path entry in search box",
+    "tooltip": "Allows path entry in the menu search box.",
+    "value": false
+  },
+  "activate-on-hover": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Open the menu when I move my mouse over it",
+    "tooltip": "Enable opening the menu when the mouse enters the applet",
+    "value": false
+  },
+  "hover-delay": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 1000,
+    "step": 50,
+    "units": "milliseconds",
+    "description": "Menu hover delay:",
+    "tooltip": "Delay between switching categories",
+    "value": 0
+  },
+  "menu-editor-button": {
+    "type": "button",
+    "description": "Open the menu editor",
+    "callback": "_launch_editor",
+    "tooltip": "Press this button to customize your menu entries."
+  },
+  "__md5__": "417bf70d65bf71c02569c036851d8938"
+}

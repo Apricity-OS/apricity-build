@@ -1,0 +1,52 @@
+Changelog
+---------
+
+* 0.7.x development series
+
+- Updated timezone and welcome screens appearance
+- Updated slides screens.
+- Ported timezonemap widget to Python
+- Added new Gnome packages to Gnome installation DE
+- Load screens after showing first screen (so now it loads faster for people that just want to try it or do a cli install)
+- A lot of updates to port to Gtk 3.14 (and avoid deprecation warnings)
+- Droped copycache parameter
+- Use provided cache to install Antergos (only needed packages are copied to the new installation)
+- Use urlib to download packages (leaving alpm as a failsafe)
+- Aria2 code has been rewritten.
+- Added a keyboard warning message when entering LUKS password
+- Added serbian options. Cnchi still doesn't select the correct serbian keyboard (anyway it's easy for the user to do it)
+- Removed a link from a label that was causing a CRITICAL gtk warning
+- Fixed numix-icon-theme-square-kde package problem
+- Added deps script file to help installing cnchi dependencies
+- Do not use VESA and use the new modesetting driver instead
+- Having a swap partition is not mandatory anymore
+- Changed some subprocess calls to their pythonic counterparts (i.e. changed subprocess chown to os.chown)
+- Fixed os-probe location (upstream changed)
+- Moved out from postinstall.sh some configuration files in postinstall.sh directory
+- Changed automatic install partition scheme. Now it creates an extended partition to store a logical swap partition
+- Removed gnome-extra feature. It was installing packages too many unnecessary packages (like Anjuta)
+- Renamed razor to lxqt
+- In some DE's replaced xfburn with brasero
+- Added antergos-welcome package
+- Added simplejson package, it's an antergos-welcome dependency
+- Updated hardware module for the packaging changes for mesa (backported to 0.6.x series)
+- Fixed some wrong chmod calls (Octal in pyton3 is preceded by 0o (backported to 0.6.x series)
+- Replace Xnoise (not developed anymore) with Pragha in GTK Desktops (Clementine in Qt ones)
+- Fixed "unclosed file" resource warning
+- Fixed issue with ext2/ext3/ext4 and existing labels
+- Updated copyright notice to reflect installer's name: Cnchi
+- Show module name in logs (instead of filename)
+- Added code to mount crypted partitions (crypttab)
+- Use LUKS in advanced installation. Now user can encrypt partitions.
+- Added pavucontrol to our desktop installations.
+- Added fluidsynth patch to change ALSA for PULSEAUDIO if necessary (backported to 0.6.x series)
+- Added ffmpegthumbnailer to Openbox WM
+- Avoid finishing with an empty antergos-mirrorslist
+- Added desktop icons in "choose desktop" screen
+- Updater (to allow cnchi to update itself) (backported to 0.6.x series)
+- Added an option in location.py to be able to show all locations
+
+Not fully finished, but improved:
+- Alongside installation
+- Autopartition GPT code.
+

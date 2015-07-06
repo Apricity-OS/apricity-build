@@ -1,0 +1,34 @@
+[options]
+Architecture = auto
+SigLevel = PackageOptional
+            
+RootDir = ${destDir}
+DBPath = ${destDir}/var/lib/pacman/
+CacheDir = ${destDir}/var/cache/pacman/pkg
+LogFile = /tmp/pacman.log
+                       
+# Repositories
+
+#[testing]
+#Include = /etc/pacman.d/mirrorlist
+
+[apricity-core]
+SigLevel = Never
+Server = http://apricityos.com/apricity-core/
+
+[core]
+Include = /etc/pacman.d/mirrorlist
+
+[extra]
+Include = /etc/pacman.d/mirrorlist
+
+[multilib]
+SigLevel = PackageRequired
+Include = /etc/pacman.d/mirrorlist
+
+#[community-testing]
+#Include = /etc/pacman.d/mirrorlist
+
+[community]
+Include = /etc/pacman.d/mirrorlist
+

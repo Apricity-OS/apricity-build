@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.10"/>
+  <object class="GtkBox" id="ask">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="halign">fill</property>
+    <property name="margin_bottom">10</property>
+      <property name="margin_top">0</property>
+      <property name="margin_start">70</property>
+      <property name="margin_end">68</property>
+    <property name="hexpand">True</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkLabel" id="introduction">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_top">10</property>
+          <property name="margin_bottom">8</property>
+        <property name="halign">center</property>
+        <property name="valign">start</property>
+        <property name="label" translatable="yes"></property>
+        <property name="use_markup">True</property>
+        <property name="justify">fill</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+        <object class="GtkBox" id="automatic_box">
+        <property name="hexpand">True</property>
+        <property name="orientation">horizontal</property>
+            <property name="margin_top">5</property>
+        <child>
+          <object class="GtkImage" id="automatic_image">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_start">0</property>
+            <property name="margin_end">10</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="automatic_radiobutton">
+            <property name="label" translatable="yes"></property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="halign">start</property>
+            <property name="always_show_image">True</property>
+            <property name="active">True</property>
+            <property name="draw_indicator">True</property>-->
+            <signal name="toggled" handler="on_automatic_radiobutton_toggled" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="automatic_description">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_start">70</property>
+        <property name="halign">start</property>
+        <property name="valign">start</property>
+        <property name="label" translatable="yes"></property>
+        <property name="use_markup">True</property>
+        <property name="justify">fill</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="encrypt_checkbutton">
+        <property name="label" translatable="yes"></property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">False</property>
+        <property name="margin_start">80</property>
+        <property name="margin_top">5</property>
+        <property name="halign">start</property>
+        <property name="draw_indicator">True</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="encrypt_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_start">104</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes"></property>
+        <property name="use_markup">True</property>
+          <property name="margin-top">4</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="lvm_checkbutton">
+        <property name="label" translatable="yes"></property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">False</property>
+        <property name="margin_start">80</property>
+          <property name="margin_top">5</property>
+        <property name="halign">start</property>
+        <property name="draw_indicator">True</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">5</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="lvm_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_start">104</property>
+          <property name="margin_top">4</property>
+          <property name="halign">start</property>
+        <property name="label" translatable="yes"></property>
+        <property name="use_markup">True</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">6</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="home_checkbutton">
+        <property name="label" translatable="yes"></property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">False</property>
+        <property name="margin_start">80</property>
+          <property name="margin_top">5</property>
+        <property name="halign">start</property>
+        <property name="draw_indicator">True</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">7</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="home_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_start">104</property>
+          <property name="margin_top">4</property>
+          <property name="halign">start</property>
+        <property name="label" translatable="yes"></property>
+        <property name="use_markup">True</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">8</property>
+      </packing>
+    </child>
+    <child>
+        <object class="GtkBox" id="alongside_box">
+        <property name="hexpand">True</property>
+        <property name="orientation">horizontal</property>
+            <property name="margin_top">5</property>
+        <child>
+          <object class="GtkImage" id="alongside_image">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_start">0</property>
+            <property name="margin_end">10</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="alongside_radiobutton">
+            
+            <property name="label" translatable="yes"></property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="halign">start</property>
+            <property name="always_show_image">True</property>
+            <property name="active">True</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">automatic_radiobutton</property>
+            <signal name="toggled" handler="on_alongside_radiobutton_toggled" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">9</property>
+          </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="alongside_description">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_start">70</property>
+        <property name="halign">start</property>
+        <property name="valign">start</property>
+        <property name="label" translatable="yes"></property>
+        <property name="use_markup">True</property>
+        <property name="justify">fill</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">10</property>
+      </packing>
+    </child>
+    <child>
+        <object class="GtkBox" id="advanced_box">
+        <property name="hexpand">True</property>
+        <property name="orientation">horizontal</property>
+            <property name="margin_top">10</property>
+        <child>
+          <object class="GtkImage" id="advanced_image">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_end">10</property>
+            <property name="margin_start">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="advanced_radiobutton">
+            <property name="label" translatable="yes"></property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="halign">start</property>
+            <property name="always_show_image">True</property>
+            <property name="active">True</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">automatic_radiobutton</property>
+            <signal name="toggled" handler="on_advanced_radiobutton_toggled" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">11</property>
+          </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="advanced_description">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin-start">70</property>
+        <property name="halign">start</property>
+        <property name="valign">start</property>
+        <property name="label" translatable="yes"></property>
+        <property name="use_markup">True</property>
+        <property name="justify">fill</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">12</property>
+      </packing>
+    </child>
+  </object>
+</interface>

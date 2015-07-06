@@ -1,0 +1,48 @@
+{
+  "aria2": {
+    "args": [
+      "--allow-overwrite=true",
+      "--always-resume=false",
+      "--auto-file-renaming=false",
+      "--check-integrity=true",
+      "--conditional-get=true",
+      "--continue=false",
+      "--file-allocation=none",
+      "--log-level=error",
+      "--max-concurrent-downloads=50",
+      "--max-connection-per-server=5",
+      "--min-split-size=5M",
+      "--show-console-readout=false",
+      "--split=10"
+    ],
+    "path": "/usr/bin/aria2c"
+  },
+  "pacman": {
+    "config": "/etc/pacman.conf",
+    "path": "/usr/bin/pacman"
+  },
+  "pacserve": {
+    "server": null
+  },
+  "powerpill": {
+    "ask": true,
+    "reflect databases": false
+  },
+  "reflector": {
+    "args": [
+      "--protocol",
+      "http",
+      "--latest",
+      "50"
+    ]
+  },
+  "rsync": {
+    "args": [
+      "--no-motd",
+      "--progress"
+    ],
+    "db only": true,
+    "path": "/usr/bin/rsync",
+    "servers": []
+  }
+}

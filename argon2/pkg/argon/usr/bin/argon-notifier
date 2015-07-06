@@ -1,0 +1,28 @@
+IFS=$'\r\n' config=($(cat /etc/argon/config))
+sleep ${config[0]}
+while true; do
+ping -c1 google.com
+online=$?
+if [[ $online == 0 ]]; then
+ updates=$((checkupdates && cower -u) | wc -l)
+ if [[ $updates == 1 ]]; then
+  updateword="update"
+  else
+  updateword="updates"
+ fi
+ IFS=$'\r\n' config=($(cat /etc/argon/config | sed "s/NUM/${updates}/" | sed "s/UPD/${updateword}/"))
+ if [[ $updates == 0 ]]; then
+  if [[ ${config[6]} == "True" ]]; then
+   notify-send --hint=int:transient:1 -a Argon -i ${config[5]} ${config[3]}
+  fi
+  echo ${config[3]} > /etc/argon/message
+  sleep ${config[1]}
+ else
+  notify-send --hint=int:transient:1 -a Argon -i ${config[4]} ${config[2]}
+  echo ${config[2]} > /etc/argon/message
+  sleep ${config[1]}
+ fi
+else
+ sleep 60
+fi
+done

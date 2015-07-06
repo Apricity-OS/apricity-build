@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Install Antergos Linux
+GenericName=Live Installer
+Comment=Install the operating system to disk
+Exec=sudo -E /usr/bin/cnchi -d -v -c /var/cache/pacman/pkg
+Icon=/usr/share/cnchi/data/images/apricity/apricity-icon.png
+Terminal=False
+Type=Application
+Categories=System;

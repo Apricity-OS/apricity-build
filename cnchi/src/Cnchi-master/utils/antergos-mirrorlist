@@ -1,0 +1,32 @@
+##
+## Antergos repository mirrorlist
+##
+
+# Autodetect your closest mirror
+Server = http://mirrors.antergos.com/$repo/$arch
+
+
+# China
+#Server = http://mirror.bjtu.edu.cn/cinnarch/$repo/$arch
+
+# France
+#Server = http://cinnarch.polymorf.fr/$repo/$arch
+
+# Greece
+#Server = http://ftp.cc.uoc.gr/mirrors/linux/antergos/$repo/$arch
+
+# England
+#Server = http://www.mirrorservice.org/sites/repo.cinnarch.com/$repo/$arch
+
+# Germany
+#Server = http://cinnarch.limun.org/$repo/$arch
+#Server = http://mirror.de.leaseweb.net/cinnarch/$repo/$arch
+
+# Netherlands
+#Server = http://mirror.nl.leaseweb.net/cinnarch/$repo/$arch
+
+# Spain
+#Server = http://softlibre.unizar.es/cinnarch/$repo/$arch
+
+# USA
+#Server = http://mirror.us.leaseweb.net/cinnarch/$repo/$arch

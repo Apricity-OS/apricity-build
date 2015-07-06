@@ -1,0 +1,95 @@
+Thanks to all of those who have helped translate Cnchi, both in the past and
+currently. Our translations are currently maintained in Transifex; please read
+doc/translation-help.txt for more details.
+
+Below is a list of past translators before we switched to Transifex; more can
+be found by looking in the GIT history.
+
+If your language is not already in the various po/ subdirectories and you wish
+it was, set up a team in Transifex for your language and we will be happy to
+add your language to the mix.
+
+Cnchi - Translating
+====================
+
+This document is here to guide you in helping translate Cnchi messages.
+
+We are currently using www.transifex.com as the translation
+platform for Cnchi. You will need to sign up for an account there
+and then register with a translation team on the
+www.transifex.com/projects/p/antergos/
+
+
+Translating Messages
+--------------------
+
+Overview
+~~~~~~~~
+
+Translation message files are a specially formatted text file containing the
+original message and the corresponding translation. These po files can then
+either be hand edited, or modified with a tool such as poedit, gtranslator or
+kbabel. Using a translation tool tends to make the job easier.
+
+Please read up on Transifex usage using the
+http://help.transifex.net/[Transifex Help] if you are not familiar.
+
+Here is an example set of commands if you have a source code checkout and are
+not worried about any local translations being overwritten. The .tx/ directory
+is checked into the git repository so is preconfigured with the project
+resources (See `tx status` output for a quick overview).
+
+	tx pull -f
+	poedit po/<mylang>.po
+	tx push -t -l <mylang>
+
+See the <<Notes,Notes>> section for additional hints on translating.
+
+Pre-release Updates
+~~~~~~~~~~~~~~~~~~~
+
+A week or two before each release, the codebase will go into a string freeze
+and a message will be post on our site www.antergos.com asking for translations.
+
+At this time, the latest `.po` language files will be made available at the
+Transifex project page. Translators interested in helping are encouraged to use the
+features of Transifex to let others know they are currently translating their
+language.
+
+Once a translator has completed the translation (*OR* realizes they do not have
+time to finish), please upload your progress back to the Transifex site.
+
+NOTE: Please upload your translations as soon as possible- this will give other
+speakers of your language time to review your translations and update them as
+necessary.
+
+Adding a New Language
+~~~~~~~~~~~~~~~~~~~~~
+
+Making a new language is not too hard, but be sure to follow all the steps.
+You will have to do the following steps in the `po/` directory,
+substituting where appropriate. Run the following command:
+
+	msginit -l <lang code> -o <lang code>.po -i cnchi.pot
+
+Look at the current message files for more guidance if necessary. Once you
+create the new language file, you may need to slightly modify the headers;
+try to make them look similar to the other .po file headers. In addition, for
+all new translations we would strongly recommend using UTF-8 encoding.
+
+Notes[[Notes]]
+~~~~~~~~~~~~~~
+
+msgid and msgstr 'variables' can be on as many lines as necessary. Line breaks
+are ignored- if you need a literal line break, use an `\n` in your string. The
+following two translations are equivalent:
+
+	msgstr "This is a test translation"
+
+	msgstr ""
+	"This is a test translation"
+
+If you want to test the translation:
+
+	cp <lang code>.mo /usr/share/locale/<lang code>/LC_MESSAGES/cnchi.mo
+    LANG=<lang code> ./cnchi

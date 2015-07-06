@@ -1,0 +1,4815 @@
+#!/usr/bin/perl
+
+#     ckbcomp -- translate XKB layout to loadkeys or kbdcontrol format
+#     Copyright © 2005,2006 Anton Zinoviev <anton@lml.bas.bg>
+
+#     This program is free software; you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation; either version 2 of the License, or
+#     (at your option) any later version.
+
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+
+#     If you have not received a copy of the GNU General Public License
+#     along with this program, write to the Free Software Foundation, Inc.,
+#     59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+use warnings 'all';
+use strict;
+use locale;
+
+my $debug_flag = 1;
+sub debug {
+    if ($debug_flag) {
+	print STDERR "@_";
+    }
+}
+
+sub warning {
+    print STDERR  "WARNING: @_";
+}
+
+########### ARGUMENTS ###############################################
+
+my $charmap;
+my $acm;
+
+my $verbosity = 0;
+
+my $installdir=$0;
+$installdir =~ s|/[^/]*$||g;
+if ($installdir =~ m|/bin$|) {
+    $installdir =~ s|/bin$||;
+} else {
+    $installdir .= "/..";
+}
+if ( $installdir eq '' || ! -d "$installdir/bin") {
+    $installdir = '/usr';
+}
+
+my @xdirs = ('/etc/console-setup/ckb',
+             "$installdir/etc/console-setup/ckb",
+	     '/usr/local/share/X11/xkb',
+	     '/usr/share/X11/xkb',
+	     '/etc/X11/xkb');
+
+my $keycodes;
+my $symbols;
+
+my $rules;
+my $model;
+my @layouts;
+my @variants = ();
+my @options = ();
+my $compact = 0;
+my $backspace = '';
+my $freebsd = 0;
+
+while (@ARGV) {
+    $_ = shift @ARGV;
+    if (s/^-//) {
+	if (/^charmap$/) {
+	    if ($charmap) {
+		die "$0: No more than one -charmap option is allowed\n";
+	    }
+	    $charmap = $ARGV[0];
+	    shift @ARGV;
+	} elsif (/^v(erbose)?$/) {
+	    if ($verbosity) {
+		die "$0: No more than one -verbose option is allowed\n";
+	    }
+	    if ($ARGV[0] =~ /^[0-9]|10$/) {
+		$verbosity = $ARGV[0];
+		shift @ARGV;
+	    } else {
+		$verbosity = 5;
+	    }
+	} elsif (/^I(.*)$/) {
+	    @xdirs = ($1, @xdirs);
+	} elsif (/^keycodes$/) {
+	    if ($keycodes) {
+		die "$0: No more than one -keycodes option is allowed\n";
+	    }
+	    $keycodes = $ARGV[0];
+	    shift @ARGV;
+	} elsif (/^symbols$/) {
+	    if ($symbols) {
+		die "$0: No more than one -symbols option is allowed\n";
+	    }
+	    $symbols = $ARGV[0];
+	    shift @ARGV;
+	} elsif (/^rules$/) {
+	    if ($rules) {
+		die "$0: No more than one -rules option is allowed\n";
+	    }
+	    $rules = $ARGV[0];
+	    shift @ARGV;
+	} elsif (/^model$/) {
+	    if ($model) {
+		die "$0: No more than one -model option is allowed\n";
+	    }
+	    $model = $ARGV[0];
+	    $model =~ s/[[:space:]]//g;
+	    shift @ARGV;
+	} elsif (/^layout$/) {
+	    if (@layouts) {
+		die "$0: No more than one -layout option is allowed\n";
+	    }
+	    $ARGV[0] =~ s/[[:space:]]//g;
+	    @layouts = split (/,/, $ARGV[0], -1);
+	    shift @ARGV;
+	} elsif (/^variant$/) {
+	    if (@variants) {
+		die "$0: No more than one -variant option is allowed\n";
+	    }
+	    $ARGV[0] =~ s/[[:space:]]//g;
+	    @variants = split (/,/, $ARGV[0], -1);
+	    shift @ARGV;
+	} elsif (/^option$/) {
+	    $ARGV[0] =~ s/[[:space:]]//g;
+	    @options = (@options, split (/,/, $ARGV[0], -1));
+	    shift @ARGV;
+	} elsif (/^help$|^-help$|^\?$/) {
+	    print <<EOT;
+Usage: ckbcomp [args] [<layout> [<variant> [<option> ... ]]]
+Where legal args are:
+-?,-help            Print this message
+-charmap <name>     Specifies the encoding to use
+-I<dir>             Add <dir> to list of directories to be used
+-keycodes <name>    Specifies keycodes component name
+-symbols <name>     Specifies symbols component name
+-rules <name>       Name of rules file to use
+-model <name>       Specifies model used to choose component names
+-layout <name>      Specifies layout used to choose component names
+-variant <name>     Specifies layout variant used to choose component names
+-option <name>      Adds an option used to choose component names
+-v[erbose] [<lvl>]  Sets verbosity (1..10).  Higher values yield
+                    more messages
+-compact            Generate compact keymap
+-freebsd            Generate keymap for FreeBSD
+-backspace bs|del   Backspace is BS (^h) or DEL (^?)
+EOT
+            exit 0;
+	} elsif (/^compact$/) {
+	    $compact = 1;
+	} elsif (/^freebsd$/) {
+	    $freebsd = 1;
+	} elsif (/^backspace$/) {
+	    $backspace = $ARGV[0];
+            if ($backspace ne 'del' && $backspace ne 'bs') {
+                die "$0: Option -backspace accepts either del or bs\n";
+            }
+            shift @ARGV;
+	} else {
+	    die "$0: Unknown option -$_\n";
+	}
+    } else {
+	if (! @layouts) {
+	    $_ =~ s/[[:space:]]//g;
+	    @layouts = split (/,/, $_, -1);
+	    @layouts = ('us') if (! @layouts);
+	} elsif (! @variants) {
+	    $_ =~ s/[[:space:]]//g;
+	    @variants = split (/,/, $_, -1);
+	    @variants = ('') if (! @variants);
+	} else {
+	    $_ =~ s/[[:space:]]//g;
+	    @options = (@options, split (/,/, $_, -1));
+	}
+    }
+}
+
+$rules = 'xorg' if (! $rules);
+$model = 'pc104' if (! $model);
+$backspace = $freebsd ? 'bs' : 'del' if (! $backspace);
+
+########### GLOBAL VARIABLES #########################################
+
+my %rules_variables = (); # The variables defined in the rules file
+
+my $arch = 'at'; # The name of a mapping between X key codes and kernel
+                 # keycodes
+
+my %acmtable; # Unicode -> legacy code (defined only when -charmap is given)
+
+my $KEYMAP = ''; # This variable contains the generated keymap
+
+my $broken_caps = 0; # In unicode mode Caps_Lock doesn't work for non-ASCII
+                     # letters.  1 = the keymap contains non-ascii letters.
+                     # See http://bugzilla.kernel.org/show_bug.cgi?id=7746#c21
+
+my %keycodes_table; # x keysym -> x key code
+my %aliases;        # x keysym -> x keysym
+
+my %symbols_table;   # x key code -> [[symbols for group0,...],
+                     #                [symbols for group1,...], ...]
+my %types_table;     # x key code -> key type (i.e. "TWO_LEVEL")
+
+my $augment_method = 1;   # Constants for different XKB include methods
+my $override_method = 2;
+my $replace_method = 3;
+my $alternate_method = 4;
+my $ignore_method = 5;    # This is not a XKB method and means "don't include"
+
+my $filename;       # The name of the currently read file
+my $stream = '';    # The contents of $filename that still has not been parsed
+my $method = $override_method; # The current method (by default "override")
+my $base_group = 0; # The base group to include in (for "symbols" files only)
+
+my %kernel_modifiers = ( # Linux
+                         'Shift' => 0x01,
+                         'Shift_Lock' => 0x01,
+                         'AltGr' => 0x02,
+                         'AltGr_Lock' => 0x02,
+                         'Control' => 0x04,
+                         'Control_Lock' => 0x04,
+                         'Alt' => 0x08,
+                         'Alt_Lock' => 0x08,
+                         'ShiftL' => 0x10,
+                         'ShiftL_Lock' => 0x10,
+                         'ShiftR' => 0x20,
+                         'ShiftR_Lock' => 0x20,
+                         'CtrlL' => 0x40,
+                         'CtrlL_Lock' => 0x40,
+                         'CtrlR' => 0x80,
+                         'CtrlR_Lock' => 0x80,
+                         # FreeBSD
+                         'lshift' => 0x01,
+                         'rshift' => 0x01,
+                         'shifta' => 0x01, # is this correct ?
+                         'lshifta' => 0x01, # is this correct ?
+                         'rshifta' => 0x01, # is this correct ?
+                         'alt' => 0x02,
+                         'lalt' => 0x02,
+                         'ralt' => 0x02,
+                         'alta' => 0x02, # is this correct ?
+                         'lalta' => 0x02, # is this correct ?
+                         'ralta' => 0x02, # is this correct ?
+                         'ctrl' => 0x04,
+                         'lctrl' => 0x04,
+                         'rctrl' => 0x04,
+                         'ctrla' => 0x04, # is this correct ?
+                         'lctrla' => 0x04, # is this correct ?
+                         'rctrla' => 0x04, # is this correct ?
+                         'alock' => 0x10,
+                         'ashift' => 0x10,
+    );
+
+my @modifier_combinations = ('plain',
+                             'shift',
+                             'altgr',
+                             'altgr shift',
+                             'control',
+                             'control shift',
+                             'control altgr',
+                             'control altgr shift',
+                             'alt',
+                             'alt shift',
+                             'alt altgr',
+                             'alt altgr shift',
+                             'alt control',
+                             'alt control shift',
+                             'alt control altgr',
+                             'alt control altgr shift',
+                             'shiftl',
+                             'shiftl shift',
+                             'shiftl altgr',
+                             'shiftl altgr shift',
+                             'shiftl control',
+                             'shiftl control shift',
+                             'shiftl control altgr',
+                             'shiftl control altgr shift',
+                             'shiftl alt',
+                             'shiftl alt shift',
+                             'shiftl alt altgr',
+                             'shiftl alt altgr shift',
+                             'shiftl alt control',
+                             'shiftl alt control shift',
+                             'shiftl alt control altgr',
+                             'shiftl alt control altgr shift',
+                             'shiftr',
+                             'shiftr shift',
+                             'shiftr altgr',
+                             'shiftr altgr shift',
+                             'shiftr control',
+                             'shiftr control shift',
+                             'shiftr control altgr',
+                             'shiftr control altgr shift',
+                             'shiftr alt',
+                             'shiftr alt shift',
+                             'shiftr alt altgr',
+                             'shiftr alt altgr shift',
+                             'shiftr alt control',
+                             'shiftr alt control shift',
+                             'shiftr alt control altgr',
+                             'shiftr alt control altgr shift',
+                             'shiftr shiftl',
+                             'shiftr shiftl shift',
+                             'shiftr shiftl altgr',
+                             'shiftr shiftl altgr shift',
+                             'shiftr shiftl control',
+                             'shiftr shiftl control shift',
+                             'shiftr shiftl control altgr',
+                             'shiftr shiftl control altgr shift',
+                             'shiftr shiftl alt',
+                             'shiftr shiftl alt shift',
+                             'shiftr shiftl alt altgr',
+                             'shiftr shiftl alt altgr shift',
+                             'shiftr shiftl alt control',
+                             'shiftr shiftl alt control shift',
+                             'shiftr shiftl alt control altgr',
+                             'shiftr shiftl alt control altgr shift',
+                             'ctrll',
+                             'ctrll shift',
+                             'ctrll altgr',
+                             'ctrll altgr shift',
+                             'ctrll control',
+                             'ctrll control shift',
+                             'ctrll control altgr',
+                             'ctrll control altgr shift',
+                             'ctrll alt',
+                             'ctrll alt shift',
+                             'ctrll alt altgr',
+                             'ctrll alt altgr shift',
+                             'ctrll alt control',
+                             'ctrll alt control shift',
+                             'ctrll alt control altgr',
+                             'ctrll alt control altgr shift',
+                             'ctrll shiftl',
+                             'ctrll shiftl shift',
+                             'ctrll shiftl altgr',
+                             'ctrll shiftl altgr shift',
+                             'ctrll shiftl control',
+                             'ctrll shiftl control shift',
+                             'ctrll shiftl control altgr',
+                             'ctrll shiftl control altgr shift',
+                             'ctrll shiftl alt',
+                             'ctrll shiftl alt shift',
+                             'ctrll shiftl alt altgr',
+                             'ctrll shiftl alt altgr shift',
+                             'ctrll shiftl alt control',
+                             'ctrll shiftl alt control shift',
+                             'ctrll shiftl alt control altgr',
+                             'ctrll shiftl alt control altgr shift',
+                             'ctrll shiftr',
+                             'ctrll shiftr shift',
+                             'ctrll shiftr altgr',
+                             'ctrll shiftr altgr shift',
+                             'ctrll shiftr control',
+                             'ctrll shiftr control shift',
+                             'ctrll shiftr control altgr',
+                             'ctrll shiftr control altgr shift',
+                             'ctrll shiftr alt',
+                             'ctrll shiftr alt shift',
+                             'ctrll shiftr alt altgr',
+                             'ctrll shiftr alt altgr shift',
+                             'ctrll shiftr alt control',
+                             'ctrll shiftr alt control shift',
+                             'ctrll shiftr alt control altgr',
+                             'ctrll shiftr alt control altgr shift',
+                             'ctrll shiftr shiftl',
+                             'ctrll shiftr shiftl shift',
+                             'ctrll shiftr shiftl altgr',
+                             'ctrll shiftr shiftl altgr shift',
+                             'ctrll shiftr shiftl control',
+                             'ctrll shiftr shiftl control shift',
+                             'ctrll shiftr shiftl control altgr',
+                             'ctrll shiftr shiftl control altgr shift',
+                             'ctrll shiftr shiftl alt',
+                             'ctrll shiftr shiftl alt shift',
+                             'ctrll shiftr shiftl alt altgr',
+                             'ctrll shiftr shiftl alt altgr shift',
+                             'ctrll shiftr shiftl alt control',
+                             'ctrll shiftr shiftl alt control shift',
+                             'ctrll shiftr shiftl alt control altgr',
+                             'ctrll shiftr shiftl alt control altgr shift',
+			    );
+
+# Some Unicodes cause the kernel/loadkeys to issue "Segmentation fault"
+# kbd 1.15-1 (deliberately) fails on anything in the range 0xf000..0xffff;
+# see http://bugs.debian.org/500116.
+my %forbidden;
+{
+    for my $i (0xf000..0xffff) {
+	$forbidden{$i} = 1;
+    }
+}
+
+my %xkbsym_table = (
+    'space' => '0020',
+    'exclam' => '0021',
+    'quotedbl' => '0022',
+    'numbersign' => '0023',
+    'dollar' => '0024',
+    'percent' => '0025',
+    'ampersand' => '0026',
+    'apostrophe' => '0027',
+    'quoteright' => '0027',
+    'parenleft' => '0028',
+    'parenlef' => '0028', # Is this recognised by X ? (speling error)
+    'parenright' => '0029',
+    'asterisk' => '002a',
+    'asterix' => '002a', # Is this recognised by X ? (speling error)
+    'plus' => '002b',
+    'comma' => '002c',
+    'minus' => '002d',
+    'period' => '002e',
+    'slash' => '002f',
+    '0' => '0030',
+    '1' => '0031',
+    '2' => '0032',
+    '3' => '0033',
+    '4' => '0034',
+    '5' => '0035',
+    '6' => '0036',
+    '7' => '0037',
+    '8' => '0038',
+    '9' => '0039',
+    'colon' => '003a',
+    'semicolon' => '003b',
+    'less' => '003c',
+    'equal' => '003d',
+    'greater' => '003e',
+    'question' => '003f',
+    'at' => '0040',
+    'A' => '0041',
+    'B' => '0042',
+    'C' => '0043',
+    'D' => '0044',
+    'E' => '0045',
+    'F' => '0046',
+    'G' => '0047',
+    'H' => '0048',
+    'I' => '0049',
+    'J' => '004a',
+    'K' => '004b',
+    'L' => '004c',
+    'M' => '004d',
+    'N' => '004e',
+    'O' => '004f',
+    'P' => '0050',
+    'Q' => '0051',
+    'R' => '0052',
+    'S' => '0053',
+    'T' => '0054',
+    'U' => '0055',
+    'V' => '0056',
+    'W' => '0057',
+    'X' => '0058',
+    'Y' => '0059',
+    'Z' => '005a',
+    'bracketleft' => '005b',
+    'backslash' => '005c',
+    'backlash' => '005c',   # Is this recognised by X ? (speling error)
+    'bracketright' => '005d',
+    'circumflex' => '005e',
+    'asciicircum' => '005e',
+    'underscore' => '005f',
+    'grave' => '0060',
+    'quoteleft' => '0060',
+    'a' => '0061',
+    'b' => '0062',
+    'c' => '0063',
+    'd' => '0064',
+    'e' => '0065',
+    'f' => '0066',
+    'g' => '0067',
+    'h' => '0068',
+    'i' => '0069',
+    'j' => '006a',
+    'k' => '006b',
+    'l' => '006c',
+    'm' => '006d',
+    'n' => '006e',
+    'o' => '006f',
+    'p' => '0070',
+    'q' => '0071',
+    'r' => '0072',
+    's' => '0073',
+    't' => '0074',
+    'u' => '0075',
+    'v' => '0076',
+    'w' => '0077',
+    'x' => '0078',
+    'y' => '0079',
+    'z' => '007a',
+    'braceleft' => '007b',
+    'pipe' => '007c', # Is this recognised by X ?
+    'bar' => '007c',
+    'braceright' => '007d',
+    'asciitilde' => '007e',
+    'nobreakspace' => '00a0',
+    'exclamdown' => '00a1',
+    'cent' => '00a2',
+    'sterling' => '00a3',
+    'currency' => '00a4',
+    'yen' => '00a5',
+    'brokenbar' => '00a6',
+    'section' => '00a7',
+    'diaeresis' => '00a8',
+    'copyright' => '00a9',
+    'ordfeminine' => '00aa',
+    'guillemotleft' => '00ab',
+    'notsign' => '00ac',
+    'hyphen' => '00ad',
+    'registered' => '00ae',
+    'macron' => '00af',
+    'overbar' => '00af',
+    'degree' => '00b0',
+    'plusminus' => '00b1',
+    'twosuperior' => '00b2',
+    'threesuperior' => '00b3',
+    'acute' => '0027', # APOSTROPHE instead of ACUTE ACCENT
+    'mu' => '00b5',
+    'paragraph' => '00b6',
+    'periodcentered' => '00b7',
+    'cedilla' => '00b8',
+    'onesuperior' => '00b9',
+    'masculine' => '00ba',
+    'guillemotright' => '00bb',
+    'onequarter' => '00bc',
+    'onehalf' => '00bd',
+    'threequarters' => '00be',
+    'questiondown' => '00bf',
+    'Agrave' => '00c0',
+    'Aacute' => '00c1',
+    'Acircumflex' => '00c2',
+    'Atilde' => '00c3',
+    'Adiaeresis' => '00c4',
+    'Aring' => '00c5',
+    'AE' => '00c6',
+    'Ccedilla' => '00c7',
+    'Egrave' => '00c8',
+    'Eacute' => '00c9',
+    'Ecircumflex' => '00ca',
+    'Ediaeresis' => '00cb',
+    'Igrave' => '00cc',
+    'Iacute' => '00cd',
+    'Icircumflex' => '00ce',
+    'Idiaeresis' => '00cf',
+    'ETH' => '00d0',
+    'Eth' => '00d0',
+    'Ntilde' => '00d1',
+    'Ograve' => '00d2',
+    'Oacute' => '00d3',
+    'Ocircumflex' => '00d4',
+    'Otilde' => '00d5',
+    'Odiaeresis' => '00d6',
+    'multiply' => '00d7',
+    'Ooblique' => '00d8',
+    'Oslash' => '00d8',
+    'Ugrave' => '00d9',
+    'Uacute' => '00da',
+    'Ucircumflex' => '00db',
+    'Udiaeresis' => '00dc',
+    'Yacute' => '00dd',
+    'THORN' => '00de',
+    'Thorn' => '00de',
+    'ssharp' => '00df',
+    'agrave' => '00e0',
+    'aacute' => '00e1',
+    'acircumflex' => '00e2',
+    'atilde' => '00e3',
+    'adiaeresis' => '00e4',
+    'aring' => '00e5',
+    'ae' => '00e6',
+    'ccedilla' => '00e7',
+    'egrave' => '00e8',
+    'eacute' => '00e9',
+    'ecircumflex' => '00ea',
+    'ediaeresis' => '00eb',
+    'igrave' => '00ec',
+    'iacute' => '00ed',
+    'icircumflex' => '00ee',
+    'idiaeresis' => '00ef',
+    'eth' => '00f0',
+    'ntilde' => '00f1',
+    'ograve' => '00f2',
+    'oacute' => '00f3',
+    'ocircumflex' => '00f4',
+    'otilde' => '00f5',
+    'odiaeresis' => '00f6',
+    'division' => '00f7',
+    'oslash' => '00f8',
+    'ooblique' => '00f8',
+    'ugrave' => '00f9',
+    'uacute' => '00fa',
+    'ucircumflex' => '00fb',
+    'udiaeresis' => '00fc',
+    'yacute' => '00fd',
+    'thorn' => '00fe',
+    'ydiaeresis' => '00ff',
+    'Amacron' => '0100',
+    'amacron' => '0101',
+    'Abreve' => '0102',
+    'abreve' => '0103',
+    'Aogonek' => '0104',
+    'aogonek' => '0105',
+    'Cacute' => '0106',
+    'cacute' => '0107',
+    'Ccircumflex' => '0108',
+    'ccircumflex' => '0109',
+    'Cabovedot' => '010a',
+    'cabovedot' => '010b',
+    'Ccaron' => '010c',
+    'ccaron' => '010d',
+    'Dcaron' => '010e',
+    'dcaron' => '010f',
+    'Dstroke' => '0110',
+    'dstroke' => '0111',
+    'Emacron' => '0112',
+    'emacron' => '0113',
+    'Eabovedot' => '0116',
+    'eabovedot' => '0117',
+    'Eogonek' => '0118',
+    'eogonek' => '0119',
+    'Ecaron' => '011a',
+    'ecaron' => '011b',
+    'Gcircumflex' => '011c',
+    'gcircumflex' => '011d',
+    'Gbreve' => '011e',
+    'gbreve' => '011f',
+    'Gabovedot' => '0120',
+    'gabovedot' => '0121',
+    'Gcedilla' => '0122',
+    'gcedilla' => '0123',
+    'Hcircumflex' => '0124',
+    'hcircumflex' => '0125',
+    'Hstroke' => '0126',
+    'hstroke' => '0127',
+    'Itilde' => '0128',
+    'itilde' => '0129',
+    'Imacron' => '012a',
+    'imacron' => '012b',
+    'Ibreve' => '012c',
+    'ibreve' => '012d',
+    'Iogonek' => '012e',
+    'iogonek' => '012f',
+    'Iabovedot' => '0130',
+    'idotless' => '0131',
+    'Jcircumflex' => '0134',
+    'jcircumflex' => '0135',
+    'Kcedilla' => '0136',
+    'kcedilla' => '0137',
+    'kra' => '0138',
+    'Lacute' => '0139',
+    'lacute' => '013a',
+    'Lcedilla' => '013b',
+    'lcedilla' => '013c',
+    'Lcaron' => '013d',
+    'lcaron' => '013e',
+    'Lstroke' => '0141',
+    'lstroke' => '0142',
+    'Nacute' => '0143',
+    'nacute' => '0144',
+    'Ncedilla' => '0145',
+    'ncedilla' => '0146',
+    'Ncaron' => '0147',
+    'ncaron' => '0148',
+    'ENG' => '014a',
+    'eng' => '014b',
+    'Omacron' => '014c',
+    'omacron' => '014d',
+    'Odoubleacute' => '0150',
+    'odoubleacute' => '0151',
+    'OE' => '0152',
+    'oe' => '0153',
+    'Racute' => '0154',
+    'racute' => '0155',
+    'Rcedilla' => '0156',
+    'rcedilla' => '0157',
+    'Rcaron' => '0158',
+    'rcaron' => '0159',
+    'Sacute' => '015a',
+    'sacute' => '015b',
+    'Scircumflex' => '015c',
+    'scircumflex' => '015d',
+    'Scedilla' => '015e',
+    'scedilla' => '015f',
+    'Scaron' => '0160',
+    'scaron' => '0161',
+    'Tcedilla' => '0162',
+    'tcedilla' => '0163',
+    'Tcaron' => '0164',
+    'tcaron' => '0165',
+    'Tslash' => '0166',
+    'tslash' => '0167',
+    'Utilde' => '0168',
+    'utilde' => '0169',
+    'Umacron' => '016a',
+    'umacron' => '016b',
+    'Ubreve' => '016c',
+    'ubreve' => '016d',
+    'Uring' => '016e',
+    'uring' => '016f',
+    'Udoubleacute' => '0170',
+    'udoubleacute' => '0171',
+    'Uogonek' => '0172',
+    'uogonek' => '0173',
+    'Wcircumflex' => '0174',
+    'wcircumflex' => '0175',
+    'Ycircumflex' => '0176',
+    'ycircumflex' => '0177',
+    'Ydiaeresis' => '0178',
+    'Zacute' => '0179',
+    'zacute' => '017a',
+    'Zabovedot' => '017b',
+    'zabovedot' => '017c',
+    'Zcaron' => '017d',
+    'zcaron' => '017e',
+    'SCHWA' => '018f',
+    'Schwa' => '018f', # Is this recognised by X ?
+    'function' => '0192',
+    'Obarred' => '019f',
+    'Ohorn' => '01a0', # Is this recognised by X ?
+    'ohorn' => '01a1', # Is this recognised by X ?
+    'Uhorn' => '01af',
+    'uhorn' => '01b0',
+    'Zstroke' => '01b5',
+    'zstroke' => '01b6',
+    'EZH' => '01b7',
+    'Ezh' => '01b7',
+    'Ocaron' => '01d1',
+    'ocaron' => '01d2',
+    'Gcaron' => '01e6', # Is this recognised by X ?
+    'gcaron' => '01e7', # Is this recognised by X ?
+    'schwa' => '0259', # Is this recognised by X ?
+    'obarred' => '0275',
+    'ezh' => '0292',
+    'caron' => '02c7',
+    'breve' => '02d8',
+    'abovedot' => '02d9',
+    'ogonek' => '02db',
+    'doubleacute' => '02dd',
+    'Greek_accentdieresis' => '0385',
+    'Greek_ALPHAaccent' => '0386',
+    'Greek_EPSILONaccent' => '0388',
+    'Greek_ETAaccent' => '0389',
+    'Greek_IOTAaccent' => '038a',
+    'Greek_OMICRONaccent' => '038c',
+    'Greek_UPSILONaccent' => '038e',
+    'Greek_OMEGAaccent' => '038f',
+    'Greek_iotaaccentdieresis' => '0390',
+    'Greek_ALPHA' => '0391',
+    'Greek_BETA' => '0392',
+    'Greek_GAMMA' => '0393',
+    'Greek_DELTA' => '0394',
+    'Greek_EPSILON' => '0395',
+    'Greek_ZETA' => '0396',
+    'Greek_ETA' => '0397',
+    'Greek_THETA' => '0398',
+    'Greek_IOTA' => '0399',
+    'Greek_KAPPA' => '039a',
+    'Greek_LAMBDA' => '039b',
+    'Greek_LAMDA' => '039b',   # Is this recognised by X ? (speling error)
+    'Greek_MU' => '039c',
+    'Greek_NU' => '039d',
+    'Greek_XI' => '039e',
+    'Greek_OMICRON' => '039f',
+    'Greek_PI' => '03a0',
+    'Greek_RHO' => '03a1',
+    'Greek_SIGMA' => '03a3',
+    'Greek_TAU' => '03a4',
+    'Greek_UPSILON' => '03a5',
+    'Greek_PHI' => '03a6',
+    'Greek_CHI' => '03a7',
+    'Greek_PSI' => '03a8',
+    'Greek_OMEGA' => '03a9',
+    'Greek_IOTAdiaeresis' => '03aa',
+    'Greek_UPSILONdieresis' => '03ab',
+    'Greek_alphaaccent' => '03ac',
+    'Greek_epsilonaccent' => '03ad',
+    'Greek_etaaccent' => '03ae',
+    'Greek_iotaaccent' => '03af',
+    'Greek_upsilonaccentdieresis' => '03b0',
+    'Greek_alpha' => '03b1',
+    'Greek_beta' => '03b2',
+    'Greek_gamma' => '03b3',
+    'Greek_delta' => '03b4',
+    'Greek_epsilon' => '03b5',
+    'Greek_zeta' => '03b6',
+    'Greek_eta' => '03b7',
+    'Greek_theta' => '03b8',
+    'Greek_iota' => '03b9',
+    'Greek_kappa' => '03ba',
+    'Greek_lambda' => '03bb',
+    'Greek_lamda' => '03bb', # Is this recognised by X ? (speling error)
+    'Greek_mu' => '03bc',
+    'Greek_nu' => '03bd',
+    'Greek_xi' => '03be',
+    'Greek_omicron' => '03bf',
+    'Greek_pi' => '03c0',
+    'Greek_rho' => '03c1',
+    'Greek_finalsmallsigma' => '03c2',
+    'Greek_sigma' => '03c3',
+    'Greek_tau' => '03c4',
+    'Greek_upsilon' => '03c5',
+    'Greek_phi' => '03c6',
+    'Greek_chi' => '03c7',
+    'Greek_psi' => '03c8',
+    'Greek_omega' => '03c9',
+    'Greek_iotadieresis' => '03ca',
+    'Greek_upsilondieresis' => '03cb',
+    'Greek_omicronaccent' => '03cc',
+    'Greek_upsilonaccent' => '03cd',
+    'Greek_omegaaccent' => '03ce',
+    'Cyrillic_IO' => '0401',
+    'Serbian_DJE' => '0402',
+    'Macedonia_GJE' => '0403',
+    'Ukrainian_IE' => '0404',
+    'Macedonia_DSE' => '0405',
+    'Ukrainian_I' => '0406',
+    'Ukrainian_YI' => '0407',
+    'Cyrillic_JE' => '0408',
+    'Cyrillic_LJE' => '0409',
+    'Cyrillic_NJE' => '040a',
+    'Serbian_TSHE' => '040b',
+    'Macedonia_KJE' => '040c',
+    'Byelorussian_SHORTU' => '040e',
+    'Cyrillic_DZHE' => '040f',
+    'Cyrillic_A' => '0410',
+    'Cyrillic_BE' => '0411',
+    'Cyrillic_VE' => '0412',
+    'Cyrillic_GHE' => '0413',
+    'Cyrillic_DE' => '0414',
+    'Cyrillic_IE' => '0415',
+    'Cyrillic_ZHE' => '0416',
+    'Cyrillic_ZH' => '0416',
+    'Cyrillic_ZE' => '0417',
+    'Cyrillic_I' => '0418',
+    'Cyrillic_SHORTI' => '0419',
+    'Cyrillic_KA' => '041a',
+    'Cyrillic_EL' => '041b',
+    'Cyrillic_EM' => '041c',
+    'Cyrillic_EN' => '041d',
+    'Cyrillic_N' => '041d',
+    'Cyrillic_O' => '041e',
+    'Cyrillic_PE' => '041f',
+    'Cyrillic_ER' => '0420',
+    'Cyrillic_ES' => '0421',
+    'Cyrillic_TE' => '0422',
+    'Cyrillic_U' => '0423',
+    'Cyrillic_EF' => '0424',
+    'Cyrillic_F' => '0424',
+    'Cyrillic_HA' => '0425',
+    'Cyrillic_TSE' => '0426',
+    'Cyrillic_CHE' => '0427',
+    'Cyrillic_SHA' => '0428',
+    'Cyrillic_SHCHA' => '0429',
+    'Cyrillic_HARDSIGN' => '042a',
+    'Cyrillic_YERU' => '042b',
+    'Cyrillic_UI' => '042b',
+    'Cyrillic_SOFTSIGN' => '042c',
+    'Cyrillic_E' => '042d',
+    'Cyrillic_YU' => '042e',
+    'Cyrillic_YA' => '042f',
+    'Cyrillic_a' => '0430',
+    'Cyrillic_be' => '0431',
+    'Cyrillic_ve' => '0432',
+    'Cyrillic_ghe' => '0433',
+    'Cyrillic_de' => '0434',
+    'Cyrillic_ie' => '0435',
+    'Cyrillic_zhe' => '0436',
+    'Cyrillic_zh' => '0436',
+    'Cyrillic_ze' => '0437',
+    'Cyrillic_i' => '0438',
+    'Cyrillic_shorti' => '0439',
+    'Cyrillic_ka' => '043a',
+    'Cyrillic_el' => '043b',
+    'Cyrillic_em' => '043c',
+    'Cyrillic_en' => '043d',
+    'Cyrillic_n' => '043d',
+    'Cyrillic_o' => '043e',
+    'Cyrillic_pe' => '043f',
+    'Cyrillic_er' => '0440',
+    'Cyrillic_es' => '0441',
+    'Cyrillic_te' => '0442',
+    'Cyrillic_u' => '0443',
+    'Cyrillic_ef' => '0444',
+    'Cyrillic_f' => '0444',
+    'Cyrillic_ha' => '0445',
+    'Cyrillic_tse' => '0446',
+    'Cyrillic_che' => '0447',
+    'Cyrillic_sha' => '0448',
+    'Cyrillic_shcha' => '0449',
+    'Cyrillic_hardsign' => '044a',
+    'Cyrillic_yeru' => '044b',
+    'Cyrillic_ui' => '044b',
+    'Cyrillic_softsign' => '044c',
+    'Cyrillic_e' => '044d',
+    'Cyrillic_yu' => '044e',
+    'Cyrillic_ya' => '044f',
+    'Cyrillic_io' => '0451',
+    'Serbian_dje' => '0452',
+    'Macedonia_gje' => '0453',
+    'Ukrainian_ie' => '0454',
+    'Macedonia_dse' => '0455',
+    'Ukrainian_i' => '0456',
+    'Ukrainian_yi' => '0457',
+    'Cyrillic_je' => '0458',
+    'Cyrillic_lje' => '0459',
+    'Cyrillic_nje' => '045a',
+    'Serbian_tshe' => '045b',
+    'Macedonia_kje' => '045c',
+    'Byelorussian_shortu' => '045e',
+    'Cyrillic_dzhe' => '045f',
+    'Ukrainian_GHE_WITH_UPTURN' => '0490', # Is this recognised by X ?
+    'Ukrainian_ghe_with_upturn' => '0491', # Is this recognised by X ?
+    'Cyrillic_GHE_bar' => '0492', # Is this recognised by X ?
+    'Cyrillic_ghe_bar' => '0493', # Is this recognised by X ?
+    'Cyrillic_ZHE_descender' => '0496',
+    'Cyrillic_zhe_descender' => '0497',
+    'Cyrillic_KA_descender' => '049a', # Is this recognised by X ?
+    'Cyrillic_ka_descender' => '049b', # Is this recognised by X ?
+    'Cyrillic_KA_vertstroke' => '049c', # Is this recognised by X ?
+    'Cyrillic_ka_vertstroke' => '049d', # Is this recognised by X ?
+    'Cyrillic_EN_descender' => '04a2', # Is this recognised by X ?
+    'Cyrillic_en_descender' => '04a3', # Is this recognised by X ?
+    'Cyrillic_U_straight' => '04ae', # Is this recognised by X ?
+    'Cyrillic_u_straight' => '04af', # Is this recognised by X ?
+    'Cyrillic_U_straight_bar' => '04b0', # Is this recognised by X ?
+    'Cyrillic_u_straight_bar' => '04b1', # Is this recognised by X ?
+    'Cyrillic_HA_descender' => '04b2', # Is this recognised by X ?
+    'Cyrillic_ha_descender' => '04b3', # Is this recognised by X ?
+    'Cyrillic_CHE_descender' => '04b6',
+    'Cyrillic_che_descender' => '04b7',
+    'Cyrillic_CHE_vertstroke' => '04b8', # Is this recognised by X ?
+    'Cyrillic_che_vertstroke' => '04b9', # Is this recognised by X ?
+    'Cyrillic_SHHA' => '04ba', # Is this recognised by X ?
+    'Cyrillic_shha' => '04bb', # Is this recognised by X ?
+    'Cyrillic_SCHWA' => '04d8', # Is this recognised by X ?
+    'Cyrillic_schwa' => '04d9', # Is this recognised by X ?
+    'Cyrillic_I_macron' => '04e2',
+    'Cyrillic_i_macron' => '04e3',
+    'Cyrillic_O_bar' => '04e8', # Is this recognised by X ?
+    'Cyrillic_o_bar' => '04e9', # Is this recognised by X ?
+    'Cyrillic_U_macron' => '04ee',
+    'Cyrillic_u_macron' => '04ef',
+    'Armenian_AYB' => '0531',
+    'Armenian_BEN' => '0532',
+    'Armenian_GIM' => '0533',
+    'Armenian_DA' => '0534',
+    'Armenian_YECH' => '0535',
+    'Armenian_ZA' => '0536',
+    'Armenian_E' => '0537',
+    'Armenian_AT' => '0538',
+    'Armenian_TO' => '0539',
+    'Armenian_ZHE' => '053a',
+    'Armenian_INI' => '053b',
+    'Armenian_LYUN' => '053c',
+    'Armenian_KHE' => '053d',
+    'Armenian_TSA' => '053e',
+    'Armenian_KEN' => '053f',
+    'Armenian_HO' => '0540',
+    'Armenian_DZA' => '0541',
+    'Armenian_GHAT' => '0542',
+    'Armenian_TCHE' => '0543',
+    'Armenian_MEN' => '0544',
+    'Armenian_HI' => '0545',
+    'Armenian_NU' => '0546',
+    'Armenian_SHA' => '0547',
+    'Armenian_VO' => '0548',
+    'Armenian_CHA' => '0549',
+    'Armenian_PE' => '054a',
+    'Armenian_JE' => '054b',
+    'Armenian_RA' => '054c',
+    'Armenian_SE' => '054d',
+    'Armenian_VEV' => '054e',
+    'Armenian_TYUN' => '054f',
+    'Armenian_RE' => '0550',
+    'Armenian_TSO' => '0551',
+    'Armenian_VYUN' => '0552',
+    'Armenian_PYUR' => '0553',
+    'Armenian_KE' => '0554',
+    'Armenian_O' => '0555',
+    'Armenian_FE' => '0556',
+    'Armenian_apostrophe' => '055a',
+    'Armenian_accent' => '055b',
+    'Armenian_shesht' => '055b',
+    'Armenian_amanak' => '055c',
+    'Armenian_exclam' => '055c',
+    'Armenian_but' => '055d',
+    'Armenian_separation_mark' => '055d',
+    'Armenian_paruyk' => '055e',
+    'Armenian_question' => '055e',
+    'Armenian_ayb' => '0561',
+    'Armenian_ben' => '0562',
+    'Armenian_gim' => '0563',
+    'Armenian_da' => '0564',
+    'Armenian_yech' => '0565',
+    'Armenian_za' => '0566',
+    'Armenian_e' => '0567',
+    'Armenian_at' => '0568',
+    'Armenian_to' => '0569',
+    'Armenian_zhe' => '056a',
+    'Armenian_ini' => '056b',
+    'Armenian_lyun' => '056c',
+    'Armenian_khe' => '056d',
+    'Armenian_tsa' => '056e',
+    'Armenian_ken' => '056f',
+    'Armenian_ho' => '0570',
+    'Armenian_dza' => '0571',
+    'Armenian_ghat' => '0572',
+    'Armenian_tche' => '0573',
+    'Armenian_men' => '0574',
+    'Armenian_hi' => '0575',
+    'Armenian_nu' => '0576',
+    'Armenian_sha' => '0577',
+    'Armenian_vo' => '0578',
+    'Armenian_cha' => '0579',
+    'Armenian_pe' => '057a',
+    'Armenian_je' => '057b',
+    'Armenian_ra' => '057c',
+    'Armenian_se' => '057d',
+    'Armenian_vev' => '057e',
+    'Armenian_tyun' => '057f',
+    'Armenian_re' => '0580',
+    'Armenian_tso' => '0581',
+    'Armenian_vyun' => '0582',
+    'Armenian_pyur' => '0583',
+    'Armenian_ke' => '0584',
+    'Armenian_o' => '0585',
+    'Armenian_fe' => '0586',
+    'Armenian_ligature_ew' => '0587',
+    'Armenian_full_stop' => '0589',
+    'Armenian_verjaket' => '0589',
+    'Armenian_hyphen' => '058a',
+    'Armenian_yentamna' => '058a',
+    'hebrew_aleph' => '05d0',
+    'hebrew_bet' => '05d1',
+    'hebrew_gimel' => '05d2',
+    'hebrew_dalet' => '05d3',
+    'hebrew_he' => '05d4',
+    'hebrew_waw' => '05d5',
+    'hebrew_zain' => '05d6',
+    'hebrew_chet' => '05d7',
+    'hebrew_tet' => '05d8',
+    'hebrew_yod' => '05d9',
+    'hebrew_finalkaph' => '05da',
+    'hebrew_kaph' => '05db',
+    'hebrew_lamed' => '05dc',
+    'hebrew_finalmem' => '05dd',
+    'hebrew_mem' => '05de',
+    'hebrew_finalnun' => '05df',
+    'hebrew_nun' => '05e0',
+    'hebrew_samech' => '05e1',
+    'hebrew_ayin' => '05e2',
+    'hebrew_finalpe' => '05e3',
+    'hebrew_pe' => '05e4',
+    'hebrew_finalzade' => '05e5',
+    'hebrew_zade' => '05e6',
+    'hebrew_qoph' => '05e7',
+    'hebrew_resh' => '05e8',
+    'hebrew_shin' => '05e9',
+    'hebrew_taw' => '05ea',
+    'Arabic_comma' => '060c',
+    'Arabic_semicolon' => '061b',
+    'Arabic_question_mark' => '061f',
+    'Arabic_hamza' => '0621',
+    'Arabic_maddaonalef' => '0622',
+    'Arabic_hamzaonalef' => '0623',
+    'Arabic_hamzaonwaw' => '0624',
+    'Arabic_hamzaunderalef' => '0625',
+    'Arabic_hamzaonyeh' => '0626',
+    'Arabic_alef' => '0627',
+    'Arabic_beh' => '0628',
+    'Arabic_tehmarbuta' => '0629',
+    'Arabic_teh' => '062a',
+    'Arabic_theh' => '062b',
+    'Arabic_jeem' => '062c',
+    'Arabic_hah' => '062d',
+    'Arabic_khah' => '062e',
+    'Arabic_dal' => '062f',
+    'Arabic_thal' => '0630',
+    'Arabic_ra' => '0631',
+    'Arabic_zain' => '0632',
+    'Arabic_seen' => '0633',
+    'Arabic_sheen' => '0634',
+    'Arabic_sad' => '0635',
+    'Arabic_dad' => '0636',
+    'Arabic_tah' => '0637',
+    'Arabic_zah' => '0638',
+    'Arabic_ain' => '0639',
+    'Arabic_ghain' => '063a',
+    'Arabic_tatweel' => '0640',
+    'Arabic_feh' => '0641',
+    'Arabic_qaf' => '0642',
+    'Arabic_kaf' => '0643',
+    'Arabic_lam' => '0644',
+    'Arabic_meem' => '0645',
+    'Arabic_noon' => '0646',
+    'Arabic_ha' => '0647',
+    'Arabic_heh' => '0647', # Is this recognised by X ?
+    'Arabic_waw' => '0648',
+    'Arabic_alefmaksura' => '0649',
+    'Arabic_yeh' => '064a',
+    'Arabic_fathatan' => '064b',
+    'Arabic_dammatan' => '064c',
+    'Arabic_kasratan' => '064d',
+    'Arabic_fatha' => '064e',
+    'Arabic_damma' => '064f',
+    'Arabic_kasra' => '0650',
+    'Arabic_shadda' => '0651',
+    'Arabic_sukun' => '0652',
+    'Arabic_madda_above' => '0653', # Is this recognised by X ?
+    'Arabic_hamza_above' => '0654', # Is this recognised by X ?
+    'Arabic_hamza_below' => '0655', # Is this recognised by X ?
+    'Arabic_0' => '0660',
+    'Arabic_1' => '0661',
+    'Arabic_2' => '0662',
+    'Arabic_3' => '0663',
+    'Arabic_4' => '0664',
+    'Arabic_5' => '0665',
+    'Arabic_6' => '0666',
+    'Arabic_7' => '0667',
+    'Arabic_8' => '0668',
+    'Arabic_9' => '0669',
+    'Arabic_percent' => '066a',
+    'Arabic_superscript_alef' => '0670', # Is this recognised by X ?
+    'Arabic_tteh' => '0679',
+    'Arabic_peh' => '067e',
+    'Arabic_tcheh' => '0686',
+    'Arabic_ddal' => '0688',
+    'Arabic_rreh' => '0691',
+    'Arabic_jeh' => '0698',
+    'Arabic_veh' => '06a4',
+    'Arabic_keheh' => '06a9',
+    'Arabic_gaf' => '06af',
+    'Arabic_noon_ghunna' => '06ba',
+    'Arabic_heh_doachashmee' => '06be',
+    'Arabic_heh_goal' => '06c1',
+    'Arabic_farsi_yeh' => '06cc',
+    'Farsi_yeh' => '06cc',
+    'Arabic_yeh_baree' => '06d2',
+    'Arabic_fullstop' => '06d4',
+    'Farsi_0' => '06f0',
+    'Farsi_1' => '06f1',
+    'Farsi_2' => '06f2',
+    'Farsi_3' => '06f3',
+    'Farsi_4' => '06f4',
+    'Farsi_5' => '06f5',
+    'Farsi_6' => '06f6',
+    'Farsi_7' => '06f7',
+    'Farsi_8' => '06f8',
+    'Farsi_9' => '06f9',
+    'Sinh_ng' => '0d82',
+    'Sinh_h2' => '0d83',
+    'Sinh_a' => '0d85',
+    'Sinh_aa' => '0d86',
+    'Sinh_ae' => '0d87',
+    'Sinh_aee' => '0d88',
+    'Sinh_i' => '0d89',
+    'Sinh_ii' => '0d8a',
+    'Sinh_u' => '0d8b',
+    'Sinh_uu' => '0d8c',
+    'Sinh_ri' => '0d8d',
+    'Sinh_rii' => '0d8e',
+    'Sinh_lu' => '0d8f',
+    'Sinh_luu' => '0d90',
+    'Sinh_e' => '0d91',
+    'Sinh_ee' => '0d92',
+    'Sinh_ai' => '0d93',
+    'Sinh_o' => '0d94',
+    'Sinh_oo' => '0d95',
+    'Sinh_au' => '0d96',
+    'Sinh_ka' => '0d9a',
+    'Sinh_kha' => '0d9b',
+    'Sinh_ga' => '0d9c',
+    'Sinh_gha' => '0d9d',
+    'Sinh_ng2' => '0d9e',
+    'Sinh_nga' => '0d9f',
+    'Sinh_ca' => '0da0',
+    'Sinh_cha' => '0da1',
+    'Sinh_ja' => '0da2',
+    'Sinh_jha' => '0da3',
+    'Sinh_nya' => '0da4',
+    'Sinh_jnya' => '0da5',
+    'Sinh_nja' => '0da6',
+    'Sinh_tta' => '0da7',
+    'Sinh_ttha' => '0da8',
+    'Sinh_dda' => '0da9',
+    'Sinh_ddha' => '0daa',
+    'Sinh_nna' => '0dab',
+    'Sinh_ndda' => '0dac',
+    'Sinh_tha' => '0dad',
+    'Sinh_thha' => '0dae',
+    'Sinh_dha' => '0daf',
+    'Sinh_dhha' => '0db0',
+    'Sinh_na' => '0db1',
+    'Sinh_ndha' => '0db3',
+    'Sinh_pa' => '0db4',
+    'Sinh_pha' => '0db5',
+    'Sinh_ba' => '0db6',
+    'Sinh_bha' => '0db7',
+    'Sinh_ma' => '0db8',
+    'Sinh_mba' => '0db9',
+    'Sinh_ya' => '0dba',
+    'Sinh_ra' => '0dbb',
+    'Sinh_la' => '0dbd',
+    'Sinh_va' => '0dc0',
+    'Sinh_sha' => '0dc1',
+    'Sinh_ssha' => '0dc2',
+    'Sinh_sa' => '0dc3',
+    'Sinh_ha' => '0dc4',
+    'Sinh_lla' => '0dc5',
+    'Sinh_fa' => '0dc6',
+    'Sinh_al' => '0dca',
+    'Sinh_aa2' => '0dcf',
+    'Sinh_ae2' => '0dd0',
+    'Sinh_aee2' => '0dd1',
+    'Sinh_i2' => '0dd2',
+    'Sinh_ii2' => '0dd3',
+    'Sinh_u2' => '0dd4',
+    'Sinh_uu2' => '0dd6',
+    'Sinh_ru2' => '0dd8',
+    'Sinh_e2' => '0dd9',
+    'Sinh_ee2' => '0dda',
+    'Sinh_ai2' => '0ddb',
+    'Sinh_o2' => '0ddc',
+    'Sinh_oo2' => '0ddd',
+    'Sinh_au2' => '0dde',
+    'Sinh_lu2' => '0ddf',
+    'Sinh_ruu2' => '0df2',
+    'Sinh_luu2' => '0df3',
+    'Thai_kokai' => '0e01',
+    'Thai_khokhai' => '0e02',
+    'Thai_khokhuat' => '0e03',
+    'Thai_khokhwai' => '0e04',
+    'Thai_khokhon' => '0e05',
+    'Thai_khorakhang' => '0e06',
+    'Thai_ngongu' => '0e07',
+    'Thai_chochan' => '0e08',
+    'Thai_choching' => '0e09',
+    'Thai_chochang' => '0e0a',
+    'Thai_soso' => '0e0b',
+    'Thai_chochoe' => '0e0c',
+    'Thai_yoying' => '0e0d',
+    'Thai_dochada' => '0e0e',
+    'Thai_topatak' => '0e0f',
+    'Thai_thothan' => '0e10',
+    'Thai_thonangmontho' => '0e11',
+    'Thai_thophuthao' => '0e12',
+    'Thai_nonen' => '0e13',
+    'Thai_dodek' => '0e14',
+    'Thai_totao' => '0e15',
+    'Thai_thothung' => '0e16',
+    'Thai_thothahan' => '0e17',
+    'Thai_thothong' => '0e18',
+    'Thai_nonu' => '0e19',
+    'Thai_bobaimai' => '0e1a',
+    'Thai_popla' => '0e1b',
+    'Thai_phophung' => '0e1c',
+    'Thai_fofa' => '0e1d',
+    'Thai_phophan' => '0e1e',
+    'Thai_fofan' => '0e1f',
+    'Thai_phosamphao' => '0e20',
+    'Thai_moma' => '0e21',
+    'Thai_yoyak' => '0e22',
+    'Thai_rorua' => '0e23',
+    'Thai_ru' => '0e24',
+    'Thai_loling' => '0e25',
+    'Thai_lu' => '0e26',
+    'Thai_wowaen' => '0e27',
+    'Thai_sosala' => '0e28',
+    'Thai_sorusi' => '0e29',
+    'Thai_sosua' => '0e2a',
+    'Thai_hohip' => '0e2b',
+    'Thai_lochula' => '0e2c',
+    'Thai_oang' => '0e2d',
+    'Thai_honokhuk' => '0e2e',
+    'Thai_paiyannoi' => '0e2f',
+    'Thai_saraa' => '0e30',
+    'Thai_maihanakat' => '0e31',
+    'Thai_saraaa' => '0e32',
+    'Thai_saraam' => '0e33',
+    'Thai_sarai' => '0e34',
+    'Thai_saraii' => '0e35',
+    'Thai_saraue' => '0e36',
+    'Thai_sarauee' => '0e37',
+    'Thai_sarau' => '0e38',
+    'Thai_sarauu' => '0e39',
+    'Thai_phinthu' => '0e3a',
+    'Thai_baht' => '0e3f',
+    'Thai_sarae' => '0e40',
+    'Thai_saraae' => '0e41',
+    'Thai_sarao' => '0e42',
+    'Thai_saraaimaimuan' => '0e43',
+    'Thai_saraaimaimalai' => '0e44',
+    'Thai_lakkhangyao' => '0e45',
+    'Thai_maiyamok' => '0e46',
+    'Thai_maitaikhu' => '0e47',
+    'Thai_maiek' => '0e48',
+    'Thai_maitho' => '0e49',
+    'Thai_maitri' => '0e4a',
+    'Thai_maichattawa' => '0e4b',
+    'Thai_thanthakhat' => '0e4c',
+    'Thai_nikhahit' => '0e4d',
+    'Thai_leksun' => '0e50',
+    'Thai_leknung' => '0e51',
+    'Thai_leksong' => '0e52',
+    'Thai_leksam' => '0e53',
+    'Thai_leksi' => '0e54',
+    'Thai_lekha' => '0e55',
+    'Thai_lekhok' => '0e56',
+    'Thai_lekchet' => '0e57',
+    'Thai_lekpaet' => '0e58',
+    'Thai_lekkao' => '0e59',
+    'Georgian_an' => '10d0',
+    'Georgian_ban' => '10d1',
+    'Georgian_gan' => '10d2',
+    'Georgian_don' => '10d3',
+    'Georgian_en' => '10d4',
+    'Georgian_vin' => '10d5',
+    'Georgian_zen' => '10d6',
+    'Georgian_tan' => '10d7',
+    'Georgian_in' => '10d8',
+    'Georgian_kan' => '10d9',
+    'Georgian_las' => '10da',
+    'Georgian_man' => '10db',
+    'Georgian_nar' => '10dc',
+    'Georgian_on' => '10dd',
+    'Georgian_par' => '10de',
+    'Georgian_zhar' => '10df',
+    'Georgian_rae' => '10e0',
+    'Georgian_san' => '10e1',
+    'Georgian_tar' => '10e2',
+    'Georgian_un' => '10e3',
+    'Georgian_phar' => '10e4',
+    'Georgian_khar' => '10e5',
+    'Georgian_ghan' => '10e6',
+    'Georgian_qar' => '10e7',
+    'Georgian_shin' => '10e8',
+    'Georgian_chin' => '10e9',
+    'Georgian_can' => '10ea',
+    'Georgian_jil' => '10eb',
+    'Georgian_cil' => '10ec',
+    'Georgian_char' => '10ed',
+    'Georgian_xan' => '10ee',
+    'Georgian_jhan' => '10ef',
+    'Georgian_hae' => '10f0',
+    'Georgian_he' => '10f1',
+    'Georgian_hie' => '10f2',
+    'Georgian_we' => '10f3',
+    'Georgian_har' => '10f4',
+    'Georgian_hoe' => '10f5',
+    'Georgian_fi' => '10f6',
+    'Hangul_J_Kiyeog' => '11a8',
+    'Hangul_J_SsangKiyeog' => '11a9',
+    'Hangul_J_KiyeogSios' => '11aa',
+    'Hangul_J_Nieun' => '11ab',
+    'Hangul_J_NieunJieuj' => '11ac',
+    'Hangul_J_NieunHieuh' => '11ad',
+    'Hangul_J_Dikeud' => '11ae',
+    'Hangul_J_Rieul' => '11af',
+    'Hangul_J_RieulKiyeog' => '11b0',
+    'Hangul_J_RieulMieum' => '11b1',
+    'Hangul_J_RieulPieub' => '11b2',
+    'Hangul_J_RieulSios' => '11b3',
+    'Hangul_J_RieulTieut' => '11b4',
+    'Hangul_J_RieulPhieuf' => '11b5',
+    'Hangul_J_RieulHieuh' => '11b6',
+    'Hangul_J_Mieum' => '11b7',
+    'Hangul_J_Pieub' => '11b8',
+    'Hangul_J_PieubSios' => '11b9',
+    'Hangul_J_Sios' => '11ba',
+    'Hangul_J_SsangSios' => '11bb',
+    'Hangul_J_Ieung' => '11bc',
+    'Hangul_J_Jieuj' => '11bd',
+    'Hangul_J_Cieuc' => '11be',
+    'Hangul_J_Khieuq' => '11bf',
+    'Hangul_J_Tieut' => '11c0',
+    'Hangul_J_Phieuf' => '11c1',
+    'Hangul_J_Hieuh' => '11c2',
+    'Hangul_J_PanSios' => '11eb',
+    'Hangul_J_KkogjiDalrinIeung' => '11f0',
+    'Hangul_J_YeorinHieuh' => '11f9',
+    'Babovedot' => '1e02', # Is this recognised by X ?
+    'babovedot' => '1e03', # Is this recognised by X ?
+    'Dabovedot' => '1e0a', # Is this recognised by X ?
+    'dabovedot' => '1e0b', # Is this recognised by X ?
+    'Fabovedot' => '1e1e', # Is this recognised by X ?
+    'fabovedot' => '1e1f', # Is this recognised by X ?
+    'Lbelowdot' => '1e36',
+    'lbelowdot' => '1e37',
+    'Mabovedot' => '1e40', # Is this recognised by X ?
+    'mabovedot' => '1e41', # Is this recognised by X ?
+    'Pabovedot' => '1e56', # Is this recognised by X ?
+    'pabovedot' => '1e57', # Is this recognised by X ?
+    'Sabovedot' => '1e60', # Is this recognised by X ?
+    'sabovedot' => '1e61', # Is this recognised by X ?
+    'Tabovedot' => '1e6a', # Is this recognised by X ?
+    'tabovedot' => '1e6b', # Is this recognised by X ?
+    'Wgrave' => '1e80',
+    'wgrave' => '1e81',
+    'Wacute' => '1e82',
+    'wacute' => '1e83',
+    'Wdiaeresis' => '1e84',
+    'wdiaeresis' => '1e85',
+    'Xabovedot' => '1e8a',
+    'xabovedot' => '1e8b',
+    'Abelowdot' => '1ea0',
+    'abelowdot' => '1ea1',
+    'Ahook' => '1ea2',
+    'ahook' => '1ea3',
+    'Acircumflexacute' => '1ea4',
+    'acircumflexacute' => '1ea5',
+    'Acircumflexgrave' => '1ea6',
+    'acircumflexgrave' => '1ea7',
+    'Acircumflexhook' => '1ea8',
+    'acircumflexhook' => '1ea9',
+    'Acircumflextilde' => '1eaa',
+    'acircumflextilde' => '1eab',
+    'Acircumflexbelowdot' => '1eac',
+    'acircumflexbelowdot' => '1ead',
+    'Abreveacute' => '1eae',
+    'abreveacute' => '1eaf',
+    'Abrevegrave' => '1eb0',
+    'abrevegrave' => '1eb1',
+    'Abrevehook' => '1eb2',
+    'abrevehook' => '1eb3',
+    'Abrevetilde' => '1eb4',
+    'abrevetilde' => '1eb5',
+    'Abrevebelowdot' => '1eb6',
+    'abrevebelowdot' => '1eb7',
+    'Ebelowdot' => '1eb8',
+    'ebelowdot' => '1eb9',
+    'Ehook' => '1eba',
+    'ehook' => '1ebb',
+    'Etilde' => '1ebc',
+    'etilde' => '1ebd',
+    'Ecircumflexacute' => '1ebe',
+    'ecircumflexacute' => '1ebf',
+    'Ecircumflexgrave' => '1ec0',
+    'ecircumflexgrave' => '1ec1',
+    'Ecircumflexhook' => '1ec2',
+    'ecircumflexhook' => '1ec3',
+    'Ecircumflextilde' => '1ec4',
+    'ecircumflextilde' => '1ec5',
+    'Ecircumflexbelowdot' => '1ec6',
+    'ecircumflexbelowdot' => '1ec7',
+    'Ihook' => '1ec8',
+    'ihook' => '1ec9',
+    'Ibelowdot' => '1eca',
+    'ibelowdot' => '1ecb',
+    'Obelowdot' => '1ecc',
+    'obelowdot' => '1ecd',
+    'Ohook' => '1ece',
+    'ohook' => '1ecf',
+    'Ocircumflexacute' => '1ed0',
+    'ocircumflexacute' => '1ed1',
+    'Ocircumflexgrave' => '1ed2',
+    'ocircumflexgrave' => '1ed3',
+    'Ocircumflexhook' => '1ed4',
+    'ocircumflexhook' => '1ed5',
+    'Ocircumflextilde' => '1ed6',
+    'ocircumflextilde' => '1ed7',
+    'Ocircumflexbelowdot' => '1ed8',
+    'ocircumflexbelowdot' => '1ed9',
+    'Ohornacute' => '1eda',
+    'ohornacute' => '1edb',
+    'Ohorngrave' => '1edc',
+    'ohorngrave' => '1edd',
+    'Ohornhook' => '1ede',
+    'ohornhook' => '1edf',
+    'Ohorntilde' => '1ee0',
+    'ohorntilde' => '1ee1',
+    'Ohornbelowdot' => '1ee2',
+    'ohornbelowdot' => '1ee3',
+    'Ubelowdot' => '1ee4',
+    'ubelowdot' => '1ee5',
+    'Uhook' => '1ee6',
+    'uhook' => '1ee7',
+    'Uhornacute' => '1ee8',
+    'uhornacute' => '1ee9',
+    'Uhorngrave' => '1eea',
+    'uhorngrave' => '1eeb',
+    'Uhornhook' => '1eec',
+    'uhornhook' => '1eed',
+    'Uhorntilde' => '1eee',
+    'uhorntilde' => '1eef',
+    'Uhornbelowdot' => '1ef0',
+    'uhornbelowdot' => '1ef1',
+    'Ygrave' => '1ef2',
+    'ygrave' => '1ef3',
+    'Ybelowdot' => '1ef4',
+    'ybelowdot' => '1ef5',
+    'Yhook' => '1ef6',
+    'yhook' => '1ef7',
+    'Ytilde' => '1ef8',
+    'ytilde' => '1ef9',
+    'enspace' => '2002',
+    'emspace' => '2003',
+    'em3space' => '2004',
+    'em4space' => '2005',
+    'digitspace' => '2007',
+    'punctspace' => '2008',
+    'thinspace' => '2009',
+    'hairspace' => '200a',
+    'figdash' => '2012',
+    'endash' => '2013',
+    'emdash' => '2014',
+    'Greek_horizbar' => '2015',
+    'hebrew_doublelowline' => '2017',
+    'leftsinglequotemark' => '2018',
+    'rightsinglequotemark' => '2019',
+    'singlelowquotemark' => '201a',
+    'leftdoublequotemark' => '201c',
+    'rightdoublequotemark' => '201d',
+    'doublelowquotemark' => '201e',
+    'dagger' => '2020',
+    'doubledagger' => '2021',
+    'enfilledcircbullet' => '2022',
+    'doubbaselinedot' => '2025',
+    'ellipsis' => '2026',
+    'permille' => '2030',
+    'minutes' => '2032',
+    'seconds' => '2033',
+    'caret' => '2038',
+    'guilsinglleft' => '2039',
+    'guilsinglright' => '203a',
+    'overline' => '203e',
+    'zerosuperior' => '2070',
+    'foursuperior' => '2074',
+    'fivesuperior' => '2075',
+    'sixsuperior' => '2076',
+    'sevensuperior' => '2077',
+    'eightsuperior' => '2078',
+    'ninesuperior' => '2079',
+    'zerosubscript' => '2080',
+    'onesubscript' => '2081',
+    'twosubscript' => '2082',
+    'threesubscript' => '2083',
+    'foursubscript' => '2084',
+    'fivesubscript' => '2085',
+    'sixsubscript' => '2086',
+    'sevensubscript' => '2087',
+    'eightsubscript' => '2088',
+    'ninesubscript' => '2089',
+    'EcuSign' => '20a0',
+    'ColonSign' => '20a1',
+    'CruzeiroSign' => '20a2',
+    'FFrancSign' => '20a3',
+    'LiraSign' => '20a4',
+    'MillSign' => '20a5',
+    'NairaSign' => '20a6',
+    'PesetaSign' => '20a7',
+    'RupeeSign' => '20a8',
+    'WonSign' => '20a9',
+    'Korean_Won' => '20a9',
+    'NewSheqelSign' => '20aa',
+    'DongSign' => '20ab', # Is this recognised by X ?
+    'EuroSign' => '20ac',
+    'Euro' => '20ac',
+    'careof' => '2105',
+    'numerosign' => '2116',
+    'phonographcopyright' => '2117',
+    'prescription' => '211e',
+    'trademark' => '2122',
+    'onethird' => '2153',
+    'twothirds' => '2154',
+    'onefifth' => '2155',
+    'twofifths' => '2156',
+    'threefifths' => '2157',
+    'fourfifths' => '2158',
+    'onesixth' => '2159',
+    'fivesixths' => '215a',
+    'oneeighth' => '215b',
+    'threeeighths' => '215c',
+    'fiveeighths' => '215d',
+    'seveneighths' => '215e',
+    'leftarrow' => '2190',
+    'uparrow' => '2191',
+    'rightarrow' => '2192',
+    'downarrow' => '2193',
+    'implies' => '21d2',
+    'ifonlyif' => '21d4',
+    'partialderivative' => '2202',
+    'partdifferential' => '2202',
+    'emptyset' => '2205',
+    'nabla' => '2207',
+    'elementof' => '2208',
+    'notelementof' => '2209',
+    'containsas' => '220B',
+    'jot' => '2218',
+    'radical' => '221a',
+    'squareroot' => '221a',
+    'cuberoot' => '221b',
+    'fourthroot' => '221c',
+    'variation' => '221d',
+    'infinity' => '221e',
+    'logicaland' => '2227',
+    'upcaret' => '2227',
+    'downcaret' => '2228',
+    'logicalor' => '2228',
+    'intersection' => '2229',
+    'upshoe' => '2229',
+    'downshoe' => '222a',
+    'union' => '222a',
+    'integral' => '222b',
+    'dintegral' => '222c',
+    'tintegral' => '222d',
+    'therefore' => '2234',
+    'because' => '2235',
+    'approximate' => '223c',
+    'similarequal' => '2243',
+    'notapproxeq' => '2247',
+    'approxeq' => '2248',
+    'notidentical' => '2262',
+    'notequal' => '2260',
+    'identical' => '2261',
+    'stricteq' => '2263',
+    'lessthanequal' => '2264',
+    'greaterthanequal' => '2265',
+    'includedin' => '2282',
+    'leftshoe' => '2282',
+    'includes' => '2283',
+    'rightshoe' => '2283',
+    'lefttack' => '22a2',
+    'righttack' => '22a3',
+    'uptack' => '22a4',
+    'downtack' => '22a5',
+    'upstile' => '2308',
+    'downstile' => '230a',
+    'telephonerecorder' => '2315',
+    'topintegral' => '2320',
+    'botintegral' => '2321',
+    'leftanglebracket' => '2329',
+    'rightanglebracket' => '232a',
+    'quad' => '2395',
+    'topleftparens' => '239b',
+    'botleftparens' => '239d',
+    'toprightparens' => '239e',
+    'botrightparens' => '23a0',
+    'topleftsqbracket' => '23a1',
+    'botleftsqbracket' => '23a3',
+    'toprightsqbracket' => '23a4',
+    'botrightsqbracket' => '23a6',
+    'leftmiddlecurlybrace' => '23a8',
+    'rightmiddlecurlybrace' => '23ac',
+    'leftradical' => '23b7',
+    'horizlinescan1' => '23ba',
+    'horizlinescan3' => '23bb',
+    'horizlinescan7' => '23bc',
+    'horizlinescan9' => '23bd',
+    'ht' => '2409',
+    'lf' => '240a',
+    'vt' => '240b',
+    'ff' => '240c',
+    'cr' => '240d',
+    'nl' => '2424',
+    'horizconnector' => '2500',
+    'horizlinescan5' => '2500',
+    'vertbar' => '2502',
+    'vertconnector' => '2502',
+    'topleftradical' => '250c',
+    'upleftcorner' => '250c',
+    'uprightcorner' => '2510',
+    'lowleftcorner' => '2514',
+    'lowrightcorner' => '2518',
+    'leftt' => '251c',
+    'rightt' => '2524',
+    'topt' => '252c',
+    'bott' => '2534',
+    'crossinglines' => '253c',
+    'checkerboard' => '2592',
+    'enfilledsqbullet' => '25aa',
+    'enopensquarebullet' => '25ab',
+    'filledrectbullet' => '25ac',
+    'openrectbullet' => '25ad',
+    'emfilledrect' => '25ae',
+    'emopenrectangle' => '25af',
+    'filledtribulletup' => '25b2',
+    'opentribulletup' => '25b3',
+    'filledrighttribullet' => '25b6',
+    'rightopentriangle' => '25b7',
+    'filledtribulletdown' => '25bc',
+    'opentribulletdown' => '25bd',
+    'filledlefttribullet' => '25c0',
+    'leftopentriangle' => '25c1',
+    'soliddiamond' => '25c6',
+    'circle' => '25cb',
+    'emopencircle' => '25cb',
+    'emfilledcircle' => '25cf',
+    'enopencircbullet' => '25e6',
+    'openstar' => '2606',
+    'telephone' => '260e',
+    'signaturemark' => '2613',
+    'leftpointer' => '261c',
+    'rightpointer' => '261e',
+    'femalesymbol' => '2640',
+    'malesymbol' => '2642',
+    'club' => '2663',
+    'heart' => '2665',
+    'diamond' => '2666',
+    'musicalflat' => '266d',
+    'musicalsharp' => '266f',
+    'checkmark' => '2713',
+    'ballotcross' => '2717',
+    'latincross' => '271d',
+    'maltesecross' => '2720',
+    'braille_dots_1' => '2801',
+    'braille_dots_2' => '2802',
+    'braille_dots_12' => '2803',
+    'braille_dots_3' => '2804',
+    'braille_dots_13' => '2805',
+    'braille_dots_23' => '2806',
+    'braille_dots_123' => '2807',
+    'braille_dots_4' => '2808',
+    'braille_dots_14' => '2809',
+    'braille_dots_24' => '280a',
+    'braille_dots_124' => '280b',
+    'braille_dots_34' => '280c',
+    'braille_dots_134' => '280d',
+    'braille_dots_234' => '280e',
+    'braille_dots_1234' => '280f',
+    'braille_dots_5' => '2810',
+    'braille_dots_15' => '2811',
+    'braille_dots_25' => '2812',
+    'braille_dots_125' => '2813',
+    'braille_dots_35' => '2814',
+    'braille_dots_135' => '2815',
+    'braille_dots_235' => '2816',
+    'braille_dots_1235' => '2817',
+    'braille_dots_45' => '2818',
+    'braille_dots_145' => '2819',
+    'braille_dots_245' => '281a',
+    'braille_dots_1245' => '281b',
+    'braille_dots_345' => '281c',
+    'braille_dots_1345' => '281d',
+    'braille_dots_2345' => '281e',
+    'braille_dots_12345' => '281f',
+    'braille_dots_6' => '2820',
+    'braille_dots_16' => '2821',
+    'braille_dots_26' => '2822',
+    'braille_dots_126' => '2823',
+    'braille_dots_36' => '2824',
+    'braille_dots_136' => '2825',
+    'braille_dots_236' => '2826',
+    'braille_dots_1236' => '2827',
+    'braille_dots_46' => '2828',
+    'braille_dots_146' => '2829',
+    'braille_dots_246' => '282a',
+    'braille_dots_1246' => '282b',
+    'braille_dots_346' => '282c',
+    'braille_dots_1346' => '282d',
+    'braille_dots_2346' => '282e',
+    'braille_dots_12346' => '282f',
+    'braille_dots_56' => '2830',
+    'braille_dots_156' => '2831',
+    'braille_dots_256' => '2832',
+    'braille_dots_1256' => '2833',
+    'braille_dots_356' => '2834',
+    'braille_dots_1356' => '2835',
+    'braille_dots_2356' => '2836',
+    'braille_dots_12356' => '2837',
+    'braille_dots_456' => '2838',
+    'braille_dots_1456' => '2839',
+    'braille_dots_2456' => '283a',
+    'braille_dots_12456' => '283b',
+    'braille_dots_3456' => '283c',
+    'braille_dots_13456' => '283d',
+    'braille_dots_23456' => '283e',
+    'braille_dots_123456' => '283f',
+    'braille_dots_7' => '2840',
+    'braille_dots_17' => '2841',
+    'braille_dots_27' => '2842',
+    'braille_dots_127' => '2843',
+    'braille_dots_37' => '2844',
+    'braille_dots_137' => '2845',
+    'braille_dots_237' => '2846',
+    'braille_dots_1237' => '2847',
+    'braille_dots_47' => '2848',
+    'braille_dots_147' => '2849',
+    'braille_dots_247' => '284a',
+    'braille_dots_1247' => '284b',
+    'braille_dots_347' => '284c',
+    'braille_dots_1347' => '284d',
+    'braille_dots_2347' => '284e',
+    'braille_dots_12347' => '284f',
+    'braille_dots_57' => '2850',
+    'braille_dots_157' => '2851',
+    'braille_dots_257' => '2852',
+    'braille_dots_1257' => '2853',
+    'braille_dots_357' => '2854',
+    'braille_dots_1357' => '2855',
+    'braille_dots_2357' => '2856',
+    'braille_dots_12357' => '2857',
+    'braille_dots_457' => '2858',
+    'braille_dots_1457' => '2859',
+    'braille_dots_2457' => '285a',
+    'braille_dots_12457' => '285b',
+    'braille_dots_3457' => '285c',
+    'braille_dots_13457' => '285d',
+    'braille_dots_23457' => '285e',
+    'braille_dots_123457' => '285f',
+    'braille_dots_67' => '2860',
+    'braille_dots_167' => '2861',
+    'braille_dots_267' => '2862',
+    'braille_dots_1267' => '2863',
+    'braille_dots_367' => '2864',
+    'braille_dots_1367' => '2865',
+    'braille_dots_2367' => '2866',
+    'braille_dots_12367' => '2867',
+    'braille_dots_467' => '2868',
+    'braille_dots_1467' => '2869',
+    'braille_dots_2467' => '286a',
+    'braille_dots_12467' => '286b',
+    'braille_dots_3467' => '286c',
+    'braille_dots_13467' => '286d',
+    'braille_dots_23467' => '286e',
+    'braille_dots_123467' => '286f',
+    'braille_dots_567' => '2870',
+    'braille_dots_1567' => '2871',
+    'braille_dots_2567' => '2872',
+    'braille_dots_12567' => '2873',
+    'braille_dots_3567' => '2874',
+    'braille_dots_13567' => '2875',
+    'braille_dots_23567' => '2876',
+    'braille_dots_123567' => '2877',
+    'braille_dots_4567' => '2878',
+    'braille_dots_14567' => '2879',
+    'braille_dots_24567' => '287a',
+    'braille_dots_124567' => '287b',
+    'braille_dots_34567' => '287c',
+    'braille_dots_134567' => '287d',
+    'braille_dots_234567' => '287e',
+    'braille_dots_1234567' => '287f',
+    'braille_dots_8' => '2880',
+    'braille_dots_18' => '2881',
+    'braille_dots_28' => '2882',
+    'braille_dots_128' => '2883',
+    'braille_dots_38' => '2884',
+    'braille_dots_138' => '2885',
+    'braille_dots_238' => '2886',
+    'braille_dots_1238' => '2887',
+    'braille_dots_48' => '2888',
+    'braille_dots_148' => '2889',
+    'braille_dots_248' => '288a',
+    'braille_dots_1248' => '288b',
+    'braille_dots_348' => '288c',
+    'braille_dots_1348' => '288d',
+    'braille_dots_2348' => '288e',
+    'braille_dots_12348' => '288f',
+    'braille_dots_58' => '2890',
+    'braille_dots_158' => '2891',
+    'braille_dots_258' => '2892',
+    'braille_dots_1258' => '2893',
+    'braille_dots_358' => '2894',
+    'braille_dots_1358' => '2895',
+    'braille_dots_2358' => '2896',
+    'braille_dots_12358' => '2897',
+    'braille_dots_458' => '2898',
+    'braille_dots_1458' => '2899',
+    'braille_dots_2458' => '289a',
+    'braille_dots_12458' => '289b',
+    'braille_dots_3458' => '289c',
+    'braille_dots_13458' => '289d',
+    'braille_dots_23458' => '289e',
+    'braille_dots_123458' => '289f',
+    'braille_dots_68' => '28a0',
+    'braille_dots_168' => '28a1',
+    'braille_dots_268' => '28a2',
+    'braille_dots_1268' => '28a3',
+    'braille_dots_368' => '28a4',
+    'braille_dots_1368' => '28a5',
+    'braille_dots_2368' => '28a6',
+    'braille_dots_12368' => '28a7',
+    'braille_dots_468' => '28a8',
+    'braille_dots_1468' => '28a9',
+    'braille_dots_2468' => '28aa',
+    'braille_dots_12468' => '28ab',
+    'braille_dots_3468' => '28ac',
+    'braille_dots_13468' => '28ad',
+    'braille_dots_23468' => '28ae',
+    'braille_dots_123468' => '28af',
+    'braille_dots_568' => '28b0',
+    'braille_dots_1568' => '28b1',
+    'braille_dots_2568' => '28b2',
+    'braille_dots_12568' => '28b3',
+    'braille_dots_3568' => '28b4',
+    'braille_dots_13568' => '28b5',
+    'braille_dots_23568' => '28b6',
+    'braille_dots_123568' => '28b7',
+    'braille_dots_4568' => '28b8',
+    'braille_dots_14568' => '28b9',
+    'braille_dots_24568' => '28ba',
+    'braille_dots_124568' => '28bb',
+    'braille_dots_34568' => '28bc',
+    'braille_dots_134568' => '28bd',
+    'braille_dots_234568' => '28be',
+    'braille_dots_1234568' => '28bf',
+    'braille_dots_78' => '28c0',
+    'braille_dots_178' => '28c1',
+    'braille_dots_278' => '28c2',
+    'braille_dots_1278' => '28c3',
+    'braille_dots_378' => '28c4',
+    'braille_dots_1378' => '28c5',
+    'braille_dots_2378' => '28c6',
+    'braille_dots_12378' => '28c7',
+    'braille_dots_478' => '28c8',
+    'braille_dots_1478' => '28c9',
+    'braille_dots_2478' => '28ca',
+    'braille_dots_12478' => '28cb',
+    'braille_dots_3478' => '28cc',
+    'braille_dots_13478' => '28cd',
+    'braille_dots_23478' => '28ce',
+    'braille_dots_123478' => '28cf',
+    'braille_dots_578' => '28d0',
+    'braille_dots_1578' => '28d1',
+    'braille_dots_2578' => '28d2',
+    'braille_dots_12578' => '28d3',
+    'braille_dots_3578' => '28d4',
+    'braille_dots_13578' => '28d5',
+    'braille_dots_23578' => '28d6',
+    'braille_dots_123578' => '28d7',
+    'braille_dots_4578' => '28d8',
+    'braille_dots_14578' => '28d9',
+    'braille_dots_24578' => '28da',
+    'braille_dots_124578' => '28db',
+    'braille_dots_34578' => '28dc',
+    'braille_dots_134578' => '28dd',
+    'braille_dots_234578' => '28de',
+    'braille_dots_1234578' => '28df',
+    'braille_dots_678' => '28e0',
+    'braille_dots_1678' => '28e1',
+    'braille_dots_2678' => '28e2',
+    'braille_dots_12678' => '28e3',
+    'braille_dots_3678' => '28e4',
+    'braille_dots_13678' => '28e5',
+    'braille_dots_23678' => '28e6',
+    'braille_dots_123678' => '28e7',
+    'braille_dots_4678' => '28e8',
+    'braille_dots_14678' => '28e9',
+    'braille_dots_24678' => '28ea',
+    'braille_dots_124678' => '28eb',
+    'braille_dots_34678' => '28ec',
+    'braille_dots_134678' => '28ed',
+    'braille_dots_234678' => '28ee',
+    'braille_dots_1234678' => '28ef',
+    'braille_dots_5678' => '28f0',
+    'braille_dots_15678' => '28f1',
+    'braille_dots_25678' => '28f2',
+    'braille_dots_125678' => '28f3',
+    'braille_dots_35678' => '28f4',
+    'braille_dots_135678' => '28f5',
+    'braille_dots_235678' => '28f6',
+    'braille_dots_1235678' => '28f7',
+    'braille_dots_45678' => '28f8',
+    'braille_dots_145678' => '28f9',
+    'braille_dots_245678' => '28fa',
+    'braille_dots_1245678' => '28fb',
+    'braille_dots_345678' => '28fc',
+    'braille_dots_1345678' => '28fd',
+    'braille_dots_2345678' => '28fe',
+    'braille_dots_12345678' => '28ff',
+    'kana_comma' => '3001',
+    'kana_fullstop' => '3002',
+    'kana_openingbracket' => '300c',
+    'kana_closingbracket' => '300d',
+    'voicedsound' => '309b',
+    'semivoicedsound' => '309c',
+    'kana_a' => '30a1',
+    'kana_A' => '30a2',
+    'kana_i' => '30a3',
+    'kana_I' => '30a4',
+    'kana_u' => '30a5',
+    'kana_U' => '30a6',
+    'kana_e' => '30a7',
+    'kana_E' => '30a8',
+    'kana_o' => '30a9',
+    'kana_O' => '30aa',
+    'kana_KA' => '30ab',
+    'kana_KI' => '30ad',
+    'kana_KU' => '30af',
+    'kana_KE' => '30b1',
+    'kana_KO' => '30b3',
+    'kana_SA' => '30b5',
+    'kana_SHI' => '30b7',
+    'kana_SU' => '30b9',
+    'kana_SE' => '30bb',
+    'kana_SO' => '30bd',
+    'kana_TA' => '30bf',
+    'kana_CHI' => '30c1',
+    'kana_tsu' => '30c3',
+    'kana_TSU' => '30c4',
+    'kana_TE' => '30c6',
+    'kana_TO' => '30c8',
+    'kana_NA' => '30ca',
+    'kana_NI' => '30cb',
+    'kana_NU' => '30cc',
+    'kana_NE' => '30cd',
+    'kana_NO' => '30ce',
+    'kana_HA' => '30cf',
+    'kana_HI' => '30d2',
+    'kana_FU' => '30d5',
+    'kana_HE' => '30d8',
+    'kana_HO' => '30db',
+    'kana_MA' => '30de',
+    'kana_MI' => '30df',
+    'kana_MU' => '30e0',
+    'kana_ME' => '30e1',
+    'kana_MO' => '30e2',
+    'kana_ya' => '30e3',
+    'kana_YA' => '30e4',
+    'kana_yu' => '30e5',
+    'kana_YU' => '30e6',
+    'kana_yo' => '30e7',
+    'kana_YO' => '30e8',
+    'kana_RA' => '30e9',
+    'kana_RI' => '30ea',
+    'kana_RU' => '30eb',
+    'kana_RE' => '30ec',
+    'kana_RO' => '30ed',
+    'kana_WA' => '30ef',
+    'kana_WO' => '30f2',
+    'kana_N' => '30f3',
+    'kana_conjunctive' => '30fb',
+    'kana_middledot' => '30fb', # Is this recognised by X ?
+    'prolongedsound' => '30fc',
+    'Hangul_Kiyeog' => '3131',
+    'Hangul_SsangKiyeog' => '3132',
+    'Hangul_KiyeogSios' => '3133',
+    'Hangul_Nieun' => '3134',
+    'Hangul_NieunJieuj' => '3135',
+    'Hangul_NieunHieuh' => '3136',
+    'Hangul_Dikeud' => '3137',
+    'Hangul_SsangDikeud' => '3138',
+    'Hangul_Rieul' => '3139',
+    'Hangul_RieulKiyeog' => '313a',
+    'Hangul_RieulMieum' => '313b',
+    'Hangul_RieulPieub' => '313c',
+    'Hangul_RieulSios' => '313d',
+    'Hangul_RieulTieut' => '313e',
+    'Hangul_RieulPhieuf' => '313f',
+    'Hangul_RieulHieuh' => '3140',
+    'Hangul_Mieum' => '3141',
+    'Hangul_Pieub' => '3142',
+    'Hangul_SsangPieub' => '3143',
+    'Hangul_PieubSios' => '3144',
+    'Hangul_Sios' => '3145',
+    'Hangul_SsangSios' => '3146',
+    'Hangul_Ieung' => '3147',
+    'Hangul_Jieuj' => '3148',
+    'Hangul_SsangJieuj' => '3149',
+    'Hangul_Cieuc' => '314a',
+    'Hangul_Khieuq' => '314b',
+    'Hangul_Tieut' => '314c',
+    'Hangul_Phieuf' => '314d',
+    'Hangul_Hieuh' => '314e',
+    'Hangul_A' => '314f',
+    'Hangul_AE' => '3150',
+    'Hangul_YA' => '3151',
+    'Hangul_YAE' => '3152',
+    'Hangul_EO' => '3153',
+    'Hangul_E' => '3154',
+    'Hangul_YEO' => '3155',
+    'Hangul_YE' => '3156',
+    'Hangul_O' => '3157',
+    'Hangul_WA' => '3158',
+    'Hangul_WAE' => '3159',
+    'Hangul_OE' => '315a',
+    'Hangul_YO' => '315b',
+    'Hangul_U' => '315c',
+    'Hangul_WEO' => '315d',
+    'Hangul_WE' => '315e',
+    'Hangul_WI' => '315f',
+    'Hangul_YU' => '3160',
+    'Hangul_EU' => '3161',
+    'Hangul_YI' => '3162',
+    'Hangul_I' => '3163',
+    'Hangul_RieulYeorinHieuh' => '316d',
+    'Hangul_SunkyeongeumMieum' => '3171',
+    'Hangul_SunkyeongeumPieub' => '3178',
+    'Hangul_PanSios' => '317f',
+    'Hangul_KkogjiDalrinIeung' => '3181',
+    'Hangul_SunkyeongeumPhieuf' => '3184',
+    'Hangul_YeorinHieuh' => '3186',
+    'Hangul_AraeA' => '318d',
+    'Hangul_AraeAE' => '318e',
+);
+
+if ($freebsd) {
+    %xkbsym_table = 
+        (%xkbsym_table,
+# Control symbols
+         'BackSpace' => 'bs',      # 0008
+         'Tab' => 'ht',            # 0009
+         'Linefeed' => 'nl',       # 000a
+         'Return' => 'cr',         # 000d
+         'Escape' => 'esc',        # 001b
+# Keypad keys
+         'KP_Multiply' => '\'*\'',
+         'KP_Add' => 'fkey56',
+         'KP_Seprator' => '\',\'', # Is this recognised by X ?
+         'KP_Separator' => '\',\'',
+         'KP_Subtract' => 'fkey52',
+         'KP_Decimal' => '\'.\'',
+         'KP_Divide' => '\'/\'',
+         'KP_0' => '\'0\'',
+         'KP_1' => '\'1\'',
+         'KP_2' => '\'2\'',
+         'KP_3' => '\'3\'',
+         'KP_4' => '\'4\'',
+         'KP_5' => '\'5\'',
+         'KP_6' => '\'6\'',
+         'KP_7' => '\'7\'',
+         'KP_8' => '\'8\'',
+         'KP_9' => '\'9\'',
+         'KP_Enter' => 'cr',
+         'KP_Home' => 'fkey49',
+         'KP_Left' => 'fkey53',
+         'KP_Up' => 'fkey50',
+         'KP_Right' => 'fkey55',
+         'KP_Down' => 'fkey58',
+         'KP_Prior' => 'fkey51',
+         'KP_Page_Up' => 'fkey51',
+         'KP_Next' => 'fkey59',
+         'KP_Page_Down' => 'fkey59',
+         'KP_End' => 'fkey57',
+         'KP_Begin' => 'fkey54',
+         'KP_Insert' => 'fkey60',
+         'KP_Delete' => 'del',
+         'KP_Space' => 'sp',
+         'KP_Equal' => '\'=\'',
+         'KP_Tab' => 'ht',
+         'KP_F1' => 'fkey01',
+         'KP_F2' => 'fkey02',
+         'KP_F3' => 'fkey03',
+         'KP_F4' => 'fkey04',
+# Dead symbols
+         'dead_grave' => 'dgra',
+         'SunFA_Grave' => 'dgra_grave', # Is this recognised by X ?
+         'dead_acute' => 'dacu',
+         'SunFA_Acute' => 'dacu', # Is this recognised by X ?
+         'dead_circumflex' => 'dcir',
+         'SunFA_Circum' => 'dcir', # Is this recognised by X ?
+         'dead_tilde' => 'dtil',
+         'SunFA_Tilde' => 'dtil',
+         'dead_breve' => 'dbre',
+         'dead_diaeresis' => 'ddia',
+         'SunFA_Diaeresis' => 'ddia', # Is this recognised by X ?
+         'dead_doubleacute' => 'ddac',
+         'dead_caron' => 'dcar',
+         'dead_V' => 'dcar', # Is this correct?
+         'dead_cedilla' => 'dced',
+         'SunFA_Cedilla' => 'dced', # Is this recognised by X ?
+         'dead_ogonek' => 'dogo',
+         'dead_macron' => 'dmac',
+         'dead_abovedot' => 'ddot',
+         'dead_abovering' => 'drin',
+         'dead_stroke' => 'nop',
+         'dead_belowdot' => '0323',       # ???? Vietnamese
+         'dead_hook' => 'dsla',           # ???? Vietnamese
+         'dead_belowcomma' => 'nop',
+         'dead_currency' => 'nop',
+         'dead_doublegrave' => 'nop',
+         'dead_invertedbreve' => 'nop',
+         'dead_iota' => '03b9',           # ???? Greek
+         'dead_horn' => '031b',           # ???? Greek
+         'dead_psili' => 'nop',           # ???? Greek
+         'dead_dasia' => 'nop',           # ???? Greek
+         'dead_greek' => 'fe8c',
+# Modifiers
+         'Multi_key' => 'nop',
+         'Mode_switch' => 'ashift',
+         'script_switch' => 'nop',
+         'Shift_L' => 'lshift',
+         'Shift_R' => 'rshift',
+         'Control_L' => 'lctrl',
+         'Control_R' => 'rctrl',
+         'Caps_Lock' => 'clock',
+         'Shift_Lock' => 'clock',
+         'Meta_L' => 'meta',
+         'Meta_R' => 'meta',
+         'Alt_L' => 'lalt',
+         'Alt_R' => 'ralt',
+         'Super_L' => 'fkey62',
+         'Super_R' => 'fkey63',
+         'Hyper_L' => 'meta',
+         'Hyper_R' => 'meta',
+         'ISO_Lock' => 'clock',
+         'ISO_Level2_Latch' => 'lshift',
+         'ISO_Level3_Shift' => 'alt',
+         'ISO_Level3_Latch' => 'alt',
+         'ISO_Level3_Lock' => 'alta',
+         'ISO_Level5_Shift' => 'alt',
+         'ISO_Level5_Latch' => 'alt',
+         'ISO_Level5_Lock' => 'alta',
+         'ISO_Group_Shift' => 'ashift',
+         'ISO_Group_Latch' => 'ashift',
+         'ISO_Group_Lock' => 'alock',
+         'ISO_Next_Group' => 'alock',
+         'ISO_Next_Group_Lock' => 'alock',
+         'ISO_Prev_Group' => 'alock',
+         'ISO_Prev_Group_Lock' => 'alock',
+         'ISO_First_Group' => 'alock',
+         'ISO_First_Group_Lock' => 'alock',
+         'ISO_Last_Group' => 'alock',
+         'ISO_Last_Group_Lock' => 'alock',
+# Other symbols
+         'NoAction' => 'NoSymbol', # Is this recognised by X ?
+         'nosymbol' => 'NoSymbol', # Is this recognised by X ?
+         'Nosymbol' => 'NoSymbol', # Is this recognised by X ?
+         'noSymbol' => 'NoSymbol', # Is this recognised by X ?
+         'NoSymbol' => 'NoSymbol',
+         'any' => 'NoSymbol', # Is this recognised by X ?
+         'VoidSymbol' => 'nop',
+         'voidsymbol' => 'nop', # Is this recognised by X ?
+         'ISO_Left_Tab' => 'ht',
+         'Clear' => 'nop',
+         'Pause' => 'saver',
+         'Scroll_Lock' => 'slock',
+         'Sys_Req' => 'nop',
+         'Delete' => 'fkey61',
+         'Codeinput' => 'nop',
+         'SingleCandidate' => 'nop',
+         'MultipleCandidate' => 'nop',
+         'PreviousCandidate' => 'nop',
+         'Home' => 'fkey49',
+         'Left' => 'fkey53',
+         'Up' => 'fkey50',
+         'Right' => 'fkey55',
+         'Down' => 'fkey58',
+         'Prior' => 'fkey51',
+         'Page_Up' => 'fkey51',
+         'Next' => 'fkey59',
+         'Page_Down' => 'fkey59',
+         'End' => 'fkey57',
+         'Begin' => 'fkey54',
+         'Select' => 'fkey57',
+         'Print' => 'nscr',
+         'Execute' => 'nop',
+         'Insert' => 'fkey60',
+         'Undo' => 'nop',
+         'Redo' => 'nop',
+         'Menu' => 'fkey64',
+         'Find' => 'fkey49',
+         'Cancel' => 'nop',
+         'Help' => 'slock', # Is this correct?
+         'Break' => 'nop',
+         'Num_Lock' => 'nlock',
+         'F1' => 'fkey01',
+         'F2' => 'fkey02',
+         'F3' => 'fkey03',
+         'F4' => 'fkey04',
+         'F5' => 'fkey05',
+         'F6' => 'fkey06',
+         'F7' => 'fkey07',
+         'F8' => 'fkey08',
+         'F9' => 'fkey09',
+         'F10' => 'fkey10',
+         'F11' => 'fkey11',
+         'L1' => 'fkey11',
+         'F12' => 'fkey12',
+         'L2' => 'fkey12',
+         'F13' => 'fkey13',
+         'L3' => 'fkey13',
+         'F14' => 'fkey14',
+         'L4' => 'fkey14',
+         'F15' => 'fkey15',
+         'L5' => 'fkey15',
+         'F16' => 'fkey16',
+         'L6' => 'fkey16',
+         'F17' => 'fkey17',
+         'L7' => 'fkey17',
+         'F18' => 'fkey18',
+         'L8' => 'fkey18',
+         'F19' => 'fkey19',
+         'L9' => 'fkey19',
+         'F20' => 'fkey20',
+         'L10' => 'fkey20',
+         'F21' => 'fkey21',
+         'R1' => 'fkey21',
+         'F22' => 'fkey22',
+         'R2' => 'fkey22',
+         'F23' => 'fkey23',
+         'R3' => 'fkey23',
+         'F24' => 'fkey24',
+         'R4' => 'fkey24',
+         'F25' => 'fkey25',
+         'R5' => 'fkey25',
+         'F26' => 'fkey26',
+         'R6' => 'fkey26',
+         'F27' => 'fkey27',
+         'R7' => 'fkey27',
+         'F28' => 'fkey28',
+         'R8' => 'fkey28',
+         'F29' => 'fkey29',
+         'R9' => 'fkey29',
+         'F30' => 'fkey30',
+         'R10' => 'fkey30',
+         'F31' => 'fkey31',
+         'R11' => 'fkey31',
+         'F32' => 'fkey32',
+         'R12' => 'fkey32',
+         'F33' => 'fkey33',
+         'R13' => 'fkey33',
+         'F34' => 'fkey34',
+         'R14' => 'fkey34',
+         'F35' => 'fkey35',
+         'R15' => 'fkey35',
+         'Terminate_Server' => 'nop',
+         'Pointer_EnableKeys' => 'nop',
+         'XF86_Switch_VT_1' => 'scr01',
+         'XF86_Switch_VT_2' => 'scr02',
+         'XF86_Switch_VT_3' => 'scr03',
+         'XF86_Switch_VT_4' => 'scr04',
+         'XF86_Switch_VT_5' => 'scr05',
+         'XF86_Switch_VT_6' => 'scr06',
+         'XF86_Switch_VT_7' => 'scr07',
+         'XF86_Switch_VT_8' => 'scr08',
+         'XF86_Switch_VT_9' => 'scr09',
+         'XF86_Switch_VT_10' => 'scr10',
+         'XF86_Switch_VT_11' => 'scr11',
+         'XF86_Switch_VT_12' => 'scr12',
+         'XF86_ClearGrab' => 'nop',
+         'XF86_Ungrab' => 'nop',
+         'XF86_Next_VMode' => 'nop',
+         'XF86_Prev_VMode' => 'nop',
+         'XF86Copy' => 'nop',
+         'XF86Cut' => 'nop',
+         'XF86Paste' => 'nop',
+         'XF86AudioLowerVolume' => 'nop',
+         'XF86AudioRaiseVolume' => 'nop',
+         'XF86AudioMute' => 'nop',
+         'XF86PowerOff' => 'nop',
+         'XF86AudioForward' => 'nop',
+         'XF86AudioMedia' => 'nop',
+         'XF86AudioNext' => 'nop',
+         'XF86AudioPause' => 'nop',
+         'XF86AudioPlay' => 'nop',
+         'XF86AudioPrev' => 'nop',
+         'XF86AudioRecord' => 'nop',
+         'XF86AudioRewind' => 'nop',
+         'XF86AudioStop' => 'nop',
+         'XF86Back' => 'nop',
+         'XF86Battery' => 'nop',
+         'XF86Bluetooth' => 'nop',
+         'XF86Calculator' => 'nop',
+         'XF86Close' => 'nop',
+         'XF86Display' => 'nop',
+         'XF86Documents' => 'nop',
+         'XF86DOS' => 'nop',
+         'XF86Eject' => 'nop',
+         'XF86Explorer' => 'nop',
+         'XF86Favorites' => 'nop',
+         'XF86Finance' => 'nop',
+         'XF86Forward' => 'nop',
+         'XF86HomePage' => 'nop',
+         'XF86KbdBrightnessDown' => 'nop',
+         'XF86KbdBrightnessUp' => 'nop',
+         'XF86KbdLightOnOff' => 'nop',
+         'XF86Launch1' => 'nop',
+         'XF86Launch2' => 'nop',
+         'XF86Launch3' => 'nop',
+         'XF86Launch4' => 'nop',
+         'XF86Mail' => 'nop',
+         'XF86MailForward' => 'nop',
+         'XF86MenuKB' => 'nop',
+         'XF86MonBrightnessDown' => 'nop',
+         'XF86MonBrightnessUp' => 'nop',
+         'XF86MyComputer' => 'nop',
+         'XF86New' => 'nop',
+         'XF86Phone' => 'nop',
+         'XF86Reload' => 'nop',
+         'XF86Reply' => 'nop',
+         'XF86RotateWindows' => 'nop',
+         'XF86Save' => 'nop',
+         'XF86ScreenSaver' => 'nop',
+         'XF86ScrollDown' => 'nop',
+         'XF86ScrollUp' => 'nop',
+         'XF86Search' => 'nop',
+         'XF86Send' => 'nop',
+         'XF86Shop' => 'nop',
+         'XF86Sleep' => 'nop',
+         'XF86Suspend' => 'nop',
+         'XF86Tools' => 'nop',
+         'XF86TouchpadToggle' => 'nop',
+         'XF86WakeUp' => 'nop',
+         'XF86WebCam' => 'nop',
+         'XF86WLAN' => 'nop',
+         'XF86WWW' => 'nop',
+         'XF86Xfer' => 'nop',
+         'braille_blank' => '2800', # What does correspond to these?
+         'braille_dot_1' => 'nop', 
+         'braille_dot_2' => 'nop',
+         'braille_dot_3' => 'nop',
+         'braille_dot_4' => 'nop',
+         'braille_dot_5' => 'nop',
+         'braille_dot_6' => 'nop',
+         'braille_dot_7' => 'nop',
+         'braille_dot_8' => 'nop',
+         'braille_dot_9' => 'nop',
+         'braille_dot_10' => 'nop',
+# I do not know the Unicodes of these
+         '0x1000' => 'nop', # Special symbol for X or syntax error?
+         '0x13a4' => 'nop', # Special symbol for X or syntax error?
+         '0xfe11' => 'nop', # Special symbol for X or syntax error?
+         'leftcaret' => 'nop', # Is this recognised by X ?
+         'guj_rra' => 'nop', # Is this recognised by X ?
+         'guj_nnna' => 'nop', # Is this recognised by X ?
+         'guj_llla' => 'nop', # Is this recognised by X ?
+         'gur_visarga' => 'nop', # Is this recognised by X ?
+         'gur_v_r' => 'nop', # Is this recognised by X ?
+         'gur_v_r_s' => 'nop', # Is this recognised by X ?
+         'Eisu_toggle' => 'nop', # Is this recognised by X ?
+         'Zenkaku_Hankaku' => 'nop', # Is this recognised by X ?
+         'Kanji' => 'nop', # Is this recognised by X ?
+         'Hangul' => 'nop', # Is this recognised by X ?
+         'Hangul_Hanja' => 'nop', # Is this recognised by X ?
+         'Henkan' => 'nop',
+         'Hiragana' => 'nop',
+         'Hiragana_Katakana' => 'nop',
+         'Katakana' => 'nop',
+         'Muhenkan' => 'nop',
+# XFree86 does not recognise these
+         'SunAudioLowerVolume' => 'nop',
+         'SunAudioRaiseVolume' => 'nop',
+         'SunAudioMute' => 'nop',
+         'SunCopy' => 'nop',
+         'SunCut' => 'nop',
+         'SunPaste' => 'nop',
+         'SunAgain' => 'nop',
+         'SunUndo' => 'nop',
+         'SunFind' => 'nop',
+         'SunStop' => 'nop',
+         'SunF36' => 'nop',
+         'SunF37' => 'nop',
+         'SunFront' => 'nop',
+         'SunOpen' => 'nop',
+         'SunPowerSwitch' => 'nop',
+         'SunPowerSwitchShift' => 'nop',
+         'SunProps' => 'nop',
+         'SunSys_Req' => 'nop',
+         'SunVideoDegauss' => 'nop',
+         'SunVideoLowerBrightness' => 'nop',
+         'SunVideoRaiseBrightness' => 'nop',
+        );
+    if ($backspace eq 'del') {
+        $xkbsym_table{'BackSpace'} = 'del';
+        $xkbsym_table{'Delete'} = 'fkey70';
+        $xkbsym_table{'KP_Delete'} = 'fkey70';
+    }
+} else {
+    %xkbsym_table = 
+        (%xkbsym_table,
+# Control symbols
+         'BackSpace' => 'Delete',  # 0008
+         'Tab' => 'Tab',           # 0009
+         'Linefeed' => 'Linefeed', # 000a
+         'Return' => 'Return',     # 000d
+         'Escape' => 'Escape',     # 001b
+# Keypad keys
+         'KP_Multiply' => 'KP_Multiply',
+         'KP_Add' => 'KP_Add',
+         'KP_Seprator' => 'KP_Comma', # Is this recognised by X ?
+         'KP_Separator' => 'KP_Comma',
+         'KP_Subtract' => 'KP_Subtract',
+         'KP_Decimal' => 'KP_Period',
+         'KP_Divide' => 'KP_Divide',
+         'KP_0' => 'KP_0',
+         'KP_1' => 'KP_1',
+         'KP_2' => 'KP_2',
+         'KP_3' => 'KP_3',
+         'KP_4' => 'KP_4',
+         'KP_5' => 'KP_5',
+         'KP_6' => 'KP_6',
+         'KP_7' => 'KP_7',
+         'KP_8' => 'KP_8',
+         'KP_9' => 'KP_9',
+         'KP_Enter' => 'KP_Enter',
+# Keypad keys (alternate level)
+         'KP_Home' => 'KP_7',
+         'KP_Left' => 'KP_4',
+         'KP_Up' => 'KP_8',
+         'KP_Right' => 'KP_6',
+         'KP_Down' => 'KP_2',
+         'KP_Prior' => 'KP_9',
+         'KP_Page_Up' => 'KP_9',
+         'KP_Next' => 'KP_3',
+         'KP_Page_Down' => 'KP_3',
+         'KP_End' => 'KP_1',
+         'KP_Begin' => 'VoidSymbol', # What does correspond to this?
+         'KP_Insert' => 'KP_0',
+         'KP_Delete' => 'VoidSymbol', # has to be 'KP_Period' or 'KP_Decimal'
+# Keypad keys with missing support in the kernel
+         'KP_Space' => 'space',
+         'KP_Equal' => 'equal',
+         'KP_Tab' => 'Tab',
+         'KP_F1' => 'F1',
+         'KP_F2' => 'F2',
+         'KP_F3' => 'F3',
+         'KP_F4' => 'F4',
+# Dead symbols
+         'dead_grave' => 'dead_grave',
+         'SunFA_Grave' => 'dead_grave', # Is this recognised by X ?
+         'dead_acute' => 'dead_acute',
+         'SunFA_Acute' => 'dead_acute', # Is this recognised by X ?
+         'dead_circumflex' => 'dead_circumflex',
+         'SunFA_Circum' => 'dead_circumflex', # Is this recognised by X ?
+         'dead_tilde' => 'dead_tilde',
+         'SunFA_Tilde' => 'dead_tilde',
+         'dead_breve' => 'dead_breve',
+         'dead_diaeresis' => 'dead_diaeresis',
+         'SunFA_Diaeresis' => 'dead_diaeresis', # Is this recognised by X ?
+         'dead_doubleacute' => 'dead_doubleacute',
+         'dead_caron' => 'dead_caron',
+         'dead_V' => 'dead_caron', # Is this correct?
+         'dead_cedilla' => 'dead_cedilla',
+         'SunFA_Cedilla' => 'dead_cedilla', # Is this recognised by X ?
+         'dead_ogonek' => 'dead_ogonek',
+# Dead symbols with no support in the kernel
+         'dead_macron' => '005f',         # underscore
+         'dead_abovedot' => '002e',       # period
+         'dead_abovering' => '00b0',      # degree
+         'dead_stroke' => '002d',         # hyphen
+         'dead_belowdot' => '0323',       # ???? Vietnamese or Romanian cedilla
+         'dead_hook' => '0309',           # ???? Vietnamese
+         'dead_belowcomma' => 'VoidSymbol',
+         'dead_currency' => 'VoidSymbol',
+         'dead_doublegrave' => 'VoidSymbol',
+         'dead_invertedbreve' => 'VoidSymbol',
+         'dead_iota' => '03b9',           # ???? Greek
+         'dead_horn' => '031b',           # ???? Greek
+         'dead_psili' => 'VoidSymbol',    # ???? Greek
+         'dead_dasia' => 'VoidSymbol',    # ???? Greek
+# Modifiers
+         'Multi_key' => 'Compose',
+         'Mode_switch' => 'ShiftL',
+         'script_switch' => 'VoidSymbol',
+         'Shift_L' => 'Shift',
+         'Shift_R' => 'Shift',
+         'Control_L' => 'Control',
+         'Control_R' => 'Control',
+         'Caps_Lock' => 'Caps_Lock',
+         'Shift_Lock' => 'Shift_Lock',
+         'Meta_L' => 'Alt',
+         'Meta_R' => 'Alt',
+         'Alt_L' => 'Alt',
+         'Alt_R' => 'Alt',
+         'Super_L' => 'Alt',
+         'Super_R' => 'Alt',
+         'Hyper_L' => 'Alt',
+         'Hyper_R' => 'Alt',
+         'ISO_Lock' => 'Caps_Lock',
+         'ISO_Level2_Latch' => 'Shift',
+         'ISO_Level3_Shift' => 'AltGr',
+         'ISO_Level3_Latch' => 'AltGr',
+         'ISO_Level3_Lock' => 'AltGr_Lock',
+         'ISO_Level5_Shift' => 'AltGr',
+         'ISO_Level5_Latch' => 'AltGr',
+         'ISO_Level5_Lock' => 'AltGr_Lock',
+         'ISO_Group_Shift' => 'ShiftL',
+         'ISO_Group_Latch' => 'ShiftL',
+         'ISO_Group_Lock' => 'ShiftL_Lock',
+         'ISO_Next_Group' => 'ShiftL_Lock',
+         'ISO_Next_Group_Lock' => 'ShiftL_Lock',
+         'ISO_Prev_Group' => 'ShiftL_Lock',
+         'ISO_Prev_Group_Lock' => 'ShiftL_Lock',
+         'ISO_First_Group' => 'ShiftL_Lock',
+         'ISO_First_Group_Lock' => 'ShiftL_Lock',
+         'ISO_Last_Group' => 'ShiftL_Lock',
+         'ISO_Last_Group_Lock' => 'ShiftL_Lock',
+# Other symbols
+         'NoAction' => 'NoSymbol', # Is this recognised by X ?
+         'nosymbol' => 'NoSymbol', # Is this recognised by X ?
+         'Nosymbol' => 'NoSymbol', # Is this recognised by X ?
+         'noSymbol' => 'NoSymbol', # Is this recognised by X ?
+         'NoSymbol' => 'NoSymbol',
+         'any' => 'NoSymbol', # Is this recognised by X ?
+         'VoidSymbol' => 'VoidSymbol',
+         'voidsymbol' => 'VoidSymbol', # Is this recognised by X ?
+         'ISO_Left_Tab' => 'Tab',
+         'Clear' => 'VoidSymbol',
+         'Pause' => 'Pause',
+         'Scroll_Lock' => 'Scroll_Lock',
+         'Sys_Req' => 'Last_Console',
+         'Delete' => 'Remove',
+         'Codeinput' => 'VoidSymbol',
+         'SingleCandidate' => 'VoidSymbol',
+         'MultipleCandidate' => 'VoidSymbol',
+         'PreviousCandidate' => 'VoidSymbol',
+         'Home' => 'Home',
+         'Left' => 'Left',
+         'Up' => 'Up',
+         'Right' => 'Right',
+         'Down' => 'Down',
+         'Prior' => 'Prior',
+         'Page_Up' => 'PageUp',
+         'Next' => 'Next',
+         'Page_Down' => 'PageDown',
+         'End' => 'End',
+         'Begin' => 'VoidSymbol',
+         'Select' => 'Select',
+         'Print' => 'Control_backslash',
+         'Execute' => 'VoidSymbol',
+         'Insert' => 'Insert',
+         'Undo' => 'VoidSymbol',
+         'Redo' => 'VoidSymbol',
+         'Menu' => 'VoidSymbol',
+         'Find' => 'Find',
+         'Cancel' => 'VoidSymbol',
+         'Help' => 'Help',
+         'Break' => 'Break',
+         'Num_Lock' => 'Num_Lock',
+         'F1' => 'F1',
+         'F2' => 'F2',
+         'F3' => 'F3',
+         'F4' => 'F4',
+         'F5' => 'F5',
+         'F6' => 'F6',
+         'F7' => 'F7',
+         'F8' => 'F8',
+         'F9' => 'F9',
+         'F10' => 'F10',
+         'F11' => 'F11',
+         'L1' => 'F11',
+         'F12' => 'F12',
+         'L2' => 'F12',
+         'F13' => 'F13',
+         'L3' => 'F13',
+         'F14' => 'F14',
+         'L4' => 'F14',
+         'F15' => 'F15',
+         'L5' => 'F15',
+         'F16' => 'F16',
+         'L6' => 'F16',
+         'F17' => 'F17',
+         'L7' => 'F17',
+         'F18' => 'F18',
+         'L8' => 'F18',
+         'F19' => 'F19',
+         'L9' => 'F19',
+         'F20' => 'F20',
+         'L10' => 'F20',
+         'F21' => 'F21',
+         'R1' => 'F21',
+         'F22' => 'F22',
+         'R2' => 'F22',
+         'F23' => 'F23',
+         'R3' => 'F23',
+         'F24' => 'F24',
+         'R4' => 'F24',
+         'F25' => 'F25',
+         'R5' => 'F25',
+         'F26' => 'F26',
+         'R6' => 'F26',
+         'F27' => 'F27',
+         'R7' => 'F27',
+         'F28' => 'F28',
+         'R8' => 'F28',
+         'F29' => 'F29',
+         'R9' => 'F29',
+         'F30' => 'F30',
+         'R10' => 'F30',
+         'F31' => 'F31',
+         'R11' => 'F31',
+         'F32' => 'F32',
+         'R12' => 'F32',
+         'F33' => 'F33',
+         'R13' => 'F33',
+         'F34' => 'F34',
+         'R14' => 'F34',
+         'F35' => 'F35',
+         'R15' => 'F35',
+         'Terminate_Server' => 'VoidSymbol',
+         'Pointer_EnableKeys' => 'VoidSymbol',
+         'XF86_Switch_VT_1' => 'Console_1',
+         'XF86_Switch_VT_2' => 'Console_2',
+         'XF86_Switch_VT_3' => 'Console_3',
+         'XF86_Switch_VT_4' => 'Console_4',
+         'XF86_Switch_VT_5' => 'Console_5',
+         'XF86_Switch_VT_6' => 'Console_6',
+         'XF86_Switch_VT_7' => 'Console_7',
+         'XF86_Switch_VT_8' => 'Console_8',
+         'XF86_Switch_VT_9' => 'Console_9',
+         'XF86_Switch_VT_10' => 'Console_10',
+         'XF86_Switch_VT_11' => 'Console_11',
+         'XF86_Switch_VT_12' => 'Console_12',
+         'XF86_ClearGrab' => 'VoidSymbol',
+         'XF86_Ungrab' => 'VoidSymbol',
+         'XF86_Next_VMode' => 'VoidSymbol',
+         'XF86_Prev_VMode' => 'VoidSymbol',
+         'XF86Copy' => 'VoidSymbol',
+         'XF86Cut' => 'VoidSymbol',
+         'XF86Paste' => 'VoidSymbol',
+         'XF86AudioLowerVolume' => 'VoidSymbol',
+         'XF86AudioRaiseVolume' => 'VoidSymbol',
+         'XF86AudioMute' => 'VoidSymbol',
+         'XF86PowerOff' => 'VoidSymbol',
+         'XF86AudioForward' => 'VoidSymbol',
+         'XF86AudioMedia' => 'VoidSymbol',
+         'XF86AudioNext' => 'VoidSymbol',
+         'XF86AudioPause' => 'VoidSymbol',
+         'XF86AudioPlay' => 'VoidSymbol',
+         'XF86AudioPrev' => 'VoidSymbol',
+         'XF86AudioRecord' => 'VoidSymbol',
+         'XF86AudioRewind' => 'VoidSymbol',
+         'XF86AudioStop' => 'VoidSymbol',
+         'XF86Back' => 'VoidSymbol',
+         'XF86Battery' => 'VoidSymbol',
+         'XF86Bluetooth' => 'VoidSymbol',
+         'XF86Calculator' => 'VoidSymbol',
+         'XF86Close' => 'VoidSymbol',
+         'XF86Display' => 'VoidSymbol',
+         'XF86Documents' => 'VoidSymbol',
+         'XF86DOS' => 'VoidSymbol',
+         'XF86Eject' => 'VoidSymbol',
+         'XF86Explorer' => 'VoidSymbol',
+         'XF86Favorites' => 'VoidSymbol',
+         'XF86Finance' => 'VoidSymbol',
+         'XF86Forward' => 'VoidSymbol',
+         'XF86HomePage' => 'VoidSymbol',
+         'XF86KbdBrightnessDown' => 'VoidSymbol',
+         'XF86KbdBrightnessUp' => 'VoidSymbol',
+         'XF86KbdLightOnOff' => 'VoidSymbol',
+         'XF86Launch1' => 'VoidSymbol',
+         'XF86Launch2' => 'VoidSymbol',
+         'XF86Launch3' => 'VoidSymbol',
+         'XF86Launch4' => 'VoidSymbol',
+         'XF86Mail' => 'VoidSymbol',
+         'XF86MailForward' => 'VoidSymbol',
+         'XF86MenuKB' => 'VoidSymbol',
+         'XF86MonBrightnessDown' => 'VoidSymbol',
+         'XF86MonBrightnessUp' => 'VoidSymbol',
+         'XF86MyComputer' => 'VoidSymbol',
+         'XF86New' => 'VoidSymbol',
+         'XF86Phone' => 'VoidSymbol',
+         'XF86Reload' => 'VoidSymbol',
+         'XF86Reply' => 'VoidSymbol',
+         'XF86RotateWindows' => 'VoidSymbol',
+         'XF86Save' => 'VoidSymbol',
+         'XF86ScreenSaver' => 'VoidSymbol',
+         'XF86ScrollDown' => 'VoidSymbol',
+         'XF86ScrollUp' => 'VoidSymbol',
+         'XF86Search' => 'VoidSymbol',
+         'XF86Send' => 'VoidSymbol',
+         'XF86Shop' => 'VoidSymbol',
+         'XF86Sleep' => 'VoidSymbol',
+         'XF86Suspend' => 'VoidSymbol',
+         'XF86Tools' => 'VoidSymbol',
+         'XF86TouchpadToggle' => 'VoidSymbol',
+         'XF86WakeUp' => 'VoidSymbol',
+         'XF86WebCam' => 'VoidSymbol',
+         'XF86WLAN' => 'VoidSymbol',
+         'XF86WWW' => 'VoidSymbol',
+         'XF86Xfer' => 'VoidSymbol',
+         'braille_blank' => 'Brl_blank',
+         'braille_dot_1' => 'Brl_dot1',
+         'braille_dot_2' => 'Brl_dot2',
+         'braille_dot_3' => 'Brl_dot3',
+         'braille_dot_4' => 'Brl_dot4',
+         'braille_dot_5' => 'Brl_dot5',
+         'braille_dot_6' => 'Brl_dot6',
+         'braille_dot_7' => 'Brl_dot7',
+         'braille_dot_8' => 'Brl_dot8',
+         'braille_dot_9' => 'Brl_dot9',
+         'braille_dot_10' => 'Brl_dot10',
+# I do not know the Unicodes of these
+         '0x1000' => 'VoidSymbol', # Special symbol for X or syntax error?
+         '0x13a4' => 'VoidSymbol', # Special symbol for X or syntax error?
+         '0xfe11' => 'VoidSymbol', # Special symbol for X or syntax error?
+         'leftcaret' => 'VoidSymbol', # Is this recognised by X ?
+         'guj_rra' => 'VoidSymbol', # Is this recognised by X ?
+         'guj_nnna' => 'VoidSymbol', # Is this recognised by X ?
+         'guj_llla' => 'VoidSymbol', # Is this recognised by X ?
+         'gur_visarga' => 'VoidSymbol', # Is this recognised by X ?
+         'gur_v_r' => 'VoidSymbol', # Is this recognised by X ?
+         'gur_v_r_s' => 'VoidSymbol', # Is this recognised by X ?
+         'Eisu_toggle' => 'VoidSymbol', # Is this recognised by X ?
+         'Zenkaku_Hankaku' => 'VoidSymbol', # Is this recognised by X ?
+         'Kanji' => 'VoidSymbol', # Is this recognised by X ?
+         'Hangul' => 'VoidSymbol', # Is this recognised by X ?
+         'Hangul_Hanja' => 'VoidSymbol', # Is this recognised by X ?
+         'Henkan' => 'VoidSymbol',
+         'Hiragana' => 'VoidSymbol',
+         'Hiragana_Katakana' => 'VoidSymbol',
+         'Katakana' => 'VoidSymbol',
+         'Muhenkan' => 'VoidSymbol',
+# XFree86 does not recognise these
+         'SunAudioLowerVolume' => 'VoidSymbol',
+         'SunAudioRaiseVolume' => 'VoidSymbol',
+         'SunAudioMute' => 'VoidSymbol',
+         'SunCopy' => 'VoidSymbol',
+         'SunCut' => 'VoidSymbol',
+         'SunPaste' => 'VoidSymbol',
+         'SunAgain' => 'VoidSymbol',
+         'SunUndo' => 'VoidSymbol',
+         'SunFind' => 'VoidSymbol',
+         'SunStop' => 'VoidSymbol',
+         'SunF36' => 'VoidSymbol',
+         'SunF37' => 'VoidSymbol',
+         'SunFront' => 'VoidSymbol',
+         'SunOpen' => 'VoidSymbol',
+         'SunPowerSwitch' => 'VoidSymbol',
+         'SunPowerSwitchShift' => 'VoidSymbol',
+         'SunProps' => 'VoidSymbol',
+         'SunSys_Req' => 'VoidSymbol',
+         'SunVideoDegauss' => 'VoidSymbol',
+         'SunVideoLowerBrightness' => 'VoidSymbol',
+         'SunVideoRaiseBrightness' => 'VoidSymbol',
+        );
+
+    if ($compact) {
+        $xkbsym_table{'Mode_switch'} = 'AltGr';
+        $xkbsym_table{'ISO_Group_Shift'} = 'AltGr';
+        $xkbsym_table{'ISO_Group_Latch'} = 'AltGr';
+        $xkbsym_table{'ISO_Group_Lock'} = 'AltGr_Lock';
+        $xkbsym_table{'ISO_Next_Group'} = 'AltGr_Lock';
+        $xkbsym_table{'ISO_Next_Group_Lock'} = 'AltGr_Lock';
+        $xkbsym_table{'ISO_Prev_Group'} = 'AltGr_Lock';
+        $xkbsym_table{'ISO_Prev_Group_Lock'} = 'AltGr_Lock';
+        $xkbsym_table{'ISO_First_Group'} = 'AltGr_Lock';
+        $xkbsym_table{'ISO_First_Group_Lock'} = 'AltGr_Lock';
+        $xkbsym_table{'ISO_Last_Group'} = 'AltGr_Lock';
+        $xkbsym_table{'ISO_Last_Group_Lock'} = 'AltGr_Lock';
+    }
+    if ($backspace eq 'bs') {
+        $xkbsym_table{'BackSpace'} = 'BackSpace';
+        $xkbsym_table{'Delete'} = 'Delete';
+    }
+}
+
+my $voidsymbol = $freebsd ? 'nop' : 'VoidSymbol';
+
+my @controlsyms;
+my @metasyms;
+my @metacontrolsyms;
+my %controlsyms_hash;
+
+{
+    if ($freebsd) {
+
+        %controlsyms_hash = (
+            'nul' => 0x00,
+            'soh' => 0x01,
+            'stx' => 0x02,
+            'etx' => 0x03,
+            'eot' => 0x04,
+            'enq' => 0x05,
+            'ack' => 0x06,
+            'bel' => 0x07,
+            'bs' => 0x08,
+            'ht' => 0x09,
+            'nl' => 0x0a,
+            'vt' => 0x0b,
+            'ff' => 0x0c,
+            'cr' => 0x0d,
+            'so' => 0x0e,
+            'si' => 0x0f,
+            'dle' => 0x10,
+            'dc1' => 0x11,
+            'dc2' => 0x12,
+            'dc3' => 0x13,
+            'dc4' => 0x14,
+            'nak' => 0x15,
+            'syn' => 0x16,
+            'etb' => 0x17,
+            'can' => 0x18,
+            'em' => 0x19,
+            'sub' => 0x1a,
+            'esc' => 0x1b,
+            'fs' => 0x1c,
+            'gs' => 0x1d,
+            'rs' => 0x1e,
+            'us' => 0x1f,
+            'del' => 0x7f,
+            );
+    } else {
+        %controlsyms_hash = (
+            'nul' => 0x00,
+            'Control_a' => 0x01,
+            'Control_b' => 0x02,
+            'Control_c' => 0x03,
+            'Control_d' => 0x04,
+            'Control_e' => 0x05,
+            'Control_f' => 0x06,
+            'Control_g' => 0x07,
+            'BackSpace' => 0x08,
+            'Tab' => 0x09,
+            'Linefeed' => 0x0a,
+            'Control_k' => 0x0b,
+            'Control_l' => 0x0c,
+            'Return' => 0x0d,
+            'Control_n' => 0x0e,
+            'Control_o' => 0x0f,
+            'Control_p' => 0x10,
+            'Control_q' => 0x11,
+            'Control_r' => 0x12,
+            'Control_s' => 0x13,
+            'Control_t' => 0x14,
+            'Control_u' => 0x15,
+            'Control_v' => 0x16,
+            'Control_w' => 0x17,
+            'Control_x' => 0x18,
+            'Control_y' => 0x19,
+            'Control_z' => 0x1a,
+            'Escape' => 0x1b,
+            'Control_backslash' => 0x1c,
+            'Control_bracketright' => 0x1d,
+            'Control_asciicircum' => 0x1e,
+            'Control_underscore' => 0x1f,
+            'Delete' => 0x7f,
+            );
+    }        
+    for my $special (keys %controlsyms_hash) {
+        $controlsyms[$controlsyms_hash{$special}] = $special;
+    }
+    for my $code (0 .. 255) {
+        if (! defined $controlsyms[$code]) {
+            if ($code >= 64 && $code <= 127
+                && defined (my $special = $controlsyms[$code % 32])) {
+                $controlsyms[$code] = $special;
+            } else {
+                $controlsyms[$code] = $voidsymbol;
+            }
+        }
+    }
+# Ctrl + BS = DEL, Ctrl + DEL = BS
+    if ($freebsd) {
+        $controlsyms[0x08] = 'del';
+        $controlsyms[0x7f] = 'bs';
+    } else {
+        $controlsyms[0x08] = 'Delete';
+        $controlsyms[0x7f] = 'BackSpace';
+    }
+# Some particularities of FreeBSD and Linux
+    if ($freebsd) {
+        $controlsyms[0x0d] = 'nl';                     # Ctrl+m = ^J
+        $controlsyms[0x20] = 'nul';                    # Ctrl+space = ^@
+        $controlsyms[0x3f] = 'del';                    # Ctrl+? = ^?
+    } else {
+        $controlsyms[0x0d] = 'Control_m';              # I don't know
+        $controlsyms[0x20] = 'nul';                    # Ctrl+space = ^@
+        $controlsyms[0x2e] = 'Compose';                # Ctrl+. = Compose
+        $controlsyms[0x3f] = 'Delete';                 # Ctrl+? = ^?
+# I suppose these are not necessary:
+        # $controlsyms[0x27] = 'Control_g';              # Ctrl+' = ^G
+        # $controlsyms[0x32] = 'nul';                    # 2
+        # $controlsyms[0x33] = 'Escape';                 # 3
+        # $controlsyms[0x34] = 'Control_backslash';      # 4
+        # $controlsyms[0x35] = 'Control_bracketright';   # 5
+        # $controlsyms[0x36] = 'Control_asciicircum';    # 6
+        # $controlsyms[0x37] = 'Control_underscore';     # 7
+        # $controlsyms[0x38] = 'Delete';                 # 8
+    }
+
+    my %metasyms_hash = (
+	' ' => 'space',
+	'`' => 'grave',
+	'^' => 'asciicircum',
+	'~' => 'asciitilde',
+	'<' => 'less',
+	'=' => 'equal',
+	'>' => 'greater',
+	'|' => 'bar',
+	'_' => 'underscore',
+	'-' => 'minus',
+	',' => 'comma',
+	';' => 'semicolon',
+	':' => 'colon',
+	'!' => 'exclam',
+	'?' => 'question',
+	'/' => 'slash',
+	'.' => 'period',
+	'\'' => 'apostrophe',
+	'"' => 'quotedbl',
+	'(' => 'parenleft',
+	')' => 'parenright',
+	'[' => 'bracketleft',
+	']' => 'bracketright',
+	'{' => 'braceleft',
+	'}' => 'braceright',
+	'@' => 'at',
+	'$' => 'dollar',
+	'*' => 'asterisk',
+	'\\' => 'backslash',
+	'&' => 'ampersand',
+	'#' => 'numbersign',
+	'%' => 'percent',
+	'+' => 'plus',
+	'0' => 'zero',
+	'1' => 'one',
+	'2' => 'two',
+	'3' => 'three',
+	'4' => 'four',
+	'5' => 'five',
+	'6' => 'six',
+	'7' => 'seven',
+	'8' => 'eight',
+	'9' => 'nine',
+	chr(0x08) => 'BackSpace',
+	chr(0x09) => 'Tab',
+	chr(0x0a) => 'Linefeed',
+	chr(0x0d) => 'Control_m',
+	chr(0x1b) => 'Escape',
+        chr(0x1c) => 'Control_backslash',
+	chr(0x7f) => 'Delete',
+    );
+    
+    for my $code (0 .. 255) {
+	my $sym = chr($code);
+	if (defined (my $special = $metasyms_hash{$sym})) {
+	    $sym = $special;
+	}
+	$metasyms[$code] = "Meta_". $sym;
+    }
+
+    for my $code (0 .. 255) {
+	my $control = $controlsyms[$code];
+	if ($control eq 'Compose') {
+	    $metacontrolsyms[$code] = 'Compose';
+	} elsif ($control eq 'Return') {
+	    $metacontrolsyms[$code] = 'Meta_Control_m';
+	} elsif ($control eq 'NoSymbol') {
+	    $metacontrolsyms[$code] = 'NoSymbol';
+	} elsif ($control eq 'VoidSymbol') {
+	    $metacontrolsyms[$code] = 'VoidSymbol';
+	} else {
+	    $metacontrolsyms[$code] = 'Meta_'. $control;
+	}
+    }
+}
+
+############ GLOBAL FUNCTIONS #########################################
+
+# Looks for $_[0] in the known directories and returns ready to use
+# file name
+sub xfilename {
+    my $file = $_[0];
+    (my $base = $file) =~ s/.*\/(.+)/$1/;
+    for my $dir (@xdirs) {
+	if (-f "$dir/$file") {
+	    return "$dir/$file";
+	}
+	if (-f "$dir/$base") {
+	    return "$dir/$base";
+	}
+    }
+    die "$0: Can not find file \"$file\" in any known directory\n";
+}
+
+########### READ THE RULES FILE #######################################
+
+# The string $_[0] matches the pattern $_[1]. 
+# The pattern may be "*", a variable name, or a plain string.
+# If the string is 'OPTIONS' then match the pattern against any of the
+# options from @options.
+sub matches_pattern {
+    my ($string, $pattern) = @_;
+    if ($string eq 'OPTIONS') {
+	for my $option (@options) {
+	    next if ($option eq '');
+	    if ($pattern eq $option) {
+		return 1;
+	    }
+	}
+    } else {
+	if ($pattern eq '*') {
+	    return $string ne '';
+	}
+	if ($pattern =~ /^\$([a-zA-Z0-9_]+)$/) {
+	    for my $member (@{$rules_variables{$1}}) {
+		if ($string eq $member) {
+		    return 1;
+		}
+	    }
+	    return 0;
+	}
+	if ($string eq $pattern) {
+	    return 1;
+	}
+    }
+    return 0;
+}
+
+if (@layouts) {
+    for my $i (0 .. $#layouts) {
+	if (! defined $variants[$i]) {
+	    $variants[$i] = '';
+	}
+    }
+    my $rules_keycodes;
+    my $rules_symbols;
+    open (RULES, xfilename ("rules/$rules"))
+	or die "$0: ". xfilename ("rules/$rules") .": $!\n";
+    my $oldline = '';
+    my @antecedents;
+    my @consequents;
+    my $match_found = 0;
+    while (<RULES>) {
+	next if (/^\s*\/\//);
+	next if (/^\s*$/);
+	chomp;
+	s/^\s*//;
+	s/\s+/ /g;
+	if ($oldline) {
+	    $_ = $oldline . $_;
+	    $oldline = '';
+	}
+	if (s/\\$/ /) {
+	    $oldline = $_;
+	    next;
+	}
+	if (/^! ?\$([a-zA-Z0-9_]+) ?= ?(.+)$/) {
+	    $rules_variables{$1} = [ split ' ', $2 ];
+	    next;
+	}
+	if (/^! ?(.+)= ?(.+)$/) {
+	    @antecedents = split ' ', $1;
+	    @consequents = split ' ', $2;
+	    foreach my $i (0 .. $#antecedents) {
+		if ($antecedents[$i] eq 'model') {
+		    $antecedents[$i] = $model;
+		} elsif ($antecedents[$i] eq 'layout' && @layouts == 1) {
+		    $antecedents[$i] = $layouts[0];
+		} elsif ($antecedents[$i] =~ /layout\[([1-4])\]/) {
+		    if (@layouts > 1) {
+			$antecedents[$i] = $layouts[$1 - 1];
+		    } else {
+			$antecedents[$i] = '';
+		    }
+		} elsif ($antecedents[$i] eq 'variant' && @variants == 1) {
+		    $antecedents[$i] = $variants[0];
+		} elsif ($antecedents[$i] =~ /variant\[([1-4])\]/) {
+		    if (@variants > 1) {
+			$antecedents[$i] = $variants[$1 - 1];
+		    } else {
+			$antecedents[$i] = '';
+		    }
+		} elsif ($antecedents[$i] eq 'option') {
+		    $antecedents[$i] = 'OPTIONS';
+		} elsif ($antecedents[$i] eq 'layout'
+			 || $antecedents[$i] eq 'variant') {
+		    $antecedents[$i] = '';
+		} else {
+                    warning "Unknown name \"$antecedents[$i]\" in the following line in \"rules/$rules\":\n";
+                    warning "$_\n";
+		    $antecedents[$i] = '';
+		}
+		if (! defined $antecedents[$i]) {
+		    $antecedents[$i] = '';
+		}
+	    }
+	    $match_found = 0;
+	    next;
+	}
+	if (/^(.+)= ?(.+)$/) {
+	    next if ($match_found);
+	    my @antecedent_patterns = split ' ', $1;
+	    my $consequent_str = $2;
+	    if (@antecedent_patterns != @antecedents ) {
+		warning "Bad number of antecedents in the following line in \"rules/$rules\":\n";
+                warning "$_\n";
+                next;
+            }
+	    my $matches = 1;
+	    for my $i (0 .. $#antecedents) {
+		if (! matches_pattern ($antecedents[$i], 
+				       $antecedent_patterns[$i])) {
+		    $matches = 0;
+		    last;
+		}
+	    }
+	    if ($matches) {
+		$match_found = $antecedents[0] ne 'OPTIONS';
+		my @consequent_values = split ' ', $2;
+                if (@consequent_values != @consequents) {
+                    warning "Bad number of consequents in the following line in \"rules/$rules\":\n";
+                    warning "$_\n";
+                }
+		for my $i (0 .. $#consequents) {
+                    # The purpose of the semicolons is to make %(v) and %_v
+                    # empty strings if %v is an empty string
+		    $consequent_values[$i] =~ s/%\(/\(;%/g;
+		    $consequent_values[$i] =~ s/%_/_;%/g;
+		    $consequent_values[$i] =~ s/(%[lvm](\[[1-4]\])?)/$1;/g;
+		    $consequent_values[$i] =~ s/%m/$model/g;
+		    $consequent_values[$i] =~ s/%l\[1\]/$layouts[0]/g;
+		    $consequent_values[$i] =~ s/%l\[2\]/$layouts[1]/g;
+		    $consequent_values[$i] =~ s/%l\[3\]/$layouts[2]/g;
+		    $consequent_values[$i] =~ s/%l\[4\]/$layouts[3]/g;
+		    $consequent_values[$i] =~ s/%l/$layouts[0]/g;
+		    $consequent_values[$i] =~ s/%v\[1\]/$variants[0]/g;
+		    $consequent_values[$i] =~ s/%v\[2\]/$variants[1]/g;
+		    $consequent_values[$i] =~ s/%v\[3\]/$variants[2]/g;
+		    $consequent_values[$i] =~ s/%v\[4\]/$variants[3]/g;
+		    $consequent_values[$i] =~ s/%v/$variants[0]/g;
+		    $consequent_values[$i] =~ s/\(;;\)//g;
+		    $consequent_values[$i] =~ s/_;;//g;
+		    $consequent_values[$i] =~ s/;//g;
+		    if ($consequent_values[$i] =~ /^\+/) {
+			if ($consequents[$i] eq 'keycodes') {
+			    $rules_keycodes = $rules_keycodes .
+				$consequent_values[$i];
+			} elsif ($consequents[$i] eq 'symbols') {
+			    $rules_symbols = $rules_symbols .
+				$consequent_values[$i];
+			}
+		    } else {
+			if ($consequents[$i] eq 'keycodes') {
+			    if (! $rules_keycodes) {
+				$rules_keycodes = $consequent_values[$i];
+			    }
+			} elsif ($consequents[$i] eq 'symbols') {
+			    if (! $rules_symbols) {
+				$rules_symbols = $consequent_values[$i];
+			    }
+			}
+		    }
+		}
+	    }
+	    next;
+	}    
+	warning "Syntax error in the following line in \"rules/$rules\":\n";
+        warning "$_\n";
+        die;
+    }
+    close RULES;
+
+    if ($verbosity >= 1) {
+	print STDERR  "Acording to the rules file:\n"
+	    ." keycodes = $rules_keycodes\n"
+	    ." symbols = $rules_symbols\n";
+    }
+
+    if (! $keycodes) {
+	$keycodes = $rules_keycodes;
+    }
+    if (! $symbols) {
+	$symbols = $rules_symbols;
+    }
+}
+
+if (! $keycodes) {
+    die "$0: No keycodes, nor layout specified\n";
+}
+if (! $symbols) {
+    die "$0: No symbols, nor layout specified\n";
+}
+
+########### COMPUTE ARCH ###########################################
+
+if ($keycodes =~ /(^|\+|\|)macintosh\(old\)($|\+|\|)/) {
+    $arch = 'macintosh';
+} elsif ($keycodes =~ /(^|\+|\|)ataritt(\([^\)]*\))?($|\+|\|)/) {
+    $arch = 'ataritt';
+} elsif ($keycodes =~ /(^|\+|\|)amiga(\([^\)]*\))?($|\+|\|)/) {
+    $arch = 'amiga';
+} elsif ($keycodes =~ /(^|\+|\|)sun(\(type[45][^\)]*\))?($|\+|\|)/) {
+    $arch = 'sun';
+} elsif ($keycodes =~ /(^|\+|\|)evdev(\([^\)]*\))?($|\+|\|)/) {
+    $arch = 'evdev';
+}
+
+########### READ ACM ###############################################
+
+if ($charmap) {
+    for my $acmfile ("$installdir/share/consoletrans/${charmap}",
+                     "$installdir/share/consoletrans/${charmap}.gz",
+                     "$installdir/share/consoletrans/${charmap}.acm",
+                     "$installdir/share/consoletrans/${charmap}.acm.gz",
+                     "/usr/share/consoletrans/${charmap}",
+                     "/usr/share/consoletrans/${charmap}.gz",
+                     "/usr/share/consoletrans/${charmap}.acm",
+                     "/usr/share/consoletrans/${charmap}.acm.gz",
+                     "${charmap}") {
+	if (-f $acmfile) {
+	    $acm = $acmfile;
+	    last;
+	}
+    }
+    (-f $acm) or die "$0: no ACM for ${charmap} exists\n";
+    if ($acm =~ /gz$/) {
+	open (ACM, '-|:utf8', "zcat $acm") or die "$0: $acm: $!\n";
+    } else {
+	open (ACM, '<:utf8', $acm) or die "$0: $acm: $!\n";
+    }
+    while (<ACM>) {
+	s/\#.*//;
+	chomp;
+	next unless (/[^\s]/);
+	if (/^\s*0x([0-9a-fA-F]{1,2})\s+\'([^\']+)\'\s*$/) {
+	    my $uni = ord ($2);
+	    my $c = hex ($1);
+	    $acmtable{$uni} = $c;
+	} else {
+	    die "$0: Syntax error in ACM file: $_\n";
+	}
+    }
+    close ACM;
+}
+
+########### PARSING ###############################################
+
+# Report a syntax error in $filename. $_[0] should describe what was
+# expected at $stream.
+sub syntax_error {
+    die "$0: instead of \"". (substr ($stream, 0, 50))
+	."\" in $filename expected $_[0].\n";
+}
+
+# Opens the text file $_[0], reads it and saves its contents in $stream
+# The comments are removed, all new lines are replaced by spaces and
+# all redundant spaces are removed.
+sub file_to_string {
+    my $file = $_[0];
+    my $string = '';
+    open (FILE, "$file") or die "$0: $file: $!\n";
+    while (<FILE>) {
+	chomp;
+	s{//.*}{};
+	s{\#.*}{};
+	$string = $string . $_ .' ';
+    }
+    close FILE;
+    
+    my $normalized = '';
+    my $final_letter = 0;
+    while ($string) {
+	if ($string =~ s/^\s+// && $final_letter && $string =~ /^[a-zA-Z0-9_]/) {
+	    $normalized = $normalized .' ';
+	    $final_letter = 0;
+	}
+	if ($string =~ s/^([^\"\s]+)//) {
+	    $normalized = $normalized . $1;
+	    $final_letter = ($1 =~ /[a-zA-Z0-9_]$/);
+	    next;
+	}
+	if ($string =~ s/^(\"[^\"]*(\"|$))//) {
+	    $normalized = $normalized . $1;
+	    $final_letter = 0;
+	    if ($2 ne '"') {
+		die "$0: missing quote in ". (substr ($1, 0, 50)) ."...\n";
+	    }
+	    next;
+	}
+	(! $string ) or die "Internal error";
+    }
+    $stream = $normalized;
+}
+
+# removes from $stream initial sequence of xkb flags (default, partial,
+# hidden, etc.) Returns true if the "default" flag was among them.
+sub xkb_flags {
+    my $default = 0;
+    while ($stream =~ s/^(default|partial|hidden
+			  |alphanumeric_keys|modifier_keys
+			  |keypad_keys|function_keys
+			  |alternate_group)\s?(.*)/$2/ix) {
+	$default = 1 if ($1 =~ /default/i);
+    }
+    return $default;
+}
+
+# Removes and returns identifier from $stream. 
+sub xkb_identifier {
+    if ($stream =~ s/^([a-zA-Z0-1_]+) ?(.*)/$2/) {
+	return $1;
+    } else {
+	syntax_error "identifier";
+    }
+}
+
+# Removes and returns a string from $stream.
+sub xkb_string {
+    if ($stream =~ /^\"([^\"]*)\"(.*)/) {
+	$stream = $2;
+	return $1;
+    } else {
+	syntax_error "string";
+    }
+}
+
+# Removes an include method name from $stream and returns $alternate_method,
+# $augment_method, $replace_method, or $override_method.  If $stream
+# does not start with a method name, return the default method (i.e. $method)
+sub xkb_method {
+    if ($stream =~ s/^alternate ?(.*)/$1/i) {
+	return $alternate_method;
+    } elsif ($stream =~ s/^augment ?(.*)/$1/i) {
+	return $augment_method;
+    } elsif ($stream =~ s/^replace ?(.*)/$1/i) {
+	return $replace_method;
+    } elsif ($stream =~ s/^override ?(.*)/$1/i) {
+	return $override_method;
+    } else {
+	return $method;
+    }
+}
+
+# If $stream starts with an include statement - process it and return true.
+# Otherwise return false. $_[0] is the file type ("symbols" or "keycodes")
+sub xkb_include {
+    my $file_type = $_[0];
+    if ($stream =~ s/^(include|replace|augment|override)\"([^\"]*)\";?
+                        (.*)/$3/ix) {
+	my $method_name = $1;
+	my $include_request = $2;
+	if ($method != $ignore_method) {
+	    my $oldmethod = $method;
+	    if ($method_name =~ /replace/i) {
+		$method = $replace_method;
+	    } elsif ($method_name =~ /augment/i) {
+		$method = $augment_method;
+	    } elsif ($method_name =~ /override/i) {
+		$method = $override_method;
+	    }
+	    &include_xkb_file ($file_type, $include_request);
+	    $method = $oldmethod;
+	}
+	return 1;
+    } else {
+	return 0;
+    }
+}
+
+sub xkb_keycodes_definitions {
+    my $oldmethod = $method;
+    while ($stream) {
+	$method = $oldmethod;
+
+	if (xkb_include ('keycodes')) {
+	    next;
+	}
+
+	$method = xkb_method ();
+	
+	if ($stream =~ (s/^(minimum|maximum|indicator|virtual\sindicator)
+			[^;]*;(.*)/$2/ix)) {
+	    next;
+	}
+
+	if ($stream =~ /^<([^>]*)>=/) {
+	    $stream =~ s/^<([^>]+)>=([0-9]*);(.*)/$3/
+		or syntax_error "keycode definition";
+	    my $key = $1;
+	    my $code = $2;
+	    if ($method == $replace_method
+		|| $method == $override_method
+		|| ($method == $augment_method
+		    && ! defined $keycodes_table{$key})) {
+		$keycodes_table{$key} = [ $code ];
+		delete $aliases{$key};
+	    } elsif ($method == $alternate_method) {
+		push @{$keycodes_table{$key}}, $code;
+	    }
+	    next;
+	}
+	if ($stream =~ /^alias/) {
+	    $stream =~ s/^alias<([^>]+)>=<([^>]+)>;(.*)/$3/
+		or syntax_error "alias definition";
+	    my $alias = $1;
+	    my $key = $2;
+	    if ($method == $replace_method
+		|| $method == $override_method
+		|| ($method == $augment_method
+		    && ! defined $keycodes_table{$alias})) {
+		$keycodes_table{$alias} = [];
+		$aliases{$alias} = $key;
+	    }
+	    next;
+	}
+	last;
+    }
+    $method = $oldmethod;
+}
+
+# Fill @{$symbols_table{$code}[$group]} with symbols
+sub symbols_for_group {
+    my $code = shift;
+    my $group = shift;
+    if ($method == $replace_method
+	|| ($method == $override_method
+	    && (@_ || ! defined $symbols_table{$code}[$group]))
+	|| ($method == $augment_method &&
+	    ! defined $symbols_table{$code})) {
+	my $level = 0;
+	for my $symbol (@_) {
+	    if ($symbol !~ /\(/ && $symbol =~ /./
+		&& (! defined $xkbsym_table{$symbol}
+		    || $xkbsym_table{$symbol} ne 'NoSymbol'
+		    || ! defined $symbols_table{$code}[$group][$level])) {
+		$symbols_table{$code}[$group][$level] = $symbol;
+	    }
+	    $level++;
+	}
+    }
+}
+
+sub xkb_key {
+    my $default_key_type = $_[0];
+    if ($stream =~ /^key</i) {
+	$stream =~ s/^key<([^>]+)>\{([^\}]*?)\};(.*)/$3/i
+	    or syntax_error "key definition";
+	my $key = $1;
+	my $list = $2 .",";
+	if ($verbosity >= 4 && ! defined $keycodes_table{$key}) {
+	    warning "No scan code for <$key> is defined.\n";
+	}
+	for my $code (@{$keycodes_table{$key}}) {
+	    if ($method == $replace_method) {
+		$symbols_table{$code} = [];
+	    }
+	    my $group = $base_group;
+	    while ($list =~ /[^ ]/) {
+		# [ X1, X2, ... ]
+		if ($list =~ s/^\[([^\]]*?)\],(.*)/$2/) {
+		    (my $symbols = $1) =~ s/,/ /g;
+		    my @groupsymbols = split ' ', $symbols;
+		    symbols_for_group $code, $group, @groupsymbols;
+		    $group++;
+		    next;
+		}
+		# symbols[GroupN] = [ X1, X2, ... ]
+		if ($list =~ (s/^symbols\[Group([1-4])\]
+			      =\[([^\]]*?)\],(.*)/$3/x)) {
+		    my $group = $1 - 1 + $base_group;
+		    (my $symbols = $2) =~ s/,/ /g;
+		    my @groupsymbols = split ' ', $symbols;
+		    symbols_for_group $code, $group, @groupsymbols;
+		    next;
+		}
+		# type = "...."
+		if ($list =~ (s/^type(?:\[Group1\])?
+                              =\"([^\"]+)\",(.*)/$2/x)) {
+		    if ($method == $replace_method
+			|| $method == $override_method
+			|| ($method == $augment_method
+			    && ! defined $types_table{$code})) {
+			$types_table{$code} = $1;
+		    }
+		    next;
+		}
+                # virtualMods = AltGr
+                # overlay1=<KO7>
+		next if ($list =~ s/^[a-zA-Z0-9_]+(=[a-zA-Z0-9_<>]+)?,
+                                   (.*)/$2/x);
+		# type = "CTRL+ALT"
+		next if ($list =~ s/^[a-zA-Z0-9_]+=\"[^\"]+\",(.*)/$1/);
+		# type[...] = "..."
+		next if ($list =~ s/^type\[[a-zA-Z0-9_]+\]=\"[^\"]+\",
+                                    (.*)/$1/x);
+		# actions[...] = [ ... ]
+		next if ($list =~ s/^actions\[[a-zA-Z0-9_]+\]=\[[^\]]*?\],
+                                    (.*)/$1/x);
+		die "$0: garbage in a key definition: \"$list\""
+		    ." in $filename.\n";
+	    }
+	    if (! defined $types_table{$code}
+		|| $types_table{$code} eq 'DEFAULT') {
+		$types_table{$code} = $default_key_type;
+	    }
+	}
+	return 1;
+    } else {
+	return 0;
+    }
+}
+
+sub xkb_symbols_definitions {
+    my $oldmethod = $method;
+    my $default_key_type = 'DEFAULT';
+    while ($stream) {
+	$method = $oldmethod;
+
+	if (xkb_include ('symbols')) {
+	    next;
+	}
+
+	$method = xkb_method ();
+
+	if ($stream =~ /^name/i) {
+	    $stream =~ s/^name\[[a-zA-Z0-9_]+\]=\"[^\"]*\";(.*)/$1/i
+		or syntax_error "group name";
+	    next;
+	}
+
+	if ($stream =~ (s/^key\.type(?:\[Group1\])?=\"([^\"]+)\";(.*)/$2/)) {
+	    $default_key_type = $1;
+	    next;
+	}
+	
+	if ($stream =~ s/^[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+=.*?;(.*)/$1/i) {
+	    next;
+	}
+
+	if ($stream =~ s/^[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+\[[a-zA-Z0-9_]+\]
+                       =.*?;(.*)/$1/ix) {
+	    next;
+	}
+
+	if (xkb_key $default_key_type) {
+	    next;
+	}
+
+	if ($stream =~ /^(modifier_map|modmap|mod_map)/i) {
+	    $stream =~ (s/^(modifier_map|modmap|mod_map)\s?[a-zA-Z0-9_]+
+			\{[^\}]*\};(.*)/$2/ix)
+		or syntax_error "modifier_map";
+	    next;
+	}
+
+	if ($stream =~ /^virtual_modifiers/i) {
+	    $stream =~ (s/^virtual_modifiers\s?[a-zA-Z0-9_,]+;(.*)/$1/ix)
+		or syntax_error "virtual_modifiers";
+	    next;
+	}
+	last;
+    }
+    $method = $oldmethod;
+}
+
+sub xkb_definitions {
+    my $file_type = $_[0];
+    if ($file_type eq 'symbols') {
+	xkb_symbols_definitions();
+    } elsif ($file_type eq 'keycodes') {
+	xkb_keycodes_definitions();
+    } else {
+	die "$0: Bad xkb file type $file_type\n";
+    }
+}
+
+# Remove from $stream the characters up to the first unmatched "}"
+sub skip_to_brace {
+    while ($stream && ($stream =~ s/^[^\}\{]*\{//)) {
+	&skip_to_brace;
+    }
+    $stream =~ s/^[^\}\{]*(\}|$)//;
+}
+
+sub xkb_block_list {
+    my $file_type = $_[0];
+    my $block = $_[1];
+    my $first = 1;
+    my $ok = 0;
+    my $mystream = $stream;
+    while ($stream) {
+	my $default = xkb_flags();
+	xkb_identifier() eq "xkb_". $file_type
+	    or syntax_error "xkb_". $file_type;
+	my $name = xkb_string();
+	my $structured;
+	if ($stream =~ s/^\{//) {
+	    $structured = 1;
+	} else {
+	    $structured = 0;
+	}
+	if ($name eq $block || ($first && ! $block)) {
+	    xkb_definitions ($file_type);
+	    if ($structured) {
+		$stream =~ s/^\};.*// or syntax_error "};";
+	    } else {
+		$stream = '';
+	    }
+	    $ok = 1;
+	} else {
+	    if ($structured) {
+		skip_to_brace;
+		$stream =~ s/^;// or syntax_error ";";
+	    } else {
+		last;
+	    }
+	}
+	$first = 0;
+    }
+    if (! $ok) {
+	$stream = $mystream;
+    }
+    return $ok;
+}
+
+sub include_xkb_file {
+    my $file_type = $_[0];
+    my $include_list = '^'. $_[1];
+
+    my $oldmethod = $method;
+    my $oldbase_group = $base_group;
+    while ($include_list) {
+	my $file;
+	my $block;
+	if ($include_list =~ (s/^(\^|\+|\|)([^\(\|\+]+)\(([^\)]+)\)
+			      :([1234])(.*)/$5/x)) {
+	    if ($1 eq '+') {
+		$method = $override_method;
+	    } elsif ($1 eq '|') {
+		$method = $augment_method;
+	    }
+	    $file = $2;
+	    $block = $3;
+	    $base_group = $4 - 1 + $base_group;
+	} elsif ($include_list =~ (s/^(\^|\+|\|)([^\(\|\+]+)\(([^\)]+)\)
+				   (.*)/$4/x)) {
+	    if ($1 eq '+') {
+		$method = $override_method;
+	    } elsif ($1 eq '|') {
+		$method = $augment_method;
+	    }
+	    $file = $2;
+	    $block = $3;
+	} elsif ($include_list =~ s/^(\^|\+|\|)([^\(\|\+]+):([1234])(.*)/$4/) {
+	    if ($1 eq '+') {
+		$method = $override_method;
+	    } elsif ($1 eq '|') {
+		$method = $augment_method;
+	    }
+	    $file = $2;
+	    $block = '';
+	    $base_group = $3 - 1 + $base_group;
+	} elsif ($include_list =~ s/^(\^|\+|\|)([^\(\|\+]+)(.*)/$3/) {
+	    if ($1 eq '+') {
+		$method = $override_method;
+	    } elsif ($1 eq '|') {
+		$method = $augment_method;
+	    }
+	    $file = $2;
+	    $block = '';
+	} else {
+	    die "$0: bad include list $include_list.\n";
+	}
+	
+	my $oldstream = $stream;
+	if ($file =~ /^\.?\//) {
+	    $stream = file_to_string ("$file");
+	} else {
+	    $stream = file_to_string (xfilename "$file_type/$file");
+	}
+	my $oldfilename = $filename;
+	$filename = $file;
+	if (!xkb_block_list ($file_type, $block)) {
+	    warning "Can not find \"$block\" in \"$file\".\n";
+	    xkb_block_list ($file_type, '');
+	}
+	$stream = $oldstream;
+	$filename = $oldfilename;
+	$method = $oldmethod;
+	$base_group = $oldbase_group;
+    }
+}
+
+include_xkb_file 'keycodes', $keycodes;
+
+foreach my $alias (keys %aliases) {
+    if (! defined $keycodes_table{$aliases{$alias}}) {
+	die "$0: undefined keyname $aliases{$alias} in ".
+	    "an keycode alias definition in $filename.\n";
+    }
+    $keycodes_table{$alias} = [ @{$keycodes_table{$alias}},
+				@{$keycodes_table{$aliases{$alias}}} ];
+}
+
+include_xkb_file 'symbols', $symbols;
+
+if ($arch eq 'at' || $arch eq 'evdev') {
+# Pause - 110, Break - 114, PrintScreen - 111, SysRq - 92
+    for my $group (0 .. 3) {
+        # no separate Break key on AT keyboards.  Break = Ctrl+Pause
+        if (defined $symbols_table{110}[$group][1]) {
+            $symbols_table{114}[$group] = [$symbols_table{110}[$group][1]];
+        }
+        # no separate SysRq key on AT keyboards.  SysRq = Alt+PrintScreen
+        if (defined $symbols_table{111}[$group][1]) {
+            $symbols_table{92}[$group] = [$symbols_table{111}[$group][1]];
+        }
+    }
+}
+
+foreach my $key (keys %symbols_table) {
+    foreach my $group (0 .. $#{$symbols_table{$key}}) {
+	if (! defined $symbols_table{$key}[$group]) {
+	    $symbols_table{$key}[$group] = [];
+	} else {
+	    foreach my $level (0 .. $#{$symbols_table{$key}[$group]}) {
+		if (! defined $symbols_table{$key}[$group][$level]) {
+		    $symbols_table{$key}[$group][$level] = 'NoSymbol';
+		}
+	    }
+	}
+    }
+    if (! defined $types_table{$key}) {
+	$types_table{$key} = 'DEFAULT';
+    }
+}
+
+sub uni_to_legacy {
+    my $uni = $_[0];
+    if ($acm) {
+	if ($uni <= 0x7f) {
+            if ($freebsd && $uni >= 0x20 && $uni <= 0x7e) {
+                return sprintf "\'%c\'", $uni;
+            } else {
+                return sprintf "0x%02x", $uni;
+            }
+	} elsif (defined $acmtable{$uni}) {
+            if ($freebsd) {
+                return sprintf "%i", $acmtable{$uni};
+            } else {
+                return sprintf "0x%02x", $acmtable{$uni};
+            }
+	} else {
+	    if ($verbosity >= 8) {
+		warning sprintf ("Unicode U+%04x does not exist "
+				 ."in the legacy encoding\n", $uni);
+	    }
+	    return $voidsymbol;
+	}
+    } else {
+	return 'U+'. sprintf ("%04x", $uni);
+    }
+}
+
+sub x_to_kernelsym {
+    my $xkeysym = $_[0];
+    my $kernelkeysym = $xkbsym_table{$xkeysym};
+    if (defined $kernelkeysym) {
+        if ($kernelkeysym !~ /^[0-9][0-9a-fA-F]{3}$/) {
+	    return $kernelkeysym;
+	}
+    } else {
+	$kernelkeysym = ($xkeysym =~ /^0x0*(100)?([0-9a-fA-F]{4})$/
+			 ? $2
+			 : ($xkeysym =~ /^U([0-9a-fA-F]+)$/
+			    ? $1 
+			    : undef));
+    }
+    if (defined $kernelkeysym) {
+	my $uni = hex ($kernelkeysym);
+	if (defined $forbidden{$uni}) {
+            if ($verbosity >= 8) {
+                warning "Forbidden Unicode \"U+$kernelkeysym\"\n";
+            }
+	    return $voidsymbol;
+	} else {
+	    if (pack("U", $uni) =~ /\p{IsAlpha}/) {
+		my $legacy = uni_to_legacy ($uni);
+		if ($legacy ne $voidsymbol) {
+		    return '+'. $legacy; # further processed for FreeBSD
+		} else {
+		    return $legacy;
+		}
+	    } elsif ($uni <= 0x1f) {
+		return $controlsyms[$uni];
+	    } else {
+		return uni_to_legacy ($uni);
+	    }
+	}
+    } else {
+	warning "Unknown X keysym \"$xkeysym\"\n";
+	return $voidsymbol;
+    }
+}
+
+sub x_to_ascii {
+    my $xkeysym = $_[0];
+    my $kernelkeysym = $xkbsym_table{$xkeysym};
+    if (defined $kernelkeysym) {
+        if (defined $controlsyms_hash{$kernelkeysym}) {
+            return $controlsyms_hash{$kernelkeysym};
+	} elsif ($kernelkeysym !~ /^[0-9][0-9a-fA-F]{3}$/) {
+	    return undef;
+	}
+    } else {
+	$kernelkeysym = ($xkeysym =~ /^0x0*(100)?([0-9a-fA-F]{4})$/
+			 ? $2
+			 : ($xkeysym =~ /^U([0-9a-fA-F]+)$/
+			    ? $1 
+			    : undef));
+    }
+    if (defined $kernelkeysym) {
+	my $uni = hex ($kernelkeysym);
+	if (0x00 <= $uni && 0x7f >= $uni) {
+	    return $uni;
+	}
+    }
+    return undef;
+}
+
+# A vector of symbol codes for a key
+my @vector;
+# $numlockable[group] -> whether the group is numlockable
+my @numlockable;
+# A vector with same length as @vector.  Measures how well each element of
+# @vector represents the xkb symbol for the particular key.  Bigger values
+# mean lower quality.
+my @quality;
+
+sub approximate {
+    my ($coord, $new_sym, $new_quality) = @_;
+    # $new_sym represents the xkb symbol for position $coord in @vector
+    # with quality $new_quality
+    if ((! defined $quality[$coord] || $quality[$coord] > $new_quality)
+	&& $new_sym ne $voidsymbol) {
+	$vector[$coord] = $new_sym;
+	$quality[$coord] = $new_quality;
+    }
+}
+
+# Fill @vector with data for key number $_[0]
+sub flatten {
+    #    Kernel         X
+    # -----------------------------------------
+    # 1  Shift          level 2 (Shift)
+    # 2  AltGr          levels 3 and 4 (AltGr)
+    # 4  Control        Control
+    # 8  Alt            Alt
+    # 0                 Group1
+    # 16 ShiftL         Group2
+    # 32 ShiftR         Group4
+    # 48 ShiftL+ShiftR  Group3
+    my $key = $_[0];
+    @vector = ();
+    @quality = ();
+    @numlockable = (0,0,0,0);
+    my @real_group_table = ([-1, -1, -1, -1],
+			    [0, 0, 0, 0], # gr1 -> gr1 -> gr1 -> gr1
+			    [0, 1, 1, 0], # gr1 -> gr2 -> gr1 -> gr2
+			    [0, 1, 2, 0], # gr1 -> gr2 -> gr1 -> gr3
+			    [0, 1, 3, 2]);# gr1 -> gr2 -> gr3 -> gr4
+    for my $group (0..3) {
+	my $real_group = $real_group_table[1+$#{$symbols_table{$key}}][$group];
+        my $last_level;
+        while ($real_group >= 0
+               && ($last_level = $#{$symbols_table{$key}[$real_group]}) < 0) {
+            $real_group = $real_group - 1;
+        }
+	next if ($real_group < 0);
+	for my $level (0..3) {
+	    my $real_level = $level;
+	    if ($types_table{$key} eq 'ONE_LEVEL') {
+		$real_level = 0;
+	    } elsif ($types_table{$key} eq 'TWO_LEVEL') {
+                $real_level = $real_level % 2;
+	    } elsif ($types_table{$key} eq 'THREE_LEVEL') {
+		if ($real_level > 2) {
+		    $real_level = 2;
+		}
+	    }
+            if ($last_level == -1) {
+                next;
+            } elsif ($last_level == 0) {
+                $real_level = 0;
+            } elsif ($last_level == 1) {
+                $real_level = $real_level % 2;
+            } elsif ($last_level == 2 && $real_level == 3) {
+                $real_level = 2;
+            } elsif ($real_level > $last_level) {
+                $real_level = $last_level;
+            }
+	    my $coord;
+	    for ($types_table{$key}) {
+		if (/^(DEFAULT|ONE_LEVEL|TWO_LEVEL
+                      |THREE_LEVEL|ALPHABETIC
+                      |EIGHT_LEVEL|EIGHT_LEVEL_ALPHABETIC
+                      |EIGHT_LEVEL_SEMIALPHABETIC
+                      |FOUR_LEVEL|FOUR_LEVEL_ALPHABETIC
+                      |FOUR_LEVEL_SEMIALPHABETIC
+                      |SEPARATE_CAPS_AND_SHIFT_ALPHABETIC
+		      |KEYPAD|FOUR_LEVEL_X|FOUR_LEVEL_MIXED_KEYPAD
+		      |FOUR_LEVEL_KEYPAD|LOCAL_EIGHT_LEVEL
+                      |FOUR_LEVEL_PLUS_LOCK
+                      )$/x) {
+		    # Level0: plain
+		    # Level1: shift
+		    # Level2: altgr
+		    # Level3: shift+altgr
+		    $coord = ($group << 4) + $level;
+		} elsif (/^(PC_BREAK|PC_CONTROL_LEVEL2
+                           |PC_LCONTROL_LEVEL2|PC_RCONTROL_LEVEL2)$/x) {
+		    # Level0: plain
+		    # Level1: control
+		    if ($level == 0 || $level == 2) {
+			$coord = ($group << 4) + $level;
+		    } else {
+			$coord = ($group << 4) + $level + 3;
+		    }
+		} elsif (/^(PC_SYSRQ|PC_ALT_LEVEL2
+                           |PC_LALT_LEVEL2|PC_RALT_LEVEL2)$/x) {
+		    # Level0: plain
+		    # Level1: alt
+		    if ($level == 0 || $level == 2) {
+			$coord = ($group << 4) + $level;
+		    } else {
+			# notice that $level is 1 or 3
+			$coord = ($group << 4) + $level + 7;
+		    }
+		} elsif (/^SHIFT\+ALT$/) {
+		    # Level0: plain
+		    # Level1: shift+alt
+		    if ($level == 0 || $level == 2) {
+			$coord = ($group << 4) + $level;
+		    } else {
+			$coord = ($group << 4) + $level + 8;
+		    }
+		} elsif (/^CTRL\+ALT$/) {
+		    # Level0: plain
+		    # Level1: control+alt
+		    if ($level == 0 || $level == 2) {
+			$coord = ($group << 4) + $level;
+		    } else {
+			$coord = ($group << 4) + $level + 11;
+		    }
+		} else {
+		    warning "Unknown key type $types_table{$key}\n";
+		    $coord = ($group << 4) + $level;
+		}
+	    }
+	    my $xkeysym = $symbols_table{$key}[$real_group][$real_level];
+	    if ($xkeysym =~ /^KP_/) {
+                $numlockable[$group] = 1;
+	    }
+	    my $is_special = ($xkeysym !~ /^U[0-9a-fA-F]+$/
+			      && defined $xkbsym_table{$xkeysym}
+			      && ($xkbsym_table{$xkeysym}
+				  !~ /^[0-9][0-9a-fA-F]{3}$/));
+	    my $kernelkeysym = x_to_kernelsym ($xkeysym);
+	    approximate ($coord, $kernelkeysym, 0);
+            if (defined (my $ascii = x_to_ascii ($xkeysym))) {
+                approximate (($coord | 0x08), $metasyms[$ascii], 1);
+                approximate (($coord | 0x04), $controlsyms[$ascii], 1);
+                approximate (($coord | 0x0c), $metacontrolsyms[$ascii], 1);
+            }
+	}
+    }
+    for my $x (0..1) {
+        my $mask = 1 << $x;
+        for my $coord (0..63) {
+            next if (! defined $vector[$coord]);
+            approximate($coord ^ $mask, $vector[$coord],
+                        $quality[$coord] + $mask << 2);
+        }
+    }
+    for my $x (2..3) {
+        my $mask = 1 << $x;
+        for my $coord (0..63) {
+            next if (! defined $vector[$coord]);
+            approximate($coord | $mask, $vector[$coord],
+                        $quality[$coord] + $mask << 2);
+        }
+    }
+    for my $coord (0..16) {
+        next if (! defined $vector[$coord]);
+        for my $mask (1<<4, 2<<4, 3<<4) {
+            approximate($coord | $mask, $vector[$coord],
+                        $quality[$coord] + 1 << 6);
+        }
+    }
+    for my $coord (0 .. 63) {
+	if (! defined $vector[$coord]) {
+	    $vector[$coord] = $voidsymbol;
+	}
+    }
+
+    for my $coord (0 .. 63) {
+	next if ($coord & 0x0c); # next if Control and/or Alt
+	my $mask = $kernel_modifiers{$vector[$coord]};
+	next unless (defined $mask);
+	for my $mod (4, 8, 12) {
+	    if ($vector[$coord + $mod] eq $voidsymbol
+		&& ($vector[($coord + $mod) ^ $mask] eq $voidsymbol)) {
+		$vector[$coord + $mod] = $vector[$coord];
+	    }
+	}
+    }
+    
+    # Without this it would be possible to lock permanently
+    # a modifier key such as Control or Alt
+    for my $coord (0 .. 63) {
+	my $mask = $kernel_modifiers{$vector[$coord]};
+	if (defined $mask) {
+	    $vector[$coord ^ $mask] = $vector[$coord];
+	    if ($compact && ! $freebsd) {
+                # In non-Latin layouts AltGr=ShiftL
+		# AltGr = 0x02,  ShiftL = 0x10
+		if (($mask & 0x02) && ($mask & 0x10)) {
+		    $vector[$coord ^ $mask ^ 0x02] = $vector[$coord];
+		    $vector[$coord ^ $mask ^ 0x10] = $vector[$coord];
+		} elsif ($mask & 0x02) {
+		    $vector[$coord ^ $mask ^ 0x10] = $vector[$coord];
+		    $vector[$coord ^ $mask ^ 0x10 ^ 0x02] = $vector[$coord];
+		} elsif ($mask & 0x10) {
+		    $vector[$coord ^ $mask ^ 0x02] = $vector[$coord];
+		    $vector[$coord ^ $mask ^ 0x02 ^ 0x10] = $vector[$coord];
+		}
+	    }
+	}
+    }
+    
+    if ($freebsd || ! $compact) {
+	for my $coord (16 .. 63) {
+	    if ($vector[$coord] =~ /^(ShiftL|ShiftL_Lock|ashift|alock)$/) {
+		$vector[$coord] = $voidsymbol;
+	    }
+	}
+	for my $coord (0 .. 15) {
+	    if ($vector[$coord] eq 'ShiftL_Lock') {   #  0 => 16
+		$vector[$coord + 16] = 'ShiftR_Lock'; # 16 => 48
+		$vector[$coord + 32] = 'ShiftR_Lock'; # 32 => 0
+		$vector[$coord + 48] = 'ShiftL_Lock'; # 48 => 32
+	    } elsif ($vector[$coord] =~ /^(ShiftL|ashift|alock)$/) {
+		$vector[$coord + 16] = $vector[$coord];
+		$vector[$coord + 32] = $vector[$coord];
+		$vector[$coord + 48] = $vector[$coord];
+	    }
+	}
+    } else {
+	for my $coord (16 .. 63) {
+	    if ($vector[$coord] =~ /^(AltGr|AltGr_Lock)$/) {
+		$vector[$coord] = $voidsymbol;
+	    }
+	}
+	for my $coord (0 .. 15) {
+            if ($vector[$coord] =~ /^(AltGr_Lock|AltGr)$/) {
+		$vector[$coord + 16] = $vector[$coord];
+		$vector[$coord + 32] = $vector[$coord];
+		$vector[$coord + 48] = $vector[$coord];
+	    }
+	}
+    }
+
+    for my $group (0 .. 3) {
+	my $kp = undef;
+	for my $x (0 .. 15) {
+	    my $coord = 16 * $group + $x;
+	    if ($vector[$coord] =~ /^KP_/) {
+		$kp = $vector[$coord];
+		last;
+	    }
+	}
+	if ($types_table{$key} =~ /^(KEYPAD|FOUR_LEVEL_X
+                                    |FOUR_LEVEL_MIXED_KEYPAD
+		                    |FOUR_LEVEL_KEYPAD)$/x
+	    && ! defined $kp) {
+	    $kp = 'VoidSymbol';
+            $numlockable[$group] = 1;
+	}
+	if ($kp && ! $freebsd) {
+	    for my $x (0 .. 15) {
+		my $coord = 16 * $group + $x;
+		for ($vector[$coord]) {
+		    if (/^VoidSymbol$/) {
+			# KP_Begin and KP_Delete are mapped to VoidSymbol
+			$vector[$coord] = $kp;
+		    } elsif (/$xkbsym_table{'plus'}/) {# not anchored match!
+			$vector[$coord] = 'KP_Add';
+		    } elsif (/$xkbsym_table{'minus'}/) {
+			$vector[$coord] = 'KP_Subtract';
+		    } elsif (/$xkbsym_table{'asterisk'}/) {
+			$vector[$coord] = 'KP_Multiply';
+		    } elsif (/$xkbsym_table{'slash'}/) {
+			$vector[$coord] = 'KP_Divide';
+		    } elsif (/$xkbsym_table{'comma'}/) {
+			$vector[$coord] = 'KP_Comma';
+		    } elsif (/$xkbsym_table{'period'}/) {
+			$vector[$coord] = 'KP_Period';
+		    } elsif (/$xkbsym_table{'0'}/) {
+			$vector[$coord] = 'KP_0';
+		    } elsif (/$xkbsym_table{'1'}/) {
+			$vector[$coord] = 'KP_1';
+		    } elsif (/$xkbsym_table{'2'}/) {
+			$vector[$coord] = 'KP_2';
+		    } elsif (/$xkbsym_table{'3'}/) {
+			$vector[$coord] = 'KP_3';
+		    } elsif (/$xkbsym_table{'4'}/) {
+			$vector[$coord] = 'KP_4';
+		    } elsif (/$xkbsym_table{'5'}/) {
+			$vector[$coord] = 'KP_5';
+		    } elsif (/$xkbsym_table{'6'}/) {
+			$vector[$coord] = 'KP_6';
+		    } elsif (/$xkbsym_table{'7'}/) {
+			$vector[$coord] = 'KP_7';
+		    } elsif (/$xkbsym_table{'8'}/) {
+			$vector[$coord] = 'KP_8';
+		    } elsif (/$xkbsym_table{'9'}/) {
+			$vector[$coord] = 'KP_9';
+		    } elsif (/^(Return|Enter)$/) {
+			$vector[$coord] = 'KP_Enter';
+		    } elsif (/^Home$/) {
+			$vector[$coord] = 'KP_7';
+		    } elsif (/^Left$/) {
+			$vector[$coord] = 'KP_4';
+		    } elsif (/^Up$/) {
+			$vector[$coord] = 'KP_8';
+		    } elsif (/^Right$/) {
+			$vector[$coord] = 'KP_6';
+		    } elsif (/^Down$/) {
+			$vector[$coord] = 'KP_2';
+		    } elsif (/^Prior$/) {
+			$vector[$coord] = 'KP_9';
+		    } elsif (/^Next$/) {
+			$vector[$coord] = 'KP_3';
+		    } elsif (/^End$/) {
+			$vector[$coord] = 'KP_1';
+		    } elsif (/^Insert$/) {
+			$vector[$coord] = 'KP_0';
+		    }
+		}
+	    }
+	}
+    }
+
+    for my $group (0 .. 3) {
+	my $coord = $group << 4;
+	my $mainsym = $vector[$coord];
+	if ($mainsym =~ /^fkey([0-9]+)$/) {
+	    my $num = $1;
+            if (1 <= $num && $num <= 12) {
+                $vector[$coord + 1] = 'fkey'. ($num+12); # shift
+                $vector[$coord + 4] = 'fkey'. ($num+24); # control
+                $vector[$coord + 5] = 'fkey'. ($num+36); # control + shift
+                $vector[$coord + 2] = 'scr'. sprintf("%02i", $num); #altgr
+                my $x = sprintf("%02i", ($num <= 6) ? $num+10 : $num);
+                $vector[$coord + 3] = 'scr'. $x; # altgr + shift
+                $vector[$coord + 6] = 'scr'. sprintf("%02i", $num); # altgr+ctrl
+                $vector[$coord + 7] = 'scr'. $x; # altgr + control + shift
+            } elsif ($num == 52 || $num == 56) {
+                my $sym = $num == 52 ? '\'-\'' : '\'+\'';
+                for my $i ($coord .. $coord+15) {
+                    if ($vector[$i] eq $mainsym && $vector[$i^1] eq $mainsym) {
+                        $vector[$i | 1] = $sym;
+                    }
+                }
+            } elsif ($num == 60 && $vector[$coord + 1] eq 'fkey60') {
+                $vector[$coord + 1] = 'paste';
+            }
+        } elsif ($mainsym =~ /^esc$/) {
+            $vector[$coord + 6] = 'debug';
+            $vector[$coord + 7] = 'debug';
+        } elsif ($mainsym =~ /^saver$/) { # 'Pause' key
+            $vector[$coord] = 'slock';
+            $vector[$coord + 1] = 'saver'; # shift
+            $vector[$coord + 2] = 'susp';  # altgr
+            $vector[$coord + 3] = 'susp';  # altgr + shift
+            $vector[$coord + 4] = 'slock'; # ctrl
+            $vector[$coord + 5] = 'saver'; # ctrl + shift
+            $vector[$coord + 6] = 'susp';  # ctrl + altgr
+            $vector[$coord + 7] = 'susp';  # ctrl + altgr + shift
+        } elsif ($freebsd && $mainsym =~ /^\' \'$/) {
+            $vector[$coord + 6] = 'susp';
+            $vector[$coord + 7] = 'susp';
+        } elsif ($mainsym =~ /^ht$/) {
+            for my $i ($coord .. $coord+15) {
+                if ($vector[$i] eq 'ht' && $vector[$i ^ 1] eq 'ht') {
+                    $vector[$i | 1] = 'btab';
+                }
+            }
+        } elsif ($mainsym =~ /^nscr$/) {
+            for my $i ($coord .. $coord+15) {
+                if ($vector[$i] eq 'nscr' && $vector[$i ^ 1] eq 'nscr') {
+                    $vector[$i | 1] = 'pscr';
+                }
+            }
+            $vector[$coord + 4] = 'debug';
+            $vector[$coord + 5] = 'debug';
+	} elsif ($mainsym =~ /^F([0-9]+)$/) {
+	    my $num = $1;
+	    $vector[$coord + 1] = 'F'. ($num + 12); # shift
+	    $vector[$coord + 2] = 'Console_'. ($num + 12); # altgr
+	    $vector[$coord + 3] = 'Console_'. ($num + 24); # altgr + shift
+	    $vector[$coord + 4] = 'F'. ($num + 24); # control
+	    $vector[$coord + 5] = 'F'. ($num + 36); # control + shift
+	    $vector[$coord + 6] = 'Console_'. ($num + 12); # control + altgr
+	    $vector[$coord + 7] = 'Console_'. ($num + 24); # control+altgr+shift
+	    $vector[$coord + 8] = 'Console_'. $num; # alt
+	    $vector[$coord + 9] = 'Console_'. ($num + 12); # alt + shift
+	    $vector[$coord + 12] = 'Console_'. $num; # control + alt
+	    $vector[$coord + 13] = 'Console_'. ($num + 12); # control+alt+shift
+	} elsif ($mainsym eq 'Scroll_Lock' || $mainsym eq 'Help') {
+	    $vector[$coord + 1] = 'Show_Memory';
+	    $vector[$coord + 2] = 'Show_Registers';
+	    $vector[$coord + 4] = 'Show_State';
+	    $vector[$coord + 8] = 'Show_Registers';
+	} elsif ($mainsym =~ /^KP_([0-9])$/) {
+	    my $num = $1;
+	    $vector[$coord + 2] = 'Hex_'. $num;
+	    $vector[$coord + 9] = 'Hex_'. $num;
+	    $vector[$coord + 8] = 'Ascii_'. $num;
+	} elsif ($mainsym eq 'Num_Lock') {
+	    $vector[$coord + 2] = 'Hex_A';
+	    $vector[$coord + 9] = 'Hex_A';
+	} elsif ($mainsym eq 'KP_Divide') {
+	    $vector[$coord + 2] = 'Hex_B';
+	    $vector[$coord + 9] = 'Hex_B';
+	} elsif ($mainsym eq 'KP_Multiply') {
+	    $vector[$coord + 2] = 'Hex_C';
+	    $vector[$coord + 9] = 'Hex_C';
+	} elsif ($mainsym eq 'KP_Subtract') {
+	    $vector[$coord + 2] = 'Hex_D';
+	    $vector[$coord + 9] = 'Hex_D';
+	} elsif ($mainsym eq 'KP_Add') {
+	    $vector[$coord + 2] = 'Hex_E';
+	    $vector[$coord + 9] = 'Hex_E';
+	} elsif ($mainsym eq 'KP_Enter') {
+	    $vector[$coord + 2] = 'Hex_F';
+	    $vector[$coord + 9] = 'Hex_F';
+	} elsif ($mainsym eq 'Prior' || $mainsym eq 'PageUp') {
+	    $vector[$coord + 1] = 'Scroll_Backward';
+	} elsif ($mainsym eq 'Next' || $mainsym eq 'PageDown') {
+	    $vector[$coord + 1] = 'Scroll_Forward';
+	} elsif ($mainsym eq 'Left') {
+	    $vector[$coord + 8] = 'Decr_Console';
+	} elsif ($mainsym eq 'Right') {
+	    $vector[$coord + 8] = 'Incr_Console';
+	} elsif ($mainsym eq 'Up') {
+	    $vector[$coord + 8] = 'KeyboardSignal';
+	}
+    }
+    return @vector;
+}
+
+sub print_vector {
+    my $kernel_code = $_[0];
+    my $only_VoidSymbol = 1;
+    my $no_NoSymbol = 1;
+    for my $mask (0 .. 63) {
+	if ($vector[$mask] ne $voidsymbol && $vector[$mask] ne 'NoSymbol') {
+	    $only_VoidSymbol = 0;
+	    last;
+	}
+    }
+    return if ($only_VoidSymbol && $compact);
+    for my $mask (0 .. 63) {
+	if ($vector[$mask] eq 'NoSymbol') {
+	    $no_NoSymbol = 0;
+	    last;
+	}
+    }
+    if ($freebsd) {
+        my @capslockable = (0,0,0,0);
+	for my $group (0 .. 3) {
+	    if ($vector[$group * 16] =~ /^\+/) {
+                $capslockable[$group] = 1;
+                last;
+            }
+        }
+	for my $mask (0 .. 63) {
+	    $vector[$mask] =~ s/^\+//;
+	    $vector[$mask] =~ s/^NoSymbol$/nop/;
+        }
+        for my $group (0 .. 1) {
+            next if ($group && $symbols !~ /:2/);
+            my $lockstate = ($capslockable[$group] ? 
+                             ($numlockable[$group] ? 'B' : 'C')
+                             : ($numlockable[$group] ? 'N' : 'O'));
+            $KEYMAP .= sprintf "  %03i   ", $kernel_code + 128*$group;
+            for my $mask (0, 1, 4, 5, 2, 3, 6, 7) {
+                $KEYMAP .= sprintf "%-6s ", $vector[$mask + 16*$group];
+            }
+            $KEYMAP .= " $lockstate\n";
+        }
+    } elsif ($compact) {
+	my $line = ($symbols =~ /:2/ # true if the keymap is non-latin
+		    ? "@vector[0, 1, 16, 17, 4, 20, 8, 24, 12, 28]"
+		    : "@vector[0, 1, 2, 3, 4, 6, 8, 10, 12, 14]");
+	$line =~ s/NoSymbol/VoidSymbol/g;
+	$KEYMAP .= "keycode $kernel_code = $line\n";
+    } else {
+	my @capsvector = @vector;
+	for my $mask (0 .. 63) {
+	    if ($capsvector[$mask] =~ /^(\+?)U\+([0-9a-fA-F]+)$/) {
+		my $v = hex ($2);
+		my $l = ord (lc (pack ("U", $v)));
+		my $u = ord (uc (pack ("U", $v)));
+		my $c = ($v == $l ? $u : $l);
+		$capsvector[$mask] = $1 ."U+". sprintf ("%04x", $c);
+		if ($v != $c && $v gt 0x7f) {
+		    $broken_caps = 1;
+		}
+	    }
+	}
+	if ($no_NoSymbol) {
+	    $KEYMAP .= "keycode $kernel_code = @vector @capsvector\n";
+	} else {
+	    for my $mask (0 .. 63) {
+		if ($vector[$mask] ne 'NoSymbol') {
+		    $KEYMAP .= "$modifier_combinations[$mask]"
+			." keycode $kernel_code = $vector[$mask]\n";
+		    if ($modifier_combinations[$mask] =~ /plain/) {
+			$KEYMAP .= "ctrll"
+			    ." keycode $kernel_code = $capsvector[$mask]\n";
+		    } else {
+			$KEYMAP .= "ctrll $modifier_combinations[$mask]"
+			    ." keycode $kernel_code = $capsvector[$mask]\n";
+		    }
+		}
+	    }
+	}
+    }
+}
+
+my %at_scancodes = (
+    9 => 1,
+    10 => 2,
+    11 => 3,
+    12 => 4,
+    13 => 5,
+    14 => 6,
+    15 => 7,
+    16 => 8,
+    17 => 9,
+    18 => 10,
+    19 => 11,
+    20 => 12,
+    21 => 13,
+    22 => 14,
+    23 => 15,
+    24 => 16,
+    25 => 17,
+    26 => 18,
+    27 => 19,
+    28 => 20,
+    29 => 21,
+    30 => 22,
+    31 => 23,
+    32 => 24,
+    33 => 25,
+    34 => 26,
+    35 => 27,
+    36 => 28,
+    37 => 29,
+    38 => 30,
+    39 => 31,
+    40 => 32,
+    41 => 33,
+    42 => 34,
+    43 => 35,
+    44 => 36,
+    45 => 37,
+    46 => 38,
+    47 => 39,
+    48 => 40,
+    49 => 41,
+    50 => 42,
+    51 => 43,
+    52 => 44,
+    53 => 45,
+    54 => 46,
+    55 => 47,
+    56 => 48,
+    57 => 49,
+    58 => 50,
+    59 => 51,
+    60 => 52,
+    61 => 53,
+    62 => 54,
+    63 => 55,
+    64 => 56,
+    65 => 57,
+    66 => 58,
+    67 => 59,
+    68 => 60,
+    69 => 61,
+    70 => 62,
+    71 => 63,
+    72 => 64,
+    73 => 65,
+    74 => 66,
+    75 => 67,
+    76 => 68,
+    77 => 69,
+    78 => 70,
+    79 => 71,
+    80 => 72,
+    81 => 73,
+    82 => 74,
+    83 => 75,
+    84 => 76,
+    85 => 77,
+    86 => 78,
+    87 => 79,
+    88 => 80,
+    89 => 81,
+    90 => 82,
+    91 => 83,
+    92 => 84,
+    93 => -1, # fake key (KP_Equal)
+    94 => 86,
+    95 => 87,
+    96 => 88,
+    97 => 102,
+    98 => 103,
+    99 => 104,
+    100 => 105,
+    102 => 106,
+    103 => 107,
+    104 => 108,
+    105 => 109,
+    106 => 110,
+    107 => 111,
+    108 => 96,
+    109 => 97,
+    110 => 119,
+    111 => 99,
+    112 => 98,
+    113 => 100,
+    114 => 101,
+    115 => 125,
+    116 => 126,
+    117 => 127,
+    118 => -1,  # Japanese
+    119 => -1,  # Japanese
+    120 => -1,  # Japanese
+    123 => -1,
+    124 => -1,  # fake key
+    125 => -1,  # fake key
+    126 => -1,  # fake key
+    127 => -1,  # fake key
+    128 => -1,  # fake key
+    129 => -1,  # Japanese
+    131 => -1,  # Japanese
+    133 => 124, # Japanese
+    134 => 121, # Brasilian ABNT2
+    144 => -1,  # Japanese
+    156 => -1,  # fake key
+    208 => -1,  # Japanese
+    209 => -1,  # Korean
+    210 => -1,  # Korean
+    211 => 89,  # Brasilian ABNT2, Japanese
+    214 => -1,  # alternate between internal and multimedia display
+    215 => -1,  # turn light on/of
+    216 => -1,  # brightness down
+    217 => -1,  # brightness up
+);
+
+my %freebsd_scancodes = (
+    9 => 1,
+    10 => 2,
+    11 => 3,
+    12 => 4,
+    13 => 5,
+    14 => 6,
+    15 => 7,
+    16 => 8,
+    17 => 9,
+    18 => 10,
+    19 => 11,
+    20 => 12,
+    21 => 13,
+    22 => 14,
+    23 => 15,
+    24 => 16,
+    25 => 17,
+    26 => 18,
+    27 => 19,
+    28 => 20,
+    29 => 21,
+    30 => 22,
+    31 => 23,
+    32 => 24,
+    33 => 25,
+    34 => 26,
+    35 => 27,
+    36 => 28,
+    37 => 29,
+    38 => 30,
+    39 => 31,
+    40 => 32,
+    41 => 33,
+    42 => 34,
+    43 => 35,
+    44 => 36,
+    45 => 37,
+    46 => 38,
+    47 => 39,
+    48 => 40,
+    49 => 41,
+    50 => 42,
+    51 => 43,
+    52 => 44,
+    53 => 45,
+    54 => 46,
+    55 => 47,
+    56 => 48,
+    57 => 49,
+    58 => 50,
+    59 => 51,
+    60 => 52,
+    61 => 53,
+    62 => 54,
+    63 => 55,
+    64 => 56,
+    65 => 57,
+    66 => 58,
+    67 => 59,
+    68 => 60,
+    69 => 61,
+    70 => 62,
+    71 => 63,
+    72 => 64,
+    73 => 65,
+    74 => 66,
+    75 => 67,
+    76 => 68,
+    77 => 69,
+    78 => 70,
+    79 => 71,
+    80 => 72,
+    81 => 73,
+    82 => 74,
+    83 => 75,
+    84 => 76,
+    85 => 77,
+    86 => 78,
+    87 => 79,
+    88 => 80,
+    89 => 81,
+    90 => 82,
+    91 => 83,
+    92 => 84,
+    93 => -1, # fake key (KP_Equal)
+    94 => 86,
+    95 => 87,
+    96 => 88,
+    97 => 94,
+    98 => 95,
+    99 => 96,
+    100 => 97,
+    102 => 98,
+    103 => 99,
+    104 => 100,
+    105 => 101,
+    106 => 102,
+    107 => 103,
+    108 => 89,
+    109 => 90,
+    110 => 104,
+    111 => 92,
+    112 => 91,
+    113 => 93,
+    114 => 108,
+    115 => 105,
+    116 => 106,
+    117 => 107,
+    118 => -1,  # Japanese
+    119 => -1,  # Japanese
+    120 => -1,  # Japanese
+    123 => -1,
+    124 => -1,  # fake key
+    125 => -1,  # fake key
+    126 => -1,  # fake key
+    127 => -1,  # fake key
+    128 => -1,  # fake key
+    129 => -1,  # Japanese
+    131 => -1,  # Japanese
+    133 => 125, # Japanese
+    134 => 126, # Brasilian ABNT2
+    144 => -1,  # Japanese
+    156 => -1,  # fake key
+    208 => -1,  # Japanese
+    209 => -1,  # Korean
+    210 => -1,  # Korean
+    211 => 115,  # Brasilian ABNT2, Japanese
+    214 => -1,  # alternate between internal and multimedia display
+    215 => -1,  # turn light on/of
+    216 => -1,  # brightness down
+    217 => -1,  # brightness up
+);
+
+if ($freebsd) {
+    $KEYMAP .= 
+"#                                                         alt\n".
+"# scan                       cntrl          alt    alt   cntrl lock\n".
+"# code  base   shift  cntrl  shift  alt    shift  cntrl  shift state\n".
+"# ------------------------------------------------------------------\n";
+#"  000   nop    nop    nop    nop    nop    nop    nop    nop     O\n";
+} elsif ($compact) {
+    $KEYMAP .= "keymaps 0-4,6,8,10,12,14\n";
+} else {
+    $KEYMAP .= "keymaps 0-127\n";
+}
+
+if ($freebsd) {
+    foreach my $key (sort {$a <=> $b} (keys %symbols_table)) {
+	my $kernel_code = $freebsd_scancodes{$key};
+	next if (! defined $kernel_code || $kernel_code < 0);
+	@vector = flatten ($key);
+	if ($kernel_code == 83 || $kernel_code == 103) {
+	    for my $coord (0+6, 0+7, 16+6, 16+7, 32+6, 32+7, 48+6, 48+7,) {
+		$vector[$coord] = 'boot';
+	    }
+        }
+	print_vector $kernel_code;
+    }
+} elsif ($arch eq 'at' || $arch eq 'evdev') {
+    foreach my $key (sort {$a <=> $b} (keys %symbols_table)) {
+	my $kernel_code = (($arch eq 'at') ? $at_scancodes{$key} : $key - 8);
+	next if (! defined $kernel_code || $kernel_code < 0);
+        @vector = flatten ($key);
+        if ($kernel_code == 99) {
+	    for my $coord (0, 1, 16, 17, 32, 33, 48, 49) {
+		$vector[$coord] = 'VoidSymbol';
+	    }
+ 	} elsif ($kernel_code == 83 || $kernel_code == 111) {
+	    for my $coord (0+6, 0+12, 0+14, 
+                           16+6, 16+12, 16+14,
+                           32+6, 32+12, 32+14, 
+                           48+6, 48+12, 48+14) {
+		$vector[$coord] = 'Boot';
+	    }
+	}
+	print_vector $kernel_code;
+    }
+} elsif ($arch eq 'macintosh') {
+    foreach my $key (sort {$a <=> $b} (keys %symbols_table)) {
+	my $kernel_code = $key - 8;
+	@vector = flatten ($key);
+	print_vector $kernel_code;
+    }
+    $KEYMAP .= '\
+keycode 127 =
+        shift   control keycode 127 = Boot
+'
+} elsif ($arch eq 'ataritt') {
+    foreach my $key (sort {$a <=> $b} (keys %symbols_table)) {
+	my $kernel_code = $key - 8;
+	if ($kernel_code == 97) {
+	    @vector = ('F246', 'Break', 'F246', 'F246',
+		       'F246', 'F246', 'F246', 'F246', 
+		       'Last_Console', 'F246', 'F246', 'F246', 
+		       'F246', 'F246', 'F246', 'F246') x 4;
+	} else {
+	    @vector = flatten ($key);
+	}
+	if ($kernel_code == 83 || $kernel_code == 113) {
+	    for my $coord (0+6, 0+12, 0+14, 
+                           16+6, 16+12, 16+14,
+                           32+6, 32+12, 32+14, 
+                           48+6, 48+12, 48+14) {
+		$vector[$coord] = 'Boot';
+	    }
+	}
+	print_vector $kernel_code;
+    }
+} elsif ($arch eq 'amiga') {
+    foreach my $key (sort {$a <=> $b} (keys %symbols_table)) {
+	my $kernel_code = $key - 8;
+	@vector = flatten ($key);
+	if ($kernel_code == 60) {
+	    for my $coord (0+6, 0+12, 0+14, 
+                           16+6, 16+12, 16+14,
+                           32+6, 32+12, 32+14, 
+                           48+6, 48+12, 48+14) {
+		$vector[$coord] = 'Boot';
+	    }
+	}
+	print_vector $kernel_code;
+    }
+} elsif ($arch eq 'sun') {
+    foreach my $key (sort {$a <=> $b} (keys %symbols_table)) {
+	my $kernel_code = $key - 7;
+	@vector = flatten ($key);
+	if ($kernel_code == 50) {
+	    for my $coord (0+6, 0+12, 0+14, 
+                           16+6, 16+12, 16+14,
+                           32+6, 32+12, 32+14, 
+                           48+6, 48+12, 48+14) {
+		$vector[$coord] = 'Boot';
+	    }
+	}
+	print_vector $kernel_code;
+    }
+} else {
+    die "$0: Unsupported keyboard type $arch\n";
+}
+
+if ($broken_caps) {
+    $KEYMAP =~ s/Caps_Lock/CtrlL_Lock/g;
+}
+
+print $KEYMAP;
+
+if ($freebsd) {
+    if ($charmap) {
+        my $file1 = "/etc/console-setup/dkey.${charmap}.inc";
+        my $file2 = "$installdir/etc/console-setup/dkey.${charmap}.inc";
+        if (-f $file1) {
+            system("cat $file1");
+        } elsif (-f $file2) {
+            system("cat $file2");
+        }
+    }
+} else {
+    print "strings as usual\n";
+
+    if ($charmap) {
+        my $file1 = "/etc/console-setup/compose.${charmap}.inc";
+        my $file2 = "$installdir/etc/console-setup/compose.${charmap}.inc";
+        if (-f $file1) {
+            system("cat $file1");
+        } elsif (-f $file2) {
+            system("cat $file2");
+        }
+    }
+}
+my $file1 = "/etc/console-setup/remap.inc";
+my $file2 = "$installdir/etc/console-setup/remap.inc";
+if (-f $file1) {
+    system("cat $file1");
+} elsif (-f $file2) {
+    system("cat $file2");
+}
+
+exit 0;

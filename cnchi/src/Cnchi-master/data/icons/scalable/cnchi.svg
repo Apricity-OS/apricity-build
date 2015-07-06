@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="94"
+   height="94"
+   id="svg7571"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="cnchi.svg"
+   inkscape:export-filename="/home/twisted/MegaCloud/_ANTERGOS/_ICONS/Cnchi/set/128x128/cnchi.png"
+   inkscape:export-xdpi="122.55319"
+   inkscape:export-ydpi="122.55319">
+  <defs
+     id="defs7573">
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4973-70"
+       id="radialGradient7569"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0,2.029129,-1.1835273,-6.1765212e-6,838.27813,-1724.5888)"
+       cx="605.93768"
+       cy="415.34412"
+       fx="605.93768"
+       fy="415.34412"
+       r="36.708191" />
+    <linearGradient
+       id="linearGradient4973-70">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0.35643564"
+         offset="0"
+         id="stop4975-9" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop4977-1" />
+    </linearGradient>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter5006-0">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.63207633"
+         id="feGaussianBlur5008-2" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter5026-0">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.70956256"
+         id="feGaussianBlur5028-9" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="35.211097"
+     inkscape:cy="51.194062"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="979"
+     inkscape:window-height="689"
+     inkscape:window-x="848"
+     inkscape:window-y="108"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7576">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-327.79663,-484.59624)">
+    <g
+       inkscape:export-ydpi="89.99073"
+       inkscape:export-xdpi="89.99073"
+       inkscape:export-filename="/home/twisted/MegaCloud/_ANTERGOS/_ICONS/Cnchi/cnchi-icon-antergos.png"
+       transform="translate(-107.4625,884.20215)"
+       id="g7553">
+      <g
+         id="g7555"
+         transform="matrix(1.0187285,0,0,1.0187285,128.87586,133.00848)">
+        <path
+           inkscape:export-ydpi="149.93477"
+           inkscape:export-xdpi="149.93477"
+           inkscape:export-filename="/home/twisted/MegaCloud/_CINNARCH/logo/Antergos/antergos-triangle-modern.png"
+           sodipodi:nodetypes="zczczcz"
+           inkscape:connector-curvature="0"
+           id="path7557"
+           d="m 389.23563,-447.01122 c -7.1549,12.39266 -27.53533,14.41238 -41.84514,14.41238 -14.3098,0 -34.69022,-2.01972 -41.84514,-14.41238 -7.1549,-12.39266 3.05224,-31.05248 10.20714,-43.44514 7.15491,-12.39266 17.3282,-29.03277 31.638,-29.03277 14.30981,0 24.48311,16.64011 31.63803,29.03277 7.1549,12.39266 17.36203,31.05248 10.20711,43.44514 z"
+           inkscape:transform-center-y="-10.014339"
+           style="fill:#003380;fill-opacity:1;stroke:none;display:inline" />
+        <path
+           style="fill:url(#radialGradient7569);fill-opacity:1;stroke:none;display:inline"
+           inkscape:transform-center-y="-10.014339"
+           d="m 389.23563,-446.73217 c -7.1549,12.39266 -27.53533,14.41238 -41.84514,14.41238 -14.3098,0 -34.69022,-2.01972 -41.84514,-14.41238 -7.1549,-12.39266 3.05224,-31.05248 10.20714,-43.44514 7.15491,-12.39266 17.3282,-29.03277 31.638,-29.03277 14.30981,0 24.48311,16.64011 31.63803,29.03277 7.1549,12.39266 17.36203,31.05248 10.20711,43.44514 z"
+           id="path7559"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="zczczcz"
+           inkscape:export-filename="/home/twisted/MegaCloud/_CINNARCH/logo/Antergos/antergos-triangle-modern.png"
+           inkscape:export-xdpi="149.93477"
+           inkscape:export-ydpi="149.93477" />
+        <g
+           transform="matrix(1.2062355,0,0,1.2062355,-376.13142,-1010.241)"
+           inkscape:export-ydpi="149.93477"
+           inkscape:export-xdpi="149.93477"
+           inkscape:export-filename="/home/twisted/MegaCloud/_CINNARCH/logo/Antergos/antergos-triangle-modern.png"
+           id="g7561">
+          <path
+             style="opacity:0.2;fill:#c8deff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter5006-0)"
+             d="m 599.57276,406.8458 c -11.86319,0 -20.28715,13.78867 -26.21875,24.0625 -4.68026,8.10645 -10.9515,19.46625 -10.46875,28.9375 0.37645,-9.03721 6.11016,-19.3882 10.46875,-26.9375 5.9316,-10.27383 14.35556,-24.0625 26.21875,-24.0625 11.86319,0 20.28715,13.78867 26.21875,24.0625 4.31356,7.4713 9.98753,17.6859 10.46875,26.65625 0.34707,-9.41382 -5.83469,-20.62982 -10.46875,-28.65625 -5.9316,-10.27383 -14.35556,-24.0625 -26.21875,-24.0625 z"
+             id="path7563"
+             inkscape:connector-curvature="0" />
+          <path
+             inkscape:connector-curvature="0"
+             style="fill:#002b6b;fill-opacity:1;stroke:none;display:inline;filter:url(#filter5026-0)"
+             d="m 636.25,457.6875 c -0.11162,2.58978 -0.72299,5.03816 -2,7.25 -5.9316,10.27383 -22.82431,11.9375 -34.6875,11.9375 -11.86319,0 -28.7559,-1.66367 -34.6875,-11.9375 -1.25134,-2.16738 -1.87093,-4.56147 -2,-7.09375 -0.13586,3.26152 0.42699,6.36922 2,9.09375 5.9316,10.27383 22.82431,11.9375 34.6875,11.9375 11.86319,0 28.7559,-1.66367 34.6875,-11.9375 1.59806,-2.76792 2.16048,-5.93104 2,-9.25 z"
+             id="path7565" />
+        </g>
+      </g>
+      <path
+         sodipodi:nodetypes="cccccccccccssccsccczccccczcc"
+         inkscape:connector-curvature="0"
+         id="path7567"
+         d="m 479.07145,-375.86822 c -0.71445,15.84316 -0.61328,35.31454 1.70408,56.19203 l 0.76683,1.06505 c 0.27863,-8.87245 1.34405,-33.75094 4.68622,-57.25708 z m 12.05636,0 c -3.61085,11.89009 -5.9292,27.44223 -7.41274,58.62034 l 1.66147,-2.30051 c 2.13306,-10.73145 5.90739,-35.77212 10.39489,-44.09306 l 0,-6.00688 -0.0425,0 0,-2.51352 c 0,-2.04848 -1.63881,-3.70637 -3.66378,-3.70637 z m -17.93544,0.12774 c -1.53511,0.441 -2.68392,1.88273 -2.68392,3.57857 l 0,2.51351 -0.0425,0 0,20.87498 c 0,0 -9.29589,-1.97732 -10.43748,0 -1.1416,1.97732 17.97804,25.17777 17.97804,25.17777 -1.59322,-10.10152 -4.86782,-31.26841 -4.81403,-52.14483 z m 22.57906,12.951 c -1.40621,10.82469 -4.87645,29.35003 -7.83877,39.61985 0,0 19.24481,-23.64227 18.23365,-25.60372 -1.01116,-1.96145 -10.39488,0 -10.39488,0 z"
+         style="opacity:0.33000004;fill:#ffffff;fill-opacity:1;stroke:none" />
+    </g>
+  </g>
+</svg>
