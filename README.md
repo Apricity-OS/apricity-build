@@ -1,4 +1,4 @@
-# ApricityOS
+# Apricity OS
 #####Welcome to Apricity OS, a modern, intuitive operating system for the cloud generation of computing. 
 ######Help support us on Patreon [here](https://www.patreon.com/apricity)
 
