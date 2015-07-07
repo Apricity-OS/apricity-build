@@ -2,7 +2,7 @@
 
 _pkgname='Apricity Assets'
 pkgname=apricityassets
-pkgver=0.1.13
+pkgver=0.1.14
 pkgrel=1
 pkgdesc='Assets for Apricity OS'
 arch=(any)
@@ -25,7 +25,7 @@ package() {
 	cp -rf "${srcdir}/apricityassets/Apricity Icons" "${pkgdir}/usr/share/icons"
 	cp -rf "${srcdir}/apricityassets/apricity-assets" "${pkgdir}/etc"
 	cp -rf "${srcdir}/apricityassets/backgrounds/apricity" "${pkgdir}/usr/share/backgrounds"
-	cp -rf "${srcdir}/apricityassets/extensions/*" "${pkgdir}/usr/share/gnome-shell/extensions"
+	cp -rf ${srcdir}/apricityassets/extensions/* "${pkgdir}/usr/share/gnome-shell/extensions"
 	cp -rf "${srcdir}/apricityassets/.liquidprompt" "${pkgdir}/etc/skel"
 	cp -rf "${srcdir}/apricityassets/plymouth/apricity" "${pkgdir}/usr/share/plymouth/themes"
 	mkdir -p "${pkgdir}/etc/skel/.config/autostart"
