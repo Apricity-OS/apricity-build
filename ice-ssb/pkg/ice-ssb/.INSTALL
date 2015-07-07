@@ -1,10 +1,12 @@
 post_install(){
 sudo ln -s /usr/bin/chromium /usr/bin/chromium-browser
+sudo ln -s /usr/bin/google-chrome-beta /usr/bin/google-chrome
 sudo ln -s /usr/bin/google-chrome-stable /usr/bin/google-chrome
 }
 
 post_upgrade(){
 sudo ln -s /usr/bin/chromium /usr/bin/chromium-browser
+sudo ln -s /usr/bin/google-chrome-beta /usr/bin/google-chrome
 sudo ln -s /usr/bin/google-chrome-stable /usr/bin/google-chrome
 }
 

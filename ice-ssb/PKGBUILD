@@ -2,7 +2,7 @@
 
 _pkgname=ice-ssb
 pkgname=ice-ssb
-pkgver=5.0.1
+pkgver=5.0.2
 pkgrel=1
 pkgdesc='ICE SSB'
 arch=(any)
