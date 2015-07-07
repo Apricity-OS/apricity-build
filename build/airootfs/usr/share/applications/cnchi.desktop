@@ -3,7 +3,7 @@
 [Desktop Entry]
 Type=Application
 Name=Installer
-Exec=sudo -E cnchi -dv -p /usr/share/cnchi/data/packages.xml
+Exec=sudo -E cnchi -dv -p /usr/share/cnchi/data/packages.xml --cache
 Icon=intel-installer
 X-GNOME-Autostart-enabled=true
 Name[en_US]=Installer

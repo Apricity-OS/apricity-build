@@ -95,7 +95,7 @@ linux_entry ()
   type="$3"
   args="$4"
 
-  if [ "$os" == "Antergos Linux" ] || [ "$os" == "Apricity Linux" ] || [ "$os" == "Arch Linux" ] || [ "$os" == "Manjaro Linux" ]; then
+  if [ "$os" == "Antergos Linux" ] || [ "$os" == "Arch Linux" ] || [ "$os" == "Manjaro Linux" ]; then
       is_arch=True
   fi
 
