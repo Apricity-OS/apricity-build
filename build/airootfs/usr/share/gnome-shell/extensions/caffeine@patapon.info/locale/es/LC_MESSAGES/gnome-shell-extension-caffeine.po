@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-caffeine\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-07 10:01+0100\n"
+"PO-Revision-Date: 2014-11-07 10:01+0100\n"
+"Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+#: ../../../extension.js:271
+msgid "Auto suspend and screensaver disabled"
+msgstr ""
+
+#: ../../../extension.js:291
+msgid "Auto suspend and screensaver enabled"
+msgstr ""
+
+#: ../../../prefs.js:45
+msgid "Show Caffeine in top panel"
+msgstr "Mostrar Caffeine en el panel superior"
+
+#: ../../../prefs.js:62
+msgid "Enable when a fullscreen application is running"
+msgstr ""
+
+#: ../../../prefs.js:79
+msgid "Enable notifications"
+msgstr "Activar las notificaciones"
+
+#: ../../../prefs.js:100
+msgid "Applications which enable Caffeine automatically"
+msgstr "Aplicaciones que activan Caffeine automáticamente"
+
+#: ../../../prefs.js:116
+msgid "Add application"
+msgstr "Agregar aplicación"
+
+#: ../../../prefs.js:130
+msgid "Create new matching rule"
+msgstr "Crear nueva regla"
+
+#: ../../../prefs.js:134
+msgid "Add"
+msgstr "Agregar"
+
+#~ msgid "Caffeine enabled"
+#~ msgstr "Caffeine activado"
+
+#~ msgid "Caffeine disabled"
+#~ msgstr "Caffeine desactivado"

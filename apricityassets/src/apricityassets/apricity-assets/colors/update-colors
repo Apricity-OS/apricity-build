@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "$PWD" != "/lib/plymouth/themes/colors" ] ; then
+sudo cp * /lib/plymouth/themes/colors/
+clear
+fi
+sudo update-initramfs -u
+echo
+echo "Running 10-second test..."
+sudo plymouthd ; sudo plymouth --show-splash ; for ((I=0; I<10; I++)); do sleep 1 ; sudo plymouth --update=test$I ; done ; sudo plymouth --quit
+exit

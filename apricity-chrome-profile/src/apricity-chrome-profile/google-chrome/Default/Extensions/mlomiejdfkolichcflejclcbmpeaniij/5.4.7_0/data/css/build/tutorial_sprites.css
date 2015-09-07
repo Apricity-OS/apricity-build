@@ -1,0 +1,17 @@
+/* glue: 0.3 hash: 55dd44b8f3 */
+.tutorial_sprites-close_off,
+.tutorial_sprites-close:hover,
+.tutorial_sprites-arrow_right_off,
+.tutorial_sprites-arrow_right:hover,
+.tutorial_sprites-arrow_left_off,
+.tutorial_sprites-arrow_left:hover,
+.tutorial_sprites-control_on,
+.tutorial_sprites-control_off{background-image:url('../../images/build/tutorial_sprites.png');background-repeat:no-repeat}
+.tutorial_sprites-close_off{background-position:-20px -20px;width:20px;height:20px;}
+.tutorial_sprites-close:hover{background-position:-80px -20px;width:20px;height:20px;}
+.tutorial_sprites-arrow_right_off{background-position:-140px -20px;width:8px;height:12px;}
+.tutorial_sprites-arrow_right:hover{background-position:-188px -20px;width:8px;height:12px;}
+.tutorial_sprites-arrow_left_off{background-position:-236px -20px;width:8px;height:12px;}
+.tutorial_sprites-arrow_left:hover{background-position:-284px -20px;width:8px;height:12px;}
+.tutorial_sprites-control_on{background-position:-332px -20px;width:7px;height:7px;}
+.tutorial_sprites-control_off{background-position:-379px -20px;width:7px;height:7px;}

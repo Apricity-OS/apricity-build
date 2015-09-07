@@ -1,0 +1,31 @@
+<chapter id="introduction">
+	<title>Introduction</title>
+	<para>
+		&partman; is a utility program to help you manage the <glossterm linkend="glossary-device">disk devices</glossterm>, <glossterm linkend="glossary-partition">partitions</glossterm> and <glossterm linkend="glossary-filesystem">file systems</glossterm> on your computer.
+	</para>
+	<para>
+		It allows you to easily <link linkend="howto-installos">create new partitions</link>, create file systems on new or existing partitions, <link linkend="howto-copypartition">copy</link>, move or delete partitions and also to <link linkend="howto-resizepartition">modify a partition's size</link> without losing the data on it.
+	</para>
+
+	<para>
+		To get its job done efficiently &partman; makes use of external tools to support a long list of file systems. See <xref linkend="requirements"/> for details about that. You will probably have the required tools for the file systems on your computer installed already.
+	</para>
+
+	<warning>
+		<title>Always back up your data!</title>
+		<para>
+			&partman; has been designed and written with high diligence and an emphasis on data integrity. There is however always some danger involved when modifying a device's partition table or its partitions: There might still be a bug in &partman;, an unexpected power failure or a problem with the computer's hardware.
+		</para>
+		<para>
+			For those reasons you should <emphasis>always have a back up of your important data</emphasis> before making any modifications with a tool like &partman;.
+		</para>
+		<para>
+			The program's authors take no responsibility whatsoever if you lose any data while using &partman;.
+		</para>
+	</warning>
+
+	<para>
+		&partman; uses <glossterm linkend="glossary-operation">operations</glossterm>, <glossterm linkend="glossary-job">jobs</glossterm> and <glossterm linkend="glossary-command">commands</glossterm> to logically divide up the work it does. See the <link linkend="glossary">glossary</link> for details on this.
+	</para>
+
+</chapter>

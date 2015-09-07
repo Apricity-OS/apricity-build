@@ -1,0 +1,7 @@
+post_remove(){
+rm -r "/usr/share/themes/Arctic Apricity"
+}
+
+pre_upgrade(){
+rm -r "/usr/share/themes/Arctic Apricity"
+}

@@ -1,0 +1,406 @@
+#  GNOME Shell Extension TaskBar
+#  Copyright (C) 2015 zpydr
+#  Copyright (C) 2015 jonnius (German translation)
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+#  zpydr@openmailbox.org
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TaskBar\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-16 23:44+0200\n"
+"PO-Revision-Date: 2014-10-16 23:47+0100\n"
+"Last-Translator: Jonatan Zeidler <jonatan_zeidler@gmx.de>\n"
+"Language-Team: German <jonatan_zeidler@gmx.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: prefs.js:119
+msgid "Overview"
+msgstr "Übersicht"
+
+#: prefs.js:122 prefs.js:155 prefs.js:316 prefs.js:325
+msgid "Tasks"
+msgstr "Anwendungen"
+
+#: prefs.js:128 prefs.js:156
+msgid "Desktop Button"
+msgstr "Schreibtischknopf"
+
+#: prefs.js:134 prefs.js:157 prefs.js:229
+msgid "Workspace Button"
+msgstr "Arbeitsflächenumschalter"
+
+#: prefs.js:140 prefs.js:158
+msgid "Appview Button"
+msgstr "Anwendungenknopf"
+
+#: prefs.js:146 prefs.js:159
+msgid "Favorites"
+msgstr "Favoriten"
+
+#: prefs.js:153
+msgid "Align "
+msgstr "Anordnen"
+
+#: prefs.js:182 prefs.js:213 prefs.js:519
+msgid "Bottom Panel"
+msgstr "Fußleiste"
+
+#: prefs.js:208
+msgid "Panels"
+msgstr "Leisten"
+
+#: prefs.js:211 prefs.js:517
+msgid "Top Panel"
+msgstr "Obere Leiste"
+
+#: prefs.js:216
+msgid "Icon Size"
+msgstr "Symbolgröße"
+
+#: prefs.js:229
+msgid "Font Size"
+msgstr "Schriftgröße"
+
+#: prefs.js:242
+msgid "Align TaskBar"
+msgstr "TaskBar positionieren"
+
+#: prefs.js:257
+msgid "Anchor Point"
+msgstr "Ankerpunkt"
+
+#: prefs.js:265
+msgid ""
+"Panel Background\n"
+"Color / Opacity"
+msgstr ""
+"Leistenhintergrund\n"
+"Farbe / Deckkraft"
+
+#: prefs.js:287 prefs.js:290
+msgid "Reset Color"
+msgstr "Farbe zurücksetzen"
+
+#: prefs.js:319
+msgid "Tasks on All Workspaces"
+msgstr "Anwendungen aller Arbeitsflächen"
+
+#: prefs.js:325
+msgid "Tasks Container Width"
+msgstr "Breite des Bereichs der Anwendungen"
+
+#: prefs.js:333
+msgid "Close Tasks"
+msgstr "Anwendungen schließen"
+
+#: prefs.js:336 prefs.js:460
+msgid "OFF"
+msgstr "AUS"
+
+#: prefs.js:337
+msgid "Middle Click"
+msgstr "Mittelklick"
+
+#: prefs.js:338
+msgid "Right Click"
+msgstr "Rechtsklick"
+
+#: prefs.js:343
+msgid "Scroll Tasks"
+msgstr "Durch Anwendungen scrollen"
+
+#: prefs.js:349
+msgid "Active Task Frame"
+msgstr "Rahmen der aktiven Anwendung"
+
+#: prefs.js:355
+msgid ""
+"Active Task Background\n"
+"Color / Opacity"
+msgstr ""
+"Hintergrund aktiver Anwendungen\n"
+"Farbe / Deckkraft"
+
+#: prefs.js:370
+msgid "Activate Tasks on Hover"
+msgstr "Anwendungen beim Überfahren aktivieren"
+
+#: prefs.js:376
+msgid "Hover Delay"
+msgstr "Überfahr-Verzögerung"
+
+#: prefs.js:376 prefs.js:854
+msgid "(ms)"
+msgstr "(ms)"
+
+#: prefs.js:406
+msgid "Buttons"
+msgstr "Schaltflächen"
+
+#: prefs.js:409
+msgid ""
+"Desktop Button Right Click\n"
+"opens Preferences (this)"
+msgstr ""
+"Rechtsklick auf Schreibtischknopf\n"
+"öffnet diese Einstellungen"
+
+#: prefs.js:415
+msgid "Desktop Button Icon"
+msgstr "Symbol des Schreibtischknopfes"
+
+#: prefs.js:424
+msgid "Workspace Button Index"
+msgstr "Arbeitsflächenumschalter zeigt"
+
+#: prefs.js:427 prefs.js:462
+msgid "Index"
+msgstr "Index"
+
+#: prefs.js:428
+msgid "Index/Total"
+msgstr "Index/Gesamt"
+
+#: prefs.js:433
+msgid "Scroll Workspaces"
+msgstr "Durch Arbeitsflächen scrollen"
+
+#: prefs.js:439
+msgid ""
+"Appview Button\n"
+"Left / Right Click Toggle"
+msgstr ""
+"Anwendungenknopf\n"
+"Links-/Rechtsklick-Zuordnung"
+
+#: prefs.js:442
+msgid ""
+"L Appview\n"
+"R Overview"
+msgstr ""
+"L Anwendungen\n"
+"R Übersicht"
+
+#: prefs.js:443
+msgid ""
+"L Overview\n"
+"R Appview"
+msgstr ""
+"L Übersicht\n"
+"R Anwendungen"
+
+#: prefs.js:448
+msgid "Appview Button Icon"
+msgstr "Symbol des Anwendungsknopfs"
+
+#: prefs.js:457
+msgid "Bottom Panel Tray Button"
+msgstr "Benachrichtigungsknopf in der Fußleiste"
+
+#: prefs.js:461
+msgid "Icon"
+msgstr "Symbol"
+
+#: prefs.js:467
+msgid "When Tray is Empty"
+msgstr "Wenn keine Benachrichtigungen"
+
+#: prefs.js:470
+msgid "Show Icon"
+msgstr "Symbol anzeigen"
+
+#: prefs.js:471
+msgid "Show 0"
+msgstr "0 anzeigen"
+
+#: prefs.js:472
+msgid "Hide"
+msgstr "Verstecken"
+
+#: prefs.js:477
+msgid "Tray Button Icon"
+msgstr "Symbol des Benachrichtigungsknopfs"
+
+#: prefs.js:486
+msgid "Activate Tray on Hover"
+msgstr "Benachrichtigungsbereich beim Überfahren aktivieren"
+
+#: prefs.js:514
+msgid "Separators"
+msgstr "Trennungen"
+
+#: prefs.js:522 prefs.js:561 prefs.js:600 prefs.js:639 prefs.js:678
+#: prefs.js:717 prefs.js:759 prefs.js:760 prefs.js:761 prefs.js:762
+#: prefs.js:763 prefs.js:764
+msgid "Separator"
+msgstr "Trennung"
+
+#: prefs.js:522
+msgid "Left"
+msgstr "Links"
+
+#: prefs.js:717
+msgid "Right"
+msgstr "Rechts"
+
+#: prefs.js:757
+msgid "Resize "
+msgstr "Größe ändern"
+
+#: prefs.js:825
+msgid "Preview"
+msgstr "Vorschau"
+
+#: prefs.js:828
+msgid "Tasks Label"
+msgstr "Programmname anzeigen"
+
+#: prefs.js:834
+msgid "Tasks Thumbnail"
+msgstr "Vorschaubild anzeigen"
+
+#: prefs.js:840
+msgid "Favorites Label"
+msgstr "Bei Favoriten Name anzeigen"
+
+#: prefs.js:846
+msgid "Thumbnail Size"
+msgstr "Vorschaubildgröße"
+
+#: prefs.js:854
+msgid "Preview Delay"
+msgstr "Vorschauverzögerung"
+
+#: prefs.js:884
+msgid "Misc"
+msgstr "Verschiedenes"
+
+#: prefs.js:887
+msgid "Hide Activities"
+msgstr "Aktivitäten entfernen"
+
+#: prefs.js:893
+msgid "Disable Hot Corner"
+msgstr "»Hot Corner« deaktivieren"
+
+#: prefs.js:899
+msgid "Hide Default App Menu"
+msgstr "Standard Anwendungsmenü ausblenden"
+
+#: prefs.js:905
+msgid ""
+"Possible conflict\n"
+"with other extensions"
+msgstr ""
+"Mögliche Konflikte\n"
+"mit anderen Erweiterungen"
+
+#: prefs.js:943
+msgid "Version"
+msgstr "Version"
+
+#: prefs.js:951
+msgid "Send Bug Report"
+msgstr "Einen Problembericht senden"
+
+#: prefs.js:961
+msgid "Donate for TaskBar"
+msgstr "Für TaskBar spenden"
+
+#: prefs.js:966
+msgid "Become a Friend of GNOME"
+msgstr "Ein GNOME-Freund werden"
+
+#: prefs.js:971
+msgid "RESET ALL !"
+msgstr "Standardwerte"
+
+#: prefs.js:974
+msgid "Free Software Foundation"
+msgstr "Stiftung für freie Software"
+
+#: prefs.js:1229
+msgid "TaskBar Preferences - Desktop Button Icon"
+msgstr "TaskBar-Einstellungen - Symbol des Schreibtischknopfes"
+
+#: prefs.js:1242 prefs.js:1343 prefs.js:1433
+msgid "Images"
+msgstr "Bilder"
+
+#: prefs.js:1330
+msgid "TaskBar Preferences - Appview Button Icon"
+msgstr "Taskbar-Einstellungen - Symbol des Anwendungsknopfs"
+
+#: prefs.js:1420
+msgid "TaskBar Preferences - Tray Button Icon"
+msgstr "TaskBar-Einstellungen - Symbol des Benachrichtigungsknopfs"
+
+#~ msgid "Components"
+#~ msgstr "Komponenten"
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Vertical Adjustment"
+#~ msgstr "Vertikale Ausrichtung"
+
+#~ msgid "Donate"
+#~ msgstr "Spenden"
+
+#~ msgid "Separator 1\t(Left)"
+#~ msgstr "Trennung 1\t(Links)"
+
+#~ msgid "Separator 2"
+#~ msgstr "Trennlinie 2"
+
+#~ msgid "Separator 3"
+#~ msgstr "Trennlinie 3"
+
+#~ msgid "Separator 4"
+#~ msgstr "Trennlinie 4"
+
+#~ msgid "Separator 5"
+#~ msgstr "Trennlinie 5"
+
+#~ msgid "Separator 6\t(Right)"
+#~ msgstr "Trennlinie 6\t(Rechts)"
+
+#~ msgid "Separator 1"
+#~ msgstr "Trennlinie 1"
+
+#~ msgid "Separator 6"
+#~ msgstr "Trennlinie 6"
+
+#~ msgid "Default"
+#~ msgstr "Vorgabe"
+
+#~ msgid "GNOME"
+#~ msgstr "GNOME"
+
+#~ msgid "Dark"
+#~ msgstr "Dunkel"
+
+#~ msgid "Appearance"
+#~ msgstr "Anordnung"
+
+#~ msgid "From Left to Right"
+#~ msgstr "Von Links nach Rechts"

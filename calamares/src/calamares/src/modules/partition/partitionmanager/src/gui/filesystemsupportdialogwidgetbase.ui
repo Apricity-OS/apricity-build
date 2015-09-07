@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FileSystemSupportDialogWidgetBase</class>
+ <widget class="QWidget" name="FileSystemSupportDialogWidgetBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>835</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>This table shows which file systems are supported and which specific operations can be performed on them.
+Some file systems need external tools to be installed for them to be supported. But not all operations can be performed on all file systems, even if all required tools are installed. Please see the documentation for details. </string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTreeWidget" name="m_Tree">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::NoSelection</enum>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="indentation">
+      <number>0</number>
+     </property>
+     <property name="rootIsDecorated">
+      <bool>false</bool>
+     </property>
+     <property name="uniformRowHeights">
+      <bool>true</bool>
+     </property>
+     <property name="itemsExpandable">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+     <property name="showGrid" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="cornerButtonEnabled" stdset="0">
+      <bool>false</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string>File System</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Create</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Grow</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Shrink</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Move</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Copy</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Check</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Read Label</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Write Label</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Read Usage</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Backup</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Restore</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Support Tools</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="m_ButtonRescan">
+       <property name="text">
+        <string comment="@action:button">Rescan Support</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

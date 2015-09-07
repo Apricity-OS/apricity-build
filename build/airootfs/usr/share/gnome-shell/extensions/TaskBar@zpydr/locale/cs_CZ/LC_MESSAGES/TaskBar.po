@@ -1,0 +1,372 @@
+#  GNOME Shell Extension TaskBar
+#  Copyright (C) 2015 zpydr
+#  Copyright (C) 2015 michal-ruzicka (Czech translation)
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+#  zpydr@openmailbox.org
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TaskBar\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-23 23:25+0000\n"
+"PO-Revision-Date: 2015-03-03 13:16+0100\n"
+"Last-Translator: Michal Růžička <ruzicka.mich@gmail.com>\n"
+"Language-Team: Michal Růžička <ruzicka.mich@gmail.com>\n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: prefs.js:116 prefs.js:195
+msgid "Overview"
+msgstr "Přehled činností"
+
+#: prefs.js:119 prefs.js:152 prefs.js:300 prefs.js:381
+msgid "Tasks"
+msgstr "Úlohy"
+
+#: prefs.js:125 prefs.js:153
+msgid "Desktop Button"
+msgstr "Tlačítko Plocha"
+
+#: prefs.js:131 prefs.js:154
+msgid "Workspace Button"
+msgstr "Přepínač ploch"
+
+#: prefs.js:137 prefs.js:155
+msgid "Appview Button"
+msgstr "Tlačítko Aplikace"
+
+#: prefs.js:143 prefs.js:156
+msgid "Favorites"
+msgstr "Oblíbené"
+
+#: prefs.js:150
+msgid "Align "
+msgstr "Zarovnat "
+
+#: prefs.js:179 prefs.js:213 prefs.js:504
+msgid "Bottom Panel"
+msgstr "Spodní panel"
+
+#: prefs.js:185
+msgid "TaskBar in Overview"
+msgstr "Zobrazit TaskBar v přehledu činností"
+
+#: prefs.js:208 prefs.js:287
+msgid "Panels"
+msgstr "Panely"
+
+#: prefs.js:211 prefs.js:502
+msgid "Top Panel"
+msgstr "Horní panel"
+
+#: prefs.js:216
+msgid "Panel Height"
+msgstr "Výška panelu"
+
+#: prefs.js:229
+msgid "Align TaskBar"
+msgstr "Zarovnání TaskBaru"
+
+#: prefs.js:244
+msgid "Anchor Point"
+msgstr "Kotvící bod"
+
+#: prefs.js:252
+msgid ""
+"Panel Background\n"
+"Color & Opacity"
+msgstr ""
+"Pozadí panelu\n"
+"barva & průhlednost"
+
+#: prefs.js:274 prefs.js:277
+msgid "Reset Color"
+msgstr "Reset barvy"
+
+#: prefs.js:303
+msgid "Tasks on All Workspaces"
+msgstr "Úlohy na všech plochách"
+
+#: prefs.js:309
+msgid "Tasks Container Width"
+msgstr "Šířka sekce úloh"
+
+#: prefs.js:309
+msgid ""
+"(0 Tasks)\n"
+"[Not Complete]"
+msgstr ""
+"(0 úloh)\n"
+"[Nedokončené]"
+
+#: prefs.js:317
+msgid "Close Tasks"
+msgstr "Zavřít úlohy"
+
+#: prefs.js:320 prefs.js:448
+msgid "OFF"
+msgstr "Vypnout"
+
+#: prefs.js:321
+msgid "Middle Click"
+msgstr "Kliknutí prostředím myšítkem"
+
+#: prefs.js:322
+msgid "Right Click"
+msgstr "Kliknutí pravým myšítkem"
+
+#: prefs.js:327
+msgid "Scroll Tasks"
+msgstr "Přepínat mezi úlohami kolečkem"
+
+#: prefs.js:333
+msgid "Invert Scroll Tasks"
+msgstr "Přepínat mezi úlohami kolečkem v opačném pořadí"
+
+#: prefs.js:339
+msgid "Active Task Frame"
+msgstr "Rámeček kolem aktivní úlohy"
+
+#: prefs.js:345
+msgid ""
+"Active Task Background\n"
+"Color & Opacity"
+msgstr ""
+"Pozadí aktivní úlohy\n"
+"barva & průhlednost"
+
+#: prefs.js:361
+msgid "Activate Tasks on Hover"
+msgstr "Aktivovat úlohy najetím kurzoru"
+
+#: prefs.js:367
+msgid "Hover Delay"
+msgstr "Prodleva aktivace úlohy najetím kurzoru"
+
+#: prefs.js:394 prefs.js:486
+msgid "Buttons"
+msgstr "Tlačítka"
+
+#: prefs.js:397
+msgid ""
+"Desktop Button Right Click\n"
+"opens Preferences (this)"
+msgstr ""
+"Kliknutí pravým myšítkem na\n"
+"tlačítko Plocha otevře nastavení (toto)"
+
+#: prefs.js:403
+msgid "Desktop Button Icon"
+msgstr "Ikona tlačítka Plocha"
+
+#: prefs.js:412
+msgid "Workspace Button Index"
+msgstr "Tlačítko přepínače ploch"
+
+#: prefs.js:415 prefs.js:450
+msgid "Index"
+msgstr "Pořadové číslo"
+
+#: prefs.js:416
+msgid "Index/Total"
+msgstr "Pořadové číslo / celkem"
+
+#: prefs.js:421
+msgid "Scroll Workspaces"
+msgstr "Přepínat kolečkem plochy"
+
+#: prefs.js:427
+msgid ""
+"Appview Button\n"
+"Left & Right Click Toggle"
+msgstr ""
+"Tlačítko Aplikace\n"
+"kliknutí levým & pravým myšítkem"
+
+#: prefs.js:430
+msgid ""
+"L Appview\n"
+"R Overview"
+msgstr ""
+"L Aplikace\n"
+"P Přehled činností"
+
+#: prefs.js:431
+msgid ""
+"L Overview\n"
+"R Appview"
+msgstr ""
+"L Přehled činností\n"
+"P Aplikace"
+
+#: prefs.js:436
+msgid "Appview Button Icon"
+msgstr "Ikona tlačítka Aplikace"
+
+#: prefs.js:445
+msgid "Bottom Panel Tray Button"
+msgstr "Tlačítko lišty zpráv na spodním panelu"
+
+#: prefs.js:449
+msgid "Icon"
+msgstr "Ikona"
+
+#: prefs.js:455
+msgid "When Tray is Empty"
+msgstr "Pokud je lišta zpráv prázdná"
+
+#: prefs.js:458
+msgid "Show Icon"
+msgstr "Zobraz ikonu"
+
+#: prefs.js:459
+msgid "Show 0"
+msgstr "Zobraz 0"
+
+#: prefs.js:460
+msgid "Hide"
+msgstr "Skrýt"
+
+#: prefs.js:465
+msgid "Tray Button Icon"
+msgstr "Ikona tlačítky lišty zpráv"
+
+#: prefs.js:474
+msgid "Activate Tray on Hover"
+msgstr "Aktivovat lištu zpráv najetím kurzoru"
+
+#: prefs.js:499 prefs.js:794
+msgid "Separators"
+msgstr "Oddělovače"
+
+#: prefs.js:507 prefs.js:546 prefs.js:585 prefs.js:624 prefs.js:663
+#: prefs.js:702 prefs.js:744 prefs.js:745 prefs.js:746 prefs.js:747
+#: prefs.js:748 prefs.js:749
+msgid "Separator"
+msgstr "Oddělovač"
+
+#: prefs.js:507
+msgid "Left"
+msgstr "Vlevo"
+
+#: prefs.js:702
+msgid "Right"
+msgstr "Vpravo"
+
+#: prefs.js:742
+msgid "Resize "
+msgstr "Změnit velikost "
+
+#: prefs.js:807 prefs.js:850
+msgid "Preview"
+msgstr "Náhled"
+
+#: prefs.js:810
+msgid "Tasks Label"
+msgstr "Popiska úlohy"
+
+#: prefs.js:816
+msgid "Tasks Thumbnail"
+msgstr "Náhled úlohy"
+
+#: prefs.js:822
+msgid "Favorites Label"
+msgstr "Popisky oblíbených"
+
+#: prefs.js:828
+msgid "Thumbnail Size"
+msgstr "Velikost náhledu"
+
+#: prefs.js:836
+msgid "Preview Delay"
+msgstr "Prodleva náhledu"
+
+#: prefs.js:863 prefs.js:891
+msgid "Misc"
+msgstr "Různé"
+
+#: prefs.js:866
+msgid "Hide Activities"
+msgstr "Skrýt Aktivity"
+
+#: prefs.js:872
+msgid "Disable Hot Corner"
+msgstr "Vypnout aktivní roh"
+
+#: prefs.js:878
+msgid "Hide Default App Menu"
+msgstr "Skrýt standardní menu aplikací"
+
+#: prefs.js:884
+msgid ""
+"Activating one\n"
+"of those 3 options\n"
+"could cause a conflict\n"
+"with other extensions"
+msgstr ""
+"Zapnutí některé\n"
+"z těchto tří voleb\n"
+"může způsobit konflikt\n"
+"s jinými rozšířeními"
+
+#: prefs.js:904 prefs.js:960
+msgid "About TaskBar"
+msgstr "O TaskBaru"
+
+#: prefs.js:919
+msgid "Version"
+msgstr "Verze"
+
+#: prefs.js:927
+msgid "Send Bug Report"
+msgstr "Poslat hlášení o chybě"
+
+#: prefs.js:937
+msgid "Donate for TaskBar"
+msgstr "Dotace pro TaskBar"
+
+#: prefs.js:942
+msgid "Become a Friend of GNOME"
+msgstr "Staňte se Přítelem GNOME"
+
+#: prefs.js:947
+msgid "RESET ALL !"
+msgstr "VŠECHNO RESETOVAT!"
+
+#: prefs.js:950
+msgid "Free Software Foundation"
+msgstr "Free Software Foundation"
+
+#: prefs.js:1211
+msgid "TaskBar Preferences - Desktop Button Icon"
+msgstr "Nastavení TaskBar – ikona tlačítka Plocha"
+
+#: prefs.js:1224 prefs.js:1325 prefs.js:1415
+msgid "Images"
+msgstr "Obrázky"
+
+#: prefs.js:1312
+msgid "TaskBar Preferences - Appview Button Icon"
+msgstr "Nastavení TaskBar – ikona tlačítka Aplikace"
+
+#: prefs.js:1402
+msgid "TaskBar Preferences - Tray Button Icon"
+msgstr "Nastavení TaskBar – ikona tlačítka lišty zpráv"

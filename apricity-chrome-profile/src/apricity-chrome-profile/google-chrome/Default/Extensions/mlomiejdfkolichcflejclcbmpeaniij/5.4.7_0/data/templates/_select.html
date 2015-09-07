@@ -1,0 +1,13 @@
+<select id="<%- id %>">
+	<% _.each(options, function (option) { %>
+		<% if (option.hasOwnProperty('value')) { %>
+			<option value="<%- option.value %>"<% if (typeof selected != 'undefined' && option.value === selected) print(' selected') %>>
+				<%- option.name %>
+			</option>
+		<% } else { %>
+			<option<% if (typeof selected != 'undefined' && option === selected) print(' selected') %>>
+				<%- option %>
+			</option>
+		<% } %>
+	<% }) %>
+</select>

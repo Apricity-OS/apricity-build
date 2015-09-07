@@ -1,0 +1,7 @@
+/* glue: 0.3 hash: 1e8cf9e9a3 */
+.header-cog_off,
+.header-cog:hover,
+.header-cog:active{background-image:url('../../images/build/header.png');background-repeat:no-repeat}
+.header-cog_off{background-position:-20px -20px;width:45px;height:45px;}
+.header-cog:hover{background-position:-20px -105px;width:45px;height:45px;}
+.header-cog:active{background-position:-20px -190px;width:45px;height:41px;}

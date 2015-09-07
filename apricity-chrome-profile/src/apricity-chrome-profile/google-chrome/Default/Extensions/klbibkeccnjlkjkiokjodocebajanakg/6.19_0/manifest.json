@@ -1,0 +1,58 @@
+{
+   "background": {
+      "persistent": true,
+      "scripts": [ "js/db.js", "js/gsUtils.js", "js/background.js" ]
+   },
+   "browser_action": {
+      "default_icon": "img/icon19.png",
+      "default_popup": "popup.html",
+      "default_title": "The Great Suspender"
+   },
+   "commands": {
+      "1-suspend-tab": {
+         "description": "Suspend active tab",
+         "suggested_key": {
+            "default": "Ctrl+Shift+S"
+         }
+      },
+      "2-unsuspend-tab": {
+         "description": "Unsuspend active tab",
+         "suggested_key": {
+            "default": "Ctrl+Shift+U"
+         }
+      },
+      "3-suspend-active-window": {
+         "description": "Suspend all tabs in active window"
+      },
+      "4-unsuspend-active-window": {
+         "description": "Unsuspend all tabs in active window"
+      },
+      "5-suspend-all-windows": {
+         "description": "Suspend all tabs in all windows"
+      },
+      "6-unsuspend-all-windows": {
+         "description": "Unsuspend all tabs in all windows"
+      }
+   },
+   "content_scripts": [ {
+      "js": [ "js/contentscript.js" ],
+      "matches": [ "http://*/*", "https://*/*" ]
+   } ],
+   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+   "description": "Automatically suspends unused tabs to free up system resources",
+   "icons": {
+      "128": "img/icon128.png",
+      "16": "img/icon16.png",
+      "48": "img/icon48.png"
+   },
+   "incognito": "split",
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDWu7+3vUaUm2vuJZQsiPeciQbO5hpq8/Z2o6zP/Kv7I5+rI1ZfDhjsuz6jw2Efi23YwkAGPpXewhKnrmGXAgRSPIq1EHZUTwVwqo1SFWGCyEzywvXjpPiLaP3DsJCHT2wJE0KcWvt/aKeREtFCpvZ3b5vnupYh1oMlSryqBiINewIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "24",
+   "name": "The Great Suspender",
+   "options_page": "options.html",
+   "permissions": [ "tabs", "storage", "history", "unlimitedStorage", "http://*/*", "https://*/*", "chrome://favicon/*", "http://greatsuspender.github.io/", "contextMenus" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "6.19",
+   "web_accessible_resources": [ "suspended.html", "history.html", "clean.html", "css/style.css", "css/suspended.css" ]
+}

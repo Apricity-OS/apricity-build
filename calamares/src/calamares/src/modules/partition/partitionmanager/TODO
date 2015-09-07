@@ -1,0 +1,52 @@
+===============================================================================
+
+For releases after 1.1:
+
+* add a way for the user to remove an existing mount point
+
+* make Job::copyBlocks() work for cases where the logical sector sizes of
+  source and target are not the same
+
+* can we use capacity (i.e. bytes/mib) instead of sector for alignment
+  configuration? would we need to know the physical sector size for that? are
+  we able to acquire that information?
+
+* find an elegant solution for the brokenness in design that is
+  Partition::sectorSize()... Either a Partition has a reference/pointer to the
+  Device it's on or the method is removed completely. -- Maybe the
+  PartitionTable should refernce the Device?
+
+* the file system support dialog is a usability nightmare
+
+* introduce new commands for online-actions, like change label online or, for
+  filesystems that support it, even resize online
+
+* write a setup-kcm in the style of k3b's so that the user can set the r/w
+  permissions of the disks there; also use kauth to update the partition table
+  in the kernel. that should cover all cases where we actually need root
+  privileges now. -- we actually also need root privs for SMART now.
+
+* The whole lvm/dm debacle.
+
+* The interface between core and the file systems needs some more thought.
+  Ideally we'd be free to use either external helper apps (like we do now) or
+  libraries to achieve the same things. Libraries in this case being libntfs-3g
+  and libext2fs. There's one for reiserfs too, iirc.
+
+* Convert the fs implementations into plugins. Redesign the support-stuff, make
+  that more flexible (no statics in the FS classes, some helper class or at
+  least an array in FileSystem).
+
+* Add a SMART self test operation.
+
+* support KLocale::BinaryUnitDialect and use KLocale's formatting methods (how
+  feasable is that? does it make sense?)
+
+* Information about file system on a separate tab in the properties, unique
+  to the file system in use.
+
+* let the user specify external command locations and options in the settings;
+  use some program and binary management setup internally like k3b has it
+
+* parse progress information at least from e2fsck and ntfsclone... maybe others.
+

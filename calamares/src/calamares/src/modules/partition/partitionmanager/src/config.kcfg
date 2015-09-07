@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+	<kcfgfile arg="true"/>
+	<include>fs/filesystem.h</include>
+	<include>util/capacity.h</include>
+	<group name="KDE Partition Manager">
+		<entry name="treePartitionColumnWidths" type="IntList" hidden="true">
+			<default>140,90,90,90,0,90,90,0,0,0,0,0</default>
+		</entry>
+		<entry name="treePartitionColumnPositions" type="IntList" hidden="true">
+			<default>0,1,2,3,4,5,6,7,8,9,10,11</default>
+		</entry>
+		<entry name="treePartitionColumnVisible" type="IntList" hidden="true">
+			<default>1,1,1,1,0,1,1,0,0,0,0,0</default>
+		</entry>
+		<entry name="treeLogColumnWidths" type="IntList" hidden="true">
+			<default>32,192,800</default>
+		</entry>
+		<entry name="treeLogColumnPositions" type="IntList" hidden="true">
+			<default>0,1,2</default>
+		</entry>
+		<entry name="treeLogColumnVisible" type="IntList" hidden="true">
+			<default>1,1,1</default>
+		</entry>
+		<entry name="treeSmartAttributesColumnWidths" type="IntList" hidden="true">
+			<default>32,430,96,96,64,64,64,96,96,96</default>
+		</entry>
+		<entry name="treeSmartAttributesColumnPositions" type="IntList" hidden="true">
+			<default>0,1,2,3,4,5,6,7,8,9</default>
+		</entry>
+		<entry name="treeSmartAttributesColumnVisible" type="IntList" hidden="true">
+			<default>1,1,0,0,0,0,0,0,1,1</default>
+		</entry>
+		<entry name="firstRun" type="Bool">
+			<label context="@label">Is this the first time KDE Partition Manager is being run?</label>
+			<default>true</default>
+		</entry>
+		<entry name="minLogLevel" type="Int">
+			<label context="@label">Hide log messages below</label>
+			<default>0</default>
+		</entry>
+		<entry name="sectorAlignment" type="Int">
+			<label context="@label">Partition sector alignment</label>
+			<default>2048</default>
+		</entry>
+		<entry name="useCylinderAlignment" type="Bool">
+			<label context="@label">Use cylinder based alignment (Windows XP compatible)</label>
+			<default>false</default>
+		</entry>
+		<entry name="alignDefault" type="Bool">
+			<label context="@label">Align partitions per default</label>
+			<default>true</default>
+		</entry>
+		<entry name="allowApplyOperationsAsNonRoot" type="Bool">
+			<label context="@label">Allow applying operations without administrator privileges</label>
+			<default>false</default>
+		</entry>
+		<entry key="fileSystemColorCode$(colorNumber)" type="Color">
+			<label context="@label">File system colors</label>
+			<parameter name="colorNumber" type="UInt" max="24"/>
+			<!-- numbers correspond to the enum in fs/filesystem.h -->
+			<default param="0">220,205,175</default> <!-- unknown -->
+			<default param="1">187,249,207</default> <!-- extended -->
+			<default param="2">102,121,150</default> <!-- ext2 -->
+			<default param="3">122,145,180</default> <!-- ext3 -->
+			<default param="4">143,170,210</default> <!-- ext4 -->
+			<default param="5">155,155,130</default> <!-- swap -->
+			<default param="6">204,179,215</default> <!-- fat16 -->
+			<default param="7">229,201,240</default> <!-- fat32 -->
+			<default param="8">244,214,255</default> <!-- ntfs -->
+			<default param="9">216,220,135</default> <!-- reiser-->
+			<default param="10">251,255,157</default> <!-- reiser4 -->
+			<default param="11">200,255,254</default> <!-- xfs -->
+			<default param="12">137,200,198</default> <!-- jfs -->
+			<default param="13">210,136,142</default> <!-- hfs -->
+			<default param="14">240,165,171</default> <!-- hfs+ -->
+			<default param="15">151,220,134</default> <!-- ufs -->
+			<default param="16">220,205,175</default> <!-- unformatted -->
+			<default param="17">173,205,255</default> <!-- btrfs -->
+			<default param="18">176,155,185</default> <!-- hpfs -->
+			<default param="19">170,30,77</default> <!-- luks -->
+			<default param="20">96,140,85</default> <!-- ocfs2 -->
+			<default param="21">33,137,108</default> <!-- zfs -->
+			<default param="22">250,230,255</default> <!-- exfat -->
+			<default param="23">242,155,104</default> <!-- nilfs2 -->
+			<default param="24">160,210,180</default> <!-- lvm2 pv -->
+		</entry>
+		<entry key="showMenuBar" type="Bool">
+			<label context="@label">Show the application's menu bar</label>
+			<default>true</default>
+		</entry>
+		<entry key="backend" type="String">
+			<label context="@label">Backend plugin</label>
+			<default>pmlibpartedbackendplugin</default>
+		</entry>
+		<entry key="defaultFileSystem" type="Int">
+			<default>FileSystem::Ext3</default>
+		</entry>
+		<entry key="preferredUnit" type="Int">
+			<label context="@label">Preferred unit:</label>
+			<choices>
+				<choice name="Byte">Capacity::Byte</choice>
+				<choice name="KiB">Capacity::KiB</choice>
+				<choice name="MiB">Capacity::MiB</choice>
+				<choice name="GiB">Capacity::GiB</choice>
+				<choice name="TiB">Capacity::TiB</choice>
+				<choice name="PiB">Capacity::PiB</choice>
+				<choice name="EiB">Capacity::EiB</choice>
+			</choices>
+			<default>Capacity::MiB</default>
+		</entry>
+		<entry key="shredSource" type="Enum">
+			<choices>
+				<choice name="random"/>
+				<choice name="zeros"/>
+			</choices>
+			<default>random</default>
+		</entry>
+	</group>
+</kcfg>

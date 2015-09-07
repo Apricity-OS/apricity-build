@@ -1,0 +1,34 @@
+#!/bin/bash
+#Note: No guarantee that this theme will be seen correctly at all screen resolutions available
+#execute only from within the colors-splash folder!
+
+sudo mkdir /lib/plymouth/themes/colors
+clear
+sudo rsync -aq --exclude=install-colors * /lib/plymouth/themes/colors/
+clear
+sudo update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/colors/colors.plymouth 100
+sudo update-alternatives --config default.plymouth  #here, choose the number of the theme you want to use then hit enter
+sudo update-initramfs -u
+echo
+echo Installing plymouth-x11...   Redundant if already installed.
+sudo apt-get install plymouth-x11
+echo
+echo Running 10-second test...
+sudo plymouthd ; sudo plymouth --show-splash ; for ((I=0; I<10; I++)); do sleep 1 ; sudo plymouth --update=test$I ; done ; sudo plymouth --quit
+clear
+echo
+echo If or when you want to restore the original Plymouth theme, 
+echo    execute the script: ./update-plymouth 
+echo 
+echo If you want to test the theme without re-starting the machine,
+echo    execute the script: ./test-plymouth
+echo
+echo If you want to test the theme after any modifications,
+echo    execute the script: ./update-colors
+echo
+echo Scripts may be executed from the folder where colors.tar.gz was extracted,
+echo    OR from /lib/plymouth/themes/colors.
+echo
+echo
+read -p "Press ENTER to exit."
+exit

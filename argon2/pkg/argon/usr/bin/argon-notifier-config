@@ -1,0 +1,184 @@
+#!/usr/bin/python
+
+config = []
+for line in open('/etc/argon/config'):
+    line = line.rstrip()
+    config.append(line)
+
+from gi.repository import Gtk
+import os
+from os.path import expanduser
+
+class GridWindow(Gtk.Window):
+
+    def __init__(self):
+        Gtk.Window.__init__(self, title="Argon - Update Notifier Configuration")
+        self.set_border_width(8)
+        self.set_position(Gtk.WindowPosition.CENTER)
+        self.set_icon_from_file('/usr/share/argon/argon.png')
+        grid = Gtk.Grid(column_homogeneous=True,column_spacing=8,row_spacing=8)
+        self.add(grid) 
+
+        self.label1 = Gtk.Label("seconds from login to first update check", xalign=0)
+        adjustment = Gtk.Adjustment(0, 0, 999999999, 1, 10, 0)
+        policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
+        delayonevalue = eval(config[0])
+        self.spinbutton1 = Gtk.SpinButton()
+        self.spinbutton1.set_adjustment(adjustment)
+        self.spinbutton1.set_update_policy(policy)
+        self.spinbutton1.set_value(delayonevalue)
+
+        self.label2 = Gtk.Label("seconds between subsequent update checks", xalign=0)
+        adjustment = Gtk.Adjustment(0, 0, 999999999, 1, 10, 0)
+        policy = Gtk.SpinButtonUpdatePolicy.IF_VALID
+        delaytwovalue = eval(config[1])
+        self.spinbutton2 = Gtk.SpinButton()
+        self.spinbutton2.set_adjustment(adjustment)
+        self.spinbutton2.set_update_policy(policy)
+        self.spinbutton2.set_value(delaytwovalue)
+
+        self.label3 = Gtk.Label("notification text when updates are available", xalign=0)
+        self.entry1 = Gtk.Entry()
+        self.entry1.set_text("%s" % config[2])
+
+        self.label4 = Gtk.Label("notification text when system is up to date", xalign=0)
+        self.entry2 = Gtk.Entry()
+        self.entry2.set_text("%s" % config[3])
+
+        self.label5 = Gtk.Label("notification icon when updates are available", xalign=0)
+        self.button1 = Gtk.Button("%s" % (config[4]))
+        self.button1.connect("clicked", self.button1sig)
+
+        self.label6 = Gtk.Label("notification icon when system is up to date", xalign=0)
+        self.button2 = Gtk.Button("%s" % (config[5]))
+        self.button2.connect("clicked", self.button2sig)
+
+        self.label7 = Gtk.Label("show notifications when system is up to date", xalign=0)
+        self.check = Gtk.CheckButton()
+        if config[6] == "True":
+            self.check.set_active(True)
+            self.spinbutton2.set_sensitive(True)
+            self.entry2.set_sensitive(True)
+        elif config[6] == "False":
+            self.check.set_active(False)
+            self.spinbutton2.set_sensitive(False)
+            self.entry2.set_sensitive(False)
+        self.check.connect("toggled", self.checksig)
+
+        self.link = Gtk.LinkButton("http://code.google.com/p/arch-argon/", "Argon Project Page")
+
+        autofile = os.path.exists(os.path.expanduser('~/.config/autostart/argon-update-notifier.desktop'))
+        if autofile == False:
+            self.button3 = Gtk.Button("Enable Autostart")
+        elif autofile == True:
+            self.button3 = Gtk.Button("Disable Autostart")
+        self.button3.connect("clicked", self.autostart)
+
+        self.button4 = Gtk.Button("Restore Defaults")
+        self.button4.connect("clicked", self.default)
+
+        self.button5 = Gtk.Button("Cancel")
+        self.button5.connect("clicked", self.cancel)
+
+        self.button6 = Gtk.Button("Done")
+        self.button6.connect("clicked", self.done)
+
+        grid.attach(self.label1,0,0,2,1)
+        grid.attach(self.spinbutton1,2,0,2,1)
+        grid.attach(self.label2,0,1,2,1)
+        grid.attach(self.spinbutton2,2,1,2,1)
+        grid.attach(self.label3,0,2,2,1)
+        grid.attach(self.entry1,2,2,2,1)
+        grid.attach(self.label4,0,3,2,1)
+        grid.attach(self.entry2,2,3,2,1)
+        grid.attach(self.label5,0,4,2,1)
+        grid.attach(self.button1,2,4,2,1)
+        grid.attach(self.label6,0,5,2,1)
+        grid.attach(self.button2,2,5,2,1)
+        grid.attach(self.label7,0,6,2,1)
+        grid.attach(self.check,2,6,1,1)
+        grid.attach(self.link,3,6,1,1)
+        grid.attach(self.button3,0,7,1,1)
+        grid.attach(self.button4,1,7,1,1)
+        grid.attach(self.button5,2,7,1,1)
+        grid.attach(self.button6,3,7,1,1)
+
+    def button1sig(self, configalter):
+        dialog = Gtk.FileChooserDialog("Choose Icon", self,
+            Gtk.FileChooserAction.OPEN,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+             Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            configalter.set_label(dialog.get_filename())
+            iconfile1 = dialog.get_filename()
+        dialog.destroy()
+
+    def button2sig(self, configalter):
+        dialog = Gtk.FileChooserDialog("Choose Icon", self,
+            Gtk.FileChooserAction.OPEN,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+             Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            configalter.set_label(dialog.get_filename())
+            iconfile2 = dialog.get_filename()
+        dialog.destroy()
+
+    def checksig(self, configalter):
+        if self.check.get_active() == True:
+            self.spinbutton2.set_sensitive(True)
+            self.entry2.set_sensitive(True)
+        elif self.check.get_active() == False:
+            self.spinbutton2.set_sensitive(False)
+            self.entry2.set_sensitive(False)
+
+    def autostart(self, button):
+        autofile = os.path.exists((os.path.expanduser('~/.config/autostart/argon-update-notifier.desktop')))
+        if autofile == False:
+            if not os.path.exists(os.path.expanduser('~/.config/autostart')):
+                os.makedirs(os.path.expanduser('~/.config/autostart'))
+            os.symlink('/usr/share/argon/argon-update-notifier.desktop',os.path.expanduser('~/.config/autostart/argon-update-notifier.desktop'))
+            self.button3.set_label("Disable Autostart")
+        elif autofile == True:
+            os.remove(os.path.expanduser('~/.config/autostart/argon-update-notifier.desktop'))
+            self.button3.set_label("Enable Autostart")
+
+    def default(self, button):
+        config = ["60", "28800", "NUM system UPD available", "Arch Linux is up to date", "/usr/share/argon/arch-stale.png", "/usr/share/argon/arch-fresh.png", "True"]
+        configfile = open("/etc/argon/config", "w")
+        for item in config:
+            configfile.write("%s\n" % item)
+        self.spinbutton1.set_value(60)
+        self.spinbutton2.set_value(10800)
+        self.entry1.set_text("NUM system UPD available")
+        self.entry2.set_text("Arch Linux is up to date")
+        self.button1.set_label("/usr/share/argon/arch-stale.png")
+        self.button2.set_label("/usr/share/argon/arch-fresh.png")
+        self.check.set_active(True)
+
+    def cancel(self, button):
+        Gtk.main_quit()
+
+    def done(self, button):
+        config[0] = self.spinbutton1.get_value_as_int()
+        config[1] = self.spinbutton2.get_value_as_int()
+        config[2] = self.entry1.get_text()
+        if config[2] == "":
+            config[2] = " "
+        config[3] = self.entry2.get_text()
+        if config[3] == "":
+            config[3] = " "
+        config[4] = self.button1.get_label()
+        config[5] = self.button2.get_label()
+        config[6] = self.check.get_active()
+
+        configfile = open("/etc/argon/config", "w")
+        for item in config:
+            configfile.write("%s\n" % item)
+        Gtk.main_quit()
+
+win = GridWindow()
+win.connect("delete-event", Gtk.main_quit)
+win.show_all()
+Gtk.main()

@@ -1,0 +1,161 @@
+<chapter id="faq">
+	<title>Questions and Answers</title>
+
+	&reporting.bugs;
+	&updating.documentation;
+
+	<qandaset id="faqlist">
+		<qandaentry>
+			<question>
+				<para>How dangerous is &partman; for my data?</para>
+			</question>
+			<answer>
+				<para>
+					First of all, you should never perform any destructive operations (delete, move, resize) without first making a complete backup of everything affected.
+				</para>
+				<para>
+					Having said that, &partman; is safe to use. It performs extensive checks before and after every operation. It calls external tools written and supported by the file system authors. And it has been tested extensively.
+				</para>
+				<para>
+					There is always the risk of data loss due to an unknown bug. &partman;'s authors try to minimize this risk, but there are of course no guarantees.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>I have installed all recommended external file system support packages and still do not get support for all operations on all file systems.</para>
+			</question>
+			<answer>
+				<para>
+					Not everything &partman; can do in principle can be done with all file systems.
+				</para>
+				<para>
+					One example is performing a file system check on linuxswap: It is just not possible. There are other limitations like that inherent in some file systems. You cannot shrink JFS or XFS file systems because neither of the two supports shrinking at all, with or without &partman;.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>Why can't I see any meaningful progress information when resizing a partition?</para>
+			</question>
+			<answer>
+				<para>
+					&partman; can only show progress information when it knows how long the jobs in an operation will take. Unfortunately this is usually not the case when resizing partitions because the by far longest job when doing so is resizing the file system on the partition. Resizing file systems is in most cases something an external tool will do on behalf of &partman; and these external tools do not provide useful progress information to &partman;, so there's nothing to report while they are running.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>Why can't I resize the root partition? How can I resize the partition /home is on?</para>
+			</question>
+			<answer>
+				<para>
+					To modify a partition it must not be mounted. You can however not unmount the root partition. Neither will you be able to unmount the home partition if the home directory of the currently logged in user is on it.
+				</para>
+				<para>
+					The solution for this problem is to boot from a Linux Live CD that comes with &partman; and modify these partitions from there.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>I'm getting a warning message in the log output about something that a partition cannot be created with the size I requested and that it will instead be smaller. What happened?</para>
+			</question>
+			<answer>
+				<para>
+					On MS-DOS partition tables, partitions have to begin and end on cylinder boundaries. This is mainly for historical reasons. &partman; will deal with this internally and try not to bother the user with that limitation.
+				</para>
+				<para>
+					Under rare circumstances, &partman; will however not be able to set up an operation in the way the user requested it due to this limitation. For example, if one cylinder on a device is 8 MiB large and you try to resize a partition by 6 MiB, this will not work.
+				</para>
+				<para>
+					You might also encounter this message if you have a device and partition table where the partitions are, for whatever reason, not correctly snapped to cylinder boundaries and you try to move or copy these partitions for the first time.
+				</para>
+				<para>
+					The message itself is harmless and only exists to inform the user that something can not be done quite exactly the way the user expects. Your partitions and data will not be negatively affected in any way if you see this message.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>How many operations can I add to the list of pending operations?</para>
+			</question>
+			<answer>
+				<para>
+					There is no limit.
+				</para>
+				<para>
+					It is however not recommended to add too many operations to the list. There is always a small chance an operation might fail with an error, in which case &partman; will stop executing operations. In that case it is a lot easier to find out what happened (and to re-add all the operations that could not be executed) if the list of pending operations was not exceedingly long.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>Resizing an ext2 or ext3 file system failed with something in the report about <quote>no space left on device</quote>. What happened? Is my data corrupted now?</para>
+			</question>
+			<answer>
+				<para>
+					This is a problem of the <command>e2resize</command> command and the underlying ext2/3/4 file system. If a file system is nearly full, <command>e2resize</command> cannot make it any smaller even though that should be possible from the number of free sectors left. &partman; can unfortunately not know beforehand if <command>e2resize</command> will abort with this error for a given file system or not. If it happens nothing will be done at all and your data will not be negatively affected.
+				</para>
+				<para>
+					There is no real workaround for this problem right now.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>Why can't I format my floppy disk with &partman;? Why is there no support for CD writing or DVD burning?</para>
+			</question>
+			<answer>
+				<para>
+					None of this is what &partman; has been designed to do: It is an application that deals with partitions and the file systems on these partitions. Floppy disks, CDs or DVDs do not need or use partitions.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>Why can't I modify partitions on a device with an amiga or bsd partition table?</para>
+			</question>
+			<answer>
+				<para>
+					&partman; currently only allows read-only access to any other partition table type than MS-DOS. This is for safety reasons: Support in &partman; for this partition table types is not really there and what is there (or just incidentally works) has not been tested enough to use it with confidence.
+				</para>
+				<para>
+					Of course you can still create a new MS-DOS partition table on the device in question, but that is probably not what you want.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>On startup, &partman; hangs for a couple of minutes while it apparently tries to scan the floppy drive on my computer.</para>
+			</question>
+			<answer>
+				<para>
+					This happens if you have a floppy drive configured in your computer's BIOS settings but have not actually connected one. If you do not have a floppy drive check your BIOS settings and disable any floppy drives configured there to see if this makes the problem go away.
+				</para>
+			</answer>
+		</qandaentry>
+		<qandaentry>
+			<question>
+				<para>During startup, &partman; prints some message about probing devices and that it might even crash or at least take a long time.</para>
+			</question>
+			<answer>
+				<para>
+					LibParted, a backend library &partman; uses, has problems with systems where the Linux Device Mapper is used in a way it doesn't understand. Unfortunately it reacts to some of these situations with segmentation faults, i.e. crashes. &partman; therefore tries to avoid these situations by using an alternative way to scan your computer for disks. If it cannot do that, however, and therefore has to rely on LibParted, it will print a message like the one mentioned. If the scanning for disks works, you can safely disregard the message.
+				</para>
+			</answer>
+		</qandaentry>
+<!--
+		<qandaentry>
+			<question>
+				<para></para>
+			</question>
+			<answer>
+				<para>
+				</para>
+			</answer>
+		</qandaentry>
+-->
+	</qandaset>
+</chapter>
+

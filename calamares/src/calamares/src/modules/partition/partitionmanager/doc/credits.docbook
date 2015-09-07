@@ -1,0 +1,19 @@
+<chapter id="credits">
+	<title>Credits and License</title>
+	<para>
+		&partman;
+	</para>
+	<para>
+		Program copyright 2008, 2009, 2010 Volker Lanz
+		<email>vl@fidra.de</email>
+	</para>
+	<para>
+		Documentation Copyright &copy; 2008, 2009, 2010 Volker Lanz.
+		<email>vl@fidra.de</email>
+	</para>
+
+	<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+	&underFDL;
+	&underGPL;
+</chapter>

@@ -1,0 +1,31 @@
+<p>
+	<%= t("options_sharing_notice") %>
+</p>
+
+<p>
+	<%= t("options_sharing1", (typeof tm != 'undefined' ? '™' : '')) %>
+</p>
+
+<div id="ghostrank-moreinfo" style="display:none">
+	<p>
+		<%= t("options_sharing2") %>
+	</p>
+	<p>
+		<%= t("options_sharing3") %>
+	</p>
+	<p>
+		<%= t("options_sharing4",
+    "<a href=\"http://www.aboutads.info/\" target=\"_blank\">",
+    "<a href=\"https://purplebox.ghostery.com/post/1016021311\" target=\"_blank\">",
+    "<a href=\"https://purplebox.ghostery.com/post/1016023393\" target=\"_blank\">",
+    "<a href=\"https://wiki.digitalmethods.net/Dmi/DmiWinterSchool2012TrackingTheTrackers\" target=\"_blank\">",
+    "<a href=\"https://purplebox.ghostery.com/post/1016023378\" target='_blank'>") %>
+	</p>
+	<p>
+		<%= t("options_sharing5", "<a href=\"https://purplebox.ghostery.com/post/1016023438\" target=\"_blank\">") %>
+	</p>
+</div>
+
+<p style="margin-top:0">
+	... <a href="#" id="ghostrank-moreinfo-link" aria-labelledby="ghostrank-moreinfo"><%- t("see_more") %></a>
+</p>

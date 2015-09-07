@@ -1,0 +1,20 @@
+#!/bin/bash
+echo ""
+echo "    000    -------------------------"
+echo "    000  "
+echo "    000          =============        "
+echo " 0000 0000       System Update          "
+echo "   00000                                "
+echo "     0     -------------------------"
+echo "           "
+pacaur -Syu
+IFS=$'\r\n' config=($(cat /etc/argon/config))
+echo ${config[3]} > /etc/argon/message
+echo ""
+echo "               0000                     "
+echo "             0000                          "
+echo "           0000 "
+echo " 0000   0000    ----------------------------------------------------- "
+echo "   0000000       process complete, you may now close this window  \\"
+echo "     000        -----------------------------------------------------  "
+

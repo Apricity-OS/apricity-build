@@ -1,0 +1,7 @@
+{
+  "program": {
+    "x86-64": { "url": "_platform_specific/x86-64_ja/hotword-x86-64.nexe" },
+    "x86-32": { "url": "_platform_specific/x86-32_ja/hotword-x86-32.nexe" },
+    "arm": {"url": "_platform_specific/arm_ja/hotword-arm.nexe" }
+  }
+}

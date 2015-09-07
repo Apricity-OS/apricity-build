@@ -1,0 +1,21 @@
+body {
+    font-size: 15px;
+    line-height: 22px;
+}
+#tabs {
+    float: left;
+    margin-top: 15px;
+}
+.option {
+    margin: 20px 0;
+}
+.option-title {
+    margin-left: 10px;
+}
+.option-label {
+    display: block;
+    font-weight: bold;
+}
+.option-desc {
+    padding-left: 23px;
+}

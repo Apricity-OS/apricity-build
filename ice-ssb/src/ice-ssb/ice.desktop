@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Ice
+Comment=Desktop integration for webapps
+GenericName=Ice
+Exec=ice
+Icon=ice
+Terminal=false
+Type=Application
+Categories=GTK;Network;
+StartupNotify=false
+GenericName[en_US]=Ice

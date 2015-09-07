@@ -1,0 +1,56 @@
+#StylishDark grub2 theme
+
+desktop-image: "background.png"
+
+title-text: ""
+
+terminal-box: "terminal_box_*.png"
+terminal-font: "Gnu Unifont Mono Regular 16"
+
++ boot_menu {
+  left = 33%
+  width = 50%
+  top = 25%
+  height = 50%	
+
+  item_font = "DejaVu Sans Bold 14"
+  item_color = "#bbbbbb"
+  item_height = 32
+  item_icon_space = 8
+  item_spacing = 2
+
+  selected_item_font = "DejaVu Sans Bold 14"
+  selected_item_color= "#ffffff"
+  selected_item_pixmap_style = "select_*.png"
+
+  icon_height = 32
+  icon_width = 32
+
+  scrollbar = true
+  scrollbar_width = 20
+  scrollbar_thumb = "slider_*.png"
+}
+
++ progress_bar {
+  id = "__timeout__"
+
+  left = 36%
+  top = 85%
+  height = 15
+  width = 45%
+
+  # font = "DejaVu Sans Regular 12"
+
+  # text_color = "#aaaaaa"
+  fg_color = "#3f4446"
+
+  bg_color = "#323637"
+  border_color = "#323637"
+
+  # instead of the above colors, use pixmaps
+  # bar_style = "progress_bar_*.png"
+  # highlight_style = "progress_highlight_*.png"
+
+  # text = "@TIMEOUT_NOTIFICATION_LONG@"
+}
+

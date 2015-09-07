@@ -1,0 +1,464 @@
+<chapter id="reference">
+	<title>Command Reference</title>
+
+	<sect1 id="reference-overview">
+		<title>Overview</title>
+		<para>This chapter gives detailed explanations of all commands available in &partman;. It is intended as a reference to accompany the information given in <xref linkend="usermanual"/>.</para>
+	</sect1>
+	
+	<sect1 id="menu-file">
+		<title>The <guimenu>File</guimenu> Menu</title>
+		<para>
+			<variablelist>
+				<varlistentry id="menu-file-quit">
+					<term>
+						<menuchoice>
+							<shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></shortcut>
+							<guimenu>File</guimenu>
+							<guimenuitem>Quit</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Quits &partman;</action> without applying any pending operations. The application will however ask you to confirm your choice to quit if there are pending operations.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</para>
+	</sect1>
+
+	<sect1 id="menu-edit">
+		<title>The <guimenu>Edit</guimenu> Menu</title>
+		<para>
+			<variablelist>
+				<varlistentry id="menu-edit-undo">
+					<term>
+						<menuchoice>
+							<shortcut><keycombo action="simul">&Ctrl;<keycap>Z</keycap></keycombo></shortcut>
+							<guimenu>Edit</guimenu>
+							<guimenuitem>Undo</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Undoes the last operation</action> that has been added to the operation stack.
+						</para>
+						<para>
+							This command is only enabled if the list of operations is not empty.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-edit-clear">
+					<term>
+						<menuchoice>
+							<guimenu>Edit</guimenu>
+							<guimenuitem>Clear</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Clears the list of operations</action> without applying any of them.
+						</para>
+						<para>
+							This command is only enabled if the list of operations is not empty.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-edit-apply">
+					<term>
+						<menuchoice>
+							<guimenu>Edit</guimenu>
+							<guimenuitem>Apply</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Applies the list of operations</action>. This command will apply all operations in the list so that all changes are permanently written to your disks. After the operations have been applied, the list is cleared and there will be no way to undo any operation.
+						</para>
+						<para>
+							This command is only enabled if the list of operations is not empty.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</para>
+	</sect1>
+
+	<sect1 id="menu-view">
+		<title>The <guimenu>View</guimenu> Menu</title>
+		<para>
+			<variablelist>
+				<varlistentry id="menu-view-devices">
+					<term>
+						<menuchoice>
+							<guimenu>View</guimenu>
+							<guimenuitem>Devices</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Toggles the Devices panel</action>: This command turns the display of the devices list on and off.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-view-operations">
+					<term>
+						<menuchoice>
+							<guimenu>View</guimenu>
+							<guimenuitem>Pending Operations</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Toggles the Pending Operations panel</action>: This command turns the display of the operation list on and off.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-view-information">
+					<term>
+						<menuchoice>
+							<guimenu>View</guimenu>
+							<guimenuitem>Information</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Toggles the Information panel</action>: This command turns the display of the information panel on and off. The information panel will either display details about the currently selected device or, if one is selected, the selected partition.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-view-log">
+					<term>
+						<menuchoice>
+							<guimenu>View</guimenu>
+							<guimenuitem>Log Output</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Toggles the Log Output panel</action>: This command turns the display of the log output panel on and off.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-view-filesystemsupport">
+					<term>
+						<menuchoice>
+							<guimenu>View</guimenu>
+							<guimenuitem>File System Support</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Shows the file system support dialog.</action> This dialog shows in detail which operations can be performed for which of the supported file systems.
+						</para>
+						<para>
+							Here is an example how the dialog might look like with most external tools installed:
+						</para>
+						<para>
+							<screenshot>
+								<mediaobject>
+									<imageobject><imagedata fileref="filesystemsupport.png" format="PNG"/></imageobject>
+									<textobject><phrase>File system support dialog with most external tools installed</phrase></textobject>
+								</mediaobject>
+							</screenshot>
+						</para>
+						<para>
+							The blue check marks mean <quote>supported</quote>, the red crosses mean <quote>not supported</quote>. Some combinations are never supported, for example checking a linuxswap file system, because they are inherently impossible. Others cannot be supported because the external tools lack the functionality. This is for instance the case with writing labels for FAT file systems.
+						</para>
+						<para>
+							If you have installed new tools while &partman; is running click on <guibutton>Rescan Support</guibutton> to force a recheck of installed  file system support tools.
+						</para>
+						<para>
+							Also see <xref linkend="requirements"/> for which external tool is required for which operation.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-view-refresh">
+					<term>
+						<menuchoice>
+							<shortcut><keycap>F5</keycap></shortcut>
+							<guimenu>View</guimenu>
+							<guimenuitem>Refresh Devices</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Refreshes the devices</action>: This command forces &partman; to scan and read the devices on your computer again. This may for example be useful if you plugged in an external USB hard disk after you started &partman;.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</para>
+	</sect1>
+
+	<sect1 id="menu-device">
+		<title>The <guimenu>Device</guimenu> Menu</title>
+		<para>
+			<variablelist>
+				<varlistentry id="menu-device-createpartitiontable">
+					<term>
+						<menuchoice>
+							<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>N</keycap></keycombo></shortcut>
+							<guimenu>Device</guimenu>
+							<guimenuitem>Create New Partition Table</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Creates a new partition table</action>: This command creates a new and empty MSDOS partition table on the currently selected device. This will delete all partitions on the device and all data on them, so you will want to be careful with this command.
+						</para>
+						<para>
+							This command is only enabled if a device is selected and no partition on this device
+							is currently mounted.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</para>
+	</sect1>
+
+	<sect1 id="menu-partition">
+		<title>The <guimenu>Partition</guimenu> Menu</title>
+
+		<para>
+			<variablelist>
+				<varlistentry id="menu-partition-new">
+					<term>
+						<menuchoice>
+							<shortcut><keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo></shortcut>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>New</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Creates a new partition</action>: Opens the dialog to create a new partition where you will be able to set type, size, position and file system of the partition to create.
+						</para>
+						<para>
+							Please note that the partition table on a device may impose restrictions on how many partitions can be created. MS-DOS partition tables, for example, allow only four primary partitions.
+						</para>
+						<para>
+							This command is only enabled if an unallocated area on a device is selected.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-partition-resize">
+					<term>
+						<menuchoice>
+							<shortcut><keycombo action="simul">&Ctrl;<keycap>R</keycap></keycombo></shortcut>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>Resize/Move</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Resizes or moves a partition</action>: Opens the dialog to resize or move an existing partition. Depending on the partition's file system and the external tools installed on your computer, not all three possible resize-related actions -- that is, moving the partition, making it smaller (<quote>shrinking</quote> it) or making it larger (<quote>growing</quote> it) -- may be available in this dialog. See <xref linkend="menu-view-filesystemsupport"/>.
+						</para>
+						<para>
+							This command is only enabled if a partition is selected that is not currently mounted and whose file system can be shrunk, grown or moved. For an extended partition, it is only enabled if none of the logicals in the extended partition are mounted.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-partition-delete">
+					<term>
+						<menuchoice>
+							<shortcut><keycap>Del</keycap></shortcut>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>Delete</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Deletes a partition</action>: This command deletes the currently selected partition.
+						</para>
+						<para>
+							This command is only enabled if a partition is selected that is not currently mounted. For an extended partition, it is only enabled if it does not contain any logical partitions.
+						</para>
+						<warning>
+							<title>Warning: Possible loss of data</title>
+							<para>Deleting a partition means that all data on the partition is destroyed.</para>
+						</warning>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-partition-copy">
+					<term>
+						<menuchoice>
+							<shortcut><keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo></shortcut>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>Copy</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Copies a partition</action>: This command copies the currently selected partition to &partman;'s clipboard.
+						</para>
+						<para>
+							This command is only enabled if a partition is selected that is not currently mounted and whose file system can be copied. Extended partitions can not be copied.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-partition-paste">
+					<term>
+						<menuchoice>
+							<shortcut><keycombo action="simul">&Ctrl;<keycap>V</keycap></keycombo></shortcut>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>Paste</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Paste a partition</action>: This command pastes the partition from &partman;'s clipboard to the currently selected partition or unallocated area.
+						</para>
+						<para>
+							When pasting to an unallocated area, a dialog will open allowing you to move or grow the inserted copy. When overwriting an existing partition this dialog will not be shown.
+						</para>
+						<para>
+							This command is only enabled if a partition is currently in the clipboard and a valid target (either a partition or an unallocated area) is selected. The target must also be large enough to hold the source and can not be mounted. You can not copy a partition onto itself.
+						</para>
+						<warning>
+							<title>Warning: Possible loss of data</title>
+							<para>Pasting a partition on an existing one means that all data on the existing partition is destroyed and replaced with the data from the pasted partition.</para>
+						</warning>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-partition-mount">
+					<term>
+						<menuchoice>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>Mount/Unmount</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Mounts or umounts a partition</action>: This command mounts or unmounts the selected partition, depending on its current state.
+						</para>
+						<para>
+							This command is only enabled if a partition is selected that can be mounted or unmounted. If the operating system does not know a mount point for the partition you can not mount it from &partman;.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-partition-check">
+					<term>
+						<menuchoice>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>Check</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Checks a partition</action>: This command checks the selected partition and its file system for errors and tries to correct any problems it finds. During this process the file system on the partition will also be resized to fill the partition completely.
+						</para>
+						<para>
+							This command is only enabled if a partition is selected that can be checked and is not currently mounted.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-partition-backup">
+					<term>
+						<menuchoice>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>Backup</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Backs up a partition</action>: This command backs up the file system on the selected partition to a file. You will be asked where to store the image file after activating this command.
+						</para>
+						<para>
+							The created image file is a sector-for-sector copy of the file system on the partition. It is not compressed and does not have any additional meta information or header added to it, thus it can be directly mounted using a loop device outside of &partman; if the operation system supports that.
+						</para>
+						<para>
+							This command is only enabled if a partition is selected and the file system on it can be backed up. The partition must also not be mounted.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-partition-restore">
+					<term>
+						<menuchoice>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>Restore</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Restores a partition</action>: This command restores a file system from an image file to a partition. You will be asked for the name of the image file to restore after activating this command. The target to restore to must be large enough for the image file.
+						</para>
+						<para>
+							The command is only enabled if either an unallocated area is selected or a partition that is not currently mounted.
+						</para>
+						<warning>
+							<title>Warning: Possible loss of data</title>
+							<para>Restoring a partition on an existing one means that all data on the existing partition is destroyed and replaced with the data from the restored image file.</para>
+						</warning>
+					</listitem>
+				</varlistentry>
+				<varlistentry id="menu-partition-properties">
+					<term>
+						<menuchoice>
+							<guimenu>Partition</guimenu>
+							<guimenuitem>Properties</guimenuitem>
+						</menuchoice>
+					</term>
+					<listitem>
+						<para>
+							<action>Shows a partition's properties</action>: This command shows a dialog with information about the currently selected partition or unallocated space.
+						</para>
+						<para>
+							What is displayed and what can be modified in this dialog depends on the type of partition, the type of the file system on the partition and on the partition being currently mounted or not.
+						</para>
+						<para>
+							Not all file systems, for example, support setting a label. It is also generally not possible to modify any properties if the partition is mounted.
+						</para>
+						<para>
+							This is a list of all partition and file system properties that can in general be modified in this dialog:
+							
+							<itemizedlist>
+								<listitem>
+									<para>Set or modify a file system's label</para>
+								</listitem>
+								<listitem>
+									<para>Change the partition's file system.</para>
+
+									<warning>
+										<title>Warning: Possible loss of data</title>
+										<para>Changing the file system for a partition always means that all data on the partition is destroyed.</para>
+									</warning>
+								</listitem>
+								<listitem>
+									<para>Recreate the file system on the partition</para>
+
+									<warning>
+										<title>Warning: Possible loss of data</title>
+										
+										<para>Recreating a file system on a partition always means that all data on the partition is destroyed. Recreating a file system should only be used as a last resort if the file system on a partition cannot be repaired anymore.</para>
+									</warning>
+								</listitem>
+								<listitem>
+									<para>Change a partition's flags</para>
+									<para>Depending on the type of partition table used, there will be several flags available for each partition on the partition table. In most cases, modifying the flags is not necessary and should be considered an advanced feature.</para>
+								</listitem>
+							</itemizedlist>
+						</para>
+						<para>
+							The command is only enabled if either an unallocated area or a partition is selected.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</para>
+	</sect1>
+
+	<sect1 id="menu-settings">
+		<title>The <guimenu>Settings</guimenu> Menu</title>
+
+		<para>
+			This is the common <guimenu>Settings</guimenu> menu present in most &kde; applications. Please see the &kde; documentation for details on this menu.
+		</para>
+	</sect1>
+
+	<sect1 id="menu-help">
+		<title>The <guimenu>Help</guimenu> Menu</title>
+		&help.menu.documentation;
+	</sect1>
+</chapter>

@@ -1,0 +1,13 @@
+post_install(){
+ln -s /usr/bin/chromium /usr/bin/chromium-browser
+}
+
+post_upgrade(){
+ln -s /usr/bin/chromium /usr/bin/chromium-browser
+}
+
+post_remove(){
+rm /usr/bin/ice
+rm /usr/share/pixmaps/ice.png
+rm /usr/share/applications/ice.desktop
+}

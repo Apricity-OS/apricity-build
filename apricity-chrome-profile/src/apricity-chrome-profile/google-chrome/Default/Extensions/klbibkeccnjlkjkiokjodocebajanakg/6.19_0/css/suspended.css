@@ -1,0 +1,208 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    background: #cfe0e4;
+    padding: 0;
+    margin: 0;
+}
+img {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background: #cfe0e4;
+    margin: 0;
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
+a {
+    color: #3889AB;
+    text-decoration: none;
+    font-weight: 400;
+}
+.btnDonate {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0 5px;
+  float: left;
+}
+.btn {
+  background: #52a6c8;
+  color: #fff;
+  border-radius: 3px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  display: inline-block;
+  border: 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+#gsTopBar  {
+   	position: fixed;
+    background: #efefef;
+    top: 0;
+    padding: 15px 0;
+    line-height: 30px;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    color: #444;
+    border-bottom: 1px solid #AAA;
+    box-shadow: 0 0 4px -2px rgba(0, 0, 0, 0.5);
+}
+#gsTitleWrap {
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+#gsTopBarTitle {
+    font-size: 19px;
+    line-height: 26px;
+    color: rgb(68, 68, 68);
+    font-weight: 300;
+    cursor: pointer;
+}
+#gsTopBarTitle:hover {
+    text-decoration: underline;
+}
+#gsWhitelistLink {
+    text-decoration: underline;
+    cursor: pointer;
+}
+#gsPreview {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+#gsPreviewImg {
+    width: 100%;
+    margin-top:86px;
+}
+.centerBoxContainer {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+.centerBox {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+#suspendedMsg {
+    width: 100%;
+    height: 100%;
+}
+#suspendedMsg, #gsPreview {
+    cursor: pointer;
+}
+#suspendedMsg h1, #suspendedMsg h2 {
+    font-size: 60px;
+    color: #134960;
+    margin: 30px 0 0;
+    font-weight: 600;
+}
+#suspendedMsg h2 {
+    font-size: 50px;
+}
+@media all and (max-width: 600px) {
+    #suspendedMsg h1 {
+        font-size: 45px;
+    }
+    #suspendedMsg h2 {
+        font-size: 55px;
+    }
+}
+#dudePopup {
+    position: fixed;
+    left: 30px;
+    bottom: -240px;
+}
+
+@-webkit-keyframes silde_to_top {
+    0% {
+        bottom: -240px;
+    }
+    100% {
+        bottom: 10px;
+        z-index: 1000000;
+    }
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+#dudePopup.poppedup {
+    -webkit-animation-name: silde_to_top;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-direction: normal;
+    -webkit-animation-delay: 0.5s;
+    -webkit-animation-play-state: running;
+    -webkit-animation-fill-mode: forwards;
+}
+
+#donateBubble {
+    position: relative;
+    width: 356px;
+    height: 80px;
+    padding: 5px 10px;
+    background: #E7F3F8;
+    border: #87BACE solid 1px;
+    border-radius: 4px;
+    color: #555;
+    bottom: 50px;
+    left: 133px;
+    position: fixed;
+    text-align: center;
+    font-size: 15px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+}
+
+#donateBubble:after {
+    content: "";
+    position: absolute;
+    top: 19px;
+    left: -15px;
+    border-style: solid;
+    border-width: 15px 15px 15px 0;
+    border-color: transparent #E7F3F8;
+    display: block;
+    width: 0;
+    z-index: 1;
+}
+
+#donateBubble:before {
+    content: "";
+    position: absolute;
+    top: 19px;
+    left: -16px;
+    border-style: solid;
+    border-width: 15px 15px 15px 0;
+    border-color: transparent #87BACE;
+    display: block;
+    width: 0;
+    z-index: 0;
+}
+
+#donateBubble.fadeIn {
+    -webkit-animation: fadein 0.7s;
+    animation: fadein 0.7s;
+    -webkit-animation-fill-mode:forwards;
+    -webkit-animation-delay: 1.5s;
+}
+
+

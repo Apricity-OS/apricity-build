@@ -1,0 +1,578 @@
+<locales>
+	<language>
+		<language_name>Afar Djibouti (DJ)</language_name>
+		<locale_name>aa_DJ.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Afrikaans (ZA)</language_name>
+		<locale_name>af_ZA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Aragonese (ES)</language_name>
+		<locale_name>an_ES.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (AE)</language_name>
+		<locale_name>ar_AE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (BH)</language_name>
+		<locale_name>ar_BH.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (DZ)</language_name>
+		<locale_name>ar_DZ.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (EG)</language_name>
+		<locale_name>ar_EG.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (IQ)</language_name>
+		<locale_name>ar_IQ.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (JO)</language_name>
+		<locale_name>ar_JO.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (KW)</language_name>
+		<locale_name>ar_KW.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (LB)</language_name>
+		<locale_name>ar_LB.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (LY)</language_name>
+		<locale_name>ar_LY.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (MA)</language_name>
+		<locale_name>ar_MA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (OM)</language_name>
+		<locale_name>ar_OM.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (QA)</language_name>
+		<locale_name>ar_QA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (SA)</language_name>
+		<locale_name>ar_SA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (SD)</language_name>
+		<locale_name>ar_SD.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (SY)</language_name>
+		<locale_name>ar_SY.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (TN)</language_name>
+		<locale_name>ar_TN.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Arabic (YE)</language_name>
+		<locale_name>ar_YE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Asturian (ES)</language_name>
+		<locale_name>ast_ES.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Belarusian (BY)</language_name>
+		<locale_name>be_BY.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Bulgarian (BG)</language_name>
+		<locale_name>bg_BG.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Breton (FR)</language_name>
+		<locale_name>br_FR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Bosnian (BA)</language_name>
+		<locale_name>bs_BA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Catalan (AD)</language_name>
+		<locale_name>ca_AD.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Catalan (ES)</language_name>
+		<locale_name>ca_ES.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Catalan (FR)</language_name>
+		<locale_name>ca_FR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Catalan (IT)</language_name>
+		<locale_name>ca_IT.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Czech (CZ)</language_name>
+		<locale_name>cs_CZ.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Welsh (GB)</language_name>
+		<locale_name>cy_GB.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Danish (DK)</language_name>
+		<locale_name>da_DK.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>German (AT)</language_name>
+		<locale_name>de_AT.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>German (BE)</language_name>
+		<locale_name>de_BE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>German (CH)</language_name>
+		<locale_name>de_CH.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>German (DE)</language_name>
+		<locale_name>de_DE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>German (LU)</language_name>
+		<locale_name>de_LU.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Greek (GR)</language_name>
+		<locale_name>el_GR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Greek (CY)</language_name>
+		<locale_name>el_CY.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (AU)</language_name>
+		<locale_name>en_AU.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (BW)</language_name>
+		<locale_name>en_BW.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (CA)</language_name>
+		<locale_name>en_CA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (DK)</language_name>
+		<locale_name>en_DK.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (GB)</language_name>
+		<locale_name>en_GB.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (HK)</language_name>
+		<locale_name>en_HK.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (IE)</language_name>
+		<locale_name>en_IE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (NZ)</language_name>
+		<locale_name>en_NZ.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (PH)</language_name>
+		<locale_name>en_PH.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (SG)</language_name>
+		<locale_name>en_SG.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (US)</language_name>
+		<locale_name>en_US.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (ZA)</language_name>
+		<locale_name>en_ZA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>English (ZW)</language_name>
+		<locale_name>en_ZW.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (AR)</language_name>
+		<locale_name>es_AR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (BO)</language_name>
+		<locale_name>es_BO.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (CL)</language_name>
+		<locale_name>es_CL.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (CO)</language_name>
+		<locale_name>es_CO.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (CR)</language_name>
+		<locale_name>es_CR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (DO)</language_name>
+		<locale_name>es_DO.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (EC)</language_name>
+		<locale_name>es_EC.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (ES)</language_name>
+		<locale_name>es_ES.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (GT)</language_name>
+		<locale_name>es_GT.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (HN)</language_name>
+		<locale_name>es_HN.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (MX)</language_name>
+		<locale_name>es_MX.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (NI)</language_name>
+		<locale_name>es_NI.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (PA)</language_name>
+		<locale_name>es_PA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (PE)</language_name>
+		<locale_name>es_PE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (PR)</language_name>
+		<locale_name>es_PR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (PY)</language_name>
+		<locale_name>es_PY.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (SV)</language_name>
+		<locale_name>es_SV.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (US)</language_name>
+		<locale_name>es_US.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (UY)</language_name>
+		<locale_name>es_UY.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Spanish (VE)</language_name>
+		<locale_name>es_VE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Estonian (EE)</language_name>
+		<locale_name>et_EE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Basque (ES)</language_name>
+		<locale_name>eu_ES.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Finnish (FI)</language_name>
+		<locale_name>fi_FI.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Faroese (FO)</language_name>
+		<locale_name>fo_FO.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>French (BE)</language_name>
+		<locale_name>fr_BE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>French (CA)</language_name>
+		<locale_name>fr_CA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>French (CH)</language_name>
+		<locale_name>fr_CH.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>French (FR)</language_name>
+		<locale_name>fr_FR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>French (LU)</language_name>
+		<locale_name>fr_LU.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Irish (IE)</language_name>
+		<locale_name>ga_IE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Scots Gaelic (GB)</language_name>
+		<locale_name>gd_GB.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Galician (ES)</language_name>
+		<locale_name>gl_ES.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Manx Gaelic (GB)</language_name>
+		<locale_name>gv_GB.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Hebrew (IL)</language_name>
+		<locale_name>he_IL.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Croatian (HR)</language_name>
+		<locale_name>hr_HR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Hungarian (HU)</language_name>
+		<locale_name>hu_HU.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Indonesian (ID)</language_name>
+		<locale_name>id_ID.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Icelandic (IS)</language_name>
+		<locale_name>is_IS.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Italian (CH)</language_name>
+		<locale_name>it_CH.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Italian (IT)</language_name>
+		<locale_name>it_IT.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Hebrew (IL)</language_name>
+		<locale_name>iw_IL.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Japanese (JP)</language_name>
+		<locale_name>ja_JP.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Georgian (GE)</language_name>
+		<locale_name>ka_GE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Kazakh (KZ)</language_name>
+		<locale_name>kk_KZ.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Greenlandic (GL)</language_name>
+		<locale_name>kl_GL.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Korean (KR)</language_name>
+		<locale_name>ko_KR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Kurdish (TR)</language_name>
+		<locale_name>ku_TR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Cornish (GB)</language_name>
+		<locale_name>kw_GB.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Luganda (UG)</language_name>
+		<locale_name>lg_UG.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Lithuanian (LT)</language_name>
+		<locale_name>lt_LT.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Latvian (LV)</language_name>
+		<locale_name>lv_LV.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Malagasy (MG)</language_name>
+		<locale_name>mg_MG.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Maori (NZ)</language_name>
+		<locale_name>mi_NZ.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Macedonian (MK)</language_name>
+		<locale_name>mk_MK.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Malay (MY)</language_name>
+		<locale_name>ms_MY.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Maltese (MT)</language_name>
+		<locale_name>mt_MT.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Norwegian, Bokmål (NO)</language_name>
+		<locale_name>nb_NO.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Dutch (BE)</language_name>
+		<locale_name>nl_BE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Dutch (NL)</language_name>
+		<locale_name>nl_NL.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Norwegian, Nynorsk (NO)</language_name>
+		<locale_name>nn_NO.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Occitan (FR)</language_name>
+		<locale_name>oc_FR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>om (KE)</language_name>
+		<locale_name>om_KE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Polish (PL)</language_name>
+		<locale_name>pl_PL.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Portuguese (BR)</language_name>
+		<locale_name>pt_BR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Portuguese (PT)</language_name>
+		<locale_name>pt_PT.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Romanian (RO)</language_name>
+		<locale_name>ro_RO.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Russian (RU)</language_name>
+		<locale_name>ru_RU.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Russian (UA)</language_name>
+		<locale_name>ru_UA.UTF-8</locale_name>
+	</language>
+    <language>
+        <language_name>Serbian (SR)</language_name>
+        <locale_name>sr_RS.UTF-8</locale_name>
+    </language>
+	<language>
+		<language_name>Slovak (SK)</language_name>
+		<locale_name>sk_SK.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Slovenian (SI)</language_name>
+		<locale_name>sl_SI.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>so (DJ)</language_name>
+		<locale_name>so_DJ.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>so (KE)</language_name>
+		<locale_name>so_KE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>so (SO)</language_name>
+		<locale_name>so_SO.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Albanian (AL)</language_name>
+		<locale_name>sq_AL.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Sotho (ZA)</language_name>
+		<locale_name>st_ZA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Swedish (FI)</language_name>
+		<locale_name>sv_FI.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Swedish (SE)</language_name>
+		<locale_name>sv_SE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Tajik (TJ)</language_name>
+		<locale_name>tg_TJ.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Thai (TH)</language_name>
+		<locale_name>th_TH.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Tagalog (PH)</language_name>
+		<locale_name>tl_PH.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Turkish (CY)</language_name>
+		<locale_name>tr_CY.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Turkish (TR)</language_name>
+		<locale_name>tr_TR.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>uk (UA)</language_name>
+		<locale_name>uk_UA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Walloon (BE)</language_name>
+		<locale_name>wa_BE.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Xhosa (ZA)</language_name>
+		<locale_name>xh_ZA.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Yiddish (US)</language_name>
+		<locale_name>yi_US.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Chinese (CN)</language_name>
+		<locale_name>zh_CN.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Chinese (HK)</language_name>
+		<locale_name>zh_HK.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Chinese (SG)</language_name>
+		<locale_name>zh_SG.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Chinese (TW)</language_name>
+		<locale_name>zh_TW.UTF-8</locale_name>
+	</language>
+	<language>
+		<language_name>Zulu (ZA)</language_name>
+		<locale_name>zu_ZA.UTF-8</locale_name>
+	</language>
+</locales>

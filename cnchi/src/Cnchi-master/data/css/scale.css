@@ -1,0 +1,18 @@
+GtkScale#myslider {
+    -GtkRange-slider-width: 60;
+    background-color: grey;
+    font-size: 10px;
+    border-radius: 4px;
+}
+
+
+GtkScale.slider#myslider  {
+    background-color: grey;
+    background-image: -gtk-gradient(radial,
+    center center, 0,
+    center center, 1,
+    color-stop(0.0,rgba(50,134,134,1)),
+    color-stop(.50,rgba(70,188,188,1)),
+    color-stop(.51,rgba(59,175,175,1)),
+    color-stop(1.0,rgba(143,215,215,1)));
+}

@@ -1,0 +1,19 @@
+#!/bin/bash -v
+DESKTOP=$1
+if [[ ${DESKTOP} == 'gnome' ]]; then
+	# Change keyboard layout
+	dbus-launch gsettings set org.gnome.desktop.input-sources sources "[('xkb','us')]"
+fi
+
+if [[ ${DESKTOP} == 'cinnamon' ]]; then
+	cd
+fi
+
+if [[ ${DESKTOP} == 'xfce' ]]; then
+	cd
+fi
+
+if [[ ${DESKTOP} == 'mate' ]]; then
+	cd
+fi
+

@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  GNOME Shell Extension TaskBar
+  Copyright (C) 2015 zpydr
+
+  Version 43
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+  zpydr@openmailbox.org
+-->
+<schemalist gettext-domain="gnome-shell-extensions-TaskBar">
+    <enum id="org.gnome.shell.extensions.TaskBar.close-button-style">
+        <value value="0" nick="off"/>
+        <value value="1" nick="middle"/>
+        <value value="2" nick="right"/>
+    </enum>
+    <enum id="org.gnome.shell.extensions.TaskBar.workspace-button-index-style">
+        <value value="0" nick="index"/>
+        <value value="1" nick="total"/>
+    </enum>
+    <enum id="org.gnome.shell.extensions.TaskBar.showapps-button-toggle-style">
+        <value value="0" nick="leftclickappview"/>
+        <value value="1" nick="leftclickoverview"/>
+    </enum>
+    <enum id="org.gnome.shell.extensions.TaskBar.appearance-style">
+        <value value="0" nick="tasks"/>
+        <value value="1" nick="desktopbutton"/>
+        <value value="2" nick="workspacebutton"/>
+        <value value="3" nick="showappsbutton"/>
+        <value value="4" nick="favorites"/>
+    </enum>
+    <enum id="org.gnome.shell.extensions.TaskBar.separator-style">
+        <value value="0" nick="separatorone"/>
+        <value value="1" nick="separatortwo"/>
+        <value value="2" nick="separatorthree"/>
+        <value value="3" nick="separatorfour"/>
+        <value value="4" nick="separatorfive"/>
+        <value value="5" nick="separatorsix"/>
+    </enum>
+    <enum id="org.gnome.shell.extensions.TaskBar.tray-button-style">
+        <value value="0" nick="off"/>
+        <value value="1" nick="icon"/>
+        <value value="2" nick="index"/>
+    </enum>
+    <enum id="org.gnome.shell.extensions.TaskBar.tray-button-empty-style">
+        <value value="0" nick="icon"/>
+        <value value="1" nick="zero"/>
+        <value value="2" nick="hide"/>
+    </enum>
+    <schema path="/org/gnome/shell/extensions/TaskBar/" id="org.gnome.shell.extensions.TaskBar">
+        <key name="first-start" type="b">
+            <default>true</default>
+            <summary>Display Preferences on the first start of TaskBar</summary>
+            <description/>
+        </key>
+        <key name="display-tasks" type="b">
+            <default>true</default>
+            <summary>Display Tasks</summary>
+            <description/>
+        </key>
+        <key name="display-desktop-button" type="b">
+            <default>true</default>
+            <summary>Display Desktop Button</summary>
+            <description/>
+        </key>
+        <key name="display-workspace-button" type="b">
+            <default>true</default>
+            <summary>Display Workspace Button</summary>
+            <description/>
+        </key>
+        <key name="display-showapps-button" type="b">
+            <default>true</default>
+            <summary>Display Show Applications Button</summary>
+            <description/>
+        </key>
+        <key name="display-favorites" type="b">
+            <default>false</default>
+            <summary>Display Favorites</summary>
+            <description/>
+        </key>
+        <key name="panel-position" type="i">
+            <default>1</default>
+            <summary>Panel Position</summary>
+            <description/>
+        </key>
+        <key name="panel-box" type="i">
+            <default>1</default>
+            <summary>Panel Box Left=1 Middle=2 Right=3</summary>
+            <description/>
+        </key>
+        <key name="position-max-right" type="i">
+            <default>9</default>
+            <summary>Max Right Position</summary>
+            <description/>
+        </key>
+        <key name="overview" type="b">
+            <default>true</default>
+            <summary>Show TaskBar in Overview</summary>
+            <description/>
+        </key>
+        <key name="bottom-panel" type="b">
+            <default>false</default>
+            <summary>Bottom Panel</summary>
+            <description/>
+        </key>
+        <key name="bottom-panel-vertical" type="i">
+            <range min="-100" max="100"/>
+            <default>0</default>
+            <summary>Vertical Bottom Panel Position</summary>
+            <description/>
+        </key>
+        <key name="position-bottom-box" type="i">
+            <range min="0" max="2"/>
+            <default>0</default>
+            <summary>Left Center or Right Bottom Box</summary>
+            <description/>
+        </key>
+        <key name="hover-event" type="i">
+            <range min="0" max="5"/>
+            <default>0</default>
+            <summary>Hover Event</summary>
+            <description/>
+        </key>
+        <key name="hover-separator-event" type="i">
+            <range min="0" max="6"/>
+            <default>0</default>
+            <summary>Hover Separator Event</summary>
+            <description/>
+        </key>
+        <key name="icon-size" type="i">
+            <range min="1" max="96"/>
+            <default>22</default>
+            <summary>Icon Size</summary>
+            <description/>
+        </key>
+        <key name="icon-size-bottom" type="i">
+            <range min="1" max="96"/>
+            <default>22</default>
+            <summary>Icon Size</summary>
+            <description/>
+        </key>
+       <key name="font-size" type="s">
+            <default>'rgba(0,0,0,0)'</default>
+            <summary>TEST Panel Font Color TEST</summary>
+            <description/>
+        </key>
+        <key name="font-size-bottom" type="i">
+            <range min="1" max="96"/>
+            <default>17</default>
+            <summary>Icon Size</summary>
+            <description/>
+        </key>
+        <key name="tasks-all-workspaces" type="b">
+            <default>false</default>
+            <summary>Display Tasks from all Workspaces</summary>
+            <description/>
+        </key>
+        <key name="tasks-container-width" type="i">
+            <range min="0" max="100"/>
+            <default>0</default>
+            <summary>Tasks Container Width</summary>
+            <description/>
+        </key>
+        <key name="close-button" enum="org.gnome.shell.extensions.TaskBar.close-button-style">
+            <default>'off'</default>
+            <summary>Middle/Right Click to Close Task</summary>
+            <description/>
+        </key>
+        <key name="scroll-tasks" type="b">
+            <default>false</default>
+            <summary>Scroll Tasks</summary>
+            <description/>
+        </key>
+        <key name="invert-scroll-tasks" type="b">
+            <default>false</default>
+            <summary>Invert Scroll Tasks</summary>
+            <description/>
+        </key>
+        <key name="active-task-frame" type="b">
+            <default>true</default>
+            <summary>Active Task Frame</summary>
+            <description/>
+        </key>
+        <key name="active-task-background-color" type="s">
+            <default>'rgba(0,0,0,0)'</default>
+            <summary>Active Task Background Color</summary>
+            <description/>
+        </key>
+        <key name="active-task-background-color-set" type="b">
+            <default>false</default>
+            <summary>Active Task Background Color</summary>
+            <description/>
+        </key>
+        <key name="top-panel-background-color" type="s">
+            <default>'unset'</default>
+            <summary>Top Panel Background Color</summary>
+            <description/>
+        </key>
+        <key name="top-panel-original-background-color" type="s">
+            <default>'unset'</default>
+            <summary>Top Panel Background Color</summary>
+            <description/>
+        </key>
+        <key name="top-panel-background-alpha" type="b">
+            <default>false</default>
+            <summary>Top Panel Background Alpha</summary>
+            <description/>
+        </key>
+        <key name="bottom-panel-background-color" type="s">
+            <default>'unset'</default>
+            <summary>Bottom Panel Background Color</summary>
+            <description/>
+        </key>
+        <key name="bottom-panel-original-background-color" type="s">
+            <default>'unset'</default>
+            <summary>Bottom Panel Background Color</summary>
+            <description/>
+        </key>
+        <key name="hover-switch-task" type="b">
+            <default>false</default>
+            <summary>Switch Task on Hover</summary>
+            <description/>
+        </key>
+        <key name="hover-delay" type="i">
+            <range min="0" max="1000"/>
+            <default>350</default>
+            <summary>Delay before Hover</summary>
+            <description/>
+        </key>
+        <key name="desktop-button-icon" type="s">
+            <default>'desktopbuttonicon'</default>
+            <summary>Desktop Button Icon</summary>
+            <description/>
+        </key>
+        <key name="desktop-button-right-click" type="b">
+            <default>true</default>
+            <summary>Desktop Button Right Click</summary>
+            <description/>
+        </key>
+        <key name="workspace-button-index" enum="org.gnome.shell.extensions.TaskBar.workspace-button-index-style">
+            <default>'index'</default>
+            <summary>Workspace Button Index</summary>
+            <description/>
+        </key>
+        <key name="scroll-workspaces" type="b">
+            <default>false</default>
+            <summary>Scroll Workspaces</summary>
+            <description/>
+        </key>
+        <key name="showapps-button-toggle" enum="org.gnome.shell.extensions.TaskBar.showapps-button-toggle-style">
+            <default>'leftclickappview'</default>
+            <summary>ShowApps Button Toggle</summary>
+            <description/>
+        </key>
+        <key name="appview-button-icon" type="s">
+            <default>'appviewbuttonicon'</default>
+            <summary>Appview Button Icon</summary>
+            <description/>
+        </key>
+        <key name="tray-button" enum="org.gnome.shell.extensions.TaskBar.tray-button-style">
+            <default>'off'</default>
+            <summary>Display Tray Button</summary>
+            <description/>
+        </key>
+        <key name="tray-button-empty" enum="org.gnome.shell.extensions.TaskBar.tray-button-empty-style">
+            <default>'icon'</default>
+            <summary>When Tray is Empty</summary>
+            <description/>
+        </key>
+        <key name="tray-button-icon" type="s">
+            <default>'traybuttonicon'</default>
+            <summary>Tray Button Icon</summary>
+            <description/>
+        </key>
+        <key name="hover-tray-button" type="b">
+            <default>false</default>
+            <summary>Activate Tray on Hover</summary>
+            <description/>
+        </key>
+        <key name="hide-activities" type="b">
+            <default>false</default>
+            <summary>Hide Activities</summary>
+            <description/>
+        </key>
+        <key name="disable-hotcorner" type="b">
+            <default>false</default>
+            <summary>Disable Hot Corner</summary>
+            <description/>
+        </key>
+        <key name="hide-default-application-menu" type="b">
+            <default>false</default>
+            <summary>Hide Default Application Menu</summary>
+            <description/>
+        </key>
+        <key name="separator-one" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-two" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-three" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-four" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-five" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-six" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-one-bottom" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-two-bottom" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-three-bottom" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-four-bottom" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-five-bottom" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-six-bottom" type="b">
+            <default>false</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-one-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-two-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-three-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-four-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-five-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-six-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-one-bottom-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-two-bottom-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-three-bottom-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-four-bottom-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-five-bottom-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-six-bottom-size" type="i">
+            <range min="1" max="2000"/>
+            <default>20</default>
+            <summary>Separator</summary>
+            <description/>
+        </key>
+        <key name="separator-selection" enum="org.gnome.shell.extensions.TaskBar.separator-style">
+            <default>'separatorone'</default>
+            <summary>Separator Selection</summary>
+            <description/>
+        </key>
+        <key name="display-label" type="b">
+            <default>true</default>
+            <summary>Display Label</summary>
+            <description/>
+        </key>
+        <key name="display-thumbnail" type="b">
+            <default>true</default>
+            <summary>Display Thumbnail</summary>
+            <description/>
+        </key>
+        <key name="display-favorites-label" type="b">
+            <default>true</default>
+            <summary>Display Favorites Label</summary>
+            <description/>
+        </key>
+        <key name="preview-size" type="i">
+            <range min="100" max="1000"/>
+            <default>350</default>
+            <summary>Preview Size</summary>
+            <description/>
+        </key>
+        <key name="preview-delay" type="i">
+            <range min="0" max="3000"/>
+            <default>500</default>
+            <summary>Delay before Preview</summary>
+            <description/>
+        </key>
+        <key name="appearance-selection" enum="org.gnome.shell.extensions.TaskBar.appearance-style">
+            <default>'tasks'</default>
+            <summary>Align Component</summary>
+            <description/>
+        </key>
+        <key name="position-tasks" type="i">
+            <range min="0" max="4"/>
+            <default>4</default>
+            <summary>Position Tasks</summary>
+            <description/>
+        </key>
+        <key name="position-desktop-button" type="i">
+            <range min="0" max="4"/>
+            <default>3</default>
+            <summary>Position Desktop Button</summary>
+            <description/>
+        </key>
+        <key name="position-workspace-button" type="i">
+            <range min="0" max="4"/>
+            <default>2</default>
+            <summary>Position Workspace Button</summary>
+            <description/>
+        </key>
+        <key name="position-appview-button" type="i">
+            <range min="0" max="4"/>
+            <default>1</default>
+            <summary>Position Appview Button</summary>
+            <description/>
+        </key>
+        <key name="position-favorites" type="i">
+            <range min="0" max="4"/>
+            <default>0</default>
+            <summary>Position Favorites</summary>
+            <description/>
+        </key>
+    </schema>
+</schemalist>

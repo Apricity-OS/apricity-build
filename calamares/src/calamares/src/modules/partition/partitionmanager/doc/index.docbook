@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+
+        <!ENTITY partman "<application>KDE Partition Manager</application>"> <!--remove this entity later, it is also in lang/user.entities to make it translatable-->
+	<!ENTITY partman-introduction SYSTEM "introduction.docbook">
+	<!ENTITY partman-usermanual SYSTEM "usermanual.docbook">
+	<!ENTITY partman-resizehowto SYSTEM "resizehowto.docbook">
+	<!ENTITY partman-copyhowto SYSTEM "copyhowto.docbook">
+	<!ENTITY partman-installoshowto SYSTEM "installoshowto.docbook">
+	<!ENTITY partman-referencemanual SYSTEM "referencemanual.docbook">
+	<!ENTITY partman-faq SYSTEM "faq.docbook">
+	<!ENTITY partman-credits SYSTEM "credits.docbook">
+	<!ENTITY partman-appendix SYSTEM "appendix.docbook">
+	<!ENTITY partman-glossary SYSTEM "glossary.docbook">
+
+	<!ENTITY debugfsreiser4 "<application>debugfs.reiser4</application>">
+	<!ENTITY debugreiserfs "<application>debugreiserfs</application>">
+	<!ENTITY dumpe2fs "<application>dumpe2fs</application>">
+	<!ENTITY e2label "<application>e2label</application>">
+	<!ENTITY fsckmsdos "<application>fsck.msdos</application>">
+	<!ENTITY hfsck "<application>hfsck</application>">
+	<!ENTITY hpfsck "<application>hpfsck</application>">
+	<!ENTITY jfsdebugfs "<application>jfs_debugfs</application>">
+	<!ENTITY jfstune "<application>jfs_tune</application>">
+	<!ENTITY ntfslabel "<application>ntfslabel</application>">
+	<!ENTITY ntfsresize "<application>ntfsresize</application>">
+	<!ENTITY swapoff "<application>swapoff</application>">
+	<!ENTITY swapon "<application>swapon</application>">
+	<!ENTITY volid "<application>vol_id</application>">
+	<!ENTITY xfsdb "<application>xfs_db</application>">
+
+	<!ENTITY kappname "&partman;">
+	<!ENTITY package "extragear">
+	<!ENTITY % addindex "IGNORE">
+	<!ENTITY % English "INCLUDE">
+]>
+
+<book id="partitionmanager" lang="&language;">
+	<bookinfo>
+		<title>The &partman; Handbook</title>
+		<authorgroup>
+			<author>
+				<firstname>Volker</firstname>
+				<surname>Lanz</surname>
+			</author>
+			<!-- TRANS:ROLES_OF_TRANSLATORS -->
+		</authorgroup>
+
+		<copyright>
+			<year>2008, 2009, 2010</year>
+			<holder>Volker Lanz</holder>
+		</copyright>
+
+		<legalnotice>&FDLNotice;</legalnotice>
+
+		<date>2010-01-08</date>
+		<releaseinfo>1.00.00</releaseinfo>
+
+		<abstract>
+			<para>Manage your disks, partitions and file systems.</para>
+		</abstract>
+
+		<keywordset>
+			<keyword>KDE</keyword>
+			<keyword>sysadmin</keyword>
+			<keyword>partition</keyword>
+			<keyword>manager</keyword>
+			<keyword>disk</keyword>
+			<keyword>device</keyword>
+			<keyword>filesystem</keyword>
+		</keywordset>
+
+	</bookinfo>
+
+	&partman-introduction;
+
+	&partman-usermanual;
+
+	&partman-referencemanual;
+
+	&partman-faq;
+
+	&partman-credits;
+	
+	&partman-appendix;
+
+	&partman-glossary;
+
+	&documentation.index;
+
+</book>
+

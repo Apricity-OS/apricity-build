@@ -1,0 +1,131 @@
+<sect1 id="howto-installos">
+	<title>How-To: Installing a New Operating System</title>
+
+	<para>
+		This how-to describes the preparation of a new hard disk device for an OS installation: Suppose you bought a new hard disk and now intend to use it as a replacement for the old one that currently holds your OS and data partitions. You would also like to take this opportunity to install a new operation system. Several steps will have to be taken to make the transition from the old to the new system and drive.
+	</para>
+
+	<para>
+		In the following, <quote>/dev/sdb</quote> is the old hard disk and <quote>/dev/sdc</quote> is the new one. This screenshot shows the situation on the source device:
+	</para>
+
+	<para>
+		<screenshot>
+			<mediaobject>
+				<imageobject><imagedata fileref="installos_howto_1.png" format="PNG"/></imageobject>
+				<textobject><phrase>Main window with source device</phrase></textobject>
+			</mediaobject>
+		</screenshot>
+	</para>
+
+	<para>
+		The new device will look like this. Note that it doesn't yet have valid partition table, thus the first step to take is to create one by selecting <xref linkend="menu-device-createpartitiontable"/>:
+	</para>
+
+	<para>
+		<screenshot>
+			<mediaobject>
+				<imageobject><imagedata fileref="installos_howto_2.png" format="PNG"/></imageobject>
+				<textobject><phrase>Main window with destination device</phrase></textobject>
+			</mediaobject>
+		</screenshot>
+	</para>
+	
+	<para>
+		After confirming the warning dialog you can begin creating partitions on the new device by clicking the extended partition and selecting <xref linkend="menu-partition-new"/>. Begin with an extended partition at the end of the device to later hold the home and swap partitions:
+	</para>
+
+	<para>
+		<screenshot>
+			<mediaobject>
+				<imageobject><imagedata fileref="installos_howto_3.png" format="PNG"/></imageobject>
+				<textobject><phrase>Creating an extended partition</phrase></textobject>
+			</mediaobject>
+		</screenshot>
+	</para>
+	
+	<para>
+		Click <guibutton>OK</guibutton> and the operation to create this extended partition is added to the list.
+	</para>
+
+	<para>
+		Now create a primary partition on the rest of the device where the new OS will be installed. Make it as large as the unallocated area in front of the extended partition:
+	</para>
+
+	<para>
+		<screenshot>
+			<mediaobject>
+				<imageobject><imagedata fileref="installos_howto_4.png" format="PNG"/></imageobject>
+				<textobject><phrase>Creating a primary partition</phrase></textobject>
+			</mediaobject>
+		</screenshot>
+	</para>
+
+	<para>
+		Click <guibutton>OK</guibutton> in the dialog to accept your choice. The operation to create the new primary partition is then added to the operation list.
+	</para>
+	
+	<para>
+		Now it is time to copy the home partition from the old device to the extended partition on the new device. Select the old device in the Device List panel, click on partition <quote>sdb5</quote> and pick <xref linkend="menu-partition-copy"/>.
+	</para>
+
+	<para>
+		Then go back to the new device and click the extended partition. Select <xref linkend="menu-partition-paste"/>. The following dialog will come up:
+	</para>
+	
+	<para>
+		<screenshot>
+			<mediaobject>
+				<imageobject><imagedata fileref="installos_howto_5.png" format="PNG"/></imageobject>
+				<textobject><phrase>Pasting the home partition</phrase></textobject>
+			</mediaobject>
+		</screenshot>
+	</para>
+
+	<para>
+		This already looks mostly okay but you already know that you will not need that much free space after the home partition because you will later create a swap partition there.
+	</para>
+
+	<para>
+		So grab the right resize handle in the dialog's resizer widget and move it to the right until the free space after the pasted partition has a size more suitable for a swap partition: 
+	</para>
+
+	<para>
+		<screenshot>
+			<mediaobject>
+				<imageobject><imagedata fileref="installos_howto_6.png" format="PNG"/></imageobject>
+				<textobject><phrase>Resizing a pasted partition</phrase></textobject>
+			</mediaobject>
+		</screenshot>
+	</para>
+	
+	<para>
+		This looks fine. Click <guibutton>OK</guibutton> to accept and close the dialog. A new operation to paste the copied partition to the extended partition on <quote>sdc</quote> is added to the operation list. Note that this operation will also set the new size.
+	</para>
+
+	<para>
+		Finally you will want to create a new swap partition at the end of the extended partition on <quote>sdc</quote>. There is no need to copy the existing swap partition from <quote>sdb</quote> because swap does not hold any permanent information worth keeping. Simply create a new partition with type linuxswap that fills the whole of the unallocated area after the new home partition.
+	</para>
+
+	<para>
+		The main window with all operations and the preview of how <quote>sdc</quote> will look like once they are applied now looks like this:
+	</para>
+	
+	<para>
+		<screenshot>
+			<mediaobject>
+				<imageobject><imagedata fileref="installos_howto_7.png" format="PNG"/></imageobject>
+				<textobject><phrase>Main window after setting up all operations</phrase></textobject>
+			</mediaobject>
+		</screenshot>
+	</para>
+	
+	<para>
+		This looks great so select <xref linkend="menu-edit-apply"/>, confirm the warning dialog and wait until the operations have all been executed. For details on executing operations see <link linkend="howto-resizepartition">the how-to on resizing partitions</link>.
+	</para>
+	
+	<para>
+		Your new hard disk device is now ready for the installation of your new operation system.
+	</para>
+
+</sect1>

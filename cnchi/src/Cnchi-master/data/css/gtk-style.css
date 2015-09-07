@@ -1,0 +1,220 @@
+#main {
+    font-family: 'Lato', 'Droid Sans', 'DejaVu Sans', sans-serif;
+    font-size: 11px;
+}
+
+#location {
+    font-size: 11px;
+}
+
+GtkWindow {
+    border-color: transparent;
+}
+
+#logo {
+    background-color: transparent;
+    margin-top: 0px;
+}
+
+.title {
+    background-color: transparent;
+    color: #666;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: 'Droid Sans';
+    text-shadow: 0px 1px 0px #222;
+}
+
+.subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    font-family: 'Lato', 'Droid Sans', 'DejaVu Sans', sans-serif;
+    color: #222222;
+}
+
+#header {
+    background-color: #f9fafb;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-bottom: 2px #666;
+    border-color: #666666;
+    border-radius:0px;
+    font-family: Lato, 'DejaVu Sans', Helvetica, sans-serif;
+    padding: 8px 12px;
+}
+
+#process_progressbar, #i_progressbar, #a_progressbar {
+    border-radius: 1px;
+}
+
+#process_progressbar {
+    -GtkProgressBar-min-horizontal-bar-height: 3;
+}
+
+#i_progressbar, #a_progressbar {
+    -GtkProgressBar-min-horizontal-bar-height: 12;
+}
+
+GtkProgressBar.progressbar {
+    color: #2196F3;
+    border-color: shade(#2196F3, 0.9);
+    background-image: linear-gradient(to bottom, #2196F3, #2196F3);
+}
+
+#fwd_btn, #bk_btn {
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+#fwd_btn {
+    border-radius: 0px 2px 2px 0px;
+}
+
+#bk_btn {
+    border-radius: 2px 0px 0px 2px;
+}
+
+#fwd_btn:hover, #bk_btn:hover {
+    color: #2196F3;
+}
+
+#fwd_btn:active, #bk_btn:active {
+    color: #333A4C;
+    box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(95, 95, 95, 0.40);
+    background-color: shade(@theme_bg_color, 1.08);
+}
+
+#fwd_btn .label {
+    font-size: 11px;
+}
+
+#fwd_btn_install_now {
+    background-color: #2196F3;
+    color: #ffffff;
+    border-radius: 0px 2px 2px 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-color: transparent;
+    border-width: 1px;
+}
+
+#fwd_btn_save {
+    background-color: #2196F3;
+    color: #ffffff;
+    border-radius: 0px 2px 2px 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-color: transparent;
+    border-width: 1px;
+}
+
+#fwd_btn_install_now .label, #fwd_btn_save .label {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+#fwd_btn_install_now:active, #fwd_btn_save:active {
+    color: #333A4C;
+    box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 0.4), inset 0 0px 3px rgba(95, 95, 95, 0.40);
+}
+
+#fwd_btn_install_now:hover, #fwd_btn_save:hover {
+    box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+.header-bar .close_button {
+    padding-left: 5px;
+    padding-right: 0px;
+}
+
+.header-bar GtkSeparator {
+    color: rgba(255, 255, 255, 0.08);
+}
+
+.toolbar .separator, .separator,
+.header-bar GtkSeparatorToolItem,
+GtkSeparatorToolItem {
+    margin-left: 10px;
+}
+
+.list {
+    background-color: #eee;
+}
+
+GtkListBoxRow:active, .list-row:active, .list-row:selected {
+    background-color: #2196F3;
+}
+
+#tryit_btn, #graph_btn {
+    padding: 12px 20px;
+    border-radius: 6px;
+    border-color: #2196F3;
+    border-width: 2px;
+    background: rgba(255, 255, 255, 1);
+    font-size: 15px;
+    font-weight: 500;
+    color: #2196F3;
+    transition: all 0.1s ease-in;
+}
+
+#tryit_btn:hover, #graph_btn:hover {
+    padding: 12px 20px;
+    background: #2196F3;
+    color: #fff;
+    border-radius: 6px;
+    border-width: 0px;
+    border-bottom-width: 1px;
+    font-size: 15px;
+}
+
+#tryit_label, #installit_label {
+    font-size: 11px;
+}
+
+GtkSwitch.trough:active {
+    border-color: transparent;
+    background-color: #2196F3;
+    background-image: none;
+}
+
+GtkTreeView row:selected {
+    background-color: #2196F3;
+    border-color: shade(#2196F3, 0.9);
+}
+
+#auto_radio_btn GtkLabel, #advanced_radio_btn GtkLabel {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#lvm_btn GtkLabel, #enc_btn GtkLabel, #home_btn GtkLabel {
+    font-size: 11px;
+}
+
+#lvm_label, #enc_label, #home_label {
+    font-size: 10px;
+    font-style: italic;
+}
+
+#ask #intro_label {
+    font-size: 15px;
+}
+
+#slides GtkScrolledWindow {
+    border: none;
+}
+
+#main_box {
+    margin-bottom: 0px;
+}
+
+StateBox {
+    border-radius: 2px;
+}

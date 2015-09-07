@@ -1,0 +1,10 @@
+{
+   "appDesc": {
+      "description": "The description of the application, displayed in the web store.",
+      "message": "Nejrychlejší způsob, jak hledat na webu."
+   },
+   "appName": {
+      "description": "The title of the application, displayed in the web store.",
+      "message": "Vyhledávání Google"
+   }
+}

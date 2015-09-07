@@ -1,0 +1,166 @@
+#!/usr/bin/python
+
+from gi.repository import Gtk, Vte, Gdk
+from gi.repository import GLib
+import os
+from os.path import expanduser
+
+topaddpath = os.path.expanduser('~/.config/argon/top-add')
+topremovepath = os.path.expanduser('~/.config/argon/top-remove')
+if not os.path.exists(os.path.expanduser('~/.config/argon')):
+    os.makedirs(os.path.expanduser('~/.config/argon'))
+if not os.path.exists(os.path.expanduser('~/.config/argon/top-add')):
+    os.system('touch %s' % (topaddpath))
+if not os.path.exists(os.path.expanduser('~/.config/argon/top-remove')):
+    os.system('touch %s' % (topremovepath))
+
+def windestroysig():
+    Gtk.Window.destroy()
+
+class GridWindow(Gtk.Window):
+
+    def __init__(self):
+        Gtk.Window.__init__(self, title="Argon - The Noble Package Manager")
+        self.set_border_width(8)
+        self.set_position(Gtk.WindowPosition.CENTER)
+        self.set_icon_from_file('/usr/share/argon/argon.png')
+        grid = Gtk.Grid(column_homogeneous=True,column_spacing=8,row_spacing=8)
+        self.add(grid) 
+
+        self.entry1 = Gtk.Entry()
+        self.entry1.connect("activate", self.button1sig)
+
+        self.button1 = Gtk.Button("Install")
+        self.button1.connect("clicked", self.button1sig)
+
+        self.entry2 = Gtk.Entry()
+        self.entry2.connect("activate", self.button2sig)
+
+        self.button2 = Gtk.Button("Remove")
+        self.button2.connect("clicked", self.button2sig)
+
+        self.button5 = Gtk.Button("Top-level Packages")
+        self.button5.connect("clicked", self.button5sig)
+
+        self.button3 = Gtk.Button("Configure Notifier")
+        self.button3.connect("clicked", self.button3sig)
+
+        self.button4 = Gtk.Button("Update System")
+        self.button4.connect("clicked", self.button4sig)
+
+        grid.add(self.entry1)
+        grid.attach(self.button1,1,0,1,1)
+        grid.attach(self.entry2,0,1,1,1)
+        grid.attach(self.button2,1,1,1,1)
+        grid.attach(self.button3,0,2,1,1)
+        grid.attach(self.button5,1,2,1,1)
+        grid.attach(self.button4,0,3,2,1)
+
+    def button1sig(self, configalter):
+        package = self.entry1.get_text()
+        os.system("echo %s > /etc/argon/package" % (package))
+        installterminal     = Vte.Terminal()
+        installterminal.spawn_sync(
+            Vte.PtyFlags.DEFAULT,
+            os.environ['HOME'],
+            ["/usr/bin/argon-install"],
+            [],
+            GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+            None,
+            None,
+            )
+
+        installwin = Gtk.Window(title="Argon - Package Installation")
+        installwin.set_icon_from_file('/usr/share/argon/argon.png')
+        installwin.set_position(Gtk.WindowPosition.CENTER)
+        installwin.connect('delete-event', windestroysig)
+        installwin.add(installterminal)
+        installwin.show_all()
+        installterminal.set_color_foreground(Gdk.RGBA(.09, .58, .82, 1))
+        installterminal.set_color_background(Gdk.RGBA(0, 0, 0, 1))
+        self.entry1.set_text("")
+        self.entry2.set_text("")
+
+    def button2sig(self, configalter):
+        package = self.entry2.get_text()
+        os.system("echo %s > /etc/argon/package" % (package))
+        removeterminal     = Vte.Terminal()
+        removeterminal.spawn_sync(
+            Vte.PtyFlags.DEFAULT,
+            os.environ['HOME'],
+            ["/usr/bin/argon-remove"],
+            [],
+            GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+            None,
+            None,
+            )
+
+        removewin = Gtk.Window(title="Argon - Package Removal")
+        removewin.set_icon_from_file('/usr/share/argon/argon.png')
+        removewin.set_position(Gtk.WindowPosition.CENTER)
+        removewin.connect('delete-event', windestroysig)
+        removewin.add(removeterminal)
+        removewin.show_all()
+        removeterminal.set_color_foreground(Gdk.RGBA(.09, .58, .82, 1))
+        removeterminal.set_color_background(Gdk.RGBA(0, 0, 0, 1))
+        self.entry1.set_text("")
+        self.entry2.set_text("")
+
+    def button5sig(self, configalter):
+        self.entry1.set_text("")
+        self.entry2.set_text("")
+        if os.path.exists(os.path.expanduser('~/.config/argon/top-add')):
+            os.system('cat %s > /etc/argon/top-add' % (topaddpath))
+        if os.path.exists(os.path.expanduser('~/.config/argon/top-remove')):
+            os.system('cat %s > /etc/argon/top-remove' % (topremovepath))
+        os.system("argon-list")
+        def file_get_contents(filename):
+            with open(filename) as f:
+                return f.read()
+        top = file_get_contents('/etc/argon/top-final')
+        listbox = Gtk.TextView()
+        listbox.set_cursor_visible(False)
+        textbuffer = listbox.get_buffer()
+        textbuffer.set_text(top)
+        listwin = Gtk.Window(title="Argon - Top-level Package List")
+        listwin.set_default_size(400,400)
+        listwinscroll = Gtk.ScrolledWindow()
+        listwin.set_icon_from_file('/usr/share/argon/argon.png')
+        listwin.set_position(Gtk.WindowPosition.CENTER)
+        listwin.connect('delete-event', windestroysig)
+        listwinscroll.add(listbox)
+        listwin.add(listwinscroll)
+        listwin.show_all()
+
+    def button3sig(self, configalter):
+        os.system("argon-notifier-config&")
+        self.entry1.set_text("")
+        self.entry2.set_text("")
+
+    def button4sig(self, configalter):
+        self.entry1.set_text("")
+        self.entry2.set_text("")
+        updateterminal     = Vte.Terminal()
+        updateterminal.spawn_sync(
+            Vte.PtyFlags.DEFAULT,
+            os.environ['HOME'],
+            ["/usr/bin/argon-update"],
+            [],
+            GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+            None,
+            None,
+            )
+
+        updatewin = Gtk.Window(title="Argon - System Update")
+        updatewin.set_icon_from_file('/usr/share/argon/argon.png')
+        updatewin.set_position(Gtk.WindowPosition.CENTER)
+        updatewin.connect('delete-event', windestroysig)
+        updatewin.add(updateterminal)
+        updatewin.show_all()
+        updateterminal.set_color_foreground(Gdk.RGBA(.09, .58, .82, 1))
+        updateterminal.set_color_background(Gdk.RGBA(0, 0, 0, 1))
+
+win = GridWindow()
+win.connect("delete-event", Gtk.main_quit)
+win.show_all()
+Gtk.main()

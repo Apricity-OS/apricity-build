@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=cbatticon
+Comment=Lightweight system tray battery indicator.
+Icon=battery
+Type=Application
+Exec=/usr/bin/cbatticon -i symbolic -l 15 -c "systemctl poweroff"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true

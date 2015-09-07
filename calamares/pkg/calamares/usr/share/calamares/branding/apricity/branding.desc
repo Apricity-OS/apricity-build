@@ -1,0 +1,23 @@
+---
+componentName:  apricity
+
+strings:
+    productName:         Apricity OS
+    shortProductName:    Apricity
+    version:             08.2015 Beta
+    shortVersion:        08.2015
+    versionedName:       Apricity OS 08.2015 Beta
+    shortVersionedName:  Apricity 08.2015
+    bootloaderEntryName: Apricity
+
+images:
+    productLogo:         "squid.png"
+    productIcon:         "logo.png"
+    productWelcome:      "languages.png"
+
+slideshow:               "show.qml"
+
+style:
+   sidebarBackground:    "#292F34"
+   sidebarText:          "#FFFFFF"
+   sidebarTextSelect:    "#292F34"

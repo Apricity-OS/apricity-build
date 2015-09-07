@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindowBase</class>
+ <widget class="QMainWindow" name="MainWindowBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1007</width>
+    <height>684</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string comment="@title:window">KDE Partition Manager</string>
+  </property>
+  <widget class="PartitionManagerWidget" name="m_PartitionManagerWidget">
+   <layout class="QVBoxLayout" name="verticalLayout"/>
+  </widget>
+  <widget class="QDockWidget" name="m_DockDevices">
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string comment="@title:window">Devices</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="ListDevices" name="m_ListDevices">
+    <layout class="QVBoxLayout"/>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_DockOperations">
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string comment="@title:window">Pending Operations</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="ListOperations" name="m_ListOperations">
+    <layout class="QVBoxLayout" name="verticalLayout_2"/>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_DockInformation">
+   <property name="windowTitle">
+    <string comment="@title:window">Information</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="InfoPane" name="m_InfoPane">
+    <layout class="QGridLayout" name="dockInformationLayout"/>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="m_DockLog">
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::TopDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string comment="@title:window">Log Output</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="TreeLog" name="m_TreeLog">
+    <layout class="QGridLayout" name="gridLayout"/>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PartitionManagerWidget</class>
+   <extends>QWidget</extends>
+   <header>gui/partitionmanagerwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ListDevices</class>
+   <extends>QWidget</extends>
+   <header>gui/listdevices.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ListOperations</class>
+   <extends>QWidget</extends>
+   <header>gui/listoperations.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TreeLog</class>
+   <extends>QWidget</extends>
+   <header>gui/treelog.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>InfoPane</class>
+   <extends>QWidget</extends>
+   <header>gui/infopane.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
