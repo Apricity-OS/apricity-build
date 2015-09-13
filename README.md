@@ -28,19 +28,16 @@ Staying connected between your devices can be tedious work, but Apricity OS come
 #####Terminal
 Apricity OS utilizes Liquid Prompt, an adaptive bash prompt that makes your terminal more informative and beautiful.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 ![Syncthing](http://apricityos.com/assets/img/back/apricity-laptop-syncthing.jpg)
 #####Collaboration
 Syncthing allows you to share large amounts data across multiple platforms allowing to be as connected as possible. Syncthing can transfer large files even faster than cloud-based alternatives. Furthermore, your files and personal information are stored only on local devices, not in the cloud, and are encrypted along every step in the file transfer process.
-=======
+
 ![Syncthing](http://apricityos.com/assets/img/apricity-laptop-syncthing.jpg)
-=======
+
 ![Syncthing](http://apricityos.com/assets/img/back/apricity-laptop-syncthing.jpg)
->>>>>>> 382e49848c9bcc3df8d0743a00a1c24c408c6305
+
 #####Collaboration
 Syncthing allows you to share large amounts data across multiple platforms allowing to be as connected as possible. Syncthing can transfer large files even faster than cloud based alternatives. Furthermore, your files and personal information are stored only on local devices, not in the cloud, and are encrypted along every step in the file transfer process.
->>>>>>> 1242be0a9e4f36c5b33921bf73cf402d877bd6a7
 
 #####Updates
 Because Apricity OS is based on Archlinux, it follows a rolling release cycle. This, when combined with the graphical Pamac package manager, ensures that you always have the most up to date packages. This also helps minimize security risks.
