@@ -1,4 +1,5 @@
 alsa-utils
+lib32-alsa-plugins
 apricityassets
 b43-fwcutter
 baobab
@@ -27,6 +28,7 @@ gedit
 gimp
 git
 gksu
+system-config-printer
 gnome-backgrounds
 gnome-bluetooth
 gnome-calculator
@@ -45,12 +47,13 @@ gnome-shell
 gnome-shell-extensions
 gnome-system-log
 gnome-system-monitor
-gnome-terminal
+gnome-terminal-apricity
 gnome-themes-standard
 gnome-tweak-tool
 gnome-user-docs
 google-chrome
 google-talkplugin
+orca
 grilo-plugins
 grub
 gsfonts
@@ -140,6 +143,7 @@ whois
 wine
 wireless_tools
 bumblebee
+nvidia-libgl
 nvidia-utils
 nvidia
 wpa_actiond
