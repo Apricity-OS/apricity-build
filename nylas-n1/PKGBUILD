@@ -1,0 +1,16 @@
+# Maintainer: agajews@gmail.com
+
+pkgname=nylas-n1
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="An extensible, open-source mail client built on the modern web."
+arch=('x86_64')
+url="https://www.nylas.com/n1"
+depends=('git' 'python' 'xdg-utils')
+optdepends=('libgnome-keyring0' 'gir1.2-gnomekeyring-1.0')
+install='nylas-n1.install'
+source=('data.tar.gz')
+md5sums=('865b3981071f838d53910c0a7d3efa05')
+package() {
+  cp -r $srcdir/./usr $pkgdir/
+}

@@ -238,7 +238,7 @@ def run():
     """
     if libcalamares.globalstorage.value("bootLoader") is None:
         return None
-
+    check_chroot_call(["os-prober"])
     fw_type = libcalamares.globalstorage.value("firmwareType")
     prepare_bootloader(fw_type)
 

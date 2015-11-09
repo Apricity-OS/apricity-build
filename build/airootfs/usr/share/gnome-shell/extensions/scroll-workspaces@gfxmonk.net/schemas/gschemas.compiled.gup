@@ -1,7 +1,0 @@
-#!bash -eux
-gup -u *.xml
-mkdir -p compiled
-glib-compile-schemas . --targetdir="compiled"
-mv compiled/gschemas.compiled "$1"
-rm -rf compiled
-

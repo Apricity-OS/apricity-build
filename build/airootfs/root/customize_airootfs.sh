@@ -46,6 +46,7 @@ then
 	rm -f /usr/share/applications/qdbusviewer-qt4.desktop
 	rm -f /usr/share/applications/qtconfig-qt4.desktop
 	rm -f /usr/share/applications/nvidia-settings.desktop
+	rm -f /usr/share/applications/hplip.desktop
 #Switch Icons
 	sed -i 's@Icon=xterm-color_48x48@Icon=xorg@' /usr/share/applications/xterm.desktop
 	sed -i 's@Icon=tracker@Icon=preferences-system-search@' /usr/share/applications/tracker-preferences.desktop
@@ -64,6 +65,7 @@ then
 #Enable Services
 	systemctl enable org.cups.cupsd.service
 	systemctl enable smbd nmbd
+	systemctl enable bumblebeed
 	systemctl enable graphical.target gdm.service pacman-init.service dhcpcd.service
 	echo 'Enabled dhcpd, gdm'
 	systemctl enable bluetooth.service
@@ -80,8 +82,6 @@ then
 #Enable Calamares Autostart
 	mkdir -p /home/liveuser/.config/autostart
 	ln -fs /usr/share/applications/calamares.desktop /home/liveuser/.config/autostart/calamares.desktop
-#Enable Broadcom Wireless	
-	modprobe brcmsmac
 #Enable ICE+Chrome Stable
 	ln -sf /usr/bin/google-chrome-stable /usr/bin/google-chrome
 	export _BROWSER=google-chrome-stable
@@ -97,15 +97,14 @@ then
 	chmod 750 /etc/sudoers.d
 	chmod 440 /etc/sudoers.d/g_wheel
 	chown -R root /etc/sudoers.d
+	echo "Enabled Sudo"
 #Set Apricity Grub Theme
 	/etc/apricity-assets/Elegant_Dark/install.sh
 #Enable Apricity Plymouth Theme
 	sed -i.bak 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
 	chown -R root.root /usr/share/plymouth/themes/apricity
 	plymouth-set-default-theme -R apricity
-	#mkinitcpio -p linux
-#Set Default Driver
-	#mhwd-gpu --setgl mesa
+	chsh -s /bin/zsh
 else
 	echo "i686"
 fi

@@ -1,6 +1,7 @@
 alsa-utils
 lib32-alsa-plugins
 apricityassets
+apricity-themes-gnome
 b43-fwcutter
 baobab
 base
@@ -38,7 +39,18 @@ gnome-control-center
 gnome-disk-utility
 gnome-font-viewer
 gnome-keyring
-gnome-music
+rhythmbox
+hplip
+virtualbox-guest-utils
+gvfs-afc
+usbmuxd
+pulseaudio-alsa
+pulseaudio-bluetooth
+bluez
+bluez-libs
+bluez-utils
+bluez-firmware
+jre8-openjdk
 gnome-photos
 gnome-screenshot
 gnome-session
@@ -162,7 +174,7 @@ xf86-video-i740
 xf86-video-intel
 xf86-video-mach64
 xf86-video-neomagic
-xf86-video-nouveau
+#xf86-video-nouveau
 xf86-video-nv
 xf86-video-openchrome
 xf86-video-r128
@@ -187,3 +199,8 @@ xorg-xinit
 xorg-xkill
 yaourt-git
 zd1211-firmware
+zsh
+python2-powerline-git
+boost
+boost-libs
+icu

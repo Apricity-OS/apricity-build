@@ -1,9 +1,10 @@
 #!/bin/bash
 
 set -e -u
-
+echo 'Removing Previous Build'
+rm -rf work
 iso_name=apricity_os
-iso_label="APRICITY_$(date +%Y%m)"
+iso_label=APRICITY
 iso_version=$(date +%Y.%m.%d)
 install_dir=arch
 work_dir=work

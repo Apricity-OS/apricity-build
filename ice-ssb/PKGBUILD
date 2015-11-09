@@ -2,12 +2,12 @@
 
 _pkgname=ice-ssb
 pkgname=ice-ssb
-pkgver=5.0.7
+pkgver=5.0.9
 pkgrel=1
 pkgdesc='ICE SSB'
 arch=(any)
 license=(GPL)
-depends=("python-requests" "python-beautifulsoup4-4.1" "python2" "pygtk" "python2-gobject")
+depends=("python-requests" "python-beautifulsoup4" "python2" "pygtk" "python2-gobject")
 source=("ice-ssb.tar.gz")
 sha256sums=(SKIP)
 install=ice-ssb.install
