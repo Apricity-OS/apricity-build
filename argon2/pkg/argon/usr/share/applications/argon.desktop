@@ -1,7 +1,9 @@
 [Desktop Entry]
 Type=Application
 Name=Argon
+Name[pl]=Menedżer pakietów Argon
 Comment=Lightweight Arch Package Manager
+Comment[pl]=Lekki menedżer pakietów Archa
 Exec=argon
 Icon=/usr/share/argon/argon.png
 Categories=System;Utility
