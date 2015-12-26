@@ -1,7 +1,7 @@
 # Apricity OS
 Note: We do not have a mailing list. If you would like to receive email notifications of issues, please watch this repository, go to your GitHub account settings, click the notification center tab, and check the box under the 'Watching' header marked 'Email'.
-####[Download The Latest 64-Bit ISO](https://sourceforge.net/projects/apricityos/files/apricity_os-09.2015-beta2.iso/download)
-####[Torrent](http://apricityos.com/iso/apricity_os-09.2015-beta2.torrent)
+####[Download The Latest 64-Bit ISO](https://sourceforge.net/projects/apricityos/files/apricity_os-11.2015-beta2.iso/download)
+####[Torrent](http://apricityos.com/iso/apricity_os-11.2015-beta2.torrent)
 ####[Support us on Patreon](http://www.patreon.com/apricity)
 ####Welcome to Apricity OS, a modern, intuitive operating system for the cloud generation of computing. 
 
