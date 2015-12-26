@@ -15,7 +15,7 @@ if( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
     set( CMAKE_C_FLAGS_RELEASE          "-O4 -DNDEBUG" )
     set( CMAKE_C_FLAGS_RELWITHDEBINFO   "-O2 -g" )
 
-    set( CMAKE_CXX_FLAGS                "${CMAKE_CXX_FLAGS} -Weverything -std=c++11" )
+    set( CMAKE_CXX_FLAGS                "${CMAKE_CXX_FLAGS} -Weverything -std=c++14" )
     set( CMAKE_CXX_FLAGS_DEBUG          "-g" )
     set( CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -DNDEBUG" )
     set( CMAKE_CXX_FLAGS_RELEASE        "-O4 -DNDEBUG" )
@@ -26,8 +26,8 @@ if( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
     set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
 else()
     set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99" )
-    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wl,--no-undefined" )
-    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wl,--fatal-warnings -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type" )
+    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wl,--no-undefined" )
+    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wl,--fatal-warnings -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type" )
 endif()
 
 if( CMAKE_COMPILER_IS_GNUCXX )
@@ -39,6 +39,7 @@ if( CMAKE_COMPILER_IS_GNUCXX )
 endif()
 
 cmake_policy( SET CMP0023 OLD )
+cmake_policy( SET CMP0028 NEW ) # double colons in KF5::Foo and Qt5::Foo are necessarily IMPORTED or ALIAS targets, don't search further
 
 # Keep cmake 3.0 quiet
 if( POLICY CMP0043 )
@@ -48,7 +49,7 @@ endif()
 include( MacroOptionalFindPackage )
 include( MacroLogFeature )
 
-set( QT_VERSION 5.3.0 )
+set( QT_VERSION 5.4.0 )
 
 find_package( Qt5 ${QT_VERSION} CONFIG REQUIRED Core Gui Widgets LinguistTools Svg Quick QuickWidgets )
 find_package( YamlCpp 0.5.1 REQUIRED )
@@ -93,8 +94,8 @@ set( CALAMARES_DESCRIPTION_SUMMARY "The distribution-independent installer frame
 set( CALAMARES_TRANSLATION_LANGUAGES ar ast ca cs_CZ da de en en_GB es_MX es fi_FI fr hr hu id it_IT ja lt nl pl pt_BR pt_PT ro ru sk sl sv th tr_TR zh_CN zh_TW )
 
 set( CALAMARES_VERSION_MAJOR 1 )
-set( CALAMARES_VERSION_MINOR 1 )
-set( CALAMARES_VERSION_PATCH 2 )
+set( CALAMARES_VERSION_MINOR 91 )
+set( CALAMARES_VERSION_PATCH 0 )
 set( CALAMARES_VERSION_RC 0 )
 
 set( CALAMARES_VERSION ${CALAMARES_VERSION_MAJOR}.${CALAMARES_VERSION_MINOR}.${CALAMARES_VERSION_PATCH} )
@@ -219,4 +220,15 @@ install(
       calamares.desktop
   DESTINATION
       ${CMAKE_INSTALL_DATADIR}/applications
+)
+
+# uninstall target
+configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+    IMMEDIATE @ONLY
+)
+
+add_custom_target( uninstall
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake
 )

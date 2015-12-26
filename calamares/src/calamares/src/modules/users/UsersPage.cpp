@@ -47,7 +47,7 @@ UsersPage::UsersPage( QWidget* parent )
     , m_readyHostname( false )
     , m_readyPassword( false )
     , m_readyRootPassword( false )
-    , m_showRootPassword( true )
+    , m_writeRootPassword( true )
 {
     ui->setupUi( this );
 
@@ -66,11 +66,23 @@ UsersPage::UsersPage( QWidget* parent )
              this, &UsersPage::onRootPasswordTextChanged );
     connect( ui->textBoxVerifiedRootPassword, &QLineEdit::textChanged,
              this, &UsersPage::onRootPasswordTextChanged );
+    connect( ui->checkBoxReusePassword, &QCheckBox::stateChanged,
+             this, [this]( int checked )
+    {
+        ui->labelChooseRootPassword->setVisible( !checked );
+        ui->labelExtraRootPassword->setVisible( !checked );
+        ui->labelRootPassword->setVisible( !checked );
+        ui->labelRootPasswordError->setVisible( !checked );
+        ui->textBoxRootPassword->setVisible( !checked );
+        ui->textBoxVerifiedRootPassword->setVisible( !checked );
+        checkReady( isReady() );
+    } );
 
     m_customUsername = false;
     m_customHostname = false;
 
-    setShowRootPassword( true );
+    setWriteRootPassword( true );
+    ui->checkBoxReusePassword->setChecked( true );
 
     CALAMARES_RETRANSLATE( ui->retranslateUi( this ); )
 }
@@ -85,16 +97,19 @@ UsersPage::~UsersPage()
 bool
 UsersPage::isReady()
 {
-    return m_readyFullName &&
-           m_readyHostname &&
-           m_readyPassword &&
-           ( !m_showRootPassword || m_readyRootPassword ) &&
-           m_readyUsername;
+    bool readyFields = m_readyFullName &&
+                       m_readyHostname &&
+                       m_readyPassword &&
+                       m_readyUsername;
+    if ( !m_writeRootPassword || ui->checkBoxReusePassword->isChecked() )
+        return readyFields;
+
+    return readyFields && m_readyRootPassword;
 }
 
 
 QList< Calamares::job_ptr >
-UsersPage::createJobs( const QString& defaultUserGroup, const QStringList& defaultGroupsList )
+UsersPage::createJobs( const QStringList& defaultGroupsList )
 {
     QList< Calamares::job_ptr > list;
     if ( !isReady() )
@@ -102,9 +117,10 @@ UsersPage::createJobs( const QString& defaultUserGroup, const QStringList& defau
 
     Calamares::Job* j;
     j = new CreateUserJob( ui->textBoxUsername->text(),
-                           QString(),
-                           ui->checkBoxLoginAuto->isChecked(),
-                           defaultUserGroup,
+                           ui->textBoxFullName->text().isEmpty() ?
+                               ui->textBoxUsername->text() :
+                               ui->textBoxFullName->text(),
+                           ui->checkBoxAutoLogin->isChecked(),
                            defaultGroupsList );
     list.append( Calamares::job_ptr( j ) );
 
@@ -112,10 +128,14 @@ UsersPage::createJobs( const QString& defaultUserGroup, const QStringList& defau
                             ui->textBoxUserPassword->text() );
     list.append( Calamares::job_ptr( j ) );
 
-    if ( m_showRootPassword )
+    if ( m_writeRootPassword )
     {
-        j = new SetPasswordJob( "root",
-                                ui->textBoxRootPassword->text() );
+        if ( ui->checkBoxReusePassword->isChecked() )
+            j = new SetPasswordJob( "root",
+                                    ui->textBoxUserPassword->text() );
+        else
+            j = new SetPasswordJob( "root",
+                                    ui->textBoxRootPassword->text() );
         list.append( Calamares::job_ptr( j ) );
     }
 
@@ -124,10 +144,11 @@ UsersPage::createJobs( const QString& defaultUserGroup, const QStringList& defau
 
     Calamares::GlobalStorage* gs = Calamares::JobQueue::instance()->globalStorage();
     gs->insert( "hostname", ui->textBoxHostname->text() );
-    if ( ui->checkBoxLoginAuto->isChecked() )
+    if ( ui->checkBoxAutoLogin->isChecked() )
         gs->insert( "autologinUser", ui->textBoxUsername->text() );
 
     gs->insert( "username", ui->textBoxUsername->text() );
+    gs->insert( "password", CalamaresUtils::obscure( ui->textBoxUserPassword->text() ) );
 
     return list;
 }
@@ -141,16 +162,10 @@ UsersPage::onActivate()
 
 
 void
-UsersPage::setShowRootPassword( bool show )
+UsersPage::setWriteRootPassword( bool write )
 {
-    ui->labelChooseRootPassword->setVisible( show );
-    ui->labelExtraRootPassword->setVisible( show );
-    ui->labelRootPassword->setVisible( show );
-    ui->labelRootPasswordError->setVisible( show );
-    ui->textBoxRootPassword->setVisible( show );
-    ui->textBoxVerifiedRootPassword->setVisible( show );
-
-    m_showRootPassword = show;
+    ui->checkBoxReusePassword->setVisible( write );
+    m_writeRootPassword = write;
 }
 
 
@@ -405,5 +420,20 @@ UsersPage::onRootPasswordTextChanged( const QString& )
         m_readyRootPassword = true;
     }
 
+    emit checkReady( isReady() );
+}
+
+
+void
+UsersPage::setAutologinDefault( bool checked )
+{
+    ui->checkBoxAutoLogin->setChecked( checked );
+    emit checkReady( isReady() );
+}
+
+void
+UsersPage::setReusePasswordDefault( bool checked )
+{
+    ui->checkBoxReusePassword->setChecked( checked );
     emit checkReady( isReady() );
 }

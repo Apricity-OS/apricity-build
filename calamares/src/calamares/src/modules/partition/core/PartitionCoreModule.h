@@ -20,15 +20,18 @@
 #ifndef PARTITIONCOREMODULE_H
 #define PARTITIONCOREMODULE_H
 
-#include <core/PartitionModel.h>
-#include <Typedefs.h>
+#include "core/PartitionModel.h"
+#include "Typedefs.h"
 
-// CalaPM
-#include <core/partitiontable.h>
+// KPMcore
+#include <kpmcore/core/partitiontable.h>
 
 // Qt
 #include <QList>
+#include <QMutex>
 #include <QObject>
+
+#include <functional>
 
 class BootLoaderModel;
 class CreatePartitionJob;
@@ -71,7 +74,8 @@ public:
     //      that contains the current state of a disk regardless of subsequent changes.
     //      This should probably be redone some other way.
     //              -- Teo 4/2015
-    Device* createImmutableDeviceCopy( Device* device ) const;
+    //FIXME: make this horrible method private. -- Teo 12/2015
+    static Device* createImmutableDeviceCopy( Device* device );
 
     QAbstractItemModel* bootLoaderModel() const;
 
@@ -94,6 +98,8 @@ public:
     QList< Partition* > efiSystemPartitions() const;
 
     void revert();
+    void revertDevice( Device* dev );
+    void asyncRevertDevice( Device* dev, std::function< void() > callback );
 
     void clearJobs();
 
@@ -114,9 +120,12 @@ public:
 
     void dumpQueue() const;
 
+    OsproberEntryList osproberEntries() const;
+
 Q_SIGNALS:
     void hasRootMountPointChanged( bool value );
     void isDirtyChanged( bool value );
+    void reverted();
 
 private:
     void refresh();
@@ -152,6 +161,10 @@ private:
     DeviceInfo* infoForDevice( Device* ) const;
 
     Partition* findPartitionByMountPoint( const QString& mountPoint ) const;
+
+    OsproberEntryList m_osproberLines;
+
+    QMutex m_revertMutex;
 };
 
 #endif /* PARTITIONCOREMODULE_H */

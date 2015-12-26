@@ -19,22 +19,22 @@
 #include "PartitionPage.h"
 
 // Local
-#include <core/BootLoaderModel.h>
-#include <core/DeviceModel.h>
-#include <core/PartitionCoreModule.h>
-#include <core/PartitionModel.h>
-#include <core/PMUtils.h>
-#include <gui/CreatePartitionDialog.h>
-#include <gui/EditExistingPartitionDialog.h>
+#include "core/BootLoaderModel.h"
+#include "core/DeviceModel.h"
+#include "core/PartitionCoreModule.h"
+#include "core/PartitionModel.h"
+#include "core/KPMHelpers.h"
+#include "gui/CreatePartitionDialog.h"
+#include "gui/EditExistingPartitionDialog.h"
 
-#include <ui_PartitionPage.h>
-#include <ui_CreatePartitionTableDialog.h>
-
-// CalaPM
-#include <core/device.h>
-#include <core/partition.h>
+#include "ui_PartitionPage.h"
+#include "ui_CreatePartitionTableDialog.h"
 
 #include "utils/Retranslator.h"
+
+// KPMcore
+#include <kpmcore/core/device.h>
+#include <kpmcore/core/partition.h>
 
 // Qt
 #include <QDebug>
@@ -102,7 +102,7 @@ PartitionPage::updateButtons()
         Q_ASSERT( model );
         Partition* partition = model->partitionForIndex( index );
         Q_ASSERT( partition );
-        bool isFree = PMUtils::isPartitionFreeSpace( partition );
+        bool isFree = KPMHelpers::isPartitionFreeSpace( partition );
         bool isExtended = partition->roles().has( PartitionRole::Extended );
 
         create = isFree;
@@ -169,7 +169,7 @@ PartitionPage::onEditClicked()
     Partition* partition = model->partitionForIndex( index );
     Q_ASSERT( partition );
 
-    if ( PMUtils::isPartitionNew( partition ) )
+    if ( KPMHelpers::isPartitionNew( partition ) )
         updatePartitionToCreate( model->device(), partition );
     else
         editExistingPartition( model->device(), partition );
@@ -214,7 +214,7 @@ PartitionPage::onPartitionViewActivated()
     // but I don't expect there will be other occurences of triggering the same
     // action from multiple UI elements in this page, so it does not feel worth
     // the price.
-    if ( PMUtils::isPartitionFreeSpace( partition ) )
+    if ( KPMHelpers::isPartitionFreeSpace( partition ) )
         m_ui->createButton->click();
     else
         m_ui->editButton->click();
@@ -266,7 +266,7 @@ PartitionPage::updateFromCurrentDevice()
         disconnect( oldModel, 0, this, 0 );
 
     PartitionModel* model = m_core->partitionModelForDevice( device );
-    m_ui->partitionPreview->setModel( model );
+    m_ui->partitionBarsView->setModel( model );
     m_ui->partitionTreeView->setModel( model );
     m_ui->partitionTreeView->expandAll();
 

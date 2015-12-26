@@ -44,6 +44,8 @@ enum ImageType : int
     PartitionEraseAuto,
     PartitionManual,
     PartitionReplaceOs,
+    PartitionTable,
+    BootEnvironment,
     Squid
 };
 
@@ -60,10 +62,12 @@ UIDLLEXPORT QPixmap defaultPixmap( ImageType type, ImageMode mode = CalamaresUti
 UIDLLEXPORT QPixmap createRoundedImage( const QPixmap& avatar, const QSize& size, float frameWidthPct = 0.20 );
 
 UIDLLEXPORT void unmarginLayout( QLayout* layout );
+UIDLLEXPORT void clearLayout( QLayout* layout );
 
 UIDLLEXPORT void setDefaultFontSize( int points );
 UIDLLEXPORT int defaultFontSize();
 UIDLLEXPORT int defaultFontHeight();
+UIDLLEXPORT QFont defaultFont();
 UIDLLEXPORT QSize defaultIconSize();
 
 }

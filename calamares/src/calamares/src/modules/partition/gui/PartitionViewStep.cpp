@@ -17,20 +17,19 @@
  *   along with Calamares. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gui/PartitionViewStep.h>
+#include "gui/PartitionViewStep.h"
 
-#include <core/DeviceModel.h>
-#include <core/PartitionCoreModule.h>
-#include <core/PartitionModel.h>
-#include <core/PMUtils.h>
-#include "core/partition.h"
-#include "core/device.h"
-#include <gui/ChoicePage.h>
-#include <gui/EraseDiskPage.h>
-#include <gui/AlongsidePage.h>
-#include <gui/PartitionPage.h>
-#include <gui/ReplacePage.h>
-#include <gui/PartitionPreview.h>
+#include "core/DeviceModel.h"
+#include "core/PartitionCoreModule.h"
+#include "core/PartitionModel.h"
+#include "core/KPMHelpers.h"
+#include "core/OsproberEntry.h"
+#include "core/PartUtils.h"
+#include "gui/ChoicePage.h"
+#include "gui/AlongsidePage.h"
+#include "gui/PartitionPage.h"
+#include "gui/PartitionBarsView.h"
+#include "gui/PartitionLabelsView.h"
 
 #include "CalamaresVersion.h"
 #include "utils/CalamaresUtilsGui.h"
@@ -41,6 +40,9 @@
 #include "JobQueue.h"
 #include "Job.h"
 #include "Branding.h"
+
+#include <kpmcore/core/device.h>
+#include <kpmcore/core/partition.h>
 
 // Qt
 #include <QApplication>
@@ -54,50 +56,42 @@ PartitionViewStep::PartitionViewStep( QObject* parent )
     : Calamares::ViewStep( parent )
     , m_widget( new QStackedWidget() )
     , m_core( new PartitionCoreModule( this ) )
-    , m_choicePage( new ChoicePage() )
-    , m_erasePage( new EraseDiskPage() )
+    , m_choicePage( nullptr )
     , m_alongsidePage( new AlongsidePage() )
     , m_manualPartitionPage( new PartitionPage( m_core ) )
-    , m_replacePage( new ReplacePage( m_core ) )
+    , m_compactMode( true )
 {
     m_widget->setContentsMargins( 0, 0, 0, 0 );
 
-    WaitingWidget* waitingWidget = new WaitingWidget( QString() );
-    m_widget->addWidget( waitingWidget );
-    CALAMARES_RETRANSLATE( waitingWidget->setText( tr( "Gathering system information..." ) ); )
+    m_waitingWidget = new WaitingWidget( QString() );
+    m_widget->addWidget( m_waitingWidget );
+    CALAMARES_RETRANSLATE( qobject_cast< WaitingWidget* >( m_waitingWidget )->setText( tr( "Gathering system information..." ) ); )
 
-    QTimer* timer = new QTimer;
-    timer->setSingleShot( true );
-    connect( timer, &QTimer::timeout,
-             [=]()
-    {
-        OsproberEntryList osproberEntries = runOsprober();
+    // We're not done loading, but we need the configuration map first.
+}
 
-        m_choicePage->init( m_core, osproberEntries );
-        m_erasePage->init( m_core );
-        m_alongsidePage->init( m_core, osproberEntries );
 
-        m_widget->addWidget( m_choicePage );
-        m_widget->addWidget( m_manualPartitionPage );
-        m_widget->addWidget( m_alongsidePage );
-        m_widget->addWidget( m_erasePage );
-        m_widget->addWidget( m_replacePage );
-        m_widget->removeWidget( waitingWidget );
-        waitingWidget->deleteLater();
+void
+PartitionViewStep::continueLoading()
+{
+    Q_ASSERT( !m_choicePage );
+    m_choicePage = new ChoicePage();
 
-        timer->deleteLater();
-    } );
-    timer->start( 0 );
+    m_choicePage->init( m_core );
+    m_alongsidePage->init( m_core );
+
+    m_widget->addWidget( m_choicePage );
+    m_widget->addWidget( m_manualPartitionPage );
+    m_widget->addWidget( m_alongsidePage );
+    m_widget->removeWidget( m_waitingWidget );
+    m_waitingWidget->deleteLater();
+    m_waitingWidget = nullptr;
 
     connect( m_core,            &PartitionCoreModule::hasRootMountPointChanged,
              this,              &PartitionViewStep::nextStatusChanged );
     connect( m_choicePage,      &ChoicePage::nextStatusChanged,
              this,              &PartitionViewStep::nextStatusChanged );
-    connect( m_erasePage,       &EraseDiskPage::nextStatusChanged,
-             this,              &PartitionViewStep::nextStatusChanged );
     connect( m_alongsidePage,   &AlongsidePage::nextStatusChanged,
-             this,              &PartitionViewStep::nextStatusChanged );
-    connect( m_replacePage,     &ReplacePage::nextStatusChanged,
              this,              &PartitionViewStep::nextStatusChanged );
 }
 
@@ -108,60 +102,6 @@ PartitionViewStep::~PartitionViewStep()
         m_choicePage->deleteLater();
     if ( m_manualPartitionPage && m_manualPartitionPage->parent() == nullptr )
         m_manualPartitionPage->deleteLater();
-}
-
-
-OsproberEntryList
-PartitionViewStep::runOsprober()
-{
-    QString osproberOutput;
-    QProcess osprober;
-    osprober.setProgram( "os-prober" );
-    osprober.setProcessChannelMode( QProcess::SeparateChannels );
-    osprober.start();
-    if ( !osprober.waitForStarted() )
-    {
-        cDebug() << "ERROR: os-prober cannot start.";
-    }
-    else if ( !osprober.waitForFinished( 60000 ) )
-    {
-        cDebug() << "ERROR: os-prober timed out.";
-    }
-    else
-    {
-        osproberOutput.append(
-            QString::fromLocal8Bit(
-                osprober.readAllStandardOutput() ).trimmed() );
-    }
-
-    QString osProberReport( "Osprober lines, clean:\n" );
-    QStringList osproberCleanLines;
-    OsproberEntryList osproberEntries;
-    foreach ( const QString& line, osproberOutput.split( '\n' ) )
-    {
-        if ( !line.simplified().isEmpty() )
-        {
-            QStringList lineColumns = line.split( ':' );
-            QString prettyName;
-            if ( !lineColumns.value( 1 ).simplified().isEmpty() )
-                prettyName = lineColumns.value( 1 ).simplified();
-            else if ( !lineColumns.value( 2 ).simplified().isEmpty() )
-                prettyName = lineColumns.value( 2 ).simplified();
-
-            QString path = lineColumns.value( 0 ).simplified();
-            if ( !path.startsWith( "/dev/" ) ) //basic sanity check
-                continue;
-
-            osproberEntries.append( { prettyName, path, canBeResized( path ), lineColumns } );
-            osproberCleanLines.append( line );
-        }
-    }
-    osProberReport.append( osproberCleanLines.join( '\n' ) );
-    cDebug() << osProberReport;
-
-    Calamares::JobQueue::instance()->globalStorage()->insert( "osproberLines", osproberCleanLines );
-
-    return osproberEntries;
 }
 
 
@@ -268,19 +208,33 @@ PartitionViewStep::createSummaryWidget() const
         }
         formLayout->addRow( diskInfoLabel );
 
-        PartitionPreview* preview;
+        PartitionBarsView* preview;
+        PartitionLabelsView* previewLabels;
+        QVBoxLayout* field;
 
-        preview = new PartitionPreview;
-        preview->setLabelsVisible( true );
+        preview = new PartitionBarsView;
+        previewLabels = new PartitionLabelsView;
         preview->setModel( info.partitionModelBefore );
+        previewLabels->setModel( info.partitionModelBefore );
         info.partitionModelBefore->setParent( widget );
-        formLayout->addRow( tr( "Before:" ), preview );
+        field = new QVBoxLayout;
+        CalamaresUtils::unmarginLayout( field );
+        field->setSpacing( 6 );
+        field->addWidget( preview );
+        field->addWidget( previewLabels );
+        formLayout->addRow( tr( "Current state:" ), field );
 
-        preview = new PartitionPreview;
-        preview->setLabelsVisible( true );
+        preview = new PartitionBarsView;
+        previewLabels = new PartitionLabelsView;
         preview->setModel( info.partitionModelAfter );
+        previewLabels->setModel( info.partitionModelAfter );
         info.partitionModelAfter->setParent( widget );
-        formLayout->addRow( tr( "After:" ), preview );
+        field = new QVBoxLayout;
+        CalamaresUtils::unmarginLayout( field );
+        field->setSpacing( 6 );
+        field->addWidget( preview );
+        field->addWidget( previewLabels );
+        formLayout->addRow( tr( "Your changes:" ), field );
     }
     QStringList jobsLines;
     foreach ( const Calamares::job_ptr& job, jobs() )
@@ -313,9 +267,8 @@ PartitionViewStep::next()
             m_widget->setCurrentWidget( m_manualPartitionPage );
         else if ( m_choicePage->currentChoice() == ChoicePage::Erase )
         {
-            if ( m_core->isDirty() )
-                m_core->revert();
-            m_widget->setCurrentWidget( m_erasePage );
+            emit done();
+            return;
         }
         else if ( m_choicePage->currentChoice() == ChoicePage::Alongside )
         {
@@ -325,9 +278,8 @@ PartitionViewStep::next()
         }
         else if ( m_choicePage->currentChoice() == ChoicePage::Replace )
         {
-            if ( m_core->isDirty() )
-                m_core->revert();
-            m_widget->setCurrentWidget( m_replacePage );
+            emit done();
+            return;
         }
         cDebug() << "Choice applied: " << m_choicePage->currentChoice();
         return;
@@ -350,12 +302,6 @@ PartitionViewStep::isNextEnabled() const
     if ( m_choicePage && m_choicePage == m_widget->currentWidget() )
         return m_choicePage->isNextEnabled();
 
-    if ( m_erasePage && m_erasePage == m_widget->currentWidget() )
-    {
-        return m_erasePage->isNextEnabled() &&
-               m_core->hasRootMountPoint();
-    }
-
     if ( m_alongsidePage && m_alongsidePage == m_widget->currentWidget() )
         return m_alongsidePage->isNextEnabled();
 
@@ -377,9 +323,7 @@ bool
 PartitionViewStep::isAtBeginning() const
 {
     if ( m_widget->currentWidget() == m_manualPartitionPage ||
-         m_widget->currentWidget() == m_erasePage ||
-         m_widget->currentWidget() == m_alongsidePage ||
-         m_widget->currentWidget() == m_replacePage )
+         m_widget->currentWidget() == m_alongsidePage )
         return false;
     return true;
 }
@@ -389,7 +333,12 @@ bool
 PartitionViewStep::isAtEnd() const
 {
     if ( m_choicePage == m_widget->currentWidget() )
+    {
+        if ( m_choicePage->currentChoice() == ChoicePage::Erase ||
+             m_choicePage->currentChoice() == ChoicePage::Replace )
+            return true;
         return false;
+    }
     return true;
 }
 
@@ -398,9 +347,10 @@ void
 PartitionViewStep::onActivate()
 {
     // if we're coming back to PVS from the next VS
-    if ( m_widget->currentWidget() == m_replacePage )
+    if ( m_widget->currentWidget() == m_choicePage )
     {
-        m_replacePage->reset();
+//        m_choicePage->reset();
+        //FIXME: ReplaceWidget should be reset maybe?
     }
 }
 
@@ -411,10 +361,6 @@ PartitionViewStep::onLeave()
     if ( m_widget->currentWidget() == m_alongsidePage )
     {
         m_alongsidePage->applyChanges();
-    }
-    else if ( m_widget->currentWidget() == m_replacePage )
-    {
-        m_replacePage->applyChanges();
     }
 }
 
@@ -445,6 +391,14 @@ PartitionViewStep::setConfigurationMap( const QVariantMap& configurationMap )
     {
         gs->insert( "ensureSuspendToDisk", true );
     }
+
+    if ( configurationMap.contains( "compactMode" ) &&
+         configurationMap.value( "compactMode" ).type() == QVariant::Bool )
+    {
+        m_compactMode = configurationMap.value( "compactMode", true ).toBool();
+    }
+
+    QTimer::singleShot( 0, this, &PartitionViewStep::continueLoading );
 }
 
 
@@ -455,55 +409,4 @@ PartitionViewStep::jobs() const
 }
 
 
-bool
-PartitionViewStep::canBeResized( const QString& partitionPath )
-{
-    //FIXME: check for max partitions count on DOS MBR
-    cDebug() << "checking if" << partitionPath << "can be resized.";
-    QString partitionWithOs = partitionPath;
-    if ( partitionWithOs.startsWith( "/dev/" ) )
-    {
-        cDebug() << partitionWithOs << "seems like a good path";
-        bool canResize = false;
-        DeviceModel* dm = m_core->deviceModel();
-        for ( int i = 0; i < dm->rowCount(); ++i )
-        {
-            Device* dev = dm->deviceForIndex( dm->index( i ) );
-            Partition* candidate = PMUtils::findPartitionByPath( { dev }, partitionWithOs );
-            if ( candidate )
-            {
-                cDebug() << "found Partition* for" << partitionWithOs;
-                if ( !candidate->fileSystem().supportGrow() ||
-                     !candidate->fileSystem().supportShrink() )
-                    return false;
-
-                bool ok = false;
-                double requiredStorageGB = Calamares::JobQueue::instance()
-                                                ->globalStorage()
-                                                ->value( "requiredStorageGB" )
-                                                .toDouble( &ok );
-
-                qint64 availableStorageB = candidate->available();
-
-                // We require a little more for partitioning overhead and swap file
-                // TODO: maybe make this configurable?
-                qint64 requiredStorageB = ( requiredStorageGB + 0.1 + 2.0 ) * 1024 * 1024 * 1024;
-                cDebug() << "Required  storage B:" << requiredStorageB
-                         << QString( "(%1GB)" ).arg( requiredStorageB / 1024 / 1024 / 1024 );
-                cDebug() << "Available storage B:" << availableStorageB
-                         << QString( "(%1GB)" ).arg( availableStorageB / 1024 / 1024 / 1024 );
-
-                if ( ok &&
-                     availableStorageB > requiredStorageB )
-                {
-                    cDebug() << "Partition" << partitionWithOs << "authorized for resize + autopartition install.";
-
-                    return true;
-                }
-            }
-        }
-    }
-
-    cDebug() << "Partition" << partitionWithOs << "CANNOT BE RESIZED FOR AUTOINSTALL.";
-    return false;
-}
+CALAMARES_PLUGIN_FACTORY_DEFINITION( PartitionViewStepFactory, registerPlugin<PartitionViewStep>(); )

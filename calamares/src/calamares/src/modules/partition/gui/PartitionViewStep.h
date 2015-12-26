@@ -20,17 +20,16 @@
 #ifndef PARTITIONVIEWSTEP_H
 #define PARTITIONVIEWSTEP_H
 
+#include <utils/PluginFactory.h>
+#include <viewpages/ViewStep.h>
+
+#include <PluginDllMacro.h>
+
 #include <QObject>
 
-#include "viewpages/ViewStep.h"
-#include "PluginDllMacro.h"
-#include "OsproberEntry.h"
-
 class ChoicePage;
-class EraseDiskPage;
 class AlongsidePage;
 class PartitionPage;
-class ReplacePage;
 class PartitionCoreModule;
 class QStackedWidget;
 
@@ -41,12 +40,12 @@ class QStackedWidget;
 class PLUGINDLLEXPORT PartitionViewStep : public Calamares::ViewStep
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA( IID "calamares.ViewModule/1.0" )
-    Q_INTERFACES( Calamares::ViewStep )
 
 public:
     explicit PartitionViewStep( QObject* parent = 0 );
     virtual ~PartitionViewStep();
+
+    void continueLoading();
 
     QString prettyName() const override;
     QWidget* createSummaryWidget() const override;
@@ -70,16 +69,17 @@ public:
     QList< Calamares::job_ptr > jobs() const override;
 
 private:
-    OsproberEntryList runOsprober();
-    bool canBeResized( const QString& partitionPath );
-
     PartitionCoreModule* m_core;
     QStackedWidget*   m_widget;
     ChoicePage*       m_choicePage;
-    EraseDiskPage*    m_erasePage;
     AlongsidePage*    m_alongsidePage;
     PartitionPage*    m_manualPartitionPage;
-    ReplacePage*      m_replacePage;
+
+    QWidget*          m_waitingWidget;
+
+    bool m_compactMode;
 };
+
+CALAMARES_PLUGIN_FACTORY_DECLARATION( PartitionViewStepFactory )
 
 #endif // PARTITIONVIEWSTEP_H

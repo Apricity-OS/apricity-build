@@ -21,14 +21,15 @@
 
 #include <QWidget>
 
-#include "OsproberEntry.h"
+#include "core/OsproberEntry.h"
 
 class QComboBox;
 class QLabel;
 class PartitionCoreModule;
 class PartitionSplitterWidget;
 class Partition;
-class PartitionPreview;
+class PartitionBarsView;
+class PartitionLabelsView;
 class Device;
 
 class AlongsidePage : public QWidget
@@ -37,7 +38,7 @@ class AlongsidePage : public QWidget
 public:
     explicit AlongsidePage( QWidget* parent = nullptr );
 
-    void init( PartitionCoreModule* core, const OsproberEntryList& osproberEntries );
+    void init( PartitionCoreModule* core );
 
     bool isNextEnabled() const;
 
@@ -54,7 +55,8 @@ private:
 
     QComboBox* m_partitionsComboBox;
     PartitionSplitterWidget* m_splitterWidget;
-    PartitionPreview* m_previewWidget;
+    PartitionBarsView* m_previewWidget;
+    PartitionLabelsView* m_previewLabels;
     QLabel* m_sizeLabel;
 
     QLabel* m_efiLabel;

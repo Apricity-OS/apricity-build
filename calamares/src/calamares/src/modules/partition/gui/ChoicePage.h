@@ -19,16 +19,30 @@
 #ifndef CHOICEPAGE_H
 #define CHOICEPAGE_H
 
+#include "ui_ChoicePage.h"
+
 #include <QWidget>
 
-#include "OsproberEntry.h"
+#include "core/OsproberEntry.h"
+
+#include <QMutex>
+#include <QPointer>
 
 class QBoxLayout;
+class QComboBox;
 class QLabel;
+class QListView;
 
+class ExpandableRadioButton;
+class PartitionBarsView;
+class PartitionLabelsView;
 class PartitionCoreModule;
+class PrettyRadioButton;
+class DeviceInfoWidget;
 
-class ChoicePage : public QWidget
+class Device;
+
+class ChoicePage : public QWidget, private Ui::ChoicePage
 {
     Q_OBJECT
 public:
@@ -44,7 +58,7 @@ public:
     explicit ChoicePage( QWidget* parent = nullptr );
     virtual ~ChoicePage();
 
-    void init( PartitionCoreModule* core, const OsproberEntryList& osproberEntries );
+    void init( PartitionCoreModule* core );
 
     bool isNextEnabled() const;
 
@@ -52,16 +66,48 @@ public:
 
 signals:
     void nextStatusChanged( bool );
+    void actionChosen();
+    void deviceChosen();
 
 private:
     void setNextEnabled( bool enabled );
+    void setupChoices();
+    QComboBox* createBootloaderComboBox( ExpandableRadioButton* parentButton );
+    ExpandableRadioButton* createEraseButton();
+    Device* selectedDevice();
+    void applyDeviceChoice();
+    void doReplaceSelectedPartition( const QModelIndex& current );
+    void updateDeviceStatePreview();
+    void applyActionChoice( ChoicePage::Choice choice );
+    void updateActionChoicePreview( ChoicePage::Choice choice );
+    void setupActions();
+    OsproberEntryList getOsproberEntriesForDevice( Device* device ) const;
 
     bool m_nextEnabled;
     PartitionCoreModule* m_core;
-    QBoxLayout* m_itemsLayout;
-    QLabel* m_messageLabel;
+
+    QMutex m_previewsMutex;
 
     Choice m_choice;
+
+    bool m_isEfi;
+    QComboBox* m_drivesCombo;
+
+    PrettyRadioButton* m_alongsideButton;
+    ExpandableRadioButton* m_eraseButton;
+    PrettyRadioButton* m_replaceButton;
+    PrettyRadioButton* m_somethingElseButton;
+
+    DeviceInfoWidget* m_deviceInfoWidget;
+
+    QPointer< PartitionBarsView > m_beforePartitionBarsView;
+    QPointer< PartitionLabelsView > m_beforePartitionLabelsView;
+    QPointer< PartitionBarsView > m_afterPartitionBarsView;
+    QPointer< PartitionLabelsView > m_afterPartitionLabelsView;
+
+    int m_lastSelectedDeviceIndex;
+
+    QMutex m_coreMutex;
 };
 
 #endif // CHOICEPAGE_H

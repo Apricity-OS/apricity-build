@@ -23,6 +23,8 @@
 #include "JobQueue.h"
 #include "GlobalStorage.h"
 
+CALAMARES_PLUGIN_FACTORY_DEFINITION( UsersViewStepFactory, registerPlugin<UsersViewStep>(); )
+
 UsersViewStep::UsersViewStep( QObject* parent )
     : Calamares::ViewStep( parent )
     , m_widget( new UsersPage() )
@@ -113,21 +115,13 @@ UsersViewStep::onLeave()
 {
     m_jobs.clear();
 
-    m_jobs.append( m_widget->createJobs( m_userGroup, m_defaultGroups ) );
+    m_jobs.append( m_widget->createJobs( m_defaultGroups ) );
 }
 
 
 void
 UsersViewStep::setConfigurationMap( const QVariantMap& configurationMap )
 {
-    if ( configurationMap.contains( "userGroup" ) &&
-         configurationMap.value( "userGroup" ).type() == QVariant::String )
-    {
-        m_userGroup = configurationMap.value( "userGroup" ).toString();
-    }
-    if ( m_userGroup.isEmpty() )
-        m_userGroup = QStringLiteral( "users" );
-
     if ( configurationMap.contains( "defaultGroups" ) &&
          configurationMap.value( "defaultGroups" ).type() == QVariant::List )
     {
@@ -157,7 +151,19 @@ UsersViewStep::setConfigurationMap( const QVariantMap& configurationMap )
     {
         Calamares::JobQueue::instance()->globalStorage()->insert( "setRootPassword",
                         configurationMap.value( "setRootPassword" ).toBool() );
-        m_widget->setShowRootPassword( configurationMap.value( "setRootPassword" ).toBool() );
+        m_widget->setWriteRootPassword( configurationMap.value( "setRootPassword" ).toBool() );
+    }
+
+    if ( configurationMap.contains( "doAutologin" ) &&
+         configurationMap.value( "doAutologin" ).type() == QVariant::Bool )
+    {
+        m_widget->setAutologinDefault( configurationMap.value( "doAutologin" ).toBool() );
+    }
+    
+    if ( configurationMap.contains( "doReusePassword" ) &&
+         configurationMap.value( "doReusePassword" ).type() == QVariant::Bool )
+    {
+        m_widget->setReusePasswordDefault( configurationMap.value( "doReusePassword" ).toBool() );
     }
 }
 

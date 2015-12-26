@@ -17,38 +17,40 @@
  *   along with Calamares. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <core/PartitionCoreModule.h>
+#include "core/PartitionCoreModule.h"
 
-#include <core/BootLoaderModel.h>
-#include <core/DeviceModel.h>
-#include <core/PartitionInfo.h>
-#include <core/PartitionIterator.h>
-#include <core/PartitionModel.h>
-#include <core/PMUtils.h>
-#include <jobs/ClearMountsJob.h>
-#include <jobs/ClearTempMountsJob.h>
-#include <jobs/CreatePartitionJob.h>
-#include <jobs/CreatePartitionTableJob.h>
-#include <jobs/DeletePartitionJob.h>
-#include <jobs/FillGlobalStorageJob.h>
-#include <jobs/FormatPartitionJob.h>
-#include <jobs/ResizePartitionJob.h>
+#include "core/BootLoaderModel.h"
+#include "core/DeviceModel.h"
+#include "core/PartitionInfo.h"
+#include "core/PartitionIterator.h"
+#include "core/PartitionModel.h"
+#include "core/KPMHelpers.h"
+#include "core/PartUtils.h"
+#include "jobs/ClearMountsJob.h"
+#include "jobs/ClearTempMountsJob.h"
+#include "jobs/CreatePartitionJob.h"
+#include "jobs/CreatePartitionTableJob.h"
+#include "jobs/DeletePartitionJob.h"
+#include "jobs/FillGlobalStorageJob.h"
+#include "jobs/FormatPartitionJob.h"
+#include "jobs/ResizePartitionJob.h"
 
-#include <Typedefs.h>
-#include <utils/Logger.h>
+#include "Typedefs.h"
+#include "utils/Logger.h"
 
-// CalaPM
-#include <CalaPM.h>
-#include <core/device.h>
-#include <core/partition.h>
-#include <backend/corebackend.h>
-#include <backend/corebackendmanager.h>
-#include <fs/filesystemfactory.h>
+// KPMcore
+#include <kpmcore/core/device.h>
+#include <kpmcore/core/partition.h>
+#include <kpmcore/backend/corebackend.h>
+#include <kpmcore/backend/corebackendmanager.h>
+#include <kpmcore/fs/filesystemfactory.h>
 
 // Qt
 #include <QStandardItemModel>
 #include <QDir>
 #include <QProcess>
+#include <QFutureWatcher>
+#include <QtConcurrent/QtConcurrent>
 
 static bool
 hasRootPartition( Device* device )
@@ -69,12 +71,14 @@ PartitionCoreModule::DeviceInfo::~DeviceInfo()
 {
 }
 
+
 void
 PartitionCoreModule::DeviceInfo::forgetChanges()
 {
     jobs.clear();
     for ( auto it = PartitionIterator::begin( device.data() ); it != PartitionIterator::end( device.data() ); ++it )
         PartitionInfo::reset( *it );
+    partitionModel->revert();
 }
 
 
@@ -97,8 +101,8 @@ PartitionCoreModule::PartitionCoreModule( QObject* parent )
     , m_deviceModel( new DeviceModel( this ) )
     , m_bootLoaderModel( new BootLoaderModel( this ) )
 {
-    if ( !CalaPM::init() )
-        qFatal( "Failed to init CalaPM" );
+    if ( !KPMHelpers::initKPMcore() )
+        qFatal( "Failed to initialize KPMcore backend" );
     FileSystemFactory::init();
     init();
 }
@@ -107,7 +111,7 @@ void
 PartitionCoreModule::init()
 {
     CoreBackend* backend = CoreBackendManager::self()->backend();
-    auto devices = backend->scanDevices();
+    auto devices = backend->scanDevices( true );
 
     // Remove the device which contains / from the list
     for ( auto it = devices.begin(); it != devices.end(); )
@@ -120,10 +124,17 @@ PartitionCoreModule::init()
     {
         auto deviceInfo = new DeviceInfo( device );
         m_deviceInfos << deviceInfo;
-
-        deviceInfo->partitionModel->init( device );
     }
     m_deviceModel->init( devices );
+
+    // The following PartUtils::runOsprober call in turn calls PartUtils::canBeResized,
+    // which relies on a working DeviceModel.
+    m_osproberLines = PartUtils::runOsprober( this );
+
+    for ( auto deviceInfo : m_deviceInfos )
+    {
+        deviceInfo->partitionModel->init( deviceInfo->device.data(), m_osproberLines );
+    }
 
     m_bootLoaderModel->init( devices );
 
@@ -159,7 +170,7 @@ PartitionCoreModule::partitionModelForDevice( Device* device ) const
 
 
 Device*
-PartitionCoreModule::createImmutableDeviceCopy( Device* device ) const
+PartitionCoreModule::createImmutableDeviceCopy( Device* device )
 {
     CoreBackend* backend = CoreBackendManager::self()->backend();
 
@@ -217,7 +228,7 @@ PartitionCoreModule::deletePartition( Device* device, Partition* partition )
         // deleting them, so let's play it safe and keep our own list.
         QList< Partition* > lst;
         for ( auto childPartition : partition->children() )
-            if ( !PMUtils::isPartitionFreeSpace( childPartition ) )
+            if ( !KPMHelpers::isPartitionFreeSpace( childPartition ) )
                 lst << childPartition;
 
         for ( auto partition : lst )
@@ -354,6 +365,13 @@ PartitionCoreModule::dumpQueue() const
     }
 }
 
+
+OsproberEntryList
+PartitionCoreModule::osproberEntries() const
+{
+    return m_osproberLines;
+}
+
 void
 PartitionCoreModule::refreshPartition( Device* device, Partition* partition )
 {
@@ -417,7 +435,7 @@ PartitionCoreModule::scanForEfiSystemPartitions()
     //       The following findPartitions call and lambda should be scrapped and
     //       rewritten based on libKPM.     -- Teo 5/2015
     QList< Partition* > efiSystemPartitions =
-        PMUtils::findPartitions( devices,
+        KPMHelpers::findPartitions( devices,
                                  []( Partition* partition ) -> bool
     {
         QProcess process;
@@ -482,6 +500,48 @@ PartitionCoreModule::revert()
     m_deviceInfos.clear();
     init();
     updateIsDirty();
+    emit reverted();
+}
+
+
+void
+PartitionCoreModule::revertDevice( Device* dev )
+{
+    QMutexLocker locker( &m_revertMutex );
+    DeviceInfo* devInfo = infoForDevice( dev );
+    if ( !devInfo )
+        return;
+    devInfo->forgetChanges();
+    CoreBackend* backend = CoreBackendManager::self()->backend();
+    Device *newDev = backend->scanDevice( devInfo->device->deviceNode() );
+    devInfo->device.reset( newDev );
+    devInfo->partitionModel->init( newDev, m_osproberLines );
+
+    m_deviceModel->swapDevice( dev, newDev );
+
+    QList< Device* > devices;
+    foreach ( auto info, m_deviceInfos )
+        devices.append( info->device.data() );
+
+    m_bootLoaderModel->init( devices );
+
+    updateIsDirty();
+}
+
+
+void
+PartitionCoreModule::asyncRevertDevice( Device* dev, std::function< void() > callback )
+{
+    QFutureWatcher< void >* watcher = new QFutureWatcher< void >();
+    connect( watcher, &QFutureWatcher< void >::finished,
+             this, [ watcher, callback ]
+    {
+        callback();
+        watcher->deleteLater();
+    } );
+
+    QFuture< void > future = QtConcurrent::run( this, &PartitionCoreModule::revertDevice, dev );
+    watcher->setFuture( future );
 }
 
 
@@ -517,13 +577,13 @@ PartitionCoreModule::createSummaryInfo() const
 
         Device* deviceBefore = backend->scanDevice( deviceInfo->device->deviceNode() );
         summaryInfo.partitionModelBefore = new PartitionModel;
-        summaryInfo.partitionModelBefore->init( deviceBefore );
+        summaryInfo.partitionModelBefore->init( deviceBefore, m_osproberLines );
         // Make deviceBefore a child of partitionModelBefore so that it is not
         // leaked (as long as partitionModelBefore is deleted)
         deviceBefore->setParent( summaryInfo.partitionModelBefore );
 
         summaryInfo.partitionModelAfter = new PartitionModel;
-        summaryInfo.partitionModelAfter->init( deviceInfo->device.data() );
+        summaryInfo.partitionModelAfter->init( deviceInfo->device.data(), m_osproberLines );
 
         lst << summaryInfo;
     }

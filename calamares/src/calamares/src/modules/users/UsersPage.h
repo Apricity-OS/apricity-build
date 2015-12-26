@@ -40,12 +40,13 @@ public:
 
     bool isReady();
 
-    QList< Calamares::job_ptr > createJobs( const QString& defaultUserGroup,
-                                            const QStringList& defaultGroupsList );
+    QList< Calamares::job_ptr > createJobs( const QStringList& defaultGroupsList );
 
     void onActivate();
 
-    void setShowRootPassword( bool show );
+    void setWriteRootPassword( bool show );
+    void setAutologinDefault( bool checked );
+    void setReusePasswordDefault( bool checked );
 
 protected slots:
     void onFullNameTextEdited( const QString& );
@@ -77,7 +78,7 @@ private:
     bool m_readyPassword;
     bool m_readyRootPassword;
 
-    bool m_showRootPassword;
+    bool m_writeRootPassword;
 };
 
 #endif // USERSPAGE_H

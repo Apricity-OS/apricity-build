@@ -26,6 +26,7 @@
 #include <QLayout>
 #include <QPainter>
 #include <QPen>
+#include <QWidget>
 
 namespace CalamaresUtils
 {
@@ -92,6 +93,14 @@ defaultPixmap( ImageType type, ImageMode mode, const QSize& size )
 
     case PartitionReplaceOs:
         pixmap = ImageRegistry::instance()->pixmap( RESPATH "images/partition-replace-os.svg", size );
+        break;
+
+    case PartitionTable:
+        pixmap = ImageRegistry::instance()->pixmap( RESPATH "images/partition-table.svg", size );
+        break;
+
+    case BootEnvironment:
+        pixmap = ImageRegistry::instance()->pixmap( RESPATH "images/boot-environment.svg", size );
         break;
 
     case Squid:
@@ -197,6 +206,15 @@ defaultFontHeight()
 }
 
 
+QFont
+defaultFont()
+{
+    QFont f;
+    f.setPointSize( defaultFontSize() );
+    return f;
+}
+
+
 void
 setDefaultFontSize( int points )
 {
@@ -209,6 +227,22 @@ defaultIconSize()
 {
     const int w = defaultFontHeight() * 1.6;
     return QSize( w, w );
+}
+
+
+void
+clearLayout( QLayout* layout )
+{
+    while ( QLayoutItem* item = layout->takeAt( 0 ) )
+    {
+        if ( QWidget* widget = item->widget() )
+            widget->deleteLater();
+
+        if ( QLayout* childLayout = item->layout() )
+            clearLayout( childLayout );
+
+        delete item;
+    }
 }
 
 

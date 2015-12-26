@@ -65,7 +65,7 @@ then
 #Enable Services
 	systemctl enable org.cups.cupsd.service
 	systemctl enable smbd nmbd
-	systemctl enable bumblebeed
+	#systemctl enable bumblebeed
 	systemctl enable graphical.target gdm.service pacman-init.service dhcpcd.service
 	echo 'Enabled dhcpd, gdm'
 	systemctl enable bluetooth.service
@@ -105,6 +105,15 @@ then
 	chown -R root.root /usr/share/plymouth/themes/apricity
 	plymouth-set-default-theme -R apricity
 	chsh -s /bin/zsh
+#Setup Pacman
+	pacman-key --init archlinux
+	pacman-key --populate archlinux
+	pacman-key --refresh-keys
+#Setup Vim
+	cp -r /etc/skel/.vim /root/.vim
+	cp /etc/skel/.vimrc /root/.vimrc
+	cp -r /etc/skel/.vim /home/liveuser/.vim
+	cp /etc/skel/.vimrc /home/liveuser/.vimrc
 else
 	echo "i686"
 fi

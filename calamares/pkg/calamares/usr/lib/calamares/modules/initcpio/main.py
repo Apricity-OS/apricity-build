@@ -20,19 +20,14 @@
 
 import libcalamares
 import subprocess
-import os
-import re
-import shutil
-import sys
-import tempfile
-
+from libcalamares.utils import check_target_env_call
 from libcalamares.utils import *
 
 
 def run_mkinitcpio():
     """ Runs mkinitcpio with given kernel profile """
     kernel = libcalamares.job.configuration['kernel']
-    check_chroot_call(['mkinitcpio', '-p', kernel])
+    check_target_env_call(['mkinitcpio', '-p', kernel])
 
 
 def run():
@@ -41,9 +36,6 @@ def run():
     :return:
     """
     root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
-    check_chroot_call(['userdel', 'liveuser'])
-    check_chroot_call(['rm', '-r', '/home/liveuser'])
-    check_chroot_call(['rm', '/etc/gdm/custom.conf'])
     subprocess.check_call(["cp", "/run/archiso/bootmnt/arch/boot/x86_64/vmlinuz", root_mount_point + "/boot/vmlinuz-linux"])
     run_mkinitcpio()
 
