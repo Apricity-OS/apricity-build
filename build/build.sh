@@ -2,7 +2,7 @@
 
 set -e -u
 echo 'Removing previous build...'
-rm -rf work/build.make*
+rm -rf work
 iso_name=apricity_os
 iso_label=APRICITY
 iso_version=$(date +%Y.%m.%d)

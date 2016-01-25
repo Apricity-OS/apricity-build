@@ -2,7 +2,7 @@
 
 _pkgname='Apricity Icons'
 pkgname=apricity-icons
-pkgver=0.1.3
+pkgver=0.1.4
 pkgrel=1
 pkgdesc='Icons for Apricity OS'
 arch=(any)

@@ -42,7 +42,7 @@ gnome-font-viewer
 gnome-keyring
 rhythmbox
 hplip
-virtualbox-guest-utils
+# virtualbox-guest-utils
 gvfs-afc
 usbmuxd
 pulseaudio-alsa
@@ -201,6 +201,8 @@ xorg-xkill
 yaourt-git
 zd1211-firmware
 zsh
+gvfs-smb
+gvfs-mtp
 python2-powerline-git
 boost
 boost-libs

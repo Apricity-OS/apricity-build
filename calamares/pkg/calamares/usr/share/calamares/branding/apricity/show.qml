@@ -62,4 +62,15 @@ Presentation
             anchors.centerIn: parent
         }
     }
+
+    Slide {
+
+        Image {
+            id: background4
+            source: "slide4.png"
+            width: 770; height: 334
+            fillMode: Image.PreserveAspectFit
+            anchors.centerIn: parent
+        }
+    }
 }

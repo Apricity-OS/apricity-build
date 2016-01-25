@@ -373,6 +373,20 @@
     <scolor>#000000</scolor>
 	</wallpaper>
 	<wallpaper deleted="false">
+		<name>Mountain</name>
+		<filename>/usr/share/backgrounds/gnome/mountain.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
+		<name>Fireworks</name>
+		<filename>/usr/share/backgrounds/gnome/fireworks.jpg</filename>
+		<options>zoom</options>
+    <pcolor>#ffffff</pcolor>
+    <scolor>#000000</scolor>
+	</wallpaper>
+	<wallpaper deleted="false">
 		<name>Lights</name>
 		<filename>/usr/share/backgrounds/gnome/lights.jpg</filename>
 		<options>zoom</options>
