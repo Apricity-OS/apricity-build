@@ -85,8 +85,7 @@ make_setup_mkinitcpio() {
 
 # Customize installation (airootfs)
 make_customize_airootfs() {
-    cp -af ${script_path}/airootfs-gnome ${work_dir}/${arch}
-    mv ${work_dir}/${arch}/airootfs-gnome ${work_dir}/${arch}/airootfs
+    cp -af ${script_path}/airootfs-gnome/* ${work_dir}/${arch}/airootfs
 
     curl -o ${work_dir}/${arch}/airootfs/etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
 
