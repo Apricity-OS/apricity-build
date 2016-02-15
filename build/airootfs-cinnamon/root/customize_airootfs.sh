@@ -114,6 +114,8 @@ then
 	cp /etc/skel/.vimrc /root/.vimrc
 	cp -r /etc/skel/.vim /home/liveuser/.vim
 	cp /etc/skel/.vimrc /home/liveuser/.vimrc
+#Set Cinnamon
+    gsettings set org.gnome.desktop.session session-name cinnamon
 else
 	echo "i686"
 fi
