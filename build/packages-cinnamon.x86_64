@@ -195,7 +195,6 @@ gvfs-mtp
 python2-powerline-git
 boost
 boost-libs
-# astststststst
 icu
 vim
-polkit-gnome
+polkit-gnome-gtk2

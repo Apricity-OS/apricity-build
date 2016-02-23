@@ -1,17 +1,16 @@
 #!/bin/bash
 
 set -e -u
-echo 'Removing previous build...'
-rm -rf work
 iso_name=apricity_os-cinnamon
 iso_label=APRICITY
 iso_version=$(date +%Y.%m.%d)
 install_dir=arch
 work_dir=work
 out_dir=out
+remove_prev=true
 
 arch=$(uname -m)
-verbose=""
+verbose="-v"
 script_path=$(readlink -f ${0%/*})
 
 _usage ()
@@ -31,6 +30,8 @@ _usage ()
     echo "                        Default: ${work_dir}"
     echo "    -o <out_dir>       Set the output directory"
     echo "                        Default: ${out_dir}"
+    echo "    -R <remove_prev>   Remove the previous build"
+    echo "                        Default: ${remove_prev}"
     echo "    -v                 Enable verbose output"
     echo "    -h                 This help message"
     exit ${1}
@@ -208,6 +209,8 @@ make_iso() {
     mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -o "${out_dir}" iso "${iso_name}-${iso_version}.iso"
 }
 
+
+
 if [[ ${EUID} -ne 0 ]]; then
     echo "This script must be run as root."
     _usage 1
@@ -218,12 +221,13 @@ if [[ ${arch} != x86_64 ]]; then
     _usage 1
 fi
 
-while getopts 'N:V:L:D:w:o:vh' arg; do
+while getopts 'N:V:L:D:R:w:o:vh' arg; do
     case "${arg}" in
         N) iso_name="${OPTARG}" ;;
         V) iso_version="${OPTARG}" ;;
         L) iso_label="${OPTARG}" ;;
         D) install_dir="${OPTARG}" ;;
+        R) remove_prev="${OPTARG}" ;;
         w) work_dir="${OPTARG}" ;;
         o) out_dir="${OPTARG}" ;;
         v) verbose="-v" ;;
@@ -234,6 +238,11 @@ while getopts 'N:V:L:D:w:o:vh' arg; do
            ;;
     esac
 done
+
+if [[ ${remove_prev} == true ]]; then
+    echo 'Removing previous build...'
+    rm -rf work
+fi
 
 mkdir -p ${work_dir}
 

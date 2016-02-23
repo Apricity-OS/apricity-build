@@ -23,6 +23,5 @@ killall tracker-miner-apps
 killall tracker-miner-fs
 killall tracker-miner-user-guides
 sleep 2
-gnome-shell --replace
 
 fi

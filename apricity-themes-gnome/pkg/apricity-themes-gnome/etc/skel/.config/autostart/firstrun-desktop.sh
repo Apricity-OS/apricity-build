@@ -18,3 +18,5 @@ gsettings set org.freedesktop.Tracker.Miner.Files enable-monitors false
 tracker-control -r
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/gnome/tahoe.jpg
 gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/gnome/bliss.jpg
+
+gnome-shell --replace

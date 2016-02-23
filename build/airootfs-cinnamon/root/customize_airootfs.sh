@@ -116,6 +116,9 @@ then
 	cp /etc/skel/.vimrc /home/liveuser/.vimrc
 #Set Cinnamon
     gsettings set org.gnome.desktop.session session-name cinnamon
+    cp -f /etc/apricity-tmp/custom.conf /etc/gdm
+    rm -f /usr/share/xsessions/gnome.desktop
+    rm -f /usr/share/xsessions/gnome-classic.desktop
 else
 	echo "i686"
 fi
