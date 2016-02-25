@@ -1,6 +1,0 @@
-.tx/* export-ignore
-hacking/* export-ignore
-HACKING.md export-ignore
-.editorconfig export-ignore
-src/modules/testmodule.py export-ignore
-src/modules/globalStorage.yaml export-ignore

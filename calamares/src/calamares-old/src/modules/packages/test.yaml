@@ -1,6 +1,0 @@
-rootMountPoint: /tmp/mount
-packageOperations:
-  - install:
-    - vi
-  - remove:
-    - vi

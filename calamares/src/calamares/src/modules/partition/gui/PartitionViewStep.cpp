@@ -1,7 +1,7 @@
 /* === This file is part of Calamares - <http://github.com/calamares> ===
  *
  *   Copyright 2014, Aurélien Gâteau <agateau@kde.org>
- *   Copyright 2014-2015, Teo Mrnjavac <teo@kde.org>
+ *   Copyright 2014-2016, Teo Mrnjavac <teo@kde.org>
  *
  *   Calamares is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@
 #include "core/OsproberEntry.h"
 #include "core/PartUtils.h"
 #include "gui/ChoicePage.h"
-#include "gui/AlongsidePage.h"
 #include "gui/PartitionPage.h"
 #include "gui/PartitionBarsView.h"
 #include "gui/PartitionLabelsView.h"
@@ -57,9 +56,7 @@ PartitionViewStep::PartitionViewStep( QObject* parent )
     , m_widget( new QStackedWidget() )
     , m_core( new PartitionCoreModule( this ) )
     , m_choicePage( nullptr )
-    , m_alongsidePage( new AlongsidePage() )
     , m_manualPartitionPage( new PartitionPage( m_core ) )
-    , m_compactMode( true )
 {
     m_widget->setContentsMargins( 0, 0, 0, 0 );
 
@@ -78,11 +75,9 @@ PartitionViewStep::continueLoading()
     m_choicePage = new ChoicePage();
 
     m_choicePage->init( m_core );
-    m_alongsidePage->init( m_core );
 
     m_widget->addWidget( m_choicePage );
     m_widget->addWidget( m_manualPartitionPage );
-    m_widget->addWidget( m_alongsidePage );
     m_widget->removeWidget( m_waitingWidget );
     m_waitingWidget->deleteLater();
     m_waitingWidget = nullptr;
@@ -90,8 +85,6 @@ PartitionViewStep::continueLoading()
     connect( m_core,            &PartitionCoreModule::hasRootMountPointChanged,
              this,              &PartitionViewStep::nextStatusChanged );
     connect( m_choicePage,      &ChoicePage::nextStatusChanged,
-             this,              &PartitionViewStep::nextStatusChanged );
-    connect( m_alongsidePage,   &AlongsidePage::nextStatusChanged,
              this,              &PartitionViewStep::nextStatusChanged );
 }
 
@@ -212,29 +205,41 @@ PartitionViewStep::createSummaryWidget() const
         PartitionLabelsView* previewLabels;
         QVBoxLayout* field;
 
+        PartitionBarsView::NestedPartitionsMode mode = Calamares::JobQueue::instance()->globalStorage()->
+                                                       value( "drawNestedPartitions" ).toBool() ?
+                                                           PartitionBarsView::DrawNestedPartitions :
+                                                           PartitionBarsView::NoNestedPartitions;
         preview = new PartitionBarsView;
+        preview->setNestedPartitionsMode( mode );
         previewLabels = new PartitionLabelsView;
+        previewLabels->setExtendedPartitionHidden( mode == PartitionBarsView::NoNestedPartitions );
         preview->setModel( info.partitionModelBefore );
         previewLabels->setModel( info.partitionModelBefore );
+        preview->setSelectionMode( QAbstractItemView::NoSelection );
+        previewLabels->setSelectionMode( QAbstractItemView::NoSelection );
         info.partitionModelBefore->setParent( widget );
         field = new QVBoxLayout;
         CalamaresUtils::unmarginLayout( field );
         field->setSpacing( 6 );
         field->addWidget( preview );
         field->addWidget( previewLabels );
-        formLayout->addRow( tr( "Current state:" ), field );
+        formLayout->addRow( tr( "Current:" ), field );
 
         preview = new PartitionBarsView;
+        preview->setNestedPartitionsMode( mode );
         previewLabels = new PartitionLabelsView;
+        previewLabels->setExtendedPartitionHidden( mode == PartitionBarsView::NoNestedPartitions );
         preview->setModel( info.partitionModelAfter );
         previewLabels->setModel( info.partitionModelAfter );
+        preview->setSelectionMode( QAbstractItemView::NoSelection );
+        previewLabels->setSelectionMode( QAbstractItemView::NoSelection );
         info.partitionModelAfter->setParent( widget );
         field = new QVBoxLayout;
         CalamaresUtils::unmarginLayout( field );
         field->setSpacing( 6 );
         field->addWidget( preview );
         field->addWidget( previewLabels );
-        formLayout->addRow( tr( "Your changes:" ), field );
+        formLayout->addRow( tr( "After:" ), field );
     }
     QStringList jobsLines;
     foreach ( const Calamares::job_ptr& job, jobs() )
@@ -264,7 +269,11 @@ PartitionViewStep::next()
     if ( m_choicePage == m_widget->currentWidget() )
     {
         if ( m_choicePage->currentChoice() == ChoicePage::Manual )
+        {
             m_widget->setCurrentWidget( m_manualPartitionPage );
+            if ( m_core->isDirty() )
+                m_manualPartitionPage->onRevertClicked();
+        }
         else if ( m_choicePage->currentChoice() == ChoicePage::Erase )
         {
             emit done();
@@ -272,9 +281,8 @@ PartitionViewStep::next()
         }
         else if ( m_choicePage->currentChoice() == ChoicePage::Alongside )
         {
-            if ( m_core->isDirty() )
-                m_core->revert();
-            m_widget->setCurrentWidget( m_alongsidePage );
+            emit done();
+            return;
         }
         else if ( m_choicePage->currentChoice() == ChoicePage::Replace )
         {
@@ -302,9 +310,6 @@ PartitionViewStep::isNextEnabled() const
     if ( m_choicePage && m_choicePage == m_widget->currentWidget() )
         return m_choicePage->isNextEnabled();
 
-    if ( m_alongsidePage && m_alongsidePage == m_widget->currentWidget() )
-        return m_alongsidePage->isNextEnabled();
-
     if ( m_manualPartitionPage && m_manualPartitionPage == m_widget->currentWidget() )
         return m_core->hasRootMountPoint();
 
@@ -322,8 +327,7 @@ PartitionViewStep::isBackEnabled() const
 bool
 PartitionViewStep::isAtBeginning() const
 {
-    if ( m_widget->currentWidget() == m_manualPartitionPage ||
-         m_widget->currentWidget() == m_alongsidePage )
+    if ( m_widget->currentWidget() == m_manualPartitionPage )
         return false;
     return true;
 }
@@ -335,7 +339,8 @@ PartitionViewStep::isAtEnd() const
     if ( m_choicePage == m_widget->currentWidget() )
     {
         if ( m_choicePage->currentChoice() == ChoicePage::Erase ||
-             m_choicePage->currentChoice() == ChoicePage::Replace )
+             m_choicePage->currentChoice() == ChoicePage::Replace ||
+             m_choicePage->currentChoice() == ChoicePage::Alongside )
             return true;
         return false;
     }
@@ -358,10 +363,8 @@ PartitionViewStep::onActivate()
 void
 PartitionViewStep::onLeave()
 {
-    if ( m_widget->currentWidget() == m_alongsidePage )
-    {
-        m_alongsidePage->applyChanges();
-    }
+    if ( m_widget->currentWidget() == m_choicePage )
+        m_choicePage->onLeave();
 }
 
 
@@ -392,10 +395,15 @@ PartitionViewStep::setConfigurationMap( const QVariantMap& configurationMap )
         gs->insert( "ensureSuspendToDisk", true );
     }
 
-    if ( configurationMap.contains( "compactMode" ) &&
-         configurationMap.value( "compactMode" ).type() == QVariant::Bool )
+    if ( configurationMap.contains( "drawNestedPartitions" ) &&
+         configurationMap.value( "drawNestedPartitions" ).type() == QVariant::Bool )
     {
-        m_compactMode = configurationMap.value( "compactMode", true ).toBool();
+        gs->insert( "drawNestedPartitions",
+                    configurationMap.value( "drawNestedPartitions", false ).toBool() );
+    }
+    else
+    {
+        gs->insert( "drawNestedPartitions", false );
     }
 
     QTimer::singleShot( 0, this, &PartitionViewStep::continueLoading );

@@ -1,7 +1,7 @@
 /* === This file is part of Calamares - <http://github.com/calamares> ===
  *
  *   Copyright 2014, Aurélien Gâteau <agateau@kde.org>
- *   Copyright 2015, Teo Mrnjavac <teo@kde.org>
+ *   Copyright 2015-2016, Teo Mrnjavac <teo@kde.org>
  *
  *   Calamares is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@
 
 #ifndef PARTITIONLABELSVIEW_H
 #define PARTITIONLABELSVIEW_H
+
+#include "PartitionViewSelectionFilter.h"
 
 #include <QAbstractItemView>
 
@@ -49,6 +51,12 @@ public:
 
     void setCustomNewRootLabel( const QString& text );
 
+    void setSelectionModel( QItemSelectionModel* selectionModel ) override;
+
+    void setSelectionFilter( SelectionFilter canBeSelected );
+
+    void setExtendedPartitionHidden( bool hidden );
+
 protected:
     // QAbstractItemView API
     QRegion visualRegionForSelection( const QItemSelection& selection ) const override;
@@ -60,6 +68,7 @@ protected:
 
     void mouseMoveEvent( QMouseEvent* event ) override;
     void leaveEvent( QEvent* event ) override;
+    void mousePressEvent( QMouseEvent* event ) override;
 
 protected slots:
     void updateGeometries() override;
@@ -73,6 +82,10 @@ private:
                     const QPoint& pos , bool selected );
     QModelIndexList getIndexesToDraw( const QModelIndex& parent ) const;
     QStringList buildTexts( const QModelIndex& index ) const;
+
+    SelectionFilter canBeSelected;
+    bool m_extendedPartitionHidden;
+
     QString m_customNewRootLabel;
     QPersistentModelIndex m_hoveredIndex;
 };

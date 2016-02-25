@@ -1,5 +1,5 @@
 builddir = /home/alex/Apricity-OS-Git/apricity-themes-cinnamon
-pkgbuild_sha256sum = ddc2b8d1508c436254475df9490a2450537c35414e7f21e745bcb45780bbe36f
+pkgbuild_sha256sum = 85999ef1ed633213f4aade66d4801e7347cc296d298091ecb07601a686150fd5
 buildenv = !distcc
 buildenv = color
 buildenv = !ccache

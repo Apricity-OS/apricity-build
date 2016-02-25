@@ -1,6 +1,7 @@
 /* === This file is part of Calamares - <http://github.com/calamares> ===
  *
  *   Copyright 2014, Aurélien Gâteau <agateau@kde.org>
+ *   Copyright 2015-2016, Teo Mrnjavac <teo@kde.org>
  *
  *   Calamares is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -26,11 +27,15 @@
 #include "core/KPMHelpers.h"
 #include "gui/CreatePartitionDialog.h"
 #include "gui/EditExistingPartitionDialog.h"
+#include "gui/ScanningDialog.h"
 
 #include "ui_PartitionPage.h"
 #include "ui_CreatePartitionTableDialog.h"
 
 #include "utils/Retranslator.h"
+#include "Branding.h"
+#include "JobQueue.h"
+#include "GlobalStorage.h"
 
 // KPMcore
 #include <kpmcore/core/device.h>
@@ -43,6 +48,8 @@
 #include <QMessageBox>
 #include <QPointer>
 #include <QDir>
+#include <QFutureWatcher>
+#include <QtConcurrent/QtConcurrent>
 
 PartitionPage::PartitionPage( PartitionCoreModule* core, QWidget* parent )
     : QWidget( parent )
@@ -52,6 +59,11 @@ PartitionPage::PartitionPage( PartitionCoreModule* core, QWidget* parent )
     m_ui->setupUi( this );
     m_ui->deviceComboBox->setModel( m_core->deviceModel() );
     m_ui->bootLoaderComboBox->setModel( m_core->bootLoaderModel() );
+    PartitionBarsView::NestedPartitionsMode mode = Calamares::JobQueue::instance()->globalStorage()->
+                                                   value( "drawNestedPartitions" ).toBool() ?
+                                                       PartitionBarsView::DrawNestedPartitions :
+                                                       PartitionBarsView::NoNestedPartitions;
+    m_ui->partitionBarsView->setNestedPartitionsMode( mode );
     updateButtons();
     updateBootLoaderInstallPath();
 
@@ -188,13 +200,22 @@ PartitionPage::onDeleteClicked()
     m_core->deletePartition( model->device(), partition );
 }
 
+
 void
 PartitionPage::onRevertClicked()
 {
-    int oldIndex = m_ui->deviceComboBox->currentIndex();
-    m_core->revert();
-    m_ui->deviceComboBox->setCurrentIndex( oldIndex );
-    updateFromCurrentDevice();
+    ScanningDialog::run(
+        QtConcurrent::run( [ this ]
+        {
+            QMutexLocker locker( &m_revertMutex );
+
+            int oldIndex = m_ui->deviceComboBox->currentIndex();
+            m_core->revertAllDevices();
+            m_ui->deviceComboBox->setCurrentIndex( oldIndex );
+            updateFromCurrentDevice();
+        } ),
+        []{},
+        this );
 }
 
 void
@@ -269,6 +290,26 @@ PartitionPage::updateFromCurrentDevice()
     m_ui->partitionBarsView->setModel( model );
     m_ui->partitionTreeView->setModel( model );
     m_ui->partitionTreeView->expandAll();
+
+    // Make both views use the same selection model.
+    if ( m_ui->partitionBarsView->selectionModel() !=
+         m_ui->partitionTreeView->selectionModel() )
+    {
+        QItemSelectionModel* selectionModel = m_ui->partitionTreeView->selectionModel();
+        m_ui->partitionTreeView->setSelectionModel( m_ui->partitionBarsView->selectionModel() );
+        selectionModel->deleteLater();
+    }
+
+    // This is necessary because even with the same selection model it might happen that
+    // a !=0 column is selected in the tree view, which for some reason doesn't trigger a
+    // timely repaint in the bars view.
+    connect( m_ui->partitionBarsView->selectionModel(), &QItemSelectionModel::currentChanged,
+             this, [=]
+    {
+        QModelIndex selectedIndex = m_ui->partitionBarsView->selectionModel()->currentIndex();
+        selectedIndex = selectedIndex.sibling( selectedIndex.row(), 0 );
+        m_ui->partitionBarsView->setCurrentIndex( selectedIndex );
+    }, Qt::UniqueConnection );
 
     // Must be done here because we need to have a model set to define
     // individual column resize mode

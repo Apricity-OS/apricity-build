@@ -98,6 +98,7 @@ public:
     QList< Partition* > efiSystemPartitions() const;
 
     void revert();
+    void revertAllDevices();
     void revertDevice( Device* dev );
     void asyncRevertDevice( Device* dev, std::function< void() > callback );
 
@@ -126,6 +127,7 @@ Q_SIGNALS:
     void hasRootMountPointChanged( bool value );
     void isDirtyChanged( bool value );
     void reverted();
+    void deviceReverted( Device* device );
 
 private:
     void refresh();

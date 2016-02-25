@@ -81,7 +81,7 @@ then
 	sed -i 's/#\(Storage=\)auto/\1volatile/' /etc/systemd/journald.conf
 #Enable Calamares Autostart
 	mkdir -p /home/liveuser/.config/autostart
-	ln -fs /usr/share/applications/calamares.desktop /home/liveuser/.config/autostart/calamares.desktop
+	cp -f /usr/share/applications/calamares.desktop /home/liveuser/.config/autostart/calamares.desktop
 #Enable ICE+Chrome Stable
 	ln -sf /usr/bin/google-chrome-stable /usr/bin/google-chrome
 	export _BROWSER=google-chrome-stable
@@ -119,6 +119,8 @@ then
     cp -f /etc/apricity-tmp/custom.conf /etc/gdm
     rm -f /usr/share/xsessions/gnome.desktop
     rm -f /usr/share/xsessions/gnome-classic.desktop
+    echo -e "#!/usr/bin/env xdg-open\n$(cat /home/liveuser/.config/autostart/calamares.desktop)" > /home/liveuser/.config/autostart/calamares.desktop
+    chmod +x /home/liveuser/.config/autostart/calamares.desktop
 else
 	echo "i686"
 fi

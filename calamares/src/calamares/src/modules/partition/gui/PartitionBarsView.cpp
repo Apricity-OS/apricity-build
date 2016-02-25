@@ -1,7 +1,7 @@
 /* === This file is part of Calamares - <http://github.com/calamares> ===
  *
  *   Copyright 2014, Aurélien Gâteau <agateau@kde.org>
- *   Copyright 2015, Teo Mrnjavac <teo@kde.org>
+ *   Copyright 2015-2016, Teo Mrnjavac <teo@kde.org>
  *
  *   Calamares is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 
 // Qt
 #include <QDebug>
+#include <QGuiApplication>
 #include <QMouseEvent>
 #include <QPainter>
 
@@ -52,7 +53,9 @@ static const int SELECTION_MARGIN = qMin( ( EXTENDED_PARTITION_MARGIN - 2 ) / 2,
 
 PartitionBarsView::PartitionBarsView( QWidget* parent )
     : QAbstractItemView( parent )
+    , m_nestedPartitionsMode( NoNestedPartitions )
     , m_hoveredIndex( QModelIndex() )
+    , canBeSelected( []( const QModelIndex& ) { return true; } )
 {
     setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
     setFrameStyle( QFrame::NoFrame );
@@ -71,6 +74,14 @@ PartitionBarsView::PartitionBarsView( QWidget* parent )
 
 PartitionBarsView::~PartitionBarsView()
 {
+}
+
+
+void
+PartitionBarsView::setNestedPartitionsMode( PartitionBarsView::NestedPartitionsMode mode )
+{
+    m_nestedPartitionsMode = mode;
+    viewport()->repaint();
 }
 
 
@@ -128,7 +139,10 @@ PartitionBarsView::drawSection( QPainter* painter, const QRect& rect_, int x, in
          m_hoveredIndex.isValid() &&
          index == m_hoveredIndex )
     {
-        painter->setBrush( color.lighter( 115 ) );
+        if ( canBeSelected( index ) )
+            painter->setBrush( color.lighter( 115 ) );
+        else
+            painter->setBrush( color );
     }
     else
     {
@@ -198,25 +212,26 @@ PartitionBarsView::drawPartitions( QPainter* painter, const QRect& rect, const Q
     PartitionModel* modl = qobject_cast< PartitionModel* >( model() );
     if ( !modl )
         return;
-    const int count = modl->rowCount( parent );
     const int totalWidth = rect.width();
 
     auto pair = computeItemsVector( parent );
     QVector< PartitionBarsView::Item >& items = pair.first;
     qreal& total = pair.second;
     int x = rect.x();
-    for ( int row = 0; row < count; ++row )
+    for ( int row = 0; row < items.count(); ++row )
     {
         const auto& item = items[ row ];
         int width;
-        if ( row < count - 1 )
+        if ( row < items.count() - 1 )
             width = totalWidth * ( item.size / total );
         else
             // Make sure we fill the last pixel column
             width = rect.right() - x + 1;
 
         drawSection( painter, rect, x, width, item.index );
-        if ( modl->hasChildren( item.index ) )
+
+        if ( m_nestedPartitionsMode == DrawNestedPartitions &&
+             modl->hasChildren( item.index ) )
         {
             QRect subRect(
                 x + EXTENDED_PARTITION_MARGIN,
@@ -229,7 +244,7 @@ PartitionBarsView::drawPartitions( QPainter* painter, const QRect& rect, const Q
         x += width;
     }
 
-    if ( !count &&
+    if ( !items.count() &&
          !modl->device()->partitionTable() ) // No disklabel or unknown
     {
         int width = rect.right() - rect.x() + 1;
@@ -253,18 +268,17 @@ PartitionBarsView::indexAt( const QPoint &point,
     PartitionModel* modl = qobject_cast< PartitionModel* >( model() );
     if ( !modl )
         return QModelIndex();
-    const int count = modl->rowCount( parent );
     const int totalWidth = rect.width();
 
     auto pair = computeItemsVector( parent );
     QVector< PartitionBarsView::Item >& items = pair.first;
     qreal& total = pair.second;
     int x = rect.x();
-    for ( int row = 0; row < count; ++row )
+    for ( int row = 0; row < items.count(); ++row )
     {
         const auto& item = items[ row ];
         int width;
-        if ( row < count - 1 )
+        if ( row < items.count() - 1 )
             width = totalWidth * ( item.size / total );
         else
             // Make sure we fill the last pixel column
@@ -273,7 +287,8 @@ PartitionBarsView::indexAt( const QPoint &point,
         QRect thisItemRect( x, rect.y(), width, rect.height() );
         if ( thisItemRect.contains( point ) )
         {
-            if ( modl->hasChildren( item.index ) )
+            if ( m_nestedPartitionsMode == DrawNestedPartitions &&
+                 modl->hasChildren( item.index ) )
             {
                 QRect subRect(
                     x + EXTENDED_PARTITION_MARGIN,
@@ -281,6 +296,7 @@ PartitionBarsView::indexAt( const QPoint &point,
                     width - 2 * EXTENDED_PARTITION_MARGIN,
                     rect.height() - 2 * EXTENDED_PARTITION_MARGIN
                 );
+
                 if ( subRect.contains( point ) )
                 {
                     return indexAt( point, subRect, item.index );
@@ -314,18 +330,17 @@ PartitionBarsView::visualRect( const QModelIndex& index,
     PartitionModel* modl = qobject_cast< PartitionModel* >( model() );
     if ( !modl )
         return QRect();
-    const int count = modl->rowCount( parent );
     const int totalWidth = rect.width();
 
     auto pair = computeItemsVector( parent );
     QVector< PartitionBarsView::Item >& items = pair.first;
     qreal& total = pair.second;
     int x = rect.x();
-    for ( int row = 0; row < count; ++row )
+    for ( int row = 0; row < items.count(); ++row )
     {
         const auto& item = items[ row ];
         int width;
-        if ( row < count - 1 )
+        if ( row < items.count() - 1 )
             width = totalWidth * ( item.size / total );
         else
             // Make sure we fill the last pixel column
@@ -335,7 +350,8 @@ PartitionBarsView::visualRect( const QModelIndex& index,
         if ( item.index == index )
             return thisItemRect;
 
-        if ( modl->hasChildren( item.index ) &&
+        if ( m_nestedPartitionsMode == DrawNestedPartitions &&
+             modl->hasChildren( item.index ) &&
              index.parent() == item.index )
         {
             QRect subRect(
@@ -344,6 +360,7 @@ PartitionBarsView::visualRect( const QModelIndex& index,
                 width - 2 * EXTENDED_PARTITION_MARGIN,
                 rect.height() - 2 * EXTENDED_PARTITION_MARGIN
             );
+
             QRect candidateVisualRect = visualRect( index, subRect, item.index );
             if ( !candidateVisualRect.isNull() )
                 return candidateVisualRect;
@@ -385,6 +402,25 @@ PartitionBarsView::scrollTo( const QModelIndex& index, ScrollHint hint )
 }
 
 
+void
+PartitionBarsView::setSelectionModel( QItemSelectionModel* selectionModel )
+{
+    QAbstractItemView::setSelectionModel( selectionModel );
+    connect( selectionModel, &QItemSelectionModel::selectionChanged,
+             this, [=]
+    {
+        viewport()->repaint();
+    } );
+}
+
+
+void
+PartitionBarsView::setSelectionFilter( std::function< bool ( const QModelIndex& ) > canBeSelected )
+{
+    this->canBeSelected = canBeSelected;
+}
+
+
 QModelIndex
 PartitionBarsView::moveCursor( CursorAction cursorAction, Qt::KeyboardModifiers modifiers )
 {
@@ -418,7 +454,12 @@ PartitionBarsView::setSelection( const QRect& rect, QItemSelectionModel::Selecti
     //      TL;DR: this sucks, look away. -- Teo 12/2015
     int x1, y1, x2, y2;
     rect.getCoords( &x1, &y1, &x2, &y2 );
-    selectionModel()->select( indexAt( QPoint( x2, y2 ) ), flags );
+
+    QModelIndex eventIndex = indexAt( QPoint( x2, y2 ) );
+    if ( canBeSelected( eventIndex ) )
+        selectionModel()->select( eventIndex, flags );
+
+    viewport()->repaint();
 }
 
 
@@ -432,10 +473,18 @@ PartitionBarsView::mouseMoveEvent( QMouseEvent* event )
         m_hoveredIndex = candidateIndex;
     }
     else
+    {
         m_hoveredIndex = QModelIndex();
+        QGuiApplication::restoreOverrideCursor();
+    }
 
     if ( oldHoveredIndex != m_hoveredIndex )
     {
+        if ( m_hoveredIndex.isValid() && !canBeSelected( m_hoveredIndex ) )
+            QGuiApplication::setOverrideCursor( Qt::ForbiddenCursor );
+        else
+            QGuiApplication::restoreOverrideCursor();
+
         viewport()->repaint();
     }
 }
@@ -444,11 +493,23 @@ PartitionBarsView::mouseMoveEvent( QMouseEvent* event )
 void
 PartitionBarsView::leaveEvent( QEvent* event )
 {
+    QGuiApplication::restoreOverrideCursor();
     if ( m_hoveredIndex.isValid() )
     {
         m_hoveredIndex = QModelIndex();
         viewport()->repaint();
     }
+}
+
+
+void
+PartitionBarsView::mousePressEvent( QMouseEvent* event )
+{
+    QModelIndex candidateIndex = indexAt( event->pos() );
+    if ( canBeSelected( candidateIndex ) )
+        QAbstractItemView::mousePressEvent( event );
+    else
+        event->accept();
 }
 
 
@@ -462,18 +523,44 @@ PartitionBarsView::updateGeometries()
 QPair< QVector< PartitionBarsView::Item >, qreal >
 PartitionBarsView::computeItemsVector( const QModelIndex& parent ) const
 {
-    const int count = model()->rowCount( parent );
-    QVector< PartitionBarsView::Item > items( count );
+    int count = model()->rowCount( parent );
+    QVector< PartitionBarsView::Item > items;
 
     qreal total = 0;
     for ( int row = 0; row < count; ++row )
     {
         QModelIndex index = model()->index( row, 0, parent );
-        qreal size = index.data( PartitionModel::SizeRole ).toLongLong();
-        total += size;
-        items[ row ] = { size, index };
+        if ( m_nestedPartitionsMode == NoNestedPartitions &&
+             model()->hasChildren( index ) )
+        {
+            QPair< QVector< PartitionBarsView::Item >, qreal > childVect =
+                    computeItemsVector( index );
+            items += childVect.first;
+            total += childVect.second;
+        }
+        else
+        {
+            qreal size = index.data( PartitionModel::SizeRole ).toLongLong();
+            total += size;
+            items.append( { size, index } );
+        }
     }
 
-    return qMakePair( items, total );
+    count = items.count();
+
+    // The sizes we have are perfect, but now we have to hardcode a minimum size for small
+    // partitions and compensate for it in the total.
+    qreal adjustedTotal = total;
+    for ( int row = 0; row < count; ++row )
+    {
+        if ( items[ row ].size < 0.01 * total ) // If this item is smaller than 1% of everything,
+        {                                       // force its width to 1%.
+            adjustedTotal -= items[ row ].size;
+            items[ row ].size = 0.01 * total;
+            adjustedTotal += items[ row ].size;
+        }
+    }
+
+    return qMakePair( items, adjustedTotal );
 }
 

@@ -21,6 +21,7 @@
 
 #include <QWidget>
 #include <QScopedPointer>
+#include <QMutex>
 
 class PartitionCoreModule;
 class Ui_PartitionPage;
@@ -42,11 +43,12 @@ public:
     explicit PartitionPage( PartitionCoreModule* core, QWidget* parent = nullptr );
     ~PartitionPage();
 
+    void onRevertClicked();
+
 private:
     QScopedPointer< Ui_PartitionPage > m_ui;
     PartitionCoreModule* m_core;
     void updateButtons();
-    void onRevertClicked();
     void onNewPartitionTableClicked();
     void onCreateClicked();
     void onEditClicked();
@@ -58,6 +60,8 @@ private:
     void editExistingPartition( Device*, Partition* );
     void updateBootLoaderInstallPath();
     void updateFromCurrentDevice();
+
+    QMutex m_revertMutex;
 };
 
 #endif // PARTITIONPAGE_H

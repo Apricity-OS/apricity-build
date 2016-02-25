@@ -1,7 +1,7 @@
 /* === This file is part of Calamares - <http://github.com/calamares> ===
  *
  *   Copyright 2014, Aurélien Gâteau <agateau@kde.org>
- *   Copyright 2014-2015, Teo Mrnjavac <teo@kde.org>
+ *   Copyright 2014-2016, Teo Mrnjavac <teo@kde.org>
  *
  *   Calamares is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@
 #include <QObject>
 
 class ChoicePage;
-class AlongsidePage;
 class PartitionPage;
 class PartitionCoreModule;
 class QStackedWidget;
@@ -72,12 +71,9 @@ private:
     PartitionCoreModule* m_core;
     QStackedWidget*   m_widget;
     ChoicePage*       m_choicePage;
-    AlongsidePage*    m_alongsidePage;
     PartitionPage*    m_manualPartitionPage;
 
     QWidget*          m_waitingWidget;
-
-    bool m_compactMode;
 };
 
 CALAMARES_PLUGIN_FACTORY_DECLARATION( PartitionViewStepFactory )

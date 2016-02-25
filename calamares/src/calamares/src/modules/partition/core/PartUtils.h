@@ -1,6 +1,6 @@
 /* === This file is part of Calamares - <http://github.com/calamares> ===
  *
- *   Copyright 2015, Teo Mrnjavac <teo@kde.org>
+ *   Copyright 2015-2016, Teo Mrnjavac <teo@kde.org>
  *
  *   Calamares is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,9 +24,14 @@
 #include <QString>
 
 class PartitionCoreModule;
+class Partition;
 
 namespace PartUtils
 {
+
+bool canBeReplaced( Partition* candidate );
+
+bool canBeResized( Partition* candidate );
 
 bool canBeResized( PartitionCoreModule* core, const QString& partitionPath );
 
