@@ -11,6 +11,7 @@ touch ~/.firstrun.ran
 rm ~/.local/share/applications/chrome-app-list.desktop
 cp -rf /etc/apricity-assets/google-chrome ~/.config/
 cp ~/.liquidprompt/liquidpromptrc-dist ~/.config/liquidpromptrc
+#su -c "sed -i /etc/pam.d/su -e 's/.*wheel/#&/'"
 #sudo rm -r /usr/lib/evolution-data-server
 #killall evolution-addressbook-factory
 #killall evolution-addressbook-factory-subprocess

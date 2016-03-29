@@ -114,6 +114,8 @@ then
 	cp /etc/skel/.vimrc /root/.vimrc
 	cp -r /etc/skel/.vim /home/liveuser/.vim
 	cp /etc/skel/.vimrc /home/liveuser/.vimrc
+#Setup Su
+    sed -i /etc/pam.d/su -e 's/auth      sufficient  pam_wheel.so trust use_uid/#auth        sufficient  pam_wheel.so trust use_uid/'
 else
 	echo "i686"
 fi

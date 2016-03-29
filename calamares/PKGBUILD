@@ -1,7 +1,7 @@
 pkgname=calamares
 _pointver=0
 pkgver=2.0.${_pointver}
-pkgrel=3
+pkgrel=7
 pkgdesc='Distribution-independent installer framework'
 arch=('i686' 'x86_64')
 license=(GPL)

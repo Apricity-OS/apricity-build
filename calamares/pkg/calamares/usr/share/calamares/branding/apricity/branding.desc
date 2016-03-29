@@ -4,10 +4,10 @@ componentName:  apricity
 strings:
     productName:         Apricity OS
     shortProductName:    Apricity
-    version:             02.2016 Beta
-    shortVersion:        02.2016
-    versionedName:       Apricity OS 02.2016 Beta
-    shortVersionedName:  Apricity 02.2016
+    version:             03.2016 Beta
+    shortVersion:        03.2016
+    versionedName:       Apricity OS 03.2016 Beta
+    shortVersionedName:  Apricity 03.2016
     bootloaderEntryName: Apricity
 
 images:

@@ -35,7 +35,7 @@ _usage ()
     echo "                        Default: ${out_dir}"
     echo "    -R <remove_prev>   Remove the previous build"
     echo "                        Default: ${remove_prev}"
-    echo "    -E <edition>   Set the iso edition"
+    echo "    -E <edition>       Set the iso edition"
     echo "                        Default: ${edition}"
     echo "    -v                 Enable verbose output"
     echo "    -h                 This help message"
@@ -265,6 +265,9 @@ for arch in x86_64; do
 done
 
 run_once make_packages_efi
+
+#killall dbus-daemon
+#killall dbus-launcher
 
 for arch in x86_64; do
     run_once make_setup_mkinitcpio
