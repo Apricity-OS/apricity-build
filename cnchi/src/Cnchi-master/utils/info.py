@@ -1,1 +1,0 @@
-../cnchi/info.py

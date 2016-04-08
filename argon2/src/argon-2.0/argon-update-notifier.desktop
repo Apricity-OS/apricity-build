@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Argon Update Notifier
-Comment=Arch Linux Update Notifier
-Exec=argon-notifier
-Icon=/usr/share/argon/argon.png
-Categories=System;Utility
-StartupNotify=false
-Terminal=false

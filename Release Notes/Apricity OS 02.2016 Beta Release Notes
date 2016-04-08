@@ -1,5 +1,0 @@
-The Apricity OS Team is proud to announce the release of Apricity OS 02.2016 Beta. This is the first ever Apricity OS release with more than one edition. This month, you can download either the GNOME edition or the Cinnamon edition. The former is recommended for more powerful systems and for users who prefer a slightly more modern, more touch-oriented desktop interface, while the latter is recommended for less powerful systems and for users who prefer a more traditional desktop interface. Other improvements to the operating system include updates to dozens of packages including the terminal (better transparency), Nautilus (Google Drive support), MTP, Pamac (several new features, support for the latest version of Pacman), and Totem (support for more codecs). Additionally, Apricity is now using version 2.0 of Calamares, the installer, which should improve overall stability during the installation process. We have also decreased the system RAM requirement to 900 Mb to enable more users to take advantage of Apricity OS. As always, we hope that you will find this release easy and enjoyable to use. 
-
-Sincerely,
-
-The Apricity OS Team.

@@ -1,5 +1,0 @@
----
-type:       "job"
-name:       "initcpiocfg"
-interface:  "python"
-script:     "main.py"

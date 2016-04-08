@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Argon
-Exec=argon-notifier-config
-Icon=/usr/share/argon/argon.png
-NoDisplay=true

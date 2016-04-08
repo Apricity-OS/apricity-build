@@ -1,7 +1,0 @@
-post_remove(){
-rm -rf "/usr/share/icons/Apricity Icons"
-}
-
-pre_upgrade(){
-rm -rf "/usr/share/icons/Apricity Icons"
-}

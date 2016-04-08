@@ -1,9 +1,0 @@
-#!/usr/bin/env xdg-open
-
-[Desktop Entry]
-Type=Application
-Name=rejs
-Exec=/etc/skel/.config/autostart/rejs.sh
-Icon=system-run
-X-GNOME-Autostart-enabled=true
-Name[en_US]=firstrun

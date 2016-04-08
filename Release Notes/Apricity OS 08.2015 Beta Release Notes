@@ -1,5 +1,0 @@
-The Apricity OS Team is excited to announce the release of Apricity OS 08.2015 Beta. This release brings several improvements over the July Beta, including a brand new installer with more options for both automatic and advanced partitioning, minimal network usage, a much faster installation process, and more. This release also brings a more unified design across GTK+ and QT applications, minor theme improvements across the board, permission bugfixes, much improved non-US keymap support, improved dock customizability, a better font installer, support for Java Icedtea, multilib bugfixes, a better UEFI bootloader, and other minor bugfixes. The August Beta comes with version 4.1.5 of the Linux Kernel, LibreOffice 5.0.1, Syncthing 0.7.4.1, and GNOME 3.16.3, among other updated packages. As always, we hope you will find this release easy and enjoyable to use.
-
-Sincerely,
-
-The Apricity OS Team

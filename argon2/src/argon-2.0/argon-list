@@ -1,4 +1,0 @@
-#!/bin/bash
-comm -23 <(comm -23 <(pacman -Qtq) <(pacman -Qgq base base-devel | sort)) <(cat /etc/argon/top-remove | sort) > /etc/argon/top-final
-cat /etc/argon/top-add >> /etc/argon/top-final
-sort /etc/argon/top-final -o /etc/argon/top-final

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=xscreensaver
-Exec=/usr/bin/xscreensaver -no-splash
-Terminal=false
-Type=Application
-Icon=screensaver
-StartupNotify=false
-X-GNOME-Autostart-Delay=30
-Categories=System;Display;GTK;

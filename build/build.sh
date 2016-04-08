@@ -65,7 +65,7 @@ make_basefs() {
 
 # Additional packages (airootfs)
 make_packages() {
-    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "$(grep -h -v ^# ${script_path}/packages.{all.both,all.${arch},${edition}.both,${edition}.${arch}})" install
+    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "$(grep -h -v ^# ${script_path}/packages/packages.{all.both,all.${arch},${edition}.both,${edition}.${arch}})" install
 }
 
 # Needed packages for x86_64 EFI boot
@@ -255,7 +255,7 @@ fi
 
 mkdir -p ${work_dir}
 
-cp pacmanx86_64.conf pacman.conf
+cp pacman/pacman.x86_64.conf pacman.conf
 run_once make_pacman_conf
 
 # Do all stuff for each airootfs
@@ -290,3 +290,4 @@ for arch in x86_64; do
 done
 
 run_once make_iso
+rm pacman.conf
