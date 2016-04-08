@@ -4,3 +4,4 @@
 /airootfs/install/
 /boot/
 /airootfs/var
+pacman.conf
