@@ -93,5 +93,7 @@ Here's an (almost exhaustive) list of included programs. Please feel free to dis
 
 ####So you want to contribute?
 That's great! Fork *this* repository, pull it to your local machine, and start by building a version of the ISO. You'll need to be running something Arch-based, since you need to install `archiso` to run the build scripts. Then run `su -c './build.sh -v -E gnome -R true'`, type your root password, and watch as `mkarchiso` does its magic. (If I forgot to put a dependency here, please create an [issue](https://github.com/Apricity-OS/apricity-build/issues))
+
 Once you've built an image, you can test it with `gnome-boxes`, `virtualbox`, or another emulator of your choice. Now, as a quick experiment, try opening `apricity-build/packages/packages.all.x86_64` and adding or removing something. Play with the build script and get comfortable using it. See if you can figure out what the other command-line arguments are (official docs are coming soon, I promise!). 
+
 Now pick an issue, fix it, and submit a [pull request](https://help.github.com/articles/using-pull-requests/). If everything looks good, it will get incorporated first into the `dev` branch, then later into the `stable` branch!
