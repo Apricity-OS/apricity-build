@@ -36,13 +36,13 @@ Apricity OS is an Arch Linux-based distribution with a nice-looking default inte
 
 **Terminal:** Apricity uses `zsh` and `powerline-shell` in its default terminal.
 
-**Browser:** This is a point of some debate. Several people have brought up the point that Chromium is available as an open source alternative to Chrome, which is the current default. The counter-argument is that Chrome has better support for closed-source codecs. The decision to include a set of Chrome extensions, enumerated below, was also somewhat contraversial. **Update: default extensions may be broken in the latest release?** For further discussion, refer to [![Join the chat at https://gitter.im/Apricity-OS/apricity-build](https://badges.gitter.im/Apricity-OS/apricity-build.svg)](https://gitter.im/Apricity-OS/apricity-build?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge), or feel free to start a thread on the [forum](http://apricityos.com/forum) or an [issue](https://github.com/Apricity-OS/apricity-build/issues).
+**Browser:** This is a point of some debate. Several people have brought up the point that Chromium is available as an open source alternative to Chrome, which is the current default. The counter-argument is that Chrome has better support for closed-source codecs. The decision to include a set of Chrome extensions, enumerated below, was also somewhat contraversial. **Update: default extensions may be broken in the latest release?** For further discussion, refer to [Gitter](https://gitter.im/Apricity-OS/apricity-build), or feel free to start a thread on the [forum](http://apricityos.com/forum) or an [issue](https://github.com/Apricity-OS/apricity-build/issues).
 - Pushbullet (may be replaced by [KDEConnect](https://community.kde.org/KDEConnect) or [Pushjet](https://pushjet.io/) in the near future)
 - Adblock Plus
 - Ghostery
 - The Great Suspender
 
-**Wallpapers:** Apricity comes with a really nice set of [Creative Commons](https://creativecommons.org/) wallpapers, some of which go really well with the default Apricity themes, and some of which just look great on their own. If you have any suggestions for wallpapers to include in future releases, either post something on [![Join the chat at https://gitter.im/Apricity-OS/apricity-build](https://badges.gitter.im/Apricity-OS/apricity-build.svg)](https://gitter.im/Apricity-OS/apricity-build?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge), the [forum](http://apricityos.com/forum), or just submit a pull request to the [apricity-wallpapers](https://github.com/Apricity-OS/apricity-wallpapers) repository.
+**Wallpapers:** Apricity comes with a really nice set of [Creative Commons](https://creativecommons.org/) wallpapers, some of which go really well with the default Apricity themes, and some of which just look great on their own. If you have any suggestions for wallpapers to include in future releases, either post something on [Gitter](https://gitter.im/Apricity-OS/apricity-build), the [forum](http://apricityos.com/forum), or just submit a pull request to the [apricity-wallpapers](https://github.com/Apricity-OS/apricity-wallpapers) repository.
 
 **Vim:** The following plugins are included in Apricity's default Vim configuration:
 - Pathogen
@@ -55,7 +55,7 @@ Apricity OS is an Arch Linux-based distribution with a nice-looking default inte
 Also of note: Apricity's Vim uses a slightly modified version of the [Monokai](https://github.com/sickill/vim-monokai) colorscheme.
 
 ####What applications are included in Apricity?
-Here's an (almost exhaustive) list of included programs. Please feel free to discuss these choices on [![Join the chat at https://gitter.im/Apricity-OS/apricity-build](https://badges.gitter.im/Apricity-OS/apricity-build.svg)](https://gitter.im/Apricity-OS/apricity-build?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) or the [forum](http://apricityos.com/forum).
+Here's an (almost exhaustive) list of included programs. Please feel free to discuss these choices on [Gitter](https://gitter.im/Apricity-OS/apricity-build) or the [forum](http://apricityos.com/forum).
 - Pamac (Add/Remove Software; Software Update)
 - File Roller (Archive Manager)
 - Gnome-Calculator
