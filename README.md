@@ -11,6 +11,8 @@ Download The March 64-Bit Cinnamon Version [Direct](https://sourceforge.net/proj
 
 Support Apricity on [Patreon](http://www.patreon.com/apricity)
 
+![Apricity Laptop](http://apricityos.com/assets/img/back/apricity-laptop.jpg)
+
 ####Apricity's Goal: Simple, Beautiful Linux
 
 ####What's Apricity OS
