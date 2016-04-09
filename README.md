@@ -1,4 +1,6 @@
 # Apricity OS
+
+[![Join the chat at https://gitter.im/Apricity-OS/apricity-build](https://badges.gitter.im/Apricity-OS/apricity-build.svg)](https://gitter.im/Apricity-OS/apricity-build?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Note: We do not have a mailing list. If you would like to receive email notifications of issues, please watch this repository, go to your GitHub account settings, click the notification center tab, and check the box under the 'Watching' header marked 'Email'.
 ####[Download The Latest 64-Bit ISO](http://apricityos.com/iso/apricity_os-01.2016-beta.iso)
 ####[Torrent](http://apricityos.com/iso/apricity_os-01.2016-beta.torrent)
