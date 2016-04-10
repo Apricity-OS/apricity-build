@@ -265,6 +265,9 @@ for arch in x86_64; do
     run_once make_packages
 done
 
+umount -l airootfs/dev
+umount -l airootfs
+
 run_once make_packages_efi
 
 #killall dbus-daemon
