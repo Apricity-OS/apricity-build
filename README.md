@@ -16,7 +16,7 @@ Support Apricity on [Patreon](http://www.patreon.com/apricity)
 ####Apricity's Goal: Simple, Beautiful Linux
 
 ####What's Apricity OS
-Apricity OS is an Arch Linux-based distribution with a nice-looking default interface, useful preinstalled applications, and two editions (more coming soon!). The idea is that if your Linux distribution works well as soon as you install it, you have to do less work. If you then decide to install Apricity on another machine, everything still works. 
+Apricity OS is an Arch Linux-based distribution with a nice-looking default interface, useful preinstalled applications, and two editions (more coming soon!). The idea is that if your Linux distribution works well as soon as you install it, you have to do less work. If you then decide to install Apricity on another machine, everything still works.
 
 ####What's configured out of the box?
 **Desktop Environment (DE) Theme:** This is mainly the Gnome or Cinnamon top or bottom panel, respectively. For Gnome, it also includes how the activities' overview, workspace switching, and the dock look. For Cinnamon, this also includes workspace switching, the application menu, and the window overview.
@@ -98,4 +98,4 @@ That's great! Fork *this* repository, pull it to your local machine, and start b
 
 Once you've built an image, you can test it with `gnome-boxes`, `virtualbox`, or another emulator of your choice. Now, as a quick experiment, try opening `apricity-build/packages/packages.all.x86_64` and adding or removing something. Play with the build script and get comfortable using it. See if you can figure out what the other command-line arguments are, and try to build the Cinnamon edition. (Official docs are coming soon, I promise!)
 
-Now pick an issue, fix it, and submit a [pull request](https://help.github.com/articles/using-pull-requests/). If everything looks good, it will get incorporated first into the `dev` branch, then later into the `stable` branch!
+Now pick something to work on. Take a look at [TODO.md](https://github.com/Apricity-OS/apricity-build/blob/master/TODO.md) for ideas. Once you've finished your feature or fixed your bug,submit a [pull request](https://help.github.com/articles/using-pull-requests/). If everything looks good, it will get incorporated first into the `dev` branch, then later into the `stable` branch!
