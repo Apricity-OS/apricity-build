@@ -265,13 +265,10 @@ for arch in x86_64; do
     run_once make_packages
 done
 
-umount -l airootfs/dev
-umount -l airootfs
+umount -l work/x86_64/airootfs/dev || /bin/true
+umount -l work/x86_64/airootfs || /bin/true
 
 run_once make_packages_efi
-
-#killall dbus-daemon
-#killall dbus-launcher
 
 for arch in x86_64; do
     run_once make_setup_mkinitcpio

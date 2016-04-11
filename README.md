@@ -19,7 +19,9 @@ Support Apricity on [Patreon](http://www.patreon.com/apricity)
 Apricity OS is an Arch Linux-based distribution with a nice-looking default interface, useful preinstalled applications, and two editions (more coming soon!). The idea is that if your Linux distribution works well as soon as you install it, you have to do less work. If you then decide to install Apricity on another machine, everything still works.
 
 ####What's configured out of the box?
-**Desktop Environment (DE) Theme:** This is mainly the Gnome or Cinnamon top or bottom panel, respectively. For Gnome, it also includes how the activities' overview, workspace switching, and the dock look. For Cinnamon, this also includes workspace switching, the application menu, and the window overview.
+**Desktop Environment (DE) Theme:** This is mainly the Gnome or Cinnamon top or bottom panel, respectively. For Gnome, it also includes how the activities' overview, workspace switching, and the dock look. For Cinnamon, this also includes workspace switching, the application menu, and the window overview. The Gnome shell theme is custom built for Apricity, and the Cinnamon theme is based on Arc.
+
+**GTK Theme:** Apricity uses [Arc GTK](https://github.com/horst3180/arc-theme) by default, but post something on [Gitter](https://gitter.im/Apricity-OS/apricity-build) if you know of other great-looking GTK themes.
 
 **DE Extensions:** Gnome is a little unintuitive and clunky to use normally, but the Gnome developers have made it easy for other developers to customize its functionality with extensions. The extensions that are enabled by default in Apricity are as follows:
 - Caffeine
