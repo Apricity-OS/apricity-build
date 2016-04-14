@@ -56,6 +56,7 @@ Apricity OS is an Arch Linux-based distribution with a nice-looking default inte
 - Vim-airline
 - Vim-sensible
 - Vim-tabber
+
 Also of note: Apricity's Vim uses a slightly modified version of the [Monokai](https://github.com/sickill/vim-monokai) colorscheme.
 
 ####What applications are included in Apricity?
