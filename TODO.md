@@ -15,9 +15,18 @@
 - [ ] Update to `calamares-2.2`
 - [ ] Replace Pushbullet with [KDEConnect](https://community.kde.org/KDEConnect) or [Pushjet](https://pushjet.io/)
 - [ ] Replace Pamac with something? It's a little buggy.
+- [ ] Updates should update the distro version
+- [ ] Add a dark theme with lighter symbolic icons
+- [ ] Think about replacing GDM with SDDM or LightDM
+- [ ] Calamares LUKS support
+- [ ] Switch to vivaldi from chrome?
+- [ ] Find an easy tool for users to switch kernel versions
+- [ ] Find an easy tool for users to switch to proprietary graphics drivers
+- [ ] Add `cronie` to package list
+- [ ] Remove `gtk-theme-murrine-arch` from `apricity-core`
 
 ####General Features
-- [ ] Automatically update PATRONS.md weekly with [patreon-api](https://github.com/oxguy3/patreon-api)]?
+- [ ] Automatically update PATRONS.md weekly with [patreon-api](https://github.com/oxguy3/patreon-api)?
 - [ ] Automatically update `calamares` weekly?
 - [ ] Enable package signing in repo
 - [ ] Automatically rebuild repo daily, pulling from the AUR and from github for Apricity packages (eventially this could be run in an AWS EC2 spot instance)
@@ -28,12 +37,19 @@
 - [ ] Add READMEs to all repositories
 - [ ] Replace `apricityassets`. It's a little confusing and convoluted. Replace it with `apricity-assets`, `apricity-plymouth`, and `apricity-gnome-extensions`.
 - [ ] Automatically update extensions from github
+- [ ] Add mirrors to `apricity-core`
+- [ ] **Custom ISO Builder**
+  - This is going to be a web form that one can fill out to select a DE, their preferred applications, a shell and GUI theme, an icon theme, some wallpapers, `systemd` services to enable, and a branch of the kernel to install. Then a custom ISO would get built on AWS and a link would be emailed to the user. The *issue* is that this would cost roughly $0.10 per build, so we need some sort of increase in revenue. 
+- [ ] **Cloud Configuration**
+  - This is a tool/service to sync installed applications, conf files, dotfiles, and anything else the user specifies across machines, and perhaps also to save backups in the cloud.
+  - This could potentially source the revenue needed to offer the abovu custom ISO builder for free.
 
 ####Desktop Environments
 - [x] Gnome
 - [x] Cinnamon
 - [ ] XFCE
 - [ ] KDE
+- [ ] MATE
 - [ ] i3 / [sway](http://swaywm.org/)?
 - [ ] Budgie?
 - [ ] Pantheon?
