@@ -42,7 +42,7 @@
   - This is going to be a web form that one can fill out to select a DE, their preferred applications, a shell and GUI theme, an icon theme, some wallpapers, `systemd` services to enable, and a branch of the kernel to install. Then a custom ISO would get built on AWS and a link would be emailed to the user. The *issue* is that this would cost roughly $0.10 per build, so we need some sort of increase in revenue.
 - [ ] **Cloud Configuration**
   - This is a tool/service to sync installed applications, conf files, dotfiles, and anything else the user specifies across machines, and perhaps also to save backups in the cloud.
-  - This could potentially source the revenue needed to offer the abovu custom ISO builder for free.
+  - This could potentially source the revenue needed to offer the above custom ISO builder for free.
 
 ####Desktop Environments
 - [x] Gnome
