@@ -2,7 +2,7 @@
 
 ####Bugs
 - [ ] Fix [bug with numix-folders](https://github.com/numixproject/numix-folders/issues/133)
-- [ ] Fix all the GTK warnings about some parts of the icon theme not declaring a size field
+- [x] Fix all the GTK warnings about some parts of the icon theme not declaring a size field
 - [ ] Chrome extensions enabled by default may be broken on some machines
 - [ ] Issue with steam [thread1](https://github.com/Apricity-OS/apricity-build/issues/20#issuecomment-206939955), [thread2](https://github.com/Apricity-OS/apricity-build/issues/20#issuecomment-206939955)
 
@@ -22,7 +22,7 @@
 - [ ] Switch to vivaldi from chrome?
 - [ ] Find an easy tool for users to switch kernel versions
 - [ ] Find an easy tool for users to switch to proprietary graphics drivers
-- [ ] Add `cronie` to package list
+- [x] Add `cronie` to package list
 - [ ] Remove `gtk-theme-murrine-arch` from `apricity-core`
 
 ####General Features
@@ -39,7 +39,7 @@
 - [ ] Automatically update extensions from github
 - [ ] Add mirrors to `apricity-core`
 - [ ] **Custom ISO Builder**
-  - This is going to be a web form that one can fill out to select a DE, their preferred applications, a shell and GUI theme, an icon theme, some wallpapers, `systemd` services to enable, and a branch of the kernel to install. Then a custom ISO would get built on AWS and a link would be emailed to the user. The *issue* is that this would cost roughly $0.10 per build, so we need some sort of increase in revenue. 
+  - This is going to be a web form that one can fill out to select a DE, their preferred applications, a shell and GUI theme, an icon theme, some wallpapers, `systemd` services to enable, and a branch of the kernel to install. Then a custom ISO would get built on AWS and a link would be emailed to the user. The *issue* is that this would cost roughly $0.10 per build, so we need some sort of increase in revenue.
 - [ ] **Cloud Configuration**
   - This is a tool/service to sync installed applications, conf files, dotfiles, and anything else the user specifies across machines, and perhaps also to save backups in the cloud.
   - This could potentially source the revenue needed to offer the abovu custom ISO builder for free.

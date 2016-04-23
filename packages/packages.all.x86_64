@@ -10,6 +10,7 @@ bind-tools
 bluez-utils
 broadcom-wl-dkms
 calamares
+cronie
 crda
 cups
 cups-pk-helper
