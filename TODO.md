@@ -23,7 +23,7 @@
 - [ ] Find an easy tool for users to switch kernel versions
 - [ ] Find an easy tool for users to switch to proprietary graphics drivers
 - [x] Add `cronie` to package list
-- [ ] Remove `gtk-theme-murrine-arch` from `apricity-core`
+- [x] Remove `gtk-theme-murrine-arch` from `apricity-core`
 
 ####General Features
 - [ ] Automatically update PATRONS.md weekly with [patreon-api](https://github.com/oxguy3/patreon-api)?
