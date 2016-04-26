@@ -1,7 +1,7 @@
 #TODO
 
 ####Bugs
-- [ ] Fix [bug with numix-folders](https://github.com/numixproject/numix-folders/issues/133)
+- [x] Fix [bug with numix-folders](https://github.com/numixproject/numix-folders/issues/133)
 - [x] Fix all the GTK warnings about some parts of the icon theme not declaring a size field
 - [ ] Chrome extensions enabled by default may be broken on some machines
 - [ ] Issue with steam [thread1](https://github.com/Apricity-OS/apricity-build/issues/20#issuecomment-206939955), [thread2](https://github.com/Apricity-OS/apricity-build/issues/20#issuecomment-206939955)
@@ -24,6 +24,10 @@
 - [ ] Find an easy tool for users to switch to proprietary graphics drivers
 - [x] Add `cronie` to package list
 - [x] Remove `gtk-theme-murrine-arch` from `apricity-core`
+- [ ] Improve the Plymouth theme (and make it work on UEFI installs)
+- [ ] Add either unite.vim or fzf.vim
+- [ ] Add pacaur
+- [ ] Switch to xf86-input-libinput
 
 ####General Features
 - [ ] Automatically update PATRONS.md weekly with [patreon-api](https://github.com/oxguy3/patreon-api)?
@@ -43,6 +47,8 @@
 - [ ] **Cloud Configuration**
   - This is a tool/service to sync installed applications, conf files, dotfiles, and anything else the user specifies across machines, and perhaps also to save backups in the cloud.
   - This could potentially source the revenue needed to offer the above custom ISO builder for free.
+- [ ] Update Wikipedia page
+- [ ] Auto build monthly torrent for snapshots
 
 ####Desktop Environments
 - [x] Gnome

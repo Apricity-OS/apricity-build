@@ -1,5 +1,6 @@
-from subprocess import call
-from os import chdir, path, getcwd, listdir
+from subprocess import call, check_call
+from os import chdir, path, getcwd, listdir, walk
+from shutil import rmtree
 
 class cd:
     """Context manager for changing the current working directory"""
@@ -14,8 +15,16 @@ class cd:
         chdir(self.savedPath)
 
 with cd('~/Apricity-OS/apricity-build'):
+    try:
+        check_call('sudo rm -r dev', shell=True)
+    except Exception as e:
+        print(e)
     for edition in ['gnome', 'cinnamon']:
         for arch in ['x84_64']:
-            call('su -c "./build.sh -v -o dev -E ' + edition + '-A ' + arch + '"', shell=True)
+            call('su -c "./build.sh -v -o dev -E ' + edition + ' -A ' + arch + '"', shell=True)
 
-    call(['rsync', '-aP', 'dev/', 'apricity@apricityos.com:public_html/iso-dev'])
+    dirpath, dirnames, filenames = walk('dev')
+    if len(filenames) > 0:
+        call(['rsync', '-aP', 'dev/', 'apricity@apricityos.com:public_html/iso-dev'])
+    else:
+        print('Failed build')
