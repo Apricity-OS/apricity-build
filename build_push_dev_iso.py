@@ -1,5 +1,6 @@
 from subprocess import call, check_call
 from os import chdir, path, getcwd, listdir, walk
+from glob import glob
 from shutil import rmtree
 
 class cd:
@@ -16,15 +17,15 @@ class cd:
 
 with cd('~/Apricity-OS/apricity-build'):
     try:
-        check_call('sudo rm -r dev', shell=True)
+        call('sudo rm -r dev', shell=True)
     except Exception as e:
         print(e)
     for edition in ['gnome', 'cinnamon']:
         for arch in ['x84_64']:
             call('su -c "./build.sh -v -o dev -E ' + edition + ' -A ' + arch + '"', shell=True)
 
-    dirpath, dirnames, filenames = walk('dev')
-    if len(filenames) > 0:
+    """isos = glob('dev/*.iso')
+    if len(isos) > 0:
         call(['rsync', '-aP', 'dev/', 'apricity@apricityos.com:public_html/iso-dev'])
     else:
-        print('Failed build')
+        print('Failed build')"""

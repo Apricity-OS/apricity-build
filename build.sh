@@ -251,7 +251,7 @@ iso_name=apricity_os-${edition}
 
 if [[ ${remove_prev} == true ]]; then
     echo 'Removing previous build...'
-    sudo umount -l work/efiboot
+    umount -l work/efiboot || /bin/true
     rm -rf work
 fi
 
