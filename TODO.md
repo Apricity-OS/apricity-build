@@ -26,8 +26,8 @@
 - [x] Remove `gtk-theme-murrine-arch` from `apricity-core`
 - [ ] Improve the Plymouth theme (and make it work on UEFI installs)
 - [ ] Add either unite.vim or fzf.vim
-- [ ] Add pacaur
-- [ ] Switch to xf86-input-libinput
+- [x] Add pacaur
+- [x] Switch to xf86-input-libinput
 
 ####General Features
 - [ ] Automatically update PATRONS.md weekly with [patreon-api](https://github.com/oxguy3/patreon-api)?
