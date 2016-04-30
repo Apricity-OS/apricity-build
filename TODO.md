@@ -15,7 +15,7 @@
 - [ ] Update to `calamares-2.2`
 - [ ] Replace Pushbullet with [KDEConnect](https://community.kde.org/KDEConnect) or [Pushjet](https://pushjet.io/)
 - [ ] Replace Pamac with something? It's a little buggy.
-- [ ] Updates should update the distro version
+- [x] Updates should update the distro version
 - [ ] Add a dark theme with lighter symbolic icons
 - [ ] Think about replacing GDM with SDDM or LightDM
 - [ ] Calamares LUKS support
