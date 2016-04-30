@@ -108,6 +108,7 @@ then
 #Setup Pacman
 	pacman-key --init archlinux
 	pacman-key --populate archlinux
+	pacman-key --init apricity
 	pacman-key --populate apricity
 	# pacman-key --refresh-keys
 #Setup Vim
