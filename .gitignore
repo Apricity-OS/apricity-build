@@ -6,3 +6,5 @@
 /boot/
 /airootfs/var
 pacman.conf
+*.swp
+.*.swp
