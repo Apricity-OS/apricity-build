@@ -5,6 +5,7 @@
 - [x] Fix all the GTK warnings about some parts of the icon theme not declaring a size field
 - [ ] Chrome extensions enabled by default may be broken on some machines
 - [ ] Issue with steam [thread1](https://github.com/Apricity-OS/apricity-build/issues/20#issuecomment-206939955), [thread2](https://github.com/Apricity-OS/apricity-build/issues/20#issuecomment-206939955)
+- [ ] Chsh to /bin/zsh for new users, not just one made in installer
 
 ####Distro Features
 - [ ] Add a 32-bit version (shouldn't be too hard, just need to test on a 32-bit machine)
@@ -28,6 +29,9 @@
 - [ ] Add either unite.vim or fzf.vim
 - [x] Add pacaur
 - [x] Switch to xf86-input-libinput
+- [ ] Fix autologin bug for existing installs
+- [ ] Switch to signed repo for existing installs
+- [ ] More elegant firstrun.sh functionality
 
 ####General Features
 - [ ] Automatically update PATRONS.md weekly with [patreon-api](https://github.com/oxguy3/patreon-api)?
@@ -35,9 +39,8 @@
 - [ ] Enable package signing in repo
 - [ ] Automatically rebuild repo daily, pulling from the AUR and from github for Apricity packages (eventially this could be run in an AWS EC2 spot instance)
 - [ ] Automatically build dev ISO in an AWS spot instance bi-weekly
-- [ ] Split github repos into stable and dev
-- [ ] Add sha256 tar hashes to all Apricity packages
-- [ ] Update all PKGBUILD urls to reflect the move to [github.com/Apricity-OS](https://github.com/Apricity-OS)
+- [x] Split github repos into stable and dev
+- [x] Update all PKGBUILD urls to reflect the move to [github.com/Apricity-OS](https://github.com/Apricity-OS)
 - [ ] Add READMEs to all repositories
 - [ ] Replace `apricityassets`. It's a little confusing and convoluted. Replace it with `apricity-assets`, `apricity-plymouth`, and `apricity-gnome-extensions`.
 - [ ] Automatically update extensions from github
@@ -47,8 +50,9 @@
 - [ ] **Cloud Configuration**
   - This is a tool/service to sync installed applications, conf files, dotfiles, and anything else the user specifies across machines, and perhaps also to save backups in the cloud.
   - This could potentially source the revenue needed to offer the above custom ISO builder for free.
-- [ ] Update Wikipedia page
+- [ ] **Update Wikipedia page**
 - [ ] Auto build monthly torrent for snapshots
+- [ ] Add pithos, yandex, vivaldi, and spotify to the repos
 
 ####Desktop Environments
 - [x] Gnome
