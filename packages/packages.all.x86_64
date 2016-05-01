@@ -113,7 +113,8 @@ os-prober
 pamac-aur
 pkgfile
 playonlinux
-plymouth
+gvim
+#plymouth
 prebootloader
 pulseaudio-alsa
 python-lxml

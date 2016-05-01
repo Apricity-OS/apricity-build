@@ -101,9 +101,9 @@ then
 #Set Apricity Grub Theme
 	/etc/apricity-assets/Elegant_Dark/install.sh
 #Enable Apricity Plymouth Theme
-	sed -i.bak 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
-	chown -R root.root /usr/share/plymouth/themes/apricity
-	plymouth-set-default-theme -R apricity
+	#sed -i.bak 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
+	#chown -R root.root /usr/share/plymouth/themes/apricity
+	#plymouth-set-default-theme -R apricity
 	chsh -s /bin/zsh
 #Setup Pacman
 	pacman-key --init archlinux
