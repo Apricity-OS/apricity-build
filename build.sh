@@ -70,7 +70,7 @@ make_packages() {
 
 # Needed packages for x86_64 EFI boot
 make_packages_efi() {
-    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "prebootloader" install
+    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "efitools dosfstools" install
 }
 
 # Copy mkinitcpio archiso hooks and build initramfs (airootfs)
@@ -145,8 +145,8 @@ make_isolinux() {
 # Prepare /EFI
 make_efi() {
     mkdir -p ${work_dir}/iso/EFI/boot
-    cp ${work_dir}/x86_64/airootfs/usr/lib/prebootloader/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
-    cp ${work_dir}/x86_64/airootfs/usr/lib/prebootloader/HashTool.efi ${work_dir}/iso/EFI/boot/
+    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
+    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/iso/EFI/boot/
 
 cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/iso/EFI/boot/loader.efi
 
@@ -181,8 +181,8 @@ make_efiboot() {
     cp ${work_dir}/iso/${install_dir}/boot/intel_ucode.img ${work_dir}/efiboot/EFI/archiso/intel_ucode.img
 
     mkdir -p ${work_dir}/efiboot/EFI/boot
-    cp ${work_dir}/x86_64/airootfs/usr/lib/prebootloader/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
-    cp ${work_dir}/x86_64/airootfs/usr/lib/prebootloader/HashTool.efi ${work_dir}/efiboot/EFI/boot/
+    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
+    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/efiboot/EFI/boot/
 
     cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/efiboot/EFI/boot/loader.efi
 
@@ -252,6 +252,7 @@ iso_name=apricity_os-${edition}
 if [[ ${remove_prev} == true ]]; then
     echo 'Removing previous build...'
     umount -l work/efiboot || /bin/true
+    umount -l work/x86_64/airootfs || /bin/true
     rm -rf work
 fi
 
@@ -260,6 +261,7 @@ mkdir -p ${work_dir}
 cp pacman/pacman.x86_64.conf pacman.conf
 run_once make_pacman_conf
 
+umount -l work/x86_64/airootfs/sys || /bin/true
 # Do all stuff for each airootfs
 for arch in x86_64; do
     run_once make_basefs

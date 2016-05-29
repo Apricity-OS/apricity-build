@@ -115,7 +115,8 @@ pkgfile
 playonlinux
 gvim
 #plymouth
-prebootloader
+efitools
+dosfstools
 pulseaudio-alsa
 python-lxml
 python-mako
