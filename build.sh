@@ -65,7 +65,7 @@ make_basefs() {
 
 # Additional packages (airootfs)
 make_packages() {
-    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "$(grep -h -v ^# ${script_path}/packages/packages.{all.both,all.${arch},${edition}.both,${edition}.${arch}})" install
+    setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "$(grep -h -v ^# ${script_path}/packages/base_packages_${arch})" install
 }
 
 # Needed packages for x86_64 EFI boot
@@ -91,8 +91,11 @@ make_setup_mkinitcpio() {
 
 # Customize installation (airootfs)
 make_customize_airootfs() {
-    cp -af ${script_path}/airootfs-all/* ${work_dir}/${arch}/airootfs
-    cp -af ${script_path}/airootfs-${edition}/* ${work_dir}/${arch}/airootfs
+    cp -af ${script_path}/airootfs/* ${work_dir}/${arch}/airootfs
+    mkdir -p ${work_dir}/${arch}/airootfs/etc/freezedry/
+    cp -f ${script_path}/freezedry/* ${work_dir}/${arch}/airootfs/etc/freezedry/
+    mv ${work_dir}/${arch}/airootfs/etc/freezedry/${edition}.toml ${work_dir}/${arch}/airootfs/etc/freezedry/default.toml
+    # cp -af ${script_path}/airootfs-${edition}/* ${work_dir}/${arch}/airootfs
 
     curl -o ${work_dir}/${arch}/airootfs/etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
 
