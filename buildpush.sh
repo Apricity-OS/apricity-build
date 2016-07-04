@@ -15,6 +15,7 @@ while getopts 'N:V:L:A:D:R:E:w:o:vh' arg; do
 done
 
 rm out/*
+git checkout dev
 git pull origin dev
 ./build.sh ${verbose} -E ${edition} -R ${remove_prev} -N ${iso_name}
 scp out/* apricity@apricityos.com:public_html/freezedry-build/${iso_name}.iso
