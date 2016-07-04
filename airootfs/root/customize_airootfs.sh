@@ -33,7 +33,7 @@ echo 'Created User'
 	sed -i 's/#\(Storage=\)auto/\1volatile/' /etc/systemd/journald.conf
 
 #Load freezedry configuration
-sudo -u liveuser freezedry --load /etc/freezedry/default.toml --livecd
+sudo -u liveuser freezedry --load /etc/freezedry/default.toml --livecd || /bin/true
 
 #Name Apricity
 sed -i.bak 's/Arch Linux/Apricity OS/g' /usr/lib/os-release
@@ -72,13 +72,13 @@ then
 	# sed -i 's@Icon=tracker@Icon=preferences-system-search@' /usr/share/applications/tracker-preferences.desktop
 	# sed -i 's@Icon=sbackup-restore@Icon=grsync-restore@' /usr/share/applications/sbackup-restore.desktop
 	# sed -i 's@Icon=sbackup-conf@Icon=grsync@' /usr/share/applications/sbackup-config.desktop
-    sed -i 's@Icon=/usr/share/hplip/data/images/128x128/hp_logo.png@Icon=hplip@' /usr/share/applications/hplip.desktop
+    sed -i 's@Icon=/usr/share/hplip/data/images/128x128/hp_logo.png@Icon=hplip@' /usr/share/applications/hplip.desktop || /bin/true
 #Switch Icons from Apricity Assets
-	cp -f /etc/apricity-assets/playonlinux.png /usr/share/playonlinux/etc
-	cp -f /etc/apricity-assets/playonlinux15.png /usr/share/playonlinux/etc
-	cp -f /etc/apricity-assets/playonlinux16.png /usr/share/playonlinux/etc
-	cp -f /etc/apricity-assets/playonlinux22.png /usr/share/playonlinux/etc
-	cp -f /etc/apricity-assets/playonlinux32.png /usr/share/playonlinux/etc
+	cp -f /etc/apricity-assets/playonlinux.png /usr/share/playonlinux/etc || /bin/true
+	cp -f /etc/apricity-assets/playonlinux15.png /usr/share/playonlinux/etc || /bin/true
+	cp -f /etc/apricity-assets/playonlinux16.png /usr/share/playonlinux/etc || /bin/true
+	cp -f /etc/apricity-assets/playonlinux22.png /usr/share/playonlinux/etc || /bin/true
+	cp -f /etc/apricity-assets/playonlinux32.png /usr/share/playonlinux/etc || /bin/true
 #Remove Arch Installation Instructions
 	rm -f /root/install.txt
 #Set Initcpio
@@ -117,12 +117,12 @@ then
 	chown -R root /etc/sudoers.d
 	echo "Enabled Sudo"
 #Set Apricity Grub Theme
-	/etc/apricity-assets/Elegant_Dark/install.sh
+	/etc/apricity-assets/Elegant_Dark/install.sh || /bin/true
 #Enable Apricity Plymouth Theme
 	#sed -i.bak 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
 	#chown -R root.root /usr/share/plymouth/themes/apricity
 	#plymouth-set-default-theme -R apricity
-	chsh -s /bin/zsh
+	chsh -s /bin/zsh || /bin/true
 #Setup Vim
 	# cp -r /etc/skel/.vim /root/.vim
 	# cp /etc/skel/.vimrc /root/.vimrc
