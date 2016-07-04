@@ -1,5 +1,5 @@
 [pacman]
-keyring = ['archlinux', 'apricity']
+keyrings = ['archlinux', 'apricity']
     [pacman.packages]
     base = [
         'base',
@@ -86,7 +86,7 @@ keyring = ['archlinux', 'apricity']
     ]
     print_drivers = [
         'cups',
-        'cups-pk-helper'
+        'cups-pk-helper',
         'libcups',
         'hplip',
         'splix',

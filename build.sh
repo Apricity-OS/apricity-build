@@ -95,6 +95,9 @@ make_customize_airootfs() {
     mkdir -p ${work_dir}/${arch}/airootfs/etc/freezedry/
     cp -f ${script_path}/freezedry/* ${work_dir}/${arch}/airootfs/etc/freezedry/
     mv ${work_dir}/${arch}/airootfs/etc/freezedry/${edition}.toml ${work_dir}/${arch}/airootfs/etc/freezedry/default.toml
+    mkdir -p ${work_dir}/${arch}/airootfs/var/cache/pacman/pkg
+    echo "Copying pacman cache"
+    cp -f /var/cache/pacman/pkg/* ${work_dir}/${arch}/airootfs/var/cache/pacman/pkg
     # cp -af ${script_path}/airootfs-${edition}/* ${work_dir}/${arch}/airootfs
 
     curl -o ${work_dir}/${arch}/airootfs/etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
@@ -103,6 +106,8 @@ make_customize_airootfs() {
 
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -r '/root/customize_airootfs.sh' run
     rm ${work_dir}/${arch}/airootfs/root/customize_airootfs.sh
+    cp -f ${work_dir}/${arch}/airootfs/var/cache/pacman/pkg/* /var/cache/pacman/pkg/
+    echo "Saving pacman cache"
 }
 
 # Prepare kernel/initramfs ${install_dir}/boot/

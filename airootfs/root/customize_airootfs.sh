@@ -28,6 +28,10 @@ echo 'Created User'
 # pacman -Syy
 # pacman-key --refresh-keys
 
+#Edit Mirrorlist
+	sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
+	sed -i 's/#\(Storage=\)auto/\1volatile/' /etc/systemd/journald.conf
+
 #Load freezedry configuration
 sudo -u liveuser freezedry --load /etc/freezedry/default.toml --livecd
 
@@ -64,10 +68,11 @@ then
 	# rm -f /usr/share/applications/nvidia-settings.desktop
 	# rm -f /usr/share/applications/hplip.desktop
 #Switch Icons
-	sed -i 's@Icon=xterm-color_48x48@Icon=xorg@' /usr/share/applications/xterm.desktop
-	sed -i 's@Icon=tracker@Icon=preferences-system-search@' /usr/share/applications/tracker-preferences.desktop
-	sed -i 's@Icon=sbackup-restore@Icon=grsync-restore@' /usr/share/applications/sbackup-restore.desktop
-	sed -i 's@Icon=sbackup-conf@Icon=grsync@' /usr/share/applications/sbackup-config.desktop
+	# sed -i 's@Icon=xterm-color_48x48@Icon=xorg@' /usr/share/applications/xterm.desktop
+	# sed -i 's@Icon=tracker@Icon=preferences-system-search@' /usr/share/applications/tracker-preferences.desktop
+	# sed -i 's@Icon=sbackup-restore@Icon=grsync-restore@' /usr/share/applications/sbackup-restore.desktop
+	# sed -i 's@Icon=sbackup-conf@Icon=grsync@' /usr/share/applications/sbackup-config.desktop
+    sed -i 's@Icon=/usr/share/hplip/data/images/128x128/hp_logo.png@Icon=hplip@' /usr/share/applications/hplip.desktop
 #Switch Icons from Apricity Assets
 	cp -f /etc/apricity-assets/playonlinux.png /usr/share/playonlinux/etc
 	cp -f /etc/apricity-assets/playonlinux15.png /usr/share/playonlinux/etc
@@ -92,9 +97,6 @@ then
 	# echo 'Enabled network'
 	# systemctl mask systemd-rfkill@.service
 	# systemctl set-default graphical.target
-#Edit Mirrorlist
-	sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
-	sed -i 's/#\(Storage=\)auto/\1volatile/' /etc/systemd/journald.conf
 #Enable Calamares Autostart
 	mkdir -p /home/liveuser/.config/autostart
 	ln -fs /usr/share/applications/calamares.desktop /home/liveuser/.config/autostart/calamares.desktop
@@ -128,6 +130,8 @@ then
 	# cp /etc/skel/.vimrc /home/liveuser/.vimrc
 #Setup Su
     sed -i /etc/pam.d/su -e 's/auth      sufficient  pam_wheel.so trust use_uid/#auth        sufficient  pam_wheel.so trust use_uid/'
+#Try to do sudo again
+    chmod -R 755 /etc/sudoers.d
 else
 	echo "i686"
 fi
