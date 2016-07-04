@@ -6,7 +6,7 @@
 /airootfs/install/
 /boot/
 /airootfs/var
-pacman.conf
+/pacman.conf
 *.swp
 .*.swp
 build.log
