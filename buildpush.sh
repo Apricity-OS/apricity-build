@@ -17,6 +17,7 @@ done
 rm out/*
 git checkout dev
 git pull origin dev
-./build.sh ${verbose} -E ${edition} -R ${remove_prev} -N ${iso_name}
-scp out/* apricity@apricityos.com:public_html/freezedry-build/${iso_name}.iso
+./build.sh ${verbose} -E ${edition} -R ${remove_prev} -N ${iso_name} > logs/${iso_name}.log
+scp out/* apricity@apricityos.com:public_html/freezedry-build/
+scp logs/${iso_name}.log apricity@apricityos.com:public_html/freezedry-build/
 rm out/*
