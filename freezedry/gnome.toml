@@ -5,7 +5,7 @@ inherits = "base.toml"
 [pacman]
     [pacman.packages]
     desktop_environment = [
-        # 'gnome',
+        'gnome',
         'gnome-shell',
         'gnome-session',
         'mutter',
@@ -29,15 +29,15 @@ inherits = "base.toml"
         'gnome-themes-standard',
         'apricity-wallpapers',
         'apricity-themes-gnome',
-        'apricity-icons',
-        # 'gnome-backgrounds',
+        'apricity-icons'
+        'gnome-backgrounds',
         'gtk-engine-murrine',
         'gnome-shell-extensions',
     ]
     browser = [
-        # 'apricity-chrome-profile',
+        'apricity-chrome-profile',
         'google-chrome',
-        'google-talkplugin',
+        'google-talkplugin'
         'icedtea-web',
         # 'flashplugin',
     ]
@@ -56,9 +56,9 @@ inherits = "base.toml"
         'evince',
         'file-roller',
         'gedit',
-        'pamac-aur',
+        'pamac_aur',
         'gnome-font-viewer',
-        'system-config-printer',
+        'system-config-printer'
         'gnome-calculator',
         'gnome-screenshot',
         'sushi',
@@ -77,10 +77,10 @@ inherits = "base.toml"
         'libreoffice-fresh',
         'playonlinux',
         'sbackup',
-        # 'steam',
+        'steam',
         'syncthing-gtk',
         'totem',
-        # 'transmission-cli',
+        'transmission-cli',
         'transmission-gtk',
         'gufw',
         'wine',
@@ -123,10 +123,8 @@ inherits = "base.toml"
 [zsh]
     [zsh.zshrc]
     base = [
-        'source /usr/share/zsh/site-contrib/powerline.zsh',
-        'zstyle ":completion:*" menu select',
-        'export QT_QPA_PLATFORMTHEME=qt5ct',
-        'export QT_STYLE_OVERRIDE=gtk2',
+        '''source /usr/share/zsh/site-contrib/powerline.zsh''',
+        '''zstyle ':completion:*' menu select''',
     ]
 
 [gnome]
@@ -160,6 +158,7 @@ desktop_icons = true
         'google-chrome.desktop',
         'ice.desktop',
         'org.gnome.Nautilus.desktop',
+        'empathy.desktop',
         'gnome-music.desktop',
         'org.gnome.Photos.desktop',
         'org.gnome.Totem.desktop',
@@ -184,7 +183,7 @@ desktop_icons = true
 
 [vim]
 plugin_manager = "pathogen"
-    [vim.plugins]
+[vim.plugins]
     apricity = [
         "https://github.com/chriskempson/base16-vim.git/",
         "https://github.com/scrooloose/syntastic.git/",
@@ -195,11 +194,8 @@ plugin_manager = "pathogen"
         "https://github.com/luochen1990/rainbow.git",
         "https://github.com/rust-lang/rust.vim.git",
         "https://github.com/cespare/vim-toml.git",
-        "https://github.com/vim-airline/vim-airline-themes.git",
-        "https://github.com/Slava/vim-spacebars.git",
-        "https://github.com/tpope/vim-commentary.git",
     ]
-    [vim.vimrc]
+[vim.vimrc]
     base = [
         "syntax on",
         "set autoread",
@@ -224,21 +220,17 @@ plugin_manager = "pathogen"
     tfbrain = [
         'map <C-p> :w \| !./push.sh<CR><CR>',
     ]
-    # ycm = [
-    #     "let g:ycm_collect_identifiers_from_tags_files = 1",
-    #     "let g:ycm_use_ultisnips_completer = 1",
-    #     "let g:ycm_seed_identifiers_with_syntax = 1 ",
-    #     "let g:ycm_complete_in_comments = 1",
-    #     "let g:ycm_complete_in_strings = 1",
-    #     "let g:ycm_autoclose_preview_window_after_insertion = 1",
-    #     "let g:ycm_key_invoke_completion = '<S-Enter>'",
-    #     "map <C-m> :YcmCompleter GoTo<CR>",
-    #     "nmap <C-k> :YcmCompleter GetDoc<CR>",
-    # ]
+    ycm = [
+        "let g:ycm_collect_identifiers_from_tags_files = 1",
+        "let g:ycm_use_ultisnips_completer = 1",
+        "let g:ycm_seed_identifiers_with_syntax = 1 ",
+        "let g:ycm_complete_in_comments = 1",
+        "let g:ycm_complete_in_strings = 1",
+        "let g:ycm_autoclose_preview_window_after_insertion = 1",
+        "let g:ycm_key_invoke_completion = '<S-Enter>'",
+        "map <C-m> :YcmCompleter GoTo<CR>",
+        "nmap <C-k> :YcmCompleter GetDoc<CR>",
+    ]
     rainbow = [
         "let g:rainbow_active = 1"
-    ]
-    js = [
-        "let g:syntastic_javascript_checkers = ['jsxhint']",
-        "let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'",
     ]

@@ -1,0 +1,31 @@
+inherits = "base.toml"
+[pacman.packages]
+gen = ["gnome-shell", "gnome-session", "mutter", "gnome-settings-daemon", "network-manager-applet", "polkit-gnome", "pacaur", "yaourt-git", "cronie", "gksu", "xdg-user-dirs-gtk", "python2-powerline-git", "gnome-themes-standard", "apricity-wallpapers", "apricity-themes-gnome", "apricity-icons", "gtk-engine-murrine", "gnome-shell-extensions", "google-chrome", "google-talkplugin", "icedtea-web", "nautilus", "gvfs-smb", "gvfs-mtp", "gvfs-google", "gnome-terminal", "gnome-system-log", "gnome-control-center", "eog", "gnome-user-docs", "evince", "file-roller", "gedit", "pamac-aur", "gnome-font-viewer", "system-config-printer", "gnome-calculator", "gnome-screenshot", "sushi", "gnome-color-manager", "gnome-keyring", "gnome-tweak-tool", "filezilla", "gimp", "gnome-calendar", "rhythmbox", "gnome-photos", "ice-ssb", "inkscape", "libreoffice-fresh", "playonlinux", "sbackup", "syncthing-gtk", "totem", "transmission-gtk", "gufw", "wine", "bluez-utils", "gnome-bluetooth", "pulseaudio-bluetooth", "bluez", "bluez-libs", "bluez-utils", "bluez-firmware", "baobab", "gnome-disk-utility", "gnome-system-monitor", "zsh", "orca", "grilo-plugins", "faac", "faad2", "flac", "gsfonts", "gst-libav", "gst-plugin-libde265", "gst-plugins-bad", "gst-plugins-base", "gst-plugins-good", "gst-plugins-ugly", "gstreamer0.10-plugins", "libdvdcss", "libdvdnav", "libdvdread", "libmatroska"]
+[gnome]
+gtk_theme = "Arctic Apricity"
+shell_theme = "Arctic Apricity"
+icon_theme = "Apricity Icons"
+wallpaper = "http://localhost:3000/upload/apagajewski/autumn-road.jpg"
+lock_background = "http://localhost:3000/upload/apagajewski/bliss.jpg"
+gtk_button_layout = ":minimize,maximize,close"
+dynamic_workspaces = "on"
+desktop_icons = "on"
+[gnome.nautilus]
+default_zoom = "small"
+[gnome.extensions]
+gen = ["user-theme@gnome-shell-extensions.gcampax.github.com", "alwayszoomworkspaces@jamie.thenicols.net", "mediaplayer@patapon.info", "caffeine@patapon.info", "scroll-workspaces@gfxmonk.net", "dash-to-dock@micxgx.gmail.com", "suspend-button@laserb", "topIcons@adel.gadllah@gmail.com", "places-menu@gnome-shell-extensions.gcampax.github.com", "drive-menu@gnome-shell-extensions.gcampax.github.com", "remove-dropdown-arrows@mpdeimos.com", "Move_Clock@rmy.pobox.com"]
+[gnome.favorite_apps]
+gen = ["google-chrome.desktop", "ice.desktop", "org.gnome.Nautilus.desktop", "gnome-music.desktop", "org.gnome.Photos.desktop", "org.gnome.Totem.desktop", "libreoffice-writer.desktop", "libreoffice-impress.desktop", "libreoffice-calc.desktop", "org.gnome.gedit.desktop", "gnome-terminal.desktop", "gnome-tweak-tool.desktop", "gnome-control-center.desktop", "pamac-manager.desktop"]
+[systemd.services]
+gen = ["bluetooth"]
+[vim]
+plugin_manager = "pathogen"
+plugins = ["https://github.com/chriskempson/base16-vim.git/", "https://github.com/scrooloose/syntastic.git/", "https://github.com/bling/vim-airline/", "https://github.com/hynek/vim-python-pep8-indent.git/", "https://github.com/mhinz/vim-signify/", "https://github.com/flazz/vim-colorschemes.git", "https://github.com/luochen1990/rainbow.git", "https://github.com/rust-lang/rust.vim.git", "https://github.com/cespare/vim-toml.git", "https://github.com/vim-airline/vim-airline-themes.git", "https://github.com/Slava/vim-spacebars.git", "https://github.com/tpope/vim-commentary.git"]
+[vim.vimrc]
+gen = ["syntax on", "set autoread", "set number", "set expandtab", "set shiftwidth=4", "set softtabstop=4", "colorscheme kalisi", "set background=dark", "let t_Co = 256", "let g:airline_powerline_fonts = 1", "let g:syntastic_check_on_open = 1", "let g:airline#extensions#tabline#enabled = 1", "let g:airline_theme=\"base16\" ", "map <C-p> :w | !./push.sh<CR><CR>", "let g:ycm_collect_identifiers_from_tags_files = 1", "let g:ycm_use_ultisnips_completer = 1", "let g:ycm_seed_identifiers_with_syntax = 1 ", "let g:ycm_complete_in_comments = 1", "let g:ycm_complete_in_strings = 1", "let g:ycm_autoclose_preview_window_after_insertion = 1", "let g:ycm_key_invoke_completion = '<S-Enter>'", "map <C-m> :YcmCompleter GoTo<CR>", "nmap <C-k> :YcmCompleter GetDoc<CR>", "let g:rainbow_active = 1", "let g:syntastic_javascript_checkers = ['jsxhint']", "let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'"]
+[zsh]
+zshrc = ["source /usr/share/zsh/site-contrib/powerline.zsh", "zstyle ':completion:*' menu select", "export QT_QPA_PLATFORMTHEME=qt5ct", "export QT_STYLE_OVERRIDE=gtk2"]
+[code.root]
+gen = ["echo 'Running root code ...'"]
+[code.user]
+gen = ["echo 'Running user code ...'"]

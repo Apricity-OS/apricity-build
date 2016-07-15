@@ -21,6 +21,6 @@ git checkout dev
 git pull origin dev
 ./build.sh ${verbose} -E ${edition} -R ${remove_prev} -N ${iso_name} | tee logs/${iso_name}.log
 ssh server@192.241.147.116 'mkdir -p /mnt/static/public_html/freezedry-build/${username}'
-scp out/* server@192.241.147.116:/mnt/static/public_html/freezedry-build/${username}/
-scp logs/${iso_name}.log server@192.241.147.116:/mnt/static/freezedry-build/${username}/
+scp out/${iso_name} server@192.241.147.116:/mnt/static/public_html/freezedry-build/${username}/${iso_name}
+scp logs/${iso_name}.log server@192.241.147.116:/mnt/static/freezedry-build/${username}/${iso_name}
 rm out/*
