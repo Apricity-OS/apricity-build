@@ -1565,11 +1565,11 @@ Creating 4.0 filesystem on work/iso/arch/x86_64/airootfs.sfs, block size 131072.
 Exportable Squashfs 4.0 filesystem, xz compressed, data block size 131072
 	compressed data, compressed metadata, compressed fragments, compressed xattrs
 	duplicates are removed
-Filesystem size 926725.44 Kbytes (905.01 Mbytes)
-	30.48% of uncompressed filesystem size (3040716.75 Kbytes)
-Inode table size 1083528 bytes (1058.13 Kbytes)
+Filesystem size 926727.51 Kbytes (905.01 Mbytes)
+	30.48% of uncompressed filesystem size (3040712.75 Kbytes)
+Inode table size 1083212 bytes (1057.82 Kbytes)
 	21.76% of uncompressed inode table size (4978492 bytes)
-Directory table size 1359724 bytes (1327.86 Kbytes)
+Directory table size 1359756 bytes (1327.89 Kbytes)
 	37.39% of uncompressed directory table size (3636597 bytes)
 Xattr table size 78 bytes (0.08 Kbytes)
 	97.50% of uncompressed xattr table size (80 bytes)
@@ -1600,7 +1600,7 @@ Number of gids 13
 	utmp (20)
 	games (50)
 	unknown (124)
-	systemd-coredump (998)
+	systemd-journal-remote (999)
 	systemd-journal (190)
 [mkarchiso] INFO: Done!
 [mkarchiso] INFO: Creating checksum file for self-test...
@@ -1611,10 +1611,10 @@ Number of gids 13
 [mkarchiso] INFO:              Architecture:   x86_64
 [mkarchiso] INFO:         Working directory:   work
 [mkarchiso] INFO:    Installation directory:   arch
-[mkarchiso] INFO:                Image name:   apricity_os-gen-2016.07.15.iso
+[mkarchiso] INFO:                Image name:   apricity_os-apricity_os.iso
 [mkarchiso] INFO:                Disk label:   APRICITY
 [mkarchiso] INFO:            Disk publisher:   Arch Linux <http://www.archlinux.org>
 [mkarchiso] INFO:          Disk application:   Arch Linux Live/Rescue CD
 
 [mkarchiso] INFO: Creating ISO image...
-[mkarchiso] INFO: Done! | 972M out/apricity_os-gen-2016.07.15.iso
+[mkarchiso] INFO: Done! | 972M out/apricity_os-apricity_os.iso
