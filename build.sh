@@ -220,7 +220,7 @@ make_prepare() {
 
 # Build ISO
 make_iso() {
-    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -o "${out_dir}" iso "${iso_name}-${iso_version}.iso"
+    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -o "${out_dir}" iso "apricity_os-${iso_name}.iso"
 }
 
 
@@ -254,8 +254,6 @@ while getopts 'N:V:L:A:D:R:E:w:o:vh' arg; do
            ;;
     esac
 done
-
-iso_name=apricity_os-${edition}
 
 if [[ ${remove_prev} == true ]]; then
     echo 'Removing previous build...'
