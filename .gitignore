@@ -10,3 +10,4 @@
 *.swp
 .*.swp
 build.log
+*.log
