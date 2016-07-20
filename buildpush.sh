@@ -23,4 +23,5 @@ git pull origin dev
 ssh server@192.241.147.116 'mkdir -p /mnt/static/public_html/freezedry-build/${username}'
 scp out/* server@192.241.147.116:/mnt/static/public_html/freezedry-build/${username}
 scp logs/${iso_name}.log server@192.241.147.116:/mnt/static/public_html/freezedry-build/${username}
+ssh server@192.241.147.116 'rm /mnt/static/public_html/freezedry-build/${username}/apricity_os-${iso_name}.iso'
 rm out/*
