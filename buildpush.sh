@@ -19,7 +19,7 @@ done
 rm out/*
 git checkout dev
 git pull origin dev
-./build.sh ${verbose} -E ${edition} -R ${remove_prev} -N ${iso_name} > logs/apricity_os-${iso_name}.log
+./build.sh ${verbose} -E ${edition} -R ${remove_prev} -N ${iso_name} 2>&1 | tee logs/apricity_os-${iso_name}.log
 ssh server@192.241.147.116 'mkdir -p /mnt/static/public_html/freezedry-build/${username}'
 scp out/* server@192.241.147.116:/mnt/static/public_html/freezedry-build/${username}
 scp logs/apricity_os-${iso_name}.log server@192.241.147.116:/mnt/static/public_html/freezedry-build/${username}
