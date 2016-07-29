@@ -25,3 +25,4 @@ sudo scp out/* server@192.241.147.116:/mnt/static/public_html/freezedry-build/${
 sudo scp logs/apricity_os-${iso_name}.log server@192.241.147.116:/mnt/static/public_html/freezedry-build/${username}/
 sudo ssh server@192.241.147.116 "rm /mnt/static/public_html/freezedry-build/${username}/apricity_os-${iso_name}.iso"
 sudo rm out/*
+sudo rm -rf work

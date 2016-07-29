@@ -18,7 +18,7 @@ passwd -d liveuser
 #rm /home/liveuser/.config/autostart/firstrun.desktop
 echo 'Created User'
 
-#Setup Pacman
+# Setup Pacman
 # pacman-key --init archlinux
 # pacman-key --populate archlinux
 # pacman-key --init

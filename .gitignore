@@ -11,3 +11,4 @@
 .*.swp
 build.log
 *.log
+.#*
