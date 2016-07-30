@@ -2,7 +2,7 @@
 
 set -e -u
 edition=gnome
-iso_name=apricity_os-${edition}
+iso_name=gnome
 iso_label=APRICITY
 iso_version=$(date +%Y.%m.%d)
 install_dir=arch
