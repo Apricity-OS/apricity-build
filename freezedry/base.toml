@@ -51,9 +51,9 @@ keyrings = ["archlinux", "apricity"]
         "apricityassets",
         "apricity-keyring",
     ]
-    installer = [
-        "calamares"
-    ]
+    # installer = [
+    #     "calamares"
+    # ]
     luks = [
         "mkinitcpio-openswap",
     ]
