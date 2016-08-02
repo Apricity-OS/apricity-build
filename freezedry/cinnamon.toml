@@ -16,7 +16,7 @@ inherits = "desktop.toml"
 gtk_theme = "Arctic Apricity"
 shell_theme = "Arctic Apricity"
 icon_theme = "Apricity Icons"
-wallpaper = "file:///usr/share/backgrounds/gnome/snow-white.png"
+wallpaper = "file:///usr/share/backgrounds/gnome/bear-rock.jpg"
 gtk_button_layout = ":minimize,maximize,close"
     [cinnamon.favorite_apps]
     apps = ["google-chrome.desktop",
