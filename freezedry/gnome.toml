@@ -3,7 +3,7 @@ inherits = "desktop.toml"
 [pacman]
     [pacman.packages]
     desktop_environment = [
-        'gnome',
+        # 'gnome',
         'gnome-shell',
         'gnome-session',
         'mutter',
