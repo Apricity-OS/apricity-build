@@ -23,7 +23,7 @@ inherits = "base.toml"
         "gtk-engine-murrine",
     ]
     browser = [
-        "apricity-chrome-profile",
+        # "apricity-chrome-profile",
         "google-chrome",
         "google-talkplugin",
         "icedtea-web",
