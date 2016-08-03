@@ -98,7 +98,7 @@ make_customize_airootfs() {
     cp -af ${script_path}/airootfs/* ${work_dir}/${arch}/airootfs
     mkdir -p ${work_dir}/${arch}/airootfs/etc/freezedry/
     cp -f ${script_path}/freezedry/* ${work_dir}/${arch}/airootfs/etc/freezedry/
-    mv ${work_dir}/${arch}/airootfs/etc/freezedry/${edition}.toml ${work_dir}/${arch}/airootfs/etc/freezedry/default.toml
+    cp ${work_dir}/${arch}/airootfs/etc/freezedry/${edition}.toml ${work_dir}/${arch}/airootfs/etc/freezedry/default.toml
     mkdir -p ${work_dir}/${arch}/airootfs/var/cache/pacman/pkg
     echo "Copying pacman cache"
     cp -f /var/cache/pacman/pkg/* ${work_dir}/${arch}/airootfs/var/cache/pacman/pkg
