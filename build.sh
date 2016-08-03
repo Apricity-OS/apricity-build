@@ -1,5 +1,9 @@
 #!/bin/bash
 
+pacman-key --init
+pacman-key --populate
+pacman-key --populate apricity
+
 set -e -u
 edition=gnome
 iso_name=gnome
