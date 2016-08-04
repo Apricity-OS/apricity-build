@@ -164,6 +164,6 @@ keyrings = ["archlinux", "apricity"]
         "graphical.target",
         "systemd-rfkill"
     ]
-    pacman = [
-        "pacman-init",
-    ]
+    # pacman = [
+    #     "pacman-init",
+    # ]
