@@ -110,6 +110,7 @@ make_customize_airootfs() {
 
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -r '/root/customize_airootfs.sh' run
     rm ${work_dir}/${arch}/airootfs/root/customize_airootfs.sh
+    rm /var/cache/pacman/pkg/*
     cp -f ${work_dir}/${arch}/airootfs/var/cache/pacman/pkg/* /var/cache/pacman/pkg/
     echo "Saving pacman cache"
 }
