@@ -157,9 +157,9 @@ plugin_manager = "pathogen"
         "let g:airline#extensions#tabline#enabled = 1",
         "let g:airline_theme=\"base16\" ",
     ]
-    tfbrain = [
-        'map <C-p> :w \| !./push.sh<CR><CR>',
-    ]
+    # tfbrain = [
+    #     'map <C-p> :w \| !./push.sh<CR><CR>',
+    # ]
     ycm = [
         "let g:ycm_collect_identifiers_from_tags_files = 1",
         "let g:ycm_use_ultisnips_completer = 1",
