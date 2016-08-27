@@ -47,65 +47,17 @@ cp /usr/lib/os-release /etc/os-release
 arch=`uname -m`
 if [ "$arch" == "x86_64" ]
 then
-# Remove Unused Desktop Applications
-	# rm -f /usr/share/applications/bssh.desktop
-	# rm -f /usr/share/applications/bvnc.desktop
-	# rm -f /usr/share/applications/avahi-discover.desktop
-	# rm -f /usr/share/applications/qv4l2.desktop
-	# rm -f /usr/share/applications/polkit-gnome-authentication-agent-1.desktop
-	# rm -f /usr/share/applications/tracker-needle.desktop
-	# rm -f /usr/share/applications/gksu.desktop
-	# rm -f /usr/share/applications/gucharmap.desktop
-	# rm -f /usr/share/applications/cups.desktop
-	# rm -f /usr/share/applications/uxterm.desktop
-	# rm -f /usr/share/applications/sbackup-restore-su.desktop
-	# rm -f /usr/share/applications/sbackup-config-su.desktop
-	# rm -f /usr/share/applications/designer-qt4.desktop
-	# rm -f /usr/share/applications/linguist-qt4.desktop
-	# rm -f /usr/share/applications/assistant-qt4.desktop
-	# rm -f /usr/share/applications/qdbusviewer-qt4.desktop
-	# rm -f /usr/share/applications/qtconfig-qt4.desktop
-	# rm -f /usr/share/applications/nvidia-settings.desktop
-	# rm -f /usr/share/applications/hplip.desktop
-#Switch Icons
-	# sed -i 's@Icon=xterm-color_48x48@Icon=xorg@' /usr/share/applications/xterm.desktop
-	# sed -i 's@Icon=tracker@Icon=preferences-system-search@' /usr/share/applications/tracker-preferences.desktop
-	# sed -i 's@Icon=sbackup-restore@Icon=grsync-restore@' /usr/share/applications/sbackup-restore.desktop
-	# sed -i 's@Icon=sbackup-conf@Icon=grsync@' /usr/share/applications/sbackup-config.desktop
-    sed -i 's@Icon=/usr/share/hplip/data/images/128x128/hp_logo.png@Icon=hplip@' /usr/share/applications/hplip.desktop || /bin/true
-#Switch Icons from Apricity Assets
+sed -i 's@Icon=/usr/share/hplip/data/images/128x128/hp_logo.png@Icon=hplip@' /usr/share/applications/hplip.desktop || /bin/true
 	cp -f /etc/apricity-assets/playonlinux.png /usr/share/playonlinux/etc || /bin/true
 	cp -f /etc/apricity-assets/playonlinux15.png /usr/share/playonlinux/etc || /bin/true
 	cp -f /etc/apricity-assets/playonlinux16.png /usr/share/playonlinux/etc || /bin/true
 	cp -f /etc/apricity-assets/playonlinux22.png /usr/share/playonlinux/etc || /bin/true
 	cp -f /etc/apricity-assets/playonlinux32.png /usr/share/playonlinux/etc || /bin/true
-#Remove Arch Installation Instructions
 	rm -f /root/install.txt
-#Set Initcpio
 	echo "$(cat /etc/mkinitcpio.conf)"
-#Enable Services
-	# systemctl enable org.cups.cupsd.service
-	# systemctl enable smbd nmbd
-	# #systemctl enable bumblebeed
-	# systemctl enable graphical.target gdm.service pacman-init.service dhcpcd.service
-	# echo 'Enabled dhcpd, gdm'
-	# systemctl enable bluetooth.service
-	# echo 'Enabled bluetooth'
-	# systemctl enable avahi-daemon.service
-	# echo 'Enabled avahi'
-	# systemctl -fq enable NetworkManager ModemManager
-	# echo 'Enabled network'
-	# systemctl mask systemd-rfkill@.service
-	# systemctl set-default graphical.target
 #Enable Calamares Autostart
 	mkdir -p /home/liveuser/.config/autostart
 	ln -fs /usr/share/applications/calamares.desktop /home/liveuser/.config/autostart/calamares.desktop
-#Enable ICE+Chrome Stable
-	# ln -sf /usr/bin/google-chrome-stable /usr/bin/google-chrome
-	# export _BROWSER=google-chrome-stable
-	# echo "BROWSER=/usr/bin/${_BROWSER}" >> /etc/environment
-	# echo "BROWSER=/usr/bin/${_BROWSER}" >> /etc/skel/.bashrc
-	# echo "BROWSER=/usr/bin/${_BROWSER}" >> /etc/profile
 #Set Nano Editor
 	export _EDITOR=nano
 	echo "EDITOR=${_EDITOR}" >> /etc/environment
@@ -123,15 +75,42 @@ then
 	#chown -R root.root /usr/share/plymouth/themes/apricity
 	#plymouth-set-default-theme -R apricity
 	chsh -s /bin/zsh || /bin/true
-#Setup Vim
-	# cp -r /etc/skel/.vim /root/.vim
-	# cp /etc/skel/.vimrc /root/.vimrc
-	# cp -r /etc/skel/.vim /home/liveuser/.vim
-	# cp /etc/skel/.vimrc /home/liveuser/.vimrc
 #Setup Su
     sed -i /etc/pam.d/su -e 's/auth      sufficient  pam_wheel.so trust use_uid/#auth        sufficient  pam_wheel.so trust use_uid/'
 #Try to do sudo again
     chmod -R 755 /etc/sudoers.d
 else
 	echo "i686"
+sed -i 's@Icon=/usr/share/hplip/data/images/128x128/hp_logo.png@Icon=hplip@' /usr/share/applications/hplip.desktop || /bin/true
+	cp -f /etc/apricity-assets/playonlinux.png /usr/share/playonlinux/etc || /bin/true
+	cp -f /etc/apricity-assets/playonlinux15.png /usr/share/playonlinux/etc || /bin/true
+	cp -f /etc/apricity-assets/playonlinux16.png /usr/share/playonlinux/etc || /bin/true
+	cp -f /etc/apricity-assets/playonlinux22.png /usr/share/playonlinux/etc || /bin/true
+	cp -f /etc/apricity-assets/playonlinux32.png /usr/share/playonlinux/etc || /bin/true
+	rm -f /root/install.txt
+	echo "$(cat /etc/mkinitcpio.conf)"
+#Enable Calamares Autostart
+	mkdir -p /home/liveuser/.config/autostart
+	ln -fs /usr/share/applications/calamares.desktop /home/liveuser/.config/autostart/calamares.desktop
+#Set Nano Editor
+	export _EDITOR=nano
+	echo "EDITOR=${_EDITOR}" >> /etc/environment
+	echo "EDITOR=${_EDITOR}" >> /etc/skel/.bashrc
+	echo "EDITOR=${_EDITOR}" >> /etc/profile
+#Enable Sudo
+	chmod 750 /etc/sudoers.d
+	chmod 440 /etc/sudoers.d/g_wheel
+	chown -R root /etc/sudoers.d
+	echo "Enabled Sudo"
+#Set Apricity Grub Theme
+	/etc/apricity-assets/Elegant_Dark/install.sh || /bin/true
+#Enable Apricity Plymouth Theme
+	#sed -i.bak 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
+	#chown -R root.root /usr/share/plymouth/themes/apricity
+	#plymouth-set-default-theme -R apricity
+	chsh -s /bin/zsh || /bin/true
+#Setup Su
+    sed -i /etc/pam.d/su -e 's/auth      sufficient  pam_wheel.so trust use_uid/#auth        sufficient  pam_wheel.so trust use_uid/'
+#Try to do sudo again
+    chmod -R 755 /etc/sudoers.d
 fi
