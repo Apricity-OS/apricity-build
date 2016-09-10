@@ -15,7 +15,8 @@ inherits = "base.toml"
         "gksu",
         "xdg-user-dirs-gtk",
         "python2-powerline-git",
-	"virtualbox-guest-utils",
+	# "virtualbox-guest-utils",
+	# "virtualbox-guest-modules-arch",
     ]
     base_customizations = [
         "apricity-wallpapers",
@@ -25,8 +26,9 @@ inherits = "base.toml"
     ]
     browser = [
         # "apricity-chrome-profile",
-        "google-chrome",
-        "google-talkplugin",
+        # "google-chrome",
+	"firefox",
+        # "google-talkplugin",
         "icedtea-web",
         # "flashplugin",
     ]

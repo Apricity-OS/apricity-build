@@ -97,7 +97,7 @@ make_setup_mkinitcpio() {
 make_customize_airootfs() {
     cp -af ${script_path}/airootfs-${arch}/* ${work_dir}/${arch}/airootfs
     mkdir -p ${work_dir}/${arch}/airootfs/etc/freezedry/
-    cp -f ${script_path}/freezedry/* ${work_dir}/${arch}/airootfs/etc/freezedry/
+    cp -f ${script_path}/freezedry-${arch}/* ${work_dir}/${arch}/airootfs/etc/freezedry/
     cp ${work_dir}/${arch}/airootfs/etc/freezedry/${edition}.toml ${work_dir}/${arch}/airootfs/etc/freezedry/default.toml
     mkdir -p ${work_dir}/${arch}/airootfs/var/cache/pacman/pkg
     echo "Copying pacman cache"
@@ -217,7 +217,7 @@ make_efiboot() {
     cp ${work_dir}/iso/EFI/shellx64_v2.efi ${work_dir}/efiboot/EFI/
     cp ${work_dir}/iso/EFI/shellx64_v1.efi ${work_dir}/efiboot/EFI/
 
-    umount -d ${work_dir}/efiboot
+    umount -dl ${work_dir}/efiboot
 }
 
 # Build airootfs filesystem image
