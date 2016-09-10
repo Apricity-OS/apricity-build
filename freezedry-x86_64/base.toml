@@ -156,8 +156,8 @@ keyrings = ["archlinux", "apricity"]
     net = [
         "NetworkManager",
         "ModemManager",
-        "smbd",
-        "nmbd",
+        # "smbd",
+        # "nmbd",
         "avahi-daemon"
     ]
     base = [
