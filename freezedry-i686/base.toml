@@ -93,7 +93,6 @@ keyrings = ["archlinux", "apricity"]
     ]
     audio_drivers = [
         "alsa-utils",
-        "lib32-alsa-plugins",
         "pulseaudio-alsa",
     ]
     input_drivers = [
@@ -142,7 +141,6 @@ keyrings = ["archlinux", "apricity"]
         "xf86-video-voodoo",
         "mesa-libgl",
         "mesa",
-        "lib32-mesa-libgl",
         "mesa-vdpau",
         "x264",
     ]

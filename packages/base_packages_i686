@@ -10,7 +10,7 @@ base-devel
 bash-completion
 bind-tools
 broadcom-wl-dkms
-calamares32
+calamares
 crda
 dosfstools
 fakeroot

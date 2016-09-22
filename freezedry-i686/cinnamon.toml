@@ -6,7 +6,6 @@ inherits = "desktop.toml"
         "cinnamon",
         "mutter",
         "network-manager-applet",
-        "polkit-gnome-gtk2",
     ]
     customizations = [
         "apricity-themes-cinnamon",
