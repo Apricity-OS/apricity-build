@@ -63,7 +63,7 @@ inherits = "base.toml"
         "gnome-photos",
         "ice-ssb",
         "inkscape",
-        "libreoffice-fresh",
+        "libreoffice-still",
         "playonlinux",
         "sbackup",
         "steam",
