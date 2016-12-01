@@ -1,0 +1,179 @@
+inherits = "base.toml"
+
+[gdm]
+
+[pacman]
+    [pacman.packages]
+    display_manager = ["gdm"]
+    cli_editor = ["nano", "gvim"]
+    aur_manager = [
+        "pacaur",
+        "yaourt-git",
+    ]
+    shell_tools_extra = [
+        "cronie",
+        "gksu",
+        "xdg-user-dirs-gtk",
+        "python2-powerline-git",
+	# "virtualbox-guest-utils",
+	# "virtualbox-guest-modules-arch",
+    ]
+    base_customizations = [
+        "apricity-wallpapers",
+        "apricity-icons",
+        "gnome-backgrounds",
+        "gtk-engine-murrine",
+    ]
+    browser = [
+        # "apricity-chrome-profile",
+        # "google-chrome",
+	"firefox",
+        # "google-talkplugin",
+        "icedtea-web",
+        # "flashplugin",
+    ]
+    file_manager = [
+        "nautilus",
+        "gvfs-smb",
+        "gvfs-mtp",
+        "gvfs-google",
+    ]
+    system_apps = [
+        "gnome-terminal",
+        "gnome-system-log",
+        "gnome-control-center",
+        "eog",
+        "gnome-user-docs",
+        "evince",
+        "file-roller",
+        "gedit",
+        "pamac-aur",
+        "gnome-font-viewer",
+        "system-config-printer",
+        "gnome-calculator",
+        "gnome-screenshot",
+        "sushi",
+        "gnome-color-manager",
+        "gnome-keyring",
+        "gnome-tweak-tool",
+    ]
+    desktop_apps = [
+        "filezilla",
+        "gimp",
+        "gnome-calendar",
+        "rhythmbox",
+        "gnome-photos",
+        "ice-ssb",
+        "inkscape",
+        "libreoffice-fresh",
+        "playonlinux",
+        "sbackup",
+        "steam",
+        "syncthing-gtk",
+        "totem",
+        "transmission-cli",
+        "transmission-gtk",
+        "gufw",
+        "wine",
+    ]
+    bluetooth = [
+        "bluez-utils",
+        "gnome-bluetooth",
+        "pulseaudio-bluetooth",
+        "bluez",
+        "bluez-libs",
+        "bluez-utils",
+        "bluez-firmware",
+    ]
+    system_tools = [
+        "baobab",
+        "gnome-disk-utility",
+        "gnome-system-monitor",
+    ]
+    shell = ["zsh"]
+    accessibility = ["orca"]
+    multimedia_lib = [
+        "grilo-plugins",
+        "faac",
+        "faad2",
+        "flac",
+        "gsfonts",
+        "gst-libav",
+        "gst-plugin-libde265",
+        "gst-plugins-bad",
+        "gst-plugins-base",
+        "gst-plugins-good",
+        "gst-plugins-ugly",
+        "gstreamer0.10-plugins",
+        "libdvdcss",
+        "libdvdnav",
+        "libdvdread",
+        "libmatroska",
+    ]
+
+[zsh]
+    [zsh.zshrc]
+    base = [
+        """source /usr/share/zsh/site-contrib/powerline.zsh""",
+        """zstyle ':completion:*' menu select""",
+    ]
+
+[systemd]
+    [systemd.services]
+    bluetooth = [
+        "bluetooth",
+    ]
+
+[vim]
+plugin_manager = "pathogen"
+[vim.plugins]
+    apricity = [
+        "https://github.com/chriskempson/base16-vim.git/",
+        "https://github.com/scrooloose/syntastic.git/",
+        "https://github.com/bling/vim-airline/",
+        "https://github.com/hynek/vim-python-pep8-indent.git/",
+        "https://github.com/mhinz/vim-signify/",
+        "https://github.com/flazz/vim-colorschemes.git",
+        "https://github.com/luochen1990/rainbow.git",
+        "https://github.com/rust-lang/rust.vim.git",
+        "https://github.com/cespare/vim-toml.git",
+    ]
+[vim.vimrc]
+    base = [
+        "syntax on",
+        "set autoread",
+        "set number",
+    ]
+    python = [
+        "set expandtab",
+        "set shiftwidth=4",
+        "set softtabstop=4",
+    ]
+    colorscheme = [
+        "colorscheme kalisi",
+        "set background=dark",
+        "let t_Co = 256",
+    ]
+    airline = [
+        "let g:airline_powerline_fonts = 1",
+        "let g:syntastic_check_on_open = 1",
+        "let g:airline#extensions#tabline#enabled = 1",
+        "let g:airline_theme=\"base16\" ",
+    ]
+    # tfbrain = [
+    #     'map <C-p> :w \| !./push.sh<CR><CR>',
+    # ]
+    ycm = [
+        "let g:ycm_collect_identifiers_from_tags_files = 1",
+        "let g:ycm_use_ultisnips_completer = 1",
+        "let g:ycm_seed_identifiers_with_syntax = 1 ",
+        "let g:ycm_complete_in_comments = 1",
+        "let g:ycm_complete_in_strings = 1",
+        "let g:ycm_autoclose_preview_window_after_insertion = 1",
+        "let g:ycm_key_invoke_completion = '<S-Enter>'",
+        "map <C-m> :YcmCompleter GoTo<CR>",
+        "nmap <C-k> :YcmCompleter GetDoc<CR>",
+    ]
+    rainbow = [
+        "let g:rainbow_active = 1"
+    ]

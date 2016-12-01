@@ -1,0 +1,65 @@
+inherits = "desktop.toml"
+
+[pacman]
+    [pacman.packages]
+    desktop_environment = [
+        # 'gnome',
+        'gnome-shell',
+        'gnome-session',
+        'mutter',
+        'gnome-settings-daemon',
+        'network-manager-applet',
+        'polkit-gnome',
+    ]
+    customizations = [
+        'gnome-themes-standard',
+        'apricity-themes-gnome',
+        'gnome-backgrounds',
+        'gnome-shell-extensions',
+    ]
+
+[gnome]
+gtk_theme = "Arctic Apricity"
+shell_theme = "Arctic Apricity"
+icon_theme = "Apricity Icons"
+wallpaper = "file:///usr/share/backgrounds/gnome/dotty-flowers.jpg"
+lock_background = "file:///usr/share/backgrounds/gnome/bliss.jpg"
+gtk_button_layout = ":minimize,maximize,close"
+dynamic_workspaces = false
+desktop_icons = true
+    [gnome.nautilus]
+    default_zoom = 'small'
+    [gnome.extensions]
+    extensions = [
+        "user-theme@gnome-shell-extensions.gcampax.github.com",
+        "alwayszoomworkspaces@jamie.thenicols.net",
+        "mediaplayer@patapon.info",
+        "caffeine@patapon.info",
+        "scroll-workspaces@gfxmonk.net",
+        "dash-to-dock@micxgx.gmail.com",
+        "suspend-button@laserb",
+        "topIcons@adel.gadllah@gmail.com",
+        "places-menu@gnome-shell-extensions.gcampax.github.com",
+        "drive-menu@gnome-shell-extensions.gcampax.github.com",
+        "remove-dropdown-arrows@mpdeimos.com",
+        "Move_Clock@rmy.pobox.com"
+    ]
+    [gnome.favorite_apps]
+    apps = [
+        'firefox.desktop',
+        'ice.desktop',
+        'org.gnome.Nautilus.desktop',
+        'empathy.desktop',
+        'gnome-music.desktop',
+        'org.gnome.Photos.desktop',
+        'org.gnome.Totem.desktop',
+        'libreoffice-writer.desktop',
+        'libreoffice-impress.desktop',
+        'libreoffice-calc.desktop',
+        'org.gnome.gedit.desktop',
+        'gnome-terminal.desktop',
+        'gnome-tweak-tool.desktop',
+        'gnome-control-center.desktop',
+        'pamac-manager.desktop',
+    ]
+

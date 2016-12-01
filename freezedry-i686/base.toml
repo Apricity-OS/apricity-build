@@ -1,0 +1,168 @@
+[pacman]
+keyrings = ["archlinux", "apricity"]
+    [pacman.packages]
+    base = [
+        "base",
+        "base-devel",
+        "linux-firmware",
+        "linux-headers",
+    ]
+    bootloader = [
+        "grub",
+        "os-prober",
+    ]
+    cli_editor = ["nano", "vim"]
+    shell_tools = [
+        "bash-completion",
+        "xz",
+        "bind-tools",
+        "crda",
+        "dosfstools",
+        "efitools",
+        "fakeroot",
+        "fuse-exfat",
+        "gvfs-afc",
+        "jre8-openjdk",
+        "gucharmap",
+        "gzip",
+        "haveged",
+        "hunspell",
+        "mc",
+        "mtools",
+        "openssh",
+        "pkgfile",
+        "python-lxml",
+        "python-mako",
+        "python-mock",
+        "boost",
+        "boost-libs",
+        "refind-efi",
+        "rfkill",
+        "sudo",
+        "smartmontools",
+        "tar",
+        "unrar",
+        "unzip",
+        "wget",
+        "icu",
+    ]
+    apricity_base = [
+        "apricity-freezedry",
+        "apricityassets",
+        "apricity-keyring",
+    ]
+    # installer = [
+    #     "calamares"
+    # ]
+    luks = [
+        "mkinitcpio-openswap",
+    ]
+    fonts = [
+        "ttf-arphic-uming",
+        "ttf-baekmuk",
+        "ttf-bitstream-vera",
+        "ttf-dejavu",
+        "ttf-droid",
+        "ttf-freefont",
+        "ttf-liberation",
+    ]
+    net = [
+        "wireless_tools",
+        "wpa_actiond",
+        "whois",
+        "tlp",
+        "libmtp",
+        "broadcom-wl-dkms",
+        "ipw2100-fw",
+        "ipw2200-fw",
+        "zd1211-firmware",
+        "modemmanager",
+        "net-tools",
+        "networkmanager-openvpn",
+        "networkmanager-pptp",
+        "ntfs-3g",
+        "ntp",
+        "samba",
+    ]
+    print_drivers = [
+        "cups",
+        "cups-pk-helper",
+        "libcups",
+        "hplip",
+        "splix",
+    ]
+    audio_drivers = [
+        "alsa-utils",
+        "pulseaudio-alsa",
+    ]
+    input_drivers = [
+        "usbmuxd",
+        "usb_modeswitch",
+        "libinput",
+        "xf86-input-libinput",
+    ]
+    xorg = [
+        "xorg-fonts",
+        "xorg-server",
+        "xorg-server-utils",
+        "xorg-xinit",
+        "xorg-xkill",
+        # "xorg-apps",
+    ]
+    video_drivers = [
+        "xf86-video-apm",
+        "xf86-video-ark",
+        "xf86-video-ati",
+        "xf86-video-chips",
+        "xf86-video-dummy",
+        "xf86-video-fbdev",
+        "xf86-video-glint",
+        "xf86-video-i128",
+        "xf86-video-i740",
+        "xf86-video-intel",
+        "xf86-video-mach64",
+        "xf86-video-neomagic",
+        "xf86-video-nouveau",
+        "xf86-video-nv",
+        "xf86-video-openchrome",
+        "xf86-video-r128",
+        "xf86-video-rendition",
+        "xf86-video-s3",
+        "xf86-video-s3virge",
+        "xf86-video-savage",
+        "xf86-video-siliconmotion",
+        "xf86-video-sis",
+        "xf86-video-sisusb",
+        "xf86-video-tdfx",
+        "xf86-video-trident",
+        "xf86-video-tseng",
+        "xf86-video-vesa",
+        "xf86-video-vmware",
+        "xf86-video-voodoo",
+        "mesa-libgl",
+        "mesa",
+        "mesa-vdpau",
+        "x264",
+    ]
+
+
+[systemd]
+    [systemd.services]
+    print = [
+        "org.cups.cupsd",
+    ]
+    net = [
+        "NetworkManager",
+        "ModemManager",
+        # "smbd",
+        # "nmbd",
+	"ntpd",
+        "avahi-daemon"
+    ]
+    base = [
+        "graphical.target",
+        "systemd-rfkill"
+    ]
+    # pacman = [
+    #     "pacman-init",
+    # ]

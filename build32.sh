@@ -117,7 +117,6 @@ make_customize_airootfs() {
 
 # Prepare kernel/initramfs ${install_dir}/boot/
 make_boot() {
-    echo "Make boot has arch $arch"
     mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
     cp ${work_dir}/${arch}/airootfs/boot/archiso.img ${work_dir}/iso/${install_dir}/boot/${arch}/archiso.img
     cp ${work_dir}/${arch}/airootfs/boot/vmlinuz-linux ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz
@@ -158,33 +157,30 @@ make_isolinux() {
 
 # Prepare /EFI
 make_efi() {
+    echo 'mkdir EFI'
     mkdir -p ${work_dir}/iso/EFI/boot
-    if [ $arch == 'x86_64' ]
-    then
-        echo 'adding efi tools'
-        cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
-        cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/iso/EFI/boot/
+    # cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
+    # cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/iso/EFI/boot/
 
-        cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/iso/EFI/boot/loader.efi
-    fi
+    # cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/iso/EFI/boot/loader.efi
 
+    echo 'mkdir entries'
     mkdir -p ${work_dir}/iso/loader/entries
+    echo 'cp loader.conf'
     cp ${script_path}/efiboot/loader/loader.conf ${work_dir}/iso/loader/
+    # cp ${script_path}/efiboot/loader/entries/uefi-shell-v2-x86_64.conf ${work_dir}/iso/loader/entries/
+    # cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/iso/loader/entries/
 
-    if [ $arch == 'x86_64' ]
-    then
-        echo 'adding uefi tools'
-        cp ${script_path}/efiboot/loader/entries/uefi-shell-v2-x86_64.conf ${work_dir}/iso/loader/entries/
-        cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/iso/loader/entries/
-        sed "s|%ARCHISO_LABEL%|${iso_label}|g;
-         s|%INSTALL_DIR%|${install_dir}|g" \
-            ${script_path}/efiboot/loader/entries/archiso-x86_64-usb.conf > ${work_dir}/iso/loader/entries/archiso-x86_64.conf
-    fi
-
+    # echo 'sed'
+    # sed "s|%ARCHISO_LABEL%|${iso_label}|g;
+         # s|%INSTALL_DIR%|${install_dir}|g" \
+        # ${script_path}/efiboot/loader/entries/archiso-x86_64-usb.conf > ${work_dir}/iso/loader/entries/archiso-x86_64.conf
 
     # EFI Shell 2.0 for UEFI 2.3+ ( http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=UEFI_Shell )
+    echo 'curl 1'
     curl -o ${work_dir}/iso/EFI/shellx64_v2.efi https://raw.githubusercontent.com/tianocore/edk2/master/ShellBinPkg/UefiShell/X64/Shell.efi
     # EFI Shell 1.0 for non UEFI 2.3+ ( http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=efi-shell )
+    echo 'curl 2'
     curl -o ${work_dir}/iso/EFI/shellx64_v1.efi https://raw.githubusercontent.com/tianocore/edk2/master/EdkShellBinPkg/FullShell/X64/Shell_Full.efi
 }
 
@@ -198,37 +194,30 @@ make_efiboot() {
     mount ${work_dir}/iso/EFI/archiso/efiboot.img ${work_dir}/efiboot
 
     mkdir -p ${work_dir}/efiboot/EFI/archiso
-    cp ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi
-    cp ${work_dir}/iso/${install_dir}/boot/${arch}/archiso.img ${work_dir}/efiboot/EFI/archiso/archiso.img
+    # cp ${work_dir}/iso/${install_dir}/boot/x86_64/vmlinuz ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi
+    # cp ${work_dir}/iso/${install_dir}/boot/x86_64/archiso.img ${work_dir}/efiboot/EFI/archiso/archiso.img
 
     cp ${work_dir}/iso/${install_dir}/boot/intel_ucode.img ${work_dir}/efiboot/EFI/archiso/intel_ucode.img
 
     mkdir -p ${work_dir}/efiboot/EFI/boot
-    if [ $arch == 'x86_64' ]
-    then
-        cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
-        cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/efiboot/EFI/boot/
-        cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/efiboot/EFI/boot/loader.efi
-    fi
+    # cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
+    # cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/efiboot/EFI/boot/
 
+    # cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/efiboot/EFI/boot/loader.efi
 
     mkdir -p ${work_dir}/efiboot/loader/entries
     cp ${script_path}/efiboot/loader/loader.conf ${work_dir}/efiboot/loader/
+    # cp ${script_path}/efiboot/loader/entries/uefi-shell-v2-x86_64.conf ${work_dir}/efiboot/loader/entries/
+    # cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/efiboot/loader/entries/
 
-    if [ $arch == 'x86_64' ]
-    then
-        cp ${script_path}/efiboot/loader/entries/uefi-shell-v2-x86_64.conf ${work_dir}/efiboot/loader/entries/
-        cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/efiboot/loader/entries/
-
-        sed "s|%ARCHISO_LABEL%|${iso_label}|g;
-         s|%INSTALL_DIR%|${install_dir}|g" \
-            ${script_path}/efiboot/loader/entries/archiso-x86_64-cd.conf > ${work_dir}/efiboot/loader/entries/archiso-x86_64.conf
-    fi
+    # sed "s|%ARCHISO_LABEL%|${iso_label}|g;
+    #      s|%INSTALL_DIR%|${install_dir}|g" \
+        # ${script_path}/efiboot/loader/entries/archiso-x86_64-cd.conf > ${work_dir}/efiboot/loader/entries/archiso-x86_64.conf
 
     cp ${work_dir}/iso/EFI/shellx64_v2.efi ${work_dir}/efiboot/EFI/
     cp ${work_dir}/iso/EFI/shellx64_v1.efi ${work_dir}/efiboot/EFI/
 
-    umount -d ${work_dir}/efiboot
+    umount -dl ${work_dir}/efiboot
 }
 
 # Build airootfs filesystem image
@@ -277,51 +266,60 @@ while getopts 'N:V:L:A:D:R:E:w:o:vh' arg; do
     esac
 done
 
-echo "Building for $arch"
-
 if [[ ${remove_prev} == true ]]; then
     echo 'Removing previous build...'
     umount -l work/efiboot || /bin/true
-    umount -l work/${arch}/airootfs || /bin/true
+    umount -l work/i686/airootfs || /bin/true
     rm -rf work
 fi
 
 mkdir -p ${work_dir}
 
-cp pacman/pacman.${arch}.conf pacman.conf
+cp pacman/pacman.i686.conf pacman.conf
 run_once make_pacman_conf
 
-umount -l work/${arch}/airootfs/sys || /bin/true
+umount -l work/i686/airootfs/sys || /bin/true
 # Do all stuff for each airootfs
-for arch in ${arch}; do
+for arch in i686; do
     run_once make_basefs
     run_once make_packages
 done
 
-umount -l work/${arch}/airootfs/dev || /bin/true
-umount -l work/${arch}/airootfs || /bin/true
+umount -l work/i686/airootfs/dev || /bin/true
+umount -l work/i686/airootfs || /bin/true
 
-run_once make_packages_efi
+# run_once make_packages_efi
 
-for arch in ${arch}; do
+for arch in i686; do
     run_once make_setup_mkinitcpio
     run_once make_customize_airootfs
 done
 
-for arch in ${arch}; do
+echo 'making boot'
+
+for arch in i686; do
     run_once make_boot
 done
 
 # Do all stuff for "iso"
+echo 'making boot extra'
 run_once make_boot_extra
-run_once make_syslinux
+echo 'making syslinux'
+for arch in i686; do
+    run_once make_syslinux
+done
+echo 'making isolinux'
 run_once make_isolinux
+echo 'making efi'
 run_once make_efi
+echo 'making efiboot'
 run_once make_efiboot
 
-for arch in ${arch}; do
+echo 'making prepare'
+for arch in i686; do
     run_once make_prepare
 done
 
+echo 'making iso'
 run_once make_iso
 rm pacman.conf

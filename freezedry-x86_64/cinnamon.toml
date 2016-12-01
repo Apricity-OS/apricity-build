@@ -1,0 +1,28 @@
+inherits = "desktop.toml"
+
+[pacman]
+    [pacman.packages]
+    desktop_environment = [
+        "cinnamon",
+        "mutter",
+        "network-manager-applet",
+    ]
+    customizations = [
+        "apricity-themes-cinnamon",
+    ]
+
+[cinnamon]
+gtk_theme = "Arctic Apricity"
+shell_theme = "Arctic Apricity"
+icon_theme = "Apricity Icons"
+wallpaper = "file:///usr/share/backgrounds/gnome/bear-rock.jpg"
+gtk_button_layout = ":minimize,maximize,close"
+    [cinnamon.favorite_apps]
+    apps = ["google-chrome.desktop",
+            "ice.desktop",
+            "gnome-music.desktop",
+            "gnome-terminal.desktop",
+            "org.gnome.gedit.desktop",
+            "pamac-manager.desktop",
+            "nemo.desktop",
+            "calamares.desktop"]
