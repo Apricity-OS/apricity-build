@@ -95,9 +95,9 @@ make_setup_mkinitcpio() {
 
 # Customize installation (airootfs)
 make_customize_airootfs() {
-    cp -af ${script_path}/airootfs-${arch}/* ${work_dir}/${arch}/airootfs
+    cp -af ${script_path}/airootfs/* ${work_dir}/${arch}/airootfs
     mkdir -p ${work_dir}/${arch}/airootfs/etc/freezedry/
-    cp -f ${script_path}/freezedry-${arch}/* ${work_dir}/${arch}/airootfs/etc/freezedry/
+    cp -f ${script_path}/freezedry/* ${work_dir}/${arch}/airootfs/etc/freezedry/
     cp ${work_dir}/${arch}/airootfs/etc/freezedry/${edition}.toml ${work_dir}/${arch}/airootfs/etc/freezedry/default.toml
     mkdir -p ${work_dir}/${arch}/airootfs/var/cache/pacman/pkg
     echo "Copying pacman cache"
@@ -117,7 +117,6 @@ make_customize_airootfs() {
 
 # Prepare kernel/initramfs ${install_dir}/boot/
 make_boot() {
-    echo "Make boot has arch $arch"
     mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
     cp ${work_dir}/${arch}/airootfs/boot/archiso.img ${work_dir}/iso/${install_dir}/boot/${arch}/archiso.img
     cp ${work_dir}/${arch}/airootfs/boot/vmlinuz-linux ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz
@@ -134,11 +133,11 @@ make_boot_extra() {
 # Prepare /${install_dir}/boot/syslinux
 make_syslinux() {
     mkdir -p ${work_dir}/iso/${install_dir}/boot/syslinux
-    for _cfg in ${script_path}/syslinux-${arch}/*.cfg; do
+    for _cfg in ${script_path}/syslinux/*.cfg; do
         sed "s|%ARCHISO_LABEL%|${iso_label}|g;
              s|%INSTALL_DIR%|${install_dir}|g" ${_cfg} > ${work_dir}/iso/${install_dir}/boot/syslinux/${_cfg##*/}
     done
-    cp ${script_path}/syslinux-${arch}/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux
+    cp ${script_path}/syslinux/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux
     cp ${work_dir}/${arch}/airootfs/usr/lib/syslinux/bios/*.c32 ${work_dir}/iso/${install_dir}/boot/syslinux
     cp ${work_dir}/${arch}/airootfs/usr/lib/syslinux/bios/lpxelinux.0 ${work_dir}/iso/${install_dir}/boot/syslinux
     cp ${work_dir}/${arch}/airootfs/usr/lib/syslinux/bios/memdisk ${work_dir}/iso/${install_dir}/boot/syslinux
@@ -159,28 +158,19 @@ make_isolinux() {
 # Prepare /EFI
 make_efi() {
     mkdir -p ${work_dir}/iso/EFI/boot
-    if [ $arch == 'x86_64' ]
-    then
-        echo 'adding efi tools'
-        cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
-        cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/iso/EFI/boot/
+    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
+    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/iso/EFI/boot/
 
-        cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/iso/EFI/boot/loader.efi
-    fi
+    cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/iso/EFI/boot/loader.efi
 
     mkdir -p ${work_dir}/iso/loader/entries
     cp ${script_path}/efiboot/loader/loader.conf ${work_dir}/iso/loader/
+    cp ${script_path}/efiboot/loader/entries/uefi-shell-v2-x86_64.conf ${work_dir}/iso/loader/entries/
+    cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/iso/loader/entries/
 
-    if [ $arch == 'x86_64' ]
-    then
-        echo 'adding uefi tools'
-        cp ${script_path}/efiboot/loader/entries/uefi-shell-v2-x86_64.conf ${work_dir}/iso/loader/entries/
-        cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/iso/loader/entries/
-        sed "s|%ARCHISO_LABEL%|${iso_label}|g;
+    sed "s|%ARCHISO_LABEL%|${iso_label}|g;
          s|%INSTALL_DIR%|${install_dir}|g" \
-            ${script_path}/efiboot/loader/entries/archiso-x86_64-usb.conf > ${work_dir}/iso/loader/entries/archiso-x86_64.conf
-    fi
-
+        ${script_path}/efiboot/loader/entries/archiso-x86_64-usb.conf > ${work_dir}/iso/loader/entries/archiso-x86_64.conf
 
     # EFI Shell 2.0 for UEFI 2.3+ ( http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=UEFI_Shell )
     curl -o ${work_dir}/iso/EFI/shellx64_v2.efi https://raw.githubusercontent.com/tianocore/edk2/master/ShellBinPkg/UefiShell/X64/Shell.efi
@@ -198,32 +188,25 @@ make_efiboot() {
     mount ${work_dir}/iso/EFI/archiso/efiboot.img ${work_dir}/efiboot
 
     mkdir -p ${work_dir}/efiboot/EFI/archiso
-    cp ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi
-    cp ${work_dir}/iso/${install_dir}/boot/${arch}/archiso.img ${work_dir}/efiboot/EFI/archiso/archiso.img
+    cp ${work_dir}/iso/${install_dir}/boot/x86_64/vmlinuz ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi
+    cp ${work_dir}/iso/${install_dir}/boot/x86_64/archiso.img ${work_dir}/efiboot/EFI/archiso/archiso.img
 
     cp ${work_dir}/iso/${install_dir}/boot/intel_ucode.img ${work_dir}/efiboot/EFI/archiso/intel_ucode.img
 
     mkdir -p ${work_dir}/efiboot/EFI/boot
-    if [ $arch == 'x86_64' ]
-    then
-        cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
-        cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/efiboot/EFI/boot/
-        cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/efiboot/EFI/boot/loader.efi
-    fi
+    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
+    cp ${work_dir}/x86_64/airootfs/usr/share/efitools/efi/HashTool.efi ${work_dir}/efiboot/EFI/boot/
 
+    cp ${work_dir}/x86_64/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/efiboot/EFI/boot/loader.efi
 
     mkdir -p ${work_dir}/efiboot/loader/entries
     cp ${script_path}/efiboot/loader/loader.conf ${work_dir}/efiboot/loader/
+    cp ${script_path}/efiboot/loader/entries/uefi-shell-v2-x86_64.conf ${work_dir}/efiboot/loader/entries/
+    cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/efiboot/loader/entries/
 
-    if [ $arch == 'x86_64' ]
-    then
-        cp ${script_path}/efiboot/loader/entries/uefi-shell-v2-x86_64.conf ${work_dir}/efiboot/loader/entries/
-        cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/efiboot/loader/entries/
-
-        sed "s|%ARCHISO_LABEL%|${iso_label}|g;
+    sed "s|%ARCHISO_LABEL%|${iso_label}|g;
          s|%INSTALL_DIR%|${install_dir}|g" \
-            ${script_path}/efiboot/loader/entries/archiso-x86_64-cd.conf > ${work_dir}/efiboot/loader/entries/archiso-x86_64.conf
-    fi
+        ${script_path}/efiboot/loader/entries/archiso-x86_64-cd.conf > ${work_dir}/efiboot/loader/entries/archiso-x86_64.conf
 
     cp ${work_dir}/iso/EFI/shellx64_v2.efi ${work_dir}/efiboot/EFI/
     cp ${work_dir}/iso/EFI/shellx64_v1.efi ${work_dir}/efiboot/EFI/
@@ -277,38 +260,36 @@ while getopts 'N:V:L:A:D:R:E:w:o:vh' arg; do
     esac
 done
 
-echo "Building for $arch"
-
 if [[ ${remove_prev} == true ]]; then
     echo 'Removing previous build...'
     umount -l work/efiboot || /bin/true
-    umount -l work/${arch}/airootfs || /bin/true
+    umount -l work/x86_64/airootfs || /bin/true
     rm -rf work
 fi
 
 mkdir -p ${work_dir}
 
-cp pacman/pacman.${arch}.conf pacman.conf
+cp pacman/pacman.x86_64.conf pacman.conf
 run_once make_pacman_conf
 
-umount -l work/${arch}/airootfs/sys || /bin/true
+umount -l work/x86_64/airootfs/sys || /bin/true
 # Do all stuff for each airootfs
-for arch in ${arch}; do
+for arch in x86_64; do
     run_once make_basefs
     run_once make_packages
 done
 
-umount -l work/${arch}/airootfs/dev || /bin/true
-umount -l work/${arch}/airootfs || /bin/true
+umount -l work/x86_64/airootfs/dev || /bin/true
+umount -l work/x86_64/airootfs || /bin/true
 
 run_once make_packages_efi
 
-for arch in ${arch}; do
+for arch in x86_64; do
     run_once make_setup_mkinitcpio
     run_once make_customize_airootfs
 done
 
-for arch in ${arch}; do
+for arch in x86_64; do
     run_once make_boot
 done
 
@@ -319,7 +300,7 @@ run_once make_isolinux
 run_once make_efi
 run_once make_efiboot
 
-for arch in ${arch}; do
+for arch in x86_64; do
     run_once make_prepare
 done
 

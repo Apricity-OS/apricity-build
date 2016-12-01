@@ -16,7 +16,6 @@ inherits = "base.toml"
         "xdg-user-dirs-gtk",
         "python2-powerline-git",
 	"virtualbox-guest-utils",
-	"virtualbox-guest-modules-arch",
     ]
     base_customizations = [
         "apricity-wallpapers",
