@@ -1,4 +1,4 @@
-# Apricity OS
+# Condres OS
 
 **Thinking about contributing? Click below to take a look at what developers are talking about on Gitter.**
 
