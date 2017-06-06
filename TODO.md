@@ -3,12 +3,9 @@
 ####Bugs
 - [x] Fix [bug with numix-folders](https://github.com/numixproject/numix-folders/issues/133)
 - [x] Fix all the GTK warnings about some parts of the icon theme not declaring a size field
-- [ ] Chrome extensions enabled by default may be broken on some machines
-- [ ] Issue with steam [thread1](https://github.com/Apricity-OS/apricity-build/issues/20#issuecomment-206939955), [thread2](https://github.com/Apricity-OS/apricity-build/issues/20#issuecomment-206939955)
-- [ ] Chsh to /bin/zsh for new users, not just one made in installer
 
 ####Distro Features
-- [ ] Add a 32-bit version (shouldn't be too hard, just need to test on a 32-bit machine)
+- [x] Remove support a 32-bit version (shouldn't be too hard, just need to test on a 32-bit machine)
 - [ ] Add a more verbose error to the installer when a user decides to install a bootloader on a UEFI machine and chooses manual partitioning but forgets to create a FAT32-formatted /boot/efi partition
 - [ ] Automatic timezone selection for the installer
 - [ ] Replace (or augment) `simple-backup` with [timeshift](http://www.teejeetech.in/p/timeshift.html)?
@@ -34,17 +31,14 @@
 - [ ] More elegant firstrun.sh functionality
 
 ####General Features
-- [ ] Automatically update PATRONS.md weekly with [patreon-api](https://github.com/oxguy3/patreon-api)?
 - [ ] Automatically update `calamares` weekly?
 - [ ] Enable package signing in repo
-- [ ] Automatically rebuild repo daily, pulling from the AUR and from github for Apricity packages (eventially this could be run in an AWS EC2 spot instance)
 - [ ] Automatically build dev ISO in an AWS spot instance bi-weekly
 - [x] Split github repos into stable and dev
-- [x] Update all PKGBUILD urls to reflect the move to [github.com/Apricity-OS](https://github.com/Apricity-OS)
 - [ ] Add READMEs to all repositories
-- [ ] Replace `apricityassets`. It's a little confusing and convoluted. Replace it with `apricity-assets`, `apricity-plymouth`, and `apricity-gnome-extensions`.
+- [ ] Replace `condresassets`. It's a little confusing and convoluted. Replace it with `condres-assets`, `condres-plymouth`, and `condres-gnome-extensions`.
 - [ ] Automatically update extensions from github
-- [ ] Add mirrors to `apricity-core`
+- [ ] Remove mirrors to `apricity-core`
 - [ ] **Custom ISO Builder**
   - This is going to be a web form that one can fill out to select a DE, their preferred applications, a shell and GUI theme, an icon theme, some wallpapers, `systemd` services to enable, and a branch of the kernel to install. Then a custom ISO would get built on AWS and a link would be emailed to the user. The *issue* is that this would cost roughly $0.10 per build, so we need some sort of increase in revenue.
 - [ ] **Cloud Configuration**
@@ -57,12 +51,12 @@
 ####Desktop Environments
 - [x] Gnome
 - [x] Cinnamon
-- [ ] XFCE
-- [ ] KDE
-- [ ] MATE
+- [x] XFCE
+- [x] KDE
+- [x] MATE
 - [ ] i3 / [sway](http://swaywm.org/)?
-- [ ] Budgie?
-- [ ] Pantheon?
+- [x] Budgie?
+- [x] Pantheon?
 
 ####General
 - [ ] Write docs for build scripts and installation
