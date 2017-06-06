@@ -38,7 +38,7 @@
 - [ ] Add READMEs to all repositories
 - [ ] Replace `condresassets`. It's a little confusing and convoluted. Replace it with `condres-assets`, `condres-plymouth`, and `condres-gnome-extensions`.
 - [ ] Automatically update extensions from github
-- [ ] Remove mirrors to `apricity-core`
+- [x] Remove mirrors to `apricity-core`
 - [ ] **Custom ISO Builder**
   - This is going to be a web form that one can fill out to select a DE, their preferred applications, a shell and GUI theme, an icon theme, some wallpapers, `systemd` services to enable, and a branch of the kernel to install. Then a custom ISO would get built on AWS and a link would be emailed to the user. The *issue* is that this would cost roughly $0.10 per build, so we need some sort of increase in revenue.
 - [ ] **Cloud Configuration**
