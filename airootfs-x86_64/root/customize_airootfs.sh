@@ -23,7 +23,7 @@ echo 'Created User'
 # pacman-key --populate archlinux
 # pacman-key --init
 # pacman-key --init apricity
-# pacman-key --populate apricity
+# pacman-key --populate condres
 # pacman-key --populate
 # pacman -Syy
 # pacman-key --refresh-keys
@@ -36,11 +36,11 @@ echo 'Created User'
 sudo -u liveuser freezedry --load /etc/freezedry/default.toml --livecd || /bin/true
 
 #Name Apricity
-sed -i.bak 's/Arch Linux/Apricity OS/g' /usr/lib/os-release
+sed -i.bak 's/Arch Linux/Condres OS/g' /usr/lib/os-release
 sed -i.bak 's/arch/apricity/g' /usr/lib/os-release
-sed -i.bak 's/www.archlinux.org/www.apricityos.com/g' /usr/lib/os-release
-sed -i.bak 's/bbs.archlinux.org/www.apricityos.com/g' /usr/lib/os-release
-sed -i.bak 's/bugs.archlinux.org/www.apricityos.com/g' /usr/lib/os-release
+sed -i.bak 's/www.archlinux.org/http://www.codelinsoft.it/sito//g' /usr/lib/os-release
+sed -i.bak 's/bbs.archlinux.org/https://www.codelinsoft.it/sito/forum.html/g' /usr/lib/os-release
+sed -i.bak 's/bugs.archlinux.org/https://www.codelinsoft.it/sito/forum.html/g' /usr/lib/os-release
 cp /usr/lib/os-release /etc/os-release
 
 #Run Architecture-Specific Tasks
